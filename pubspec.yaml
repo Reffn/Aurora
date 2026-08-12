@@ -105,7 +105,7 @@ dependencies:
   flutter_map: ^8.0.0
   flutter_map_tile_caching: ^10.0.0  # Persistent tile cache with offline support (v10 for flutter_map 8.x)
   latlong2: ^0.9.1
-  geolocator: ^13.0.1
+  geolocator: ^14.0.2
   http: ^1.2.2
 
   # Social Sharing (v3.1 - Puzzle Sharing Feature)
