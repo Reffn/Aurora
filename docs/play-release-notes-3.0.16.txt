@@ -1,0 +1,11 @@
+Die Erinnerungen klingeln jetzt wirklich — auch bei geschlossener App.
+
+Behoben:
+• Geplante Erinnerungen kamen nicht an, solange die App zu war
+• Eine verschobene Erinnerung bleibt nicht auf der alten Zeit liegen
+• Ein Aufschub über Mitternacht überlebt den Tageswechsel
+
+Geändert:
+• Die Zeichenwerkzeuge stehen nur da, solange gemalt wird
+• Die Zeitkarte bleibt bei großer Schrift lesbar
+• Keine Foto-Berechtigung mehr: Du suchst ein Bild aus, Aurora bekommt genau dieses

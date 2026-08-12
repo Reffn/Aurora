@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aurora - DIS Support App | Privacy-First</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Outfit', 'sans-serif'],
+            },
+            animation: {
+              'float': 'float 10s ease-in-out infinite',
+              'float-delayed': 'float 10s ease-in-out 5s infinite',
+              'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0) scale(1)' },
+                '50%': { transform: 'translateY(-20px) scale(1.05)' },
+              }
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      /* Custom scrollbar for a cleaner look */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0F1014;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #2d2d35;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #4a4a55;
+      }
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* Rainbow Glow Animation for Feature Screenshots */
+      @keyframes rainbow-spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .rainbow-glow-container {
+        position: relative;
+        isolation: isolate;
+      }
+
+      .rainbow-glow-container::before {
+        content: '';
+        position: absolute;
+        inset: -3px;
+        background: conic-gradient(
+          from 0deg,
+          #ff0000 0deg,
+          #ff7f00 51deg,
+          #ffff00 102deg,
+          #00ff00 153deg,
+          #00ffff 204deg,
+          #0000ff 255deg,
+          #8b00ff 306deg,
+          #ff0000 360deg
+        );
+        border-radius: 1.125rem;
+        opacity: 0.7;
+        filter: blur(25px);
+        z-index: -1;
+        animation: rainbow-spin 8s linear infinite;
+      }
+
+      .rainbow-glow-container:hover::before {
+        opacity: 0.95;
+        filter: blur(35px);
+      }
+
+      .rainbow-glow-container > * {
+        position: relative;
+        z-index: 1;
+      }
+    </style>
+
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/assets/index-C7KUBOFV.js"></script>
+</head>
+  <body class="bg-[#0F1014] text-white overflow-x-hidden antialiased selection:bg-[#FFAB91] selection:text-black">
+    <div id="root"></div>
+</body>
+</html>

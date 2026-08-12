@@ -1,0 +1,10 @@
+Wer gerade vorn ist, steht jetzt auf jeder Fläche im Bild.
+
+Neu in dieser Version:
+• Orientierungsfläche mit Zeit-Zeile, Heute-Zeile und Kurz-Timeline — der Tag auf einen Blick, ohne Suchen
+• Zeitkarte und Anwesenheitsband zeigen Weg und Zeit der letzten Stunden
+• Termine im Kalender bekommen einen Ort
+• Jeder Anteil kann die App in seiner eigenen Sprache bedienen
+• Profilbild direkt in der App malen
+
+Dazu: neuer Datenschutztext, Erinnerungs-Fixes und Verbesserungen an der Oberfläche.

@@ -1,0 +1,16 @@
+name: dis_app_lints
+description: Custom lint rules for DIS App architecture standards
+version: 1.0.0
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  analyzer: ^8.1.1
+  custom_lint_builder: ^0.8.1
+
+dev_dependencies:
+  custom_lint: ^0.8.1
+  # analysis_options.yaml bindet package:lints/recommended.yaml ein. Ohne diese
+  # Abhängigkeit findet der Analyzer die Datei nicht und meldet eine Warnung.
+  lints: ">=5.0.0 <7.0.0"

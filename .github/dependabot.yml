@@ -1,0 +1,52 @@
+version: 2
+
+# Wöchentlich statt täglich: Aurora wird von einer Person gepflegt. Ein
+# täglicher Schwung offener PRs wird nicht gelesen, und was nicht gelesen wird,
+# schützt nicht. Der `open-pull-requests-limit` deckelt aus demselben Grund.
+updates:
+  - package-ecosystem: "pub"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      # Patch- und Minor-Sprünge einzeln zu prüfen lohnt nicht; sie kommen
+      # gebündelt und werden von der CI ohnehin zusammen getestet.
+      pub-minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+
+  - package-ecosystem: "pub"
+    directory: "/dis_app_lints"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+    commit-message:
+      prefix: "chore(deps)"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    labels:
+      - "dependencies"
+    commit-message:
+      prefix: "chore(ci)"
+
+  - package-ecosystem: "gradle"
+    directory: "/android"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+    commit-message:
+      prefix: "chore(deps)"

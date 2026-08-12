@@ -1,0 +1,10 @@
+Der Weg zurück nach einem Blackout trägt jetzt.
+
+Behoben:
+• Die Wegaufzeichnung läuft weiter, auch wenn Aurora zu ist oder das Gerät schläft
+• Nach einem Geräteneustart steht eine Meldung da statt Stille — ein Tippen, und es geht weiter
+• Ein Termin erinnert von sich aus, eine halbe Stunde vorher
+• Der Kalender zeigt alle kommenden Termine, nicht nur ein Zeitfenster
+• Das Tablettenfoto ist endlich zu sehen
+
+Aurora fragt nicht mehr nach „Standort immer erlauben".

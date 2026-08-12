@@ -1,0 +1,11 @@
+arb-dir: lib/l10n
+template-arb-file: app_de.arb
+output-localization-file: app_localizations.dart
+nullable-getter: false
+
+# Schreibt bei jedem Generieren auf, welche Sprache welchen Text nicht hat.
+# Ohne diese Zeile faellt eine fehlende Uebersetzung stumm auf die
+# Vorlagensprache zurueck: In der spanischen App stand deutscher Text, und
+# der Generator sagte kein Wort dazu. Die Datei ist git-ignoriert; den
+# harten Riegel schiebt test/l10n/arb_completeness_test.dart vor.
+untranslated-messages-file: build/untranslated_messages.txt

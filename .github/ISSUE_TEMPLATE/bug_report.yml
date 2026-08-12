@@ -1,0 +1,77 @@
+name: Bug report
+description: Something in Aurora does not work the way it should
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Before you write: this issue will be public.**
+
+        Aurora holds names of alters, journal entries, medication and location
+        history. Please do not paste any of it here. Describe *what happened*,
+        not *what it said*. Replace real names with "Profile A", "Profile B".
+
+        If the bug involves data you cannot describe without exposing it, mail
+        **info@3ofus.app** instead. A bug is still a valid bug if it arrives
+        privately.
+
+        *Deutsch ist völlig in Ordnung — schreib in der Sprache, die dir liegt.*
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What did you expect, and what did Aurora do instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: |
+        Numbered steps if you can. "It happens sometimes when I open the
+        calendar" is also useful — say so rather than leaving it out.
+      placeholder: |
+        1. Open …
+        2. Tap …
+        3. …
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: Aurora version
+      description: Settings → bottom of the screen, or the Play Store entry.
+      placeholder: "3.0.18"
+    validations:
+      required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: Device and Android version
+      placeholder: "Samsung Galaxy A14, Android 14"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: How often does it happen?
+      options:
+        - Every time
+        - Often, but not always
+        - Happened once
+        - Not sure
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Before submitting
+      options:
+        - label: This report contains no personal data — no real names, no journal text, no locations.
+          required: true

@@ -1,0 +1,137 @@
+rules_version = '2';
+
+// Aurora — Firestore Security Rules
+//
+// Der Feedback-Rückkanal schreibt ohne Cloud Function dazwischen direkt aus dem
+// Client. Damit sind diese Regeln die einzige Verteidigung: der API-Key ist aus
+// jedem APK und aus dem Web-Bundle unter docs/assets auslesbar, jeder kann damit
+// Schreibversuche starten.
+//
+// Zweite Ebene ist App Check (Play Integrity), dritte ein Budget-Alarm auf dem
+// Projekt. Siehe docs/superpowers/specs/2026-08-04-feedback-rueckkanal-design.md
+// Abschnitt 5.2.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Feedback: ausschließlich anlegen, niemals lesen, ändern oder löschen.
+    //
+    // Kein `read` ist die zentrale Zusage: Feedback von Aurora-Nutzerinnen ist
+    // per Kontext ein Gesundheitsdatum. Niemand kommt über den Client daran —
+    // auch die Entwickler nicht. Zugriff nur über Console oder Admin-SDK.
+    match /feedback/{docId} {
+      allow read, update, delete: if false;
+
+      allow create: if isWellFormedFeedback();
+    }
+
+    // Telemetrie: ausschließlich anlegen, niemals lesen, ändern oder löschen.
+    //
+    // Anders als Feedback trägt die Telemetrie bewusst KEINEN Server-
+    // Zeitstempel. Ein `createdAt == request.time` würde die Uhrzeit halten,
+    // die das Schema gerade verweigert — mehrere Eingänge derselben Minute
+    // ließen sich sonst zu einer Sitzung zusammenfassen.
+    match /telemetry/{docId} {
+      allow read, update, delete: if false;
+
+      allow create: if isWellFormedTelemetry();
+    }
+
+    // Alles Übrige ist gesperrt. Neue Collections müssen hier bewusst
+    // freigeschaltet werden, statt versehentlich offen zu stehen.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+
+// Feld-Whitelist plus Größenbegrenzung. Das Schema spiegelt FeedbackPayload.toMap()
+// in lib/models/feedback_payload.dart — leere optionale Felder entfallen dort
+// vollständig, deshalb sind sie hier optional und nicht nur leer erlaubt.
+function isWellFormedFeedback() {
+  let data = request.resource.data;
+
+  return data.keys().hasOnly(['category', 'message', 'replyEmail', 'diagnostics', 'createdAt'])
+         && data.keys().hasAll(['category', 'message', 'createdAt'])
+
+         // Zeitstempel muss vom Server kommen. FieldValue.serverTimestamp() wird
+         // beim Auswerten zu request.time; ein selbst gesetzter Wert fliegt raus.
+         && data.createdAt == request.time
+
+         && data.category is string
+         && data.category.size() > 0
+         && data.category.size() <= 50
+
+         // Untergrenze spiegelt die Client-Validierung (messageError: too_short_<20).
+         && data.message is string
+         && data.message.size() >= 20
+         && data.message.size() <= 5000
+
+         && (!data.keys().hasAny(['replyEmail'])
+             || (data.replyEmail is string && data.replyEmail.size() <= 200))
+
+         && (!data.keys().hasAny(['diagnostics'])
+             || (data.diagnostics is string && data.diagnostics.size() <= 10000));
+}
+
+// Feld-Whitelist der Telemetrie. Spiegelt TelemetryEvent.toMap() in
+// lib/models/telemetry_event.dart — genau drei Felder, kein viertes.
+//
+// ERLAUBTE_EREIGNISSE ist die zweite Hälfte der Whitelist aus
+// TelemetryEventName. Der Test test/services/telemetry_rules_whitelist_test.dart
+// hält beide Listen deckungsgleich: Was nur im Client steht, würde hier
+// abgewiesen — und zwar still, weil ein automatischer Sendepfad niemanden hat,
+// dem er den Fehler zeigen könnte.
+function isWellFormedTelemetry() {
+  let data = request.resource.data;
+  let ERLAUBTE_EREIGNISSE = [
+    'onboarding_begonnen',
+    'onboarding_beendet',
+    'onboarding_abgebrochen_willkommen',
+    'onboarding_abgebrochen_privacy',
+    'onboarding_abgebrochen_features',
+    'onboarding_abgebrochen_profile',
+    'onboarding_abgebrochen_los_gehts',
+    'bereich_geoeffnet_halt',
+    'bereich_geoeffnet_notfall',
+    'bereich_geoeffnet_hilfe',
+    'bereich_geoeffnet_chat',
+    'bereich_geoeffnet_kalender',
+    'bereich_geoeffnet_medikamente',
+    'bereich_geoeffnet_tagebuch',
+    'bereich_geoeffnet_kontakte',
+    'bereich_geoeffnet_finder',
+    'bereich_geoeffnet_spiele',
+    'bereich_geoeffnet_zeitachse',
+    'bereich_geoeffnet_feedback',
+    'uebung_beendet_orientation',
+    'uebung_beendet_senses',
+    'uebung_beendet_body',
+    'uebung_beendet_container',
+    'uebung_beendet_breath',
+    'uebung_abgebrochen_orientation',
+    'uebung_abgebrochen_senses',
+    'uebung_abgebrochen_body',
+    'uebung_abgebrochen_container',
+    'uebung_abgebrochen_breath',
+    'fehler_speichern',
+    'fehler_anhang',
+    'fehler_gps_timeout'
+  ];
+
+  return data.keys().hasOnly(['event', 'day', 'appVersion'])
+         && data.keys().hasAll(['event', 'day', 'appVersion'])
+
+         && data.event is string
+         && data.event in ERLAUBTE_EREIGNISSE
+
+         // Genau zehn Zeichen im Format YYYY-MM-DD. Ein Uhrzeitanteil wäre
+         // länger und fliegt hier raus.
+         && data.day is string
+         && data.day.size() == 10
+         && data.day.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+
+         && data.appVersion is string
+         && data.appVersion.size() > 0
+         && data.appVersion.size() <= 20;
+}

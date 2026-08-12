@@ -1,0 +1,6 @@
+Drei Dinge, die still danebengingen.
+
+Behoben:
+• Aurora stürzte nach jedem Update und nach jedem Neustart des Geräts ab — und die Erinnerungen kamen danach nicht zurück
+• Kein Bild aus Kamera oder Galerie kam an, bei Profilbild, Kontakten und Finder. Jetzt schon
+• Aurora fragte ungefragt nach deinem Standort, gleich nach dem ersten Profil. Gefragt wird nur noch, wenn du danach greifst

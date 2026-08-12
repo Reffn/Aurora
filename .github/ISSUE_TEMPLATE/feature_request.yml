@@ -1,0 +1,57 @@
+name: Idea or feature request
+description: Something Aurora should be able to do
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **This issue will be public.** Describe the need, not your own
+        situation in detail. "A reminder that repeats weekly" is enough — you
+        do not owe anyone your diagnosis or your system's structure.
+
+        *Deutsch ist völlig in Ordnung.*
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is hard right now
+      description: |
+        What are you trying to do, and where does Aurora get in the way?
+        Start here rather than with a solution — often there is a simpler way
+        to solve the same problem.
+    validations:
+      required: true
+
+  - type: textarea
+    id: idea
+    attributes:
+      label: What you imagine
+      description: Your idea for how it could work. Rough is fine.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part of Aurora?
+      options:
+        - Chat / internal communication
+        - Calendar and reminders
+        - Medication
+        - Journal / timeline
+        - Location and maps
+        - Grounding, crisis, emergency
+        - Profiles and permissions
+        - Something else / not sure
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        Every feature is measured against the interface rules in
+        `docs/oberflaechen-richtlinien.md` — above all: it has to be usable
+        without reading, and in the worst state a person might be in. An idea
+        that only works on a good day usually needs rethinking rather than
+        rejecting.
