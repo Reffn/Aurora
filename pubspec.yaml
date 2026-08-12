@@ -91,7 +91,7 @@ dependencies:
   permission_handler: ^11.3.1
 
   # Local Notifications
-  flutter_local_notifications: ^17.0.0
+  flutter_local_notifications: ^18.0.1
 
   # QR Code Generator
   qr_flutter: ^4.1.0
