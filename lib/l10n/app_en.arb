@@ -3681,7 +3681,7 @@
   "telemetryChangeLater": "You can change this any time in the settings under “What Aurora sends”. Every single message that left your device is listed there too.",
   "releaseNotesTitle": "What has changed",
   "releaseNotesHighlights": "From now on, Aurora speaks up once after an update to say what is new. Everything else stays where it was: your content still lives on this device alone.",
-  "releaseNotesAsk": "And the more important part: what is missing for you? Aurora is built for the people who use it — so far nobody has written to us.",
+  "releaseNotesAsk": "And the more important part: what is missing for you? Aurora is built for the people who use it — and we read every line that reaches us.",
   "releaseNotesWhatHappens": "If you write, your text goes to us and nothing else. No identifier, no location, no name. Everything that was sent is listed in the settings under “What Aurora sends”.",
   "releaseNotesFeedbackAction": "Tell us what is missing",
   "releaseNotesContinueAction": "Continue to Aurora",

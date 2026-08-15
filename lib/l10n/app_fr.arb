@@ -2504,7 +2504,7 @@
   "telemetryChangeLater": "Tu peux changer cela à tout moment dans les réglages, sous « Ce qu'Aurora envoie ». Chaque message parti de ton appareil y figure aussi.",
   "releaseNotesTitle": "Ce qui a changé",
   "releaseNotesHighlights": "Désormais, Aurora se manifeste une fois après une mise à jour pour dire ce qui est nouveau. Pour le reste, rien ne bouge : tes contenus restent uniquement sur cet appareil.",
-  "releaseNotesAsk": "Et surtout : qu'est-ce qui te manque ? Aurora est faite pour celles et ceux qui l'utilisent — jusqu'ici, personne ne nous a écrit.",
+  "releaseNotesAsk": "Et surtout : qu'est-ce qui te manque ? Aurora est faite pour celles et ceux qui l'utilisent — et nous lisons chaque ligne qui nous parvient.",
   "releaseNotesWhatHappens": "Si tu écris, seul ton texte nous parvient. Aucun identifiant, aucun lieu, aucun nom. Tout ce qui a été envoyé figure dans les réglages, sous « Ce qu'Aurora envoie ».",
   "releaseNotesFeedbackAction": "Dis-nous ce qui manque",
   "releaseNotesContinueAction": "Continuer vers Aurora",

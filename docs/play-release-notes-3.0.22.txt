@@ -1,0 +1,3 @@
+Diese Fassung ändert nur den Hinweis, den Aurora einmal nach einem Update zeigt. Die Bitte bleibt: Sag uns, was dir fehlt. Der Satz darunter war unglücklich formuliert und ist jetzt raus.
+
+Sonst bleibt alles, wo es war — deine Inhalte liegen weiterhin allein auf diesem Gerät.
