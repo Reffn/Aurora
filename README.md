@@ -10,8 +10,9 @@ A Flutter app for people living with Dissociative Identity Disorder (DID).
 *[Deutsche Fassung: README.de.md](README.de.md)*
 
 Aurora gives a system a private place to coordinate: to talk to each other, keep
-a shared calendar, write things down, and reach help quickly. The app is in
-German; the codebase and contribution process are in English.
+a shared calendar, write things down, and reach help quickly. The app speaks five
+languages (German, English, Spanish, French, Italian); the codebase and
+contribution process are in English.
 
 ## Privacy
 
