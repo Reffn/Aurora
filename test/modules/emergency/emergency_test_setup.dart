@@ -161,7 +161,6 @@ class _InMemoryBox<T> implements Box<T> {
   @override
   Iterable<T> get values => _data.values;
 
-  @override
   ValueListenable<Box<T>> listenable() =>
       _DummyValueListenable<Box<T>>(this as Box<T>);
 

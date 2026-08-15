@@ -90,7 +90,7 @@ class _DummyDataEntry implements DataEntry {
   Box<Contact> get contactsBox => _contactsBox;
 
   @override
-  Box get settingsBox => _settingsBox;
+  Box<dynamic> get settingsBox => _settingsBox;
 
   @override
   Box<ChatMessage> get chatMessagesBox => _chatMessagesBox as Box<ChatMessage>;
