@@ -3,6 +3,7 @@
 [![Tests](https://github.com/Reffn/Aurora/actions/workflows/test.yml/badge.svg)](https://github.com/Reffn/Aurora/actions)
 [![codecov](https://codecov.io/gh/Reffn/Aurora/branch/main/graph/badge.svg)](https://codecov.io/gh/Reffn/Aurora)
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](LICENSE)
+[![Google Play](https://img.shields.io/badge/Google_Play-Aurora-34A853?logo=googleplay&logoColor=white)](https://play.google.com/store/apps/details?id=com.disapp.dis_app)
 
 A Flutter app for people living with Dissociative Identity Disorder (DID).
 

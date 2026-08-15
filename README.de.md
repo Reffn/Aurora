@@ -1,3 +1,5 @@
+[![Google Play](https://img.shields.io/badge/Google_Play-Aurora-34A853?logo=googleplay&logoColor=white)](https://play.google.com/store/apps/details?id=com.disapp.dis_app)
+
 # Aurora
 
 [![Tests](https://github.com/Reffn/Aurora/actions/workflows/test.yml/badge.svg)](https://github.com/Reffn/Aurora/actions)
