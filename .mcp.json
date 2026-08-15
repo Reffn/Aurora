@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "agentbus": {
+      "type": "stdio",
+      "command": "C:\\Users\\Bratg\\.local\\bin\\uvx.exe",
+      "args": ["--from", "F:\\agentbus", "agentbus-mcp"],
+      "env": {
+        "AGENTBUS_ROOT": "F:\\Aurora",
+        "AGENTBUS_AGENT": "${AGENTBUS_AGENT}"
+      }
+    }
+  }
+}

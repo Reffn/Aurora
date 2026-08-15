@@ -1,0 +1,141 @@
+Aurora - Deine sichere Begleitung bei Dissoziativer Identitätsstörung
+
+Aurora ist eine vollständig offline funktionierende App, die Menschen mit Dissoziativer Identitätsstörung (DIS) dabei unterstützt, ihre verschiedenen Persönlichkeiten zu verwalten und im Alltag zu koordinieren.
+
+🔒 MAXIMALE PRIVATSPHÄRE
+
+• Alle Daten bleiben ausschließlich auf deinem Gerät
+• Keine Cloud-Synchronisation oder Benutzerkonten
+• Keine Telemetrie, kein Tracking, keine Werbung
+• Vollständig offline nutzbar
+• DSGVO-konform durch Privacy-by-Design
+
+💬 INTERNE KOMMUNIKATION
+
+• Chat zwischen verschiedenen Persönlichkeiten
+• Text, Sprachnachrichten, Bilder, Videos und Zeichnungen
+• Sichere, private Kommunikation ohne Server
+• Jeder Nachrichtenverlauf bleibt lokal gespeichert
+
+📅 GEMEINSAME ORGANISATION
+
+• Geteilter Kalender zur Terminkoordination
+• Medikamentenplan mit lokalen Erinnerungen
+• Tagebuch mit flexiblen Sichtbarkeitseinstellungen
+• Kontaktverwaltung mit Bewertungen (sichere/unsichere Personen)
+• Finder-Funktion für Orte und Gegenstände
+
+🗺️ FINDER MIT KARTENFUNKTION
+
+• Orte und verlorene Gegenstände wiederfinden
+• Hilfreich bei Gedächtnislücken nach Switches
+• Kartendarstellung mit OpenStreetMap
+• GPS-Tracking optional und jederzeit deaktivierbar
+
+🆘 NOTFALL-UNTERSTÜTZUNG
+
+• Schnellzugriff auf Krisenkontakte (Telefonseelsorge, Nummer gegen Kummer, etc.)
+• DIS-Informationen und Aufklärung
+• Grounding-Techniken für dissoziative Zustände
+• Selbsthilfegruppen-Verzeichnis (Deutschland)
+• Therapeuten-Suche (DEGPT, Therapie.de)
+
+🎨 INDIVIDUALISIERUNG
+
+• Verschiedene Profile mit eigenen Farben und Avataren
+• Granulare Berechtigungen pro Persönlichkeit (RBAC)
+• Altersgerechte Standardeinstellungen für jüngere Alters
+• Passwortschutz mit Sicherheitsfragen
+• Tier-Avatare oder eigene Fotos
+
+⏱️ TIMELINE & SWITCH-TRACKING
+
+• Profilwechsel-Historie zur Nachvollziehbarkeit
+• Optionales GPS-Tracking bei Switches
+• Hilft, Gedächtnislücken zu füllen
+• Exportierbar für therapeutische Zwecke (in Planung)
+
+🧘 ENTSPANNUNG & GROUNDING
+
+• Mantras und beruhigende Affirmationen
+• Spiele zur Ablenkung und Entspannung
+• Atemübungen (Breathing Exercises)
+• Notfall-Grounding-Techniken (5-4-3-2-1 Methode)
+
+📚 DIS-AUFKLÄRUNG
+
+• Was ist DIS? - Symptome, Diagnose, Häufigkeit
+• Terminologie (Alters, Switches, Fronting, Ko-Bewusstsein)
+• Mythen über DIS aufgeklärt
+• Bewältigungsstrategien im Alltag
+• Funktionelle Multiplizität vs. Integration
+
+🔐 SICHERHEIT & KONTROLLE
+
+• Passwortschutz für Profile
+• Sicherheitsfragen für Passwort-Reset
+• Admin-Profil mit erweiterten Rechten
+• Biometrische Authentifizierung (geplant)
+• Backup/Export-Funktion (geplant)
+
+🌍 VOLLSTÄNDIG OFFLINE
+
+Die App funktioniert komplett ohne Internetverbindung. Nur für folgende optionale Funktionen ist Internet erforderlich:
+
+• Karten-Darstellung im Finder (OpenStreetMap)
+• Externe Links (Notfall-Hotlines, Websites)
+• Adresssuche (Nominatim Geocoding)
+
+Alle Kernfunktionen (Chat, Kalender, Medikamente, Tagebuch) arbeiten vollständig offline.
+
+📱 FÜR WEN IST AURORA?
+
+• Menschen mit Dissoziativer Identitätsstörung (DIS/DDNOS)
+• Multiple Systeme aller Größen (2-200+ Alters)
+• Therapeuten zur Empfehlung an Patienten
+• Unterstützungspersonen (Partner, Familie, Freunde)
+
+✨ OPEN BETA
+
+Aurora ist aktuell in der Open Beta Phase und wird aktiv weiterentwickelt. Wir sind auf dein Feedback angewiesen, um die App noch besser zu machen!
+
+Feedback gerne an: info@3ofus.app
+
+🛡️ DATENSCHUTZ-VERSPRECHEN
+
+• Wir sammeln KEINE Daten über dich
+• Wir wissen NICHT, wer die App nutzt
+• Wir tracken NICHT, was du tust
+• Deine Daten verlassen NIEMALS dein Gerät
+• Keine Analytics, keine Crashlytics, kein Firebase
+• Keine Werbung, keine Tracker
+
+Die vollständige Datenschutzerklärung findest du auf unserer Website oder in der App.
+
+⚠️ WICHTIGER HINWEIS
+
+Aurora ist eine Unterstützungs-App und KEIN Ersatz für professionelle medizinische Behandlung oder Therapie. Bei akuten Krisen wende dich bitte an Notfall-Hotlines (z.B. Telefonseelsorge: 0800 111 0 111) oder den ärztlichen Notdienst.
+
+🚀 ROADMAP
+
+Geplante Features für kommende Updates:
+
+• Backup & Export-Funktion (JSON/PDF)
+• Biometrische Authentifizierung (Fingerabdruck, Face ID)
+• Erweiterte Statistiken (Switches pro Tag, Medikamenten-Adherence)
+• Discord-Community für Feedback und Support
+• Erweiterte DIS-Aufklärungsinhalte
+• Mehr Spiele und Entspannungsübungen
+
+📧 KONTAKT & SUPPORT
+
+Entwickelt von 3ofus - mit Respekt für Vielfalt und Privatsphäre.
+
+E-Mail: info@3ofus.app
+Website: 3ofus.app/aurora/
+
+Du bist nicht allein. 💜
+
+---
+
+Keywords: DIS, Dissoziative Identitätsstörung, DDNOS, Multiple Persönlichkeiten, Alters, Mental Health, Trauma, Selbsthilfe, Privacy, Datenschutz, Offline, DSGVO, Kalender, Medikamente, Tagebuch, Chat

@@ -1,0 +1,46 @@
+# Analysis Options für DIS App
+# Nutzt very_good_analysis für strikte Code-Qualitätschecks (200+ Regeln)
+# Siehe: https://pub.dev/packages/very_good_analysis
+
+include: package:very_good_analysis/analysis_options.yaml
+
+analyzer:
+  # Custom Lint Plugin für Architektur-Standards
+  plugins:
+    - custom_lint
+
+  errors:
+    # Ein verworfenes Ergebnis ist hier kein Schönheitsfehler: `@useResult`
+    # steht über `deleteAllLocalData()`, und genau dort hat eine Aufrufstelle
+    # den Teilerfolg weggeworfen und trotzdem neu gestartet.
+    unused_result: error
+
+custom_lint:
+  debug: true
+  verbose: true
+
+  # Generierte Dateien von Analyse ausschließen
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "build/**"
+    - ".dart_tool/**"
+
+linter:
+  rules:
+    # 80-Zeichen-Limit deaktivieren (unrealistisch für Flutter Widgets)
+    lines_longer_than_80_chars: false
+
+    # Ausgeschriebene Standardwerte bleiben stehen. Die Regel hält sie für
+    # überflüssig, aber sie tragen hier Verhalten: `timeLimit` beim
+    # Positionsfix, `showUserLocation` auf den Karten, `barrierDismissible`
+    # am Dialog. Ändert ein Paket seinen Standard, ändert sich sonst lautlos,
+    # was die App tut — und ein `dart fix`-Lauf hat genau das schon einmal an
+    # neun Stellen entfernt.
+    avoid_redundant_argument_values: false
+
+    # Public API Dokumentation erstmal optional (später aktivieren)
+    public_member_api_docs: false
+
+    # File Names können auch PascalCase sein (für Screens)
+    file_names: false

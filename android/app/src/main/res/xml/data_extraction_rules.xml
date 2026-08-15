@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Aurora verlässt das Gerät nicht — auch nicht über die Plattform.
+
+    Der zweite Onboarding-Schirm sagt „Keine Cloud-Sicherung". Bis zum
+    13.08.2026 stimmte das nicht: Ohne diese Datei und ohne `allowBackup`
+    im Manifest galt Androids Vorgabe, und die sichert das gesamte
+    Datenverzeichnis in die Google Drive des angemeldeten Kontos — Profile,
+    Chatverläufe zwischen den Anteilen, Tagebuch, Medikamente,
+    Notfallkontakte.
+
+    Zwei Wege, zwei Abschnitte. `allowBackup="false"` schließt ab Android 12
+    nur den ersten. Die Gerät-zu-Gerät-Übertragung beim Umzug auf ein neues
+    Telefon bleibt erlaubt, bis sie hier ausgeschlossen wird.
+
+    Jeder Bereich, der hier nicht steht, fällt auf die Voreinstellung
+    zurück — deshalb stehen sie alle da, auch die, in denen Aurora heute
+    nichts ablegt.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="root" path="." />
+        <exclude domain="file" path="." />
+        <exclude domain="database" path="." />
+        <exclude domain="sharedpref" path="." />
+        <exclude domain="external" path="." />
+        <exclude domain="device_root" path="." />
+        <exclude domain="device_file" path="." />
+        <exclude domain="device_database" path="." />
+        <exclude domain="device_sharedpref" path="." />
+    </cloud-backup>
+
+    <device-transfer>
+        <exclude domain="root" path="." />
+        <exclude domain="file" path="." />
+        <exclude domain="database" path="." />
+        <exclude domain="sharedpref" path="." />
+        <exclude domain="external" path="." />
+        <exclude domain="device_root" path="." />
+        <exclude domain="device_file" path="." />
+        <exclude domain="device_database" path="." />
+        <exclude domain="device_sharedpref" path="." />
+    </device-transfer>
+</data-extraction-rules>

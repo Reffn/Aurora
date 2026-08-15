@@ -1,0 +1,257 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- Permissions für Media-Features -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <!-- Kein READ_MEDIA_IMAGES, kein READ_MEDIA_VIDEO.
+
+         Google hat Update 3.0.15 am 7. August 2026 deswegen abgelehnt
+         („Richtlinie für Berechtigungen für Fotos und Videos"). Zu Recht:
+         Diese Berechtigungen heißen „gib mir alle Bilder auf dem Gerät".
+         Aurora liest die Galerie nirgends aus — sie lässt den Menschen EIN
+         Bild aussuchen und kopiert es in ihren eigenen Ordner. Dafür ist ab
+         Android 13 der System-Photo-Picker da, und der braucht nichts.
+
+         `tools:node="remove"` statt bloßem Weglassen: `permission_handler`
+         bringt die Berechtigungen über sein eigenes Manifest mit, und
+         geprüft wird das zusammengeführte Manifest. Ohne diese Zeilen
+         stünden sie im Release wieder drin.
+
+         Wer sie je wieder braucht, braucht vorher einen Grund, der die
+         Richtlinie besteht — und eine Funktion, die die Galerie wirklich
+         durchsucht. -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"
+        tools:node="remove"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"
+        tools:node="remove"/>
+    <!-- Das Kamera-Plugin trägt für dieselbe Berechtigung maxSdkVersion 28 ein.
+         Ohne tools:replace bricht der Manifest-Merger den Build ab. 32 gilt,
+         weil Aurora Anhänge bis Android 12L über den Speicher schreibt. -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"
+        tools:replace="android:maxSdkVersion"/>
+    <!-- Ein Plugin bringt READ_EXTERNAL_STORAGE ohne Obergrenze mit. Ab
+         Android 13 ignoriert das System die Berechtigung ohnehin; ohne
+         Deckel steht sie aber im Release und liest sich in einer Prüfung
+         wie ein zweiter Anlauf auf denselben Medienzugriff. Der Deckel sagt,
+         was gilt: nur bis Android 12L, und dort nur für Anhänge. -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"
+        tools:replace="android:maxSdkVersion"/>
+
+    <!-- Permissions für Location (v3.1 - Finder Feature) -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- Kein ACCESS_BACKGROUND_LOCATION.
+
+         Die Wegaufzeichnung läuft über einen Vordergrunddienst, und der wird
+         gestartet, während Aurora sichtbar ist — vom Satellitenknopf oder
+         vom Schalter in den Einstellungen. Für diesen Fall genügt Android
+         „Bei Nutzung erlauben": Der Dienst darf weitermessen, auch wenn die
+         App danach in den Hintergrund geht.
+
+         Am 9. August 2026 auf dem S24 nachgemessen, mit verweigertem
+         Hintergrund-Standort: Dienst läuft (`isForeground=true`,
+         `types=0x8`), überlebt erzwungenes Deep Idle, Benachrichtigung steht.
+
+         Das erspart der Nutzerin die unheimlichste Berechtigung, die Android
+         kennt, und Aurora eine Play-Deklaration samt Demo-Video. Wieder
+         hineinnehmen darf sie nur, wer einen Weg baut, der ohne sichtbaren
+         Dienst im Hintergrund misst — und der wäre in dieser App falsch. -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"
+        tools:node="remove"/>
+
+    <!-- Vordergrunddienst für die Wegaufzeichnung.
+
+         `geolocator_android` bringt den Dienst selbst mit
+         (`GeolocatorLocationService`, `foregroundServiceType="location"`),
+         aber **keine** Berechtigung dafür — die muss die App deklarieren.
+         Ohne die zweite Zeile wirft Android 14 beim Start des Dienstes eine
+         SecurityException.
+
+         Der Dienst ist der Grund, warum die Aufzeichnung überhaupt hält:
+         Vorher hing sie an einem Timer im App-Prozess und starb mit ihm.
+         Die dauerhafte Benachrichtigung, die Android dafür verlangt, ist
+         hier kein Preis, sondern die Zusage — aufgezeichnet wird nur,
+         solange sie steht. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION"/>
+
+    <!-- Internet für Map Tiles & Geocoding (v3.1) -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- Notifications (Android 13+) -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <!-- Genaue Alarme für Medikamenten-Erinnerungen.
+
+         SCHEDULE_EXACT_ALARM: der Mensch gibt sie über einen eigenen
+         Systembildschirm frei. `NotificationService.requestPermissions`
+         fragt danach — aber nur von einer Handlung aus, und die Antwort
+         entscheidet nicht darüber, ob überhaupt erinnert wird. Ohne
+         Freigabe plant `ReminderScheduler` mit `inexactAllowWhileIdle`:
+         die Meldung kommt ein paar Minuten später statt gar nicht.
+
+         Kein USE_EXACT_ALARM. Die wird beim Installieren erteilt und ist
+         nicht widerrufbar; Google beschränkt sie deshalb auf Apps, deren
+         Kernfunktion Wecker oder Kalender ist. Aurora erinnert an
+         Medikamente, ist aber keins von beidem — und die Richtlinie ist
+         hart formuliert: „Apps will not be able to publish a version of
+         their app with this permission in the manifest unless they
+         qualify." Nach der Ablehnung von 3.0.15 ist das der zweite Weg
+         in dieselbe Wand.
+
+         tools:node="remove", nicht bloß weglassen: geprüft wird das
+         zusammengeführte Manifest, und ein Plugin kann sie mitbringen. -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM"
+        tools:node="remove"/>
+    <!-- Boot Complete für Notification Rescheduling -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+    <!--
+        Die drei Sicherungs-Attribute halten die Zusage des zweiten
+        Onboarding-Schirms: „Keine Cloud-Sicherung".
+
+        Sie fehlten bis zum 13.08.2026. Androids Vorgabe für `allowBackup`
+        ist `true` — das System sicherte damit das gesamte Datenverzeichnis
+        in die Google Drive. Niemand sah es: die Nutzerin nicht, ein Grep
+        nicht, ein Test nicht. Bei Plattform-Voreinstellungen ist die
+        Abwesenheit die Aussage.
+
+        `allowBackup="false"` allein genügt nicht. Ab Android 12 deckt es
+        nur die Cloud-Sicherung; die Gerät-zu-Gerät-Übertragung braucht
+        `dataExtractionRules`. `fullBackupContent` deckt die Geräte davor.
+
+        Bewacht von test/core/keine_cloud_sicherung_test.dart.
+    -->
+    <application
+        android:label="Aurora"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        android:dataExtractionRules="@xml/data_extraction_rules">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:taskAffinity=""
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            <!-- Specifies an Android theme to apply to this Activity as soon as
+                 the Android process has started. This theme is visible to the user
+                 while the Flutter UI initializes. After that, this theme continues
+                 to determine the Window background behind the Flutter UI. -->
+            <meta-data
+              android:name="io.flutter.embedding.android.NormalTheme"
+              android:resource="@style/NormalTheme"
+              />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <!--
+            Die Empfänger für geplante Erinnerungen.
+
+            `flutter_local_notifications` bringt sie NICHT mit: sein eigenes
+            Manifest enthält nur zwei Berechtigungen. Wer sie hier nicht
+            einträgt, bekommt keinen Fehler — `zonedSchedule` legt brav
+            einen Alarm an, der Alarm feuert pünktlich, und der Broadcast
+            geht an ein Bauteil, das es nicht gibt. Im Systemprotokoll sah
+            das am 07.08.2026 so aus:
+
+                enq=13:13:00.012  disp=1970-01-01  fin=13:13:00.012
+
+            Eingereiht und in derselben Millisekunde beendet, ohne dass ein
+            Empfänger lief. Acht Monate lang kam jede Medikamenten-
+            Erinnerung ausschließlich vom App-internen Minutentakt — also
+            nur, solange die App offen war. Bei geschlossener App: nichts.
+
+            ScheduledNotificationReceiver  zeigt die geplante Meldung.
+            ScheduledNotificationBootReceiver  stellt sie nach einem
+              Neustart wieder her; ohne ihn ist nach jedem Reboot alles weg.
+            ActionBroadcastReceiver  nimmt Knöpfe an der Meldung entgegen.
+        -->
+        <receiver
+            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver"
+            android:exported="false" />
+        <receiver
+            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.dexterous.flutterlocalnotifications.ActionBroadcastReceiver"
+            android:exported="false" />
+
+        <!--
+            Sagt nach einem Neustart, dass die Wegaufzeichnung pausiert.
+
+            Sie startet den Dienst NICHT. Ein Foreground-Service vom Typ
+            `location` darf mit „Bei Nutzung erlauben" weitermessen, aber nur,
+            wenn er gestartet wurde, während die App sichtbar war. BOOT_COMPLETED
+            ist Hintergrund; dafür verlangt Android ACCESS_BACKGROUND_LOCATION —
+            und die ist bewusst draußen (Play-Deklaration samt Demo-Video, dazu
+            „Immer erlauben" in fremden Systemmenüs).
+
+            Also ein Griff statt einer Berechtigung. Vorher erfuhr niemand, dass
+            nach einem Neustart nichts mehr aufgezeichnet wurde; das Loch fiel
+            erst auf, wenn jemand wissen wollte, wo er war.
+
+            exported="true" ist Pflicht: Der Broadcast kommt vom System.
+        -->
+        <receiver
+            android:name=".WegaufzeichnungBootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Don't delete the meta-data below.
+             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+    </application>
+    <!-- Required to query activities that can process text, see:
+         https://developer.android.com/training/package-visibility and
+         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
+
+         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
+    <queries>
+        <!-- Text processing (Flutter default) -->
+        <intent>
+            <action android:name="android.intent.action.PROCESS_TEXT"/>
+            <data android:mimeType="text/plain"/>
+        </intent>
+
+        <!-- Web browser links (for url_launcher: https, http) -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="http" />
+        </intent>
+
+        <!-- Email client (for url_launcher: mailto) -->
+        <intent>
+            <action android:name="android.intent.action.SENDTO" />
+            <data android:scheme="mailto" />
+        </intent>
+    </queries>
+</manifest>

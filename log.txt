@@ -1,0 +1,238 @@
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 88.0.0 (91.0.0 available)
+  analyzer 8.1.1 (8.4.0 available)
+  analyzer_plugin 0.13.7 (0.13.9 available)
+  audio_session 0.1.25 (0.2.2 available)
+  characters 1.4.0 (1.4.1 available)
+  flutter_launcher_icons 0.13.1 (0.14.4 available)
+  flutter_local_notifications 17.2.4 (19.5.0 available)
+  flutter_local_notifications_linux 4.0.1 (6.0.0 available)
+  flutter_local_notifications_platform_interface 7.2.0 (9.1.0 available)
+  flutter_plugin_android_lifecycle 2.0.30 (2.0.32 available)
+  hive_ce 2.14.0 (2.15.0 available)
+  hive_ce_generator 1.9.5 (1.10.0 available)
+  image_picker_android 0.8.13+3 (0.8.13+5 available)
+  just_audio 0.9.46 (0.10.5 available)
+  material_color_utilities 0.11.1 (0.13.0 available)
+  meta 1.16.0 (1.17.0 available)
+  path_provider_android 2.2.18 (2.2.20 available)
+  permission_handler 11.4.0 (12.0.1 available)
+  permission_handler_android 12.1.0 (13.0.1 available)
+  record 6.1.1 (6.1.2 available)
+  record_ios 1.1.2 (1.1.4 available)
+  record_macos 1.1.1 (1.1.2 available)
+  record_web 1.2.0 (1.2.1 available)
+  shelf_web_socket 2.0.1 (3.0.0 available)
+  signature 5.5.0 (6.3.0 available)
+  test_api 0.7.6 (0.7.7 available)
+  timezone 0.9.4 (0.10.1 available)
+  url_launcher_android 6.3.22 (6.3.24 available)
+  very_good_analysis 6.0.0 (10.0.0 available)
+  video_player_android 2.8.14 (2.8.17 available)
+  video_player_platform_interface 6.4.0 (6.5.0 available)
+  watcher 1.1.3 (1.1.4 available)
+Got dependencies!
+32 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+Launching lib\main.dart on SM A145F (wireless) in debug mode...
+√ Built build\app\outputs\flutter-apk\app-debug.apk
+D/FlutterJNI( 4716): Beginning load of flutter...
+D/FlutterJNI( 4716): flutter (null) was loaded normally!
+I/flutter ( 4716): [IMPORTANT:flutter/shell/platform/android/android_context_vk_impeller.cc(62)] Using the Impeller rendering backend (Vulkan).
+I/.disapp.dis_app( 4716): Compiler allocated 7416KB to compile void android.view.ViewRootImpl.performTraversals()
+Connecting to VM Service at ws://127.0.0.1:51423/_iOL5b7WxlY=/ws
+Connected to the VM Service.
+D/ProfileInstaller( 4716): Installing profile for com.disapp.dis_app
+I/flutter ( 4716): [2025-10-17T16:47:29.103940] ℹ️ [INFO] [UI] Logger mode: Development
+I/flutter ( 4716): [2025-10-17T16:47:29.422150] ℹ️ [INFO] [UI] App starting
+I/flutter ( 4716):   └─ Data: {mode: Development}
+I/Choreographer( 4716): Skipped 168 frames!  The application may be doing too much work on its main thread.
+I/flutter ( 4716): [2025-10-17T16:47:31.694820] ℹ️ [INFO] [SERVICE] PasswordResetService initialized
+I/flutter ( 4716): [2025-10-17T16:47:31.909047] ℹ️ [INFO] [UI] App initialized successfully
+I/flutter ( 4716): [2025-10-17T16:47:34.431455] 🔍 [DEBUG] [UI] Carousel initialized with PageView
+I/flutter ( 4716):   └─ Data: {initial_page: 10004, current_page: 4.0, tab_count: 11}
+I/flutter ( 4716): [2025-10-17T16:47:35.927030] ℹ️ [INFO] [DATAENTRY] getActiveProfile
+I/flutter ( 4716):   └─ Data: {source: Query}
+I/flutter ( 4716): [2025-10-17T16:47:35.967203] ℹ️ [INFO] [DATAENTRY] getContacts
+I/flutter ( 4716):   └─ Data: {source: Query}
+I/BLASTBufferQueue( 4716): [SurfaceView[com.disapp.dis_app/com.disapp.dis_app.MainActivity]@0#1](f:0,a:0,s:0) onFrameAvailable the first frame is available
+I/Choreographer( 4716): Skipped 350 frames!  The application may be doing too much work on its main thread.
+I/SurfaceView( 4716): 98603223 finishedDrawing
+D/PhoneWindow( 4716): forceLight changed to false [com.disapp.dis_app/com.disapp.dis_app.MainActivity] from com.android.internal.policy.PhoneWindow.updateForceLightNavigationBar:4536 com.android.internal.policy.PhoneWindow.setNavigationBarColor:4227 io.flutter.plugin.platform.PlatformPlugin.setSystemChromeSystemUIOverlayStyle:503 io.flutter.plugin.platform.PlatformPlugin.access$700:36 io.flutter.plugin.platform.PlatformPlugin$1.setSystemUiOverlayStyle:123
+I/Choreographer( 4716): Skipped 48 frames!  The application may be doing too much work on its main thread.
+I/BLASTBufferQueue_Java( 4716): update, w= 1080 h= 2408 mName = VRI[MainActivity]@a9ebcde mNativeObject= 0xb40000798cbf8e00 sc.mNativeObject= 0xb4000079909fde80 format= -3 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3386 android.view.ViewRootImpl.relayoutWindow:11348 android.view.ViewRootImpl.performTraversals:4544 android.view.ViewRootImpl.doTraversal:3708 android.view.ViewRootImpl$TraversalRunnable.run:12529 android.view.Choreographer$CallbackRecord.run:1751
+I/VRI[MainActivity]@a9ebcde( 4716): Relayout returned: old=(0,0,1080,2408) new=(0,0,1080,2408) relayoutAsync=false req=(1080,2408)0 dur=8 res=0x1 s={true 0xb400007990acf800} ch=false seqId=0
+I/VRI[MainActivity]@a9ebcde( 4716): updateBoundsLayer: t=android.view.SurfaceControl$Transaction@73aac08 sc=Surface(name=Bounds for - com.disapp.dis_app/com.disapp.dis_app.MainActivity@0)/@0xa95dfa1 frame=1
+D/VRI[MainActivity]@a9ebcde( 4716): reportNextDraw android.view.ViewRootImpl.performTraversals:5193 android.view.ViewRootImpl.doTraversal:3708 android.view.ViewRootImpl$TraversalRunnable.run:12529 android.view.Choreographer$CallbackRecord.run:1751 android.view.Choreographer$CallbackRecord.run:1760
+D/VRI[MainActivity]@a9ebcde( 4716): Setup new sync=wmsSync-VRI[MainActivity]@a9ebcde#1
+I/VRI[MainActivity]@a9ebcde( 4716): Creating new active sync group VRI[MainActivity]@a9ebcde#2
+D/VRI[MainActivity]@a9ebcde( 4716): Draw frame after cancel
+D/VRI[MainActivity]@a9ebcde( 4716): registerCallbacksForSync syncBuffer=false
+D/SurfaceView( 4716): 98603223 updateSurfacePosition RenderWorker, frameNr = 1, position = [0, 0, 1080, 2408] surfaceSize = 1080x2408
+I/SurfaceView@5e090d7( 4716): uSP: rtp = Rect(0, 0 - 1080, 2408) rtsw = 1080 rtsh = 2408
+I/SurfaceView@5e090d7( 4716): onSSPAndSRT: pl = 0 pt = 0 sx = 1.0 sy = 1.0
+I/SurfaceView@5e090d7( 4716): aOrMT: VRI[MainActivity]@a9ebcde t = android.view.SurfaceControl$Transaction@9bda987 fN = 1 android.view.SurfaceView.-$$Nest$mapplyOrMergeTransaction:0 android.view.SurfaceView$SurfaceViewPositionUpdateListener.positionChanged:1792 android.graphics.RenderNode$CompositePositionUpdateListener.positionChanged:398
+I/VRI[MainActivity]@a9ebcde( 4716): mWNT: t=0xb4000079908bd800 mBlastBufferQueue=0xb40000798cbf8e00 fn= 1 HdrRenderState mRenderHdrSdrRatio=1.0 caller= android.view.SurfaceView.applyOrMergeTransaction:1723 android.view.SurfaceView.-$$Nest$mapplyOrMergeTransaction:0 android.view.SurfaceView$SurfaceViewPositionUpdateListener.positionChanged:1792
+D/VRI[MainActivity]@a9ebcde( 4716): Received frameDrawingCallback syncResult=0 frameNum=1.
+I/VRI[MainActivity]@a9ebcde( 4716): mWNT: t=0xb40000790560cf80 mBlastBufferQueue=0xb40000798cbf8e00 fn= 1 HdrRenderState mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$11.onFrameDraw:15003 android.view.ThreadedRenderer$1.onFrameDraw:761 <bottom of call stack>
+I/VRI[MainActivity]@a9ebcde( 4716): Setting up sync and frameCommitCallback
+I/BLASTBufferQueue( 4716): [VRI[MainActivity]@a9ebcde#0](f:0,a:0,s:0) onFrameAvailable the first frame is available
+I/VRI[MainActivity]@a9ebcde( 4716): Received frameCommittedCallback lastAttemptedDrawFrameNum=1 didProduceBuffer=true
+D/HWUI    ( 4716): CFMS:: SetUp Pid : 4716    Tid : 4770
+D/VRI[MainActivity]@a9ebcde( 4716): reportDrawFinished seqId=0
+I/HWUI    ( 4716): Davey! duration=855ms; Flags=1, FrameTimelineVsyncId=120872045, IntendedVsync=839071324022790, Vsync=839072124022758, InputEventId=0, HandleInputStart=839072131756838, AnimationStart=839072131761492, PerformTraversalsStart=839072131763338, DrawStart=839072149782530, FrameDeadline=839071340689456, FrameInterval=839072130894646, FrameStartTime=16666666, SyncQueued=839072156477146, SyncStart=839072156707146, IssueDrawCommandsStart=839072160721261, SwapBuffers=839072175041915, FrameCompleted=839072180250261, DequeueBufferDuration=8634270, QueueBufferDuration=1533462, GpuCompleted=839072180250261, SwapBuffersCompleted=839072178152338, DisplayPresentTime=655656545, CommandSubmissionCompleted=839072175041915,
+D/VRI[MainActivity]@a9ebcde( 4716): mThreadedRenderer.initializeIfNeeded()#2 mSurface={isValid=true 0xb400007990acf800}
+D/InputMethodManagerUtils( 4716): startInputInner - Id : 0
+I/InputMethodManager( 4716): startInputInner - IInputMethodManagerGlobalInvoker.startInputOrWindowGainedFocus
+D/InputTransport( 4716): Input channel constructed: 'ClientS', fd=231
+I/InsetsController( 4716): onStateChanged: host=com.disapp.dis_app/com.disapp.dis_app.MainActivity, from=android.view.ViewRootImpl.handleInsetsControlChanged:2888, state=InsetsState: {mDisplayFrame=Rect(0, 0 - 1080, 2408), mDisplayCutout=DisplayCutout{insets=Rect(0, 64 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(468, 0 - 612, 64), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=1080 displayHeight=2408 physicalDisplayWidth=1080 physicalDisplayHeight=2408 density={2.8125} cutoutSpec={M 0,0 H -25.6‬ V 22.75555555555556 H 25.6‬ V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}} sideOverrides={}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=101, center=Point(101, 101)}, RoundedCorner{position=TopRight, radius=101, center=Point(979, 101)}, RoundedCorner{position=BottomRight, radius=101, center=Point(979, 2307)}, RoundedCorner{position=BottomLeft, radius=101, center=Point(101, 2307)}]}  mRoundedCornerFrame=Rect(0, 0 - 1080, 2408), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(956, 0 - 1080, 65) rotation=0}, mDisplayShape=DisplayShape{ spec=-311912193 displayWidth=1080 displayHeight=2408 physicalPixelDisplaySizeRatio=1.0 rotation=0 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {85220000 mType=statusBars mFrame=[0,0][1080,65] mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {85220005 mType=mandatorySystemGestures mFrame=[0,0][1080,98] mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {85220006 mType=tappableElement mFrame=[0,0][1080,65] mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {e1fe0001 mType=navigationBars mFrame=[0,2273][1080,2408] mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {e1fe0004 mType=systemGestures mFrame=[0,0][0,0] mVisible=true mFlags= mSideHint=NONE mBoundingRects=null}, InsetsSource: {e1fe0005 mType=mandatorySystemGestures mFrame=[0,2273][1080,2408] mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {e1fe0006 mType=tappableElement mFrame=[0,2273][1080,2408] mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {e1fe0024 mType=systemGestures mFrame=[0,0][0,0] mVisible=true mFlags= mSideHint=NONE mBoundingRects=null}, InsetsSource: {3 mType=ime mFrame=[0,0][0,0] mVisible=false mFlags= mSideHint=NONE mBoundingRects=null}, InsetsSource: {27 mType=displayCutout mFrame=[0,0][1080,64] mVisible=true mFlags= mSideHint=TOP mBoundingRects=null} }
+I/InsetsSourceConsumer( 4716): applyRequestedVisibilityToControl: visible=false, type=ime, host=com.disapp.dis_app/com.disapp.dis_app.MainActivity
+I/VRI[MainActivity]@a9ebcde( 4716): call setFrameRateCategory for touch hint category=high hint, reason=touch, vri=VRI[MainActivity]@a9ebcde
+I/flutter ( 4716): [2025-10-17T16:47:45.612124] 🔍 [DEBUG] [UI] Carousel: Live tab switch
+I/flutter ( 4716):   └─ Data: {from: 4, to: 5, page: 10003.984809027777, scrollOffset_pixels: 768306.0333333334, virtualPage: 10004}
+I/Choreographer( 4716): Skipped 30 frames!  The application may be doing too much work on its main thread.
+I/flutter ( 4716): [2025-10-17T16:47:46.283449] ℹ️ [INFO] [DATAENTRY] getFinderItems
+I/flutter ( 4716):   └─ Data: {source: Query}
+I/VRI[MainActivity]@a9ebcde( 4716): call setFrameRateCategory for touch hint category=no preference, reason=boost timeout, vri=VRI[MainActivity]@a9ebcde
+I/VRI[MainActivity]@a9ebcde( 4716): call setFrameRateCategory for touch hint category=high hint, reason=touch, vri=VRI[MainActivity]@a9ebcde
+I/flutter ( 4716): [2025-10-17T16:47:51.105540] 🔍 [DEBUG] [UI] Carousel: Live tab switch
+I/flutter ( 4716):   └─ Data: {from: 5, to: 3, page: 10001.531105324073, scrollOffset_pixels: 768117.588888889, virtualPage: 10002}
+I/flutter ( 4716): [2025-10-17T16:47:52.845196] 🔍 [DEBUG] [UI] Carousel: TAP detected
+I/flutter ( 4716):   └─ Data: {virtualIndex: 10001, actualIndex: 2, currentPage: 10002.0, scrollOffset_pixels: 768153.6000000001}
+I/flutter ( 4716): [2025-10-17T16:47:52.982340] 🔍 [DEBUG] [UI] Carousel: Live tab switch
+I/flutter ( 4716):   └─ Data: {from: 3, to: 2, page: 10001.497070327401, scrollOffset_pixels: 768114.9750011445, virtualPage: 10001}
+I/VRI[MainActivity]@a9ebcde( 4716): call setFrameRateCategory for touch hint category=no preference, reason=boost timeout, vri=VRI[MainActivity]@a9ebcde
+I/VRI[MainActivity]@a9ebcde( 4716): call setFrameRateCategory for touch hint category=high hint, reason=touch, vri=VRI[MainActivity]@a9ebcde
+I/flutter ( 4716): [2025-10-17T16:48:04.503209] 🔍 [DEBUG] [UI] Carousel: Live tab switch
+I/flutter ( 4716):   └─ Data: {from: 2, to: 3, page: 10001.968894675925, scrollOffset_pixels: 768151.2111111112, virtualPage: 10002}
+I/flutter ( 4716): [2025-10-17T16:48:04.696593] 🔍 [DEBUG] [UI] Carousel: Live tab switch
+I/flutter ( 4716):   └─ Data: {from: 3, to: 4, page: 10003.40870949074, scrollOffset_pixels: 768261.788888889, virtualPage: 10003}
+I/flutter ( 4716): [2025-10-17T16:48:04.939716] ℹ️ [INFO] [DATAENTRY] getActiveProfile
+I/flutter ( 4716):   └─ Data: {source: Query}
+I/flutter ( 4716): [2025-10-17T16:48:04.951654] ℹ️ [INFO] [DATAENTRY] getContacts
+I/flutter ( 4716):   └─ Data: {source: Query}
+I/flutter ( 4716): [2025-10-17T16:48:05.339685] 🔍 [DEBUG] [UI] Carousel: Live tab switch
+I/flutter ( 4716):   └─ Data: {from: 4, to: 5, page: 10004.377896027478, scrollOffset_pixels: 768336.2224149104, virtualPage: 10004}
+I/flutter ( 4716): [2025-10-17T16:48:05.554705] ℹ️ [INFO] [DATAENTRY] getFinderItems
+I/flutter ( 4716):   └─ Data: {source: Query}
+I/flutter ( 4716): [2025-10-17T16:48:06.032073] 🔍 [DEBUG] [UI] Carousel: Live tab switch
+I/flutter ( 4716):   └─ Data: {from: 5, to: 6, page: 10004.589265046296, scrollOffset_pixels: 768352.4555555556, virtualPage: 10005}
+I/flutter ( 4716): [2025-10-17T16:48:06.171985] 🔍 [DEBUG] [UI] Carousel: Live tab switch
+I/flutter ( 4716):   └─ Data: {from: 6, to: 7, page: 10005.91333912037, scrollOffset_pixels: 768454.1444444446, virtualPage: 10006}
+I/flutter ( 4716): [2025-10-17T16:48:07.186103] 🔍 [DEBUG] [UI] Carousel: Live tab switch
+I/flutter ( 4716):   └─ Data: {from: 7, to: 8, page: 10006.510561342593, scrollOffset_pixels: 768500.0111111113, virtualPage: 10007}
+I/flutter ( 4716): [2025-10-17T16:48:07.328537] 🔍 [DEBUG] [UI] Carousel: Live tab switch
+I/flutter ( 4716):   └─ Data: {from: 8, to: 9, page: 10007.769820601852, scrollOffset_pixels: 768596.7222222224, virtualPage: 10008}
+I/flutter ( 4716): [2025-10-17T16:48:07.489397] 🔍 [DEBUG] [UI] Carousel: Live tab switch
+I/flutter ( 4716):   └─ Data: {from: 9, to: 10, page: 10008.505931712964, scrollOffset_pixels: 768653.2555555557, virtualPage: 10009}
+I/flutter ( 4716): [2025-10-17T16:48:08.532295] 🔍 [DEBUG] [UI] Carousel: Live tab switch
+I/flutter ( 4716):   └─ Data: {from: 10, to: 0, page: 10009.542968749998, scrollOffset_pixels: 768732.9, virtualPage: 10010}
+I/flutter ( 4716): [2025-10-17T16:48:08.641479] 🔍 [DEBUG] [UI] Carousel: Live tab switch
+I/flutter ( 4716):   └─ Data: {from: 0, to: 1, page: 10010.802228009257, scrollOffset_pixels: 768829.6111111111, virtualPage: 10011}
+I/flutter ( 4716): [2025-10-17T16:48:08.751933] ℹ️ [INFO] [DATAENTRY] getChatMessages
+I/flutter ( 4716):   └─ Data: {source: Query}
+I/flutter ( 4716): [2025-10-17T16:48:08.757591] ℹ️ [INFO] [DATAENTRY] getProfiles
+I/flutter ( 4716):   └─ Data: {source: Query}
+I/flutter ( 4716): [2025-10-17T16:48:08.760904] ℹ️ [INFO] [DATAENTRY] getActiveProfile
+I/flutter ( 4716):   └─ Data: {source: Query}
+I/flutter ( 4716): [2025-10-17T16:48:08.778518] ℹ️ [INFO] [DATAENTRY] getActiveProfile
+I/flutter ( 4716):   └─ Data: {source: Query}
+I/flutter ( 4716): [2025-10-17T16:48:09.381953] 🔍 [DEBUG] [UI] Carousel: Live tab switch
+I/flutter ( 4716):   └─ Data: {from: 1, to: 2, page: 10011.853153935184, scrollOffset_pixels: 768910.3222222222, virtualPage: 10012}
+I/flutter ( 4716): [2025-10-17T16:48:09.470500] ℹ️ [INFO] [DATAENTRY] getActiveProfile
+I/flutter ( 4716):   └─ Data: {source: Query}
+I/flutter ( 4716): [2025-10-17T16:48:09.596650] ℹ️ [INFO] [DATAENTRY] getActiveProfile
+I/flutter ( 4716):   └─ Data: {source: Query}
+I/flutter ( 4716): [2025-10-17T16:48:09.801781] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-17T16:48:09.643678}
+I/flutter ( 4716): [2025-10-17T16:48:10.096584] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-09-28T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.123893] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-09-29T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.134396] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-09-30T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.144124] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-01T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.156456] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-02T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.167483] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-03T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.177969] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-04T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.188877] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-05T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.199690] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-06T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.210105] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-07T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.219325] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-08T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.228385] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-09T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.237456] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-10T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.246799] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-11T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.256735] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-12T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.266509] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-13T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.276564] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-14T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.287042] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-15T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.296633] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-16T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.306983] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-17T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.317711] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-18T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.327578] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-19T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.337593] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-20T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.346932] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-21T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.355924] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-22T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.365461] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-23T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.374416] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-24T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.386364] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-25T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.396506] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-26T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.406909] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-27T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.418615] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-28T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.429620] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-29T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.439005] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-30T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.447939] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-10-31T00:00:00.000Z}
+I/flutter ( 4716): [2025-10-17T16:48:10.457539] ℹ️ [INFO] [DATAENTRY] getCalendarEventsForDay
+I/flutter ( 4716):   └─ Data: {source: Query, day: 2025-11-01T00:00:00.000Z}
+I/Choreographer( 4716): Skipped 166 frames!  The application may be doing too much work on its main thread.
+I/flutter ( 4716): [2025-10-17T16:48:12.359895] 🔍 [DEBUG] [UI] Carousel: Live tab switch
+I/flutter ( 4716):   └─ Data: {from: 2, to: 4, page: 10013.570746527777, scrollOffset_pixels: 769042.2333333334, virtualPage: 10014}
+I/flutter ( 4716): [2025-10-17T16:48:12.516278] ℹ️ [INFO] [DATAENTRY] getActiveProfile
+I/flutter ( 4716):   └─ Data: {source: Query}
+I/flutter ( 4716): [2025-10-17T16:48:12.523207] ℹ️ [INFO] [DATAENTRY] getContacts
+I/flutter ( 4716):   └─ Data: {source: Query}
+I/flutter ( 4716): [2025-10-17T16:48:12.943380] 🔍 [DEBUG] [UI] Carousel: Live tab switch
+I/flutter ( 4716):   └─ Data: {from: 4, to: 5, page: 10014.592841216858, scrollOffset_pixels: 769120.7302054547, virtualPage: 10015}
+I/flutter ( 4716): [2025-10-17T16:48:13.108335] 🔍 [DEBUG] [UI] Carousel: Live tab switch
+I/flutter ( 4716):   └─ Data: {from: 5, to: 6, page: 10015.903026402044, scrollOffset_pixels: 769221.352427677, virtualPage: 10016}
+I/flutter ( 4716): [2025-10-17T16:48:13.215962] ℹ️ [INFO] [DATAENTRY] getFinderItems
+I/flutter ( 4716):   └─ Data: {source: Query}
+I/flutter ( 4716): [2025-10-17T16:48:13.752794] 🔍 [DEBUG] [UI] Carousel: Live tab switch
+I/flutter ( 4716):   └─ Data: {from: 6, to: 7, page: 10016.931857638889, scrollOffset_pixels: 769300.3666666667, virtualPage: 10017}
+I/flutter ( 4716): [2025-10-17T16:48:13.903275] 🔍 [DEBUG] [UI] Carousel: Live tab switch
+I/flutter ( 4716):   └─ Data: {from: 7, to: 8, page: 10018.191116898148, scrollOffset_pixels: 769397.0777777778, virtualPage: 10018}
+I/.disapp.dis_app( 4716): Thread[2,tid=4721,WaitingInMainSignalCatcherLoop,Thread*=0xb400007995c02000,peer=0x2001c78,"Signal Catcher"]: reacting to signal 3
+I/.disapp.dis_app( 4716):
+I/.disapp.dis_app( 4716): Wrote stack traces to tombstoned

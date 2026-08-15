@@ -1,0 +1,3 @@
+Deine Daten bleiben jetzt wirklich auf dem Gerät: Android sichert Aurora nicht mehr in die Google Drive und überträgt sie nicht beim Gerätewechsel. Das hatten wir versprochen — jetzt steht es auch in den Einstellungen der App selbst.
+
+Dazu Kleinigkeiten, die im Alltag stören: Aurora ist in der Meldungsleiste wieder zu erkennen, die Zeichenfläche im Chat schließt nach dem Senden, „Zurück" verwirft keine angefangene Zeichnung mehr, und im Finder heißt der Knopf jetzt „Merken".

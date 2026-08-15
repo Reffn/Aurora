@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Was der Resource-Shrinker nicht sehen kann.
+
+  Er sucht Verweise im Android-Teil: Manifest, Layouts, andere Ressourcen.
+  Was nur aus Dart heraus benannt wird, ist für ihn unbenutzt.
+
+  `ic_notification` ist genau so ein Fall. Es steht als Zeichenkette in
+  `notification_service.dart` und als AndroidResource in `gps_manager.dart` —
+  im ganzen Android-Teil zeigt niemand darauf. Gemessen am 14.08.2026 mit
+  `aapt2 dump resources`: sechs Einträge im Debug-Paket, keiner im Release.
+
+  Das wäre nicht nur ein fehlendes Bild geblieben. flutter_local_notifications
+  löst das Symbol beim Einrichten auf; fehlt es, steht die Einrichtung, und
+  keine Erinnerung geht mehr raus. Ein leerer Wert an einer Stelle, die der
+  Compiler wegoptimiert, hat den Rückkanal schon einmal acht Monate lang
+  totgelegt — dieselbe Bauart, andere Ebene.
+
+  Nach jeder Änderung hier gilt dieselbe Prüfung wie damals: Nicht die
+  Quelle glauben, sondern das gebaute Paket ansehen.
+
+    aapt2 dump resources build/app/outputs/flutter-apk/app-release.apk \
+      | grep ic_notification
+-->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@drawable/ic_notification" />

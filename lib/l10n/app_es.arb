@@ -1,0 +1,2836 @@
+{
+  "@@locale": "es",
+  "appTitle": "Aurora",
+  "@appTitle": {
+    "description": "Application title"
+  },
+  "appSubtitle": "Tu compañera segura en el día a día con TID",
+  "@appSubtitle": {
+    "description": "Application subtitle/tagline"
+  },
+  "appDescription": "Aurora te acompaña a organizar tu día a día y la comunicación dentro de tu sistema.",
+  "@appDescription": {
+    "description": "Application description"
+  },
+  "tabChat": "Chat",
+  "@tabChat": {
+    "description": "Chat tab label"
+  },
+  "tabFeedback": "Comentarios",
+  "@tabFeedback": {
+    "description": "Feedback tab label"
+  },
+  "tabCalendar": "Calendario",
+  "@tabCalendar": {
+    "description": "Calendar tab label"
+  },
+  "tabMedication": "Medicación",
+  "@tabMedication": {
+    "description": "Medication tab label"
+  },
+  "tabDiary": "Diario",
+  "@tabDiary": {
+    "description": "Diary tab label"
+  },
+  "tabContacts": "Contactos",
+  "@tabContacts": {
+    "description": "Contacts tab label"
+  },
+  "tabFinder": "Buscador",
+  "@tabFinder": {
+    "description": "Finder tab label"
+  },
+  "tabEmergency": "Emergencia",
+  "@tabEmergency": {
+    "description": "Emergency tab label"
+  },
+  "tabHelp": "Ayuda",
+  "@tabHelp": {
+    "description": "Help tab label"
+  },
+  "tabMantras": "Mantras",
+  "@tabMantras": {
+    "description": "Mantras tab label"
+  },
+  "tabGames": "Juegos",
+  "@tabGames": {
+    "description": "Games tab label"
+  },
+  "tabTimeline": "Cronología",
+  "@tabTimeline": {
+    "description": "Timeline tab label"
+  },
+  "actionSave": "Guardar",
+  "@actionSave": {
+    "description": "Save button label"
+  },
+  "actionCancel": "Cancelar",
+  "@actionCancel": {
+    "description": "Cancel button label"
+  },
+  "actionDelete": "Borrar",
+  "@actionDelete": {
+    "description": "Delete button label"
+  },
+  "actionEdit": "Editar",
+  "@actionEdit": {
+    "description": "Edit button label"
+  },
+  "actionClose": "Cerrar",
+  "@actionClose": {
+    "description": "Close button label"
+  },
+  "actionContinue": "Continuar",
+  "@actionContinue": {
+    "description": "Continue/Next button label"
+  },
+  "actionConfirm": "Confirmar",
+  "@actionConfirm": {
+    "description": "Confirm button label"
+  },
+  "actionBack": "Atrás",
+  "@actionBack": {
+    "description": "Back button label"
+  },
+  "actionQuit": "Salir",
+  "@actionQuit": {
+    "description": "Quit/Exit button label"
+  },
+  "actionSend": "Enviar",
+  "@actionSend": {
+    "description": "Send button label"
+  },
+  "actionShare": "Compartir",
+  "actionDone": "Listo",
+  "mainSettingLogout": "Ajustes / Cerrar sesión",
+  "@mainSettingLogout": {
+    "description": "Settings/Logout text in AppBar profile button"
+  },
+  "dialogExitTitle": "¿Salir de la app?",
+  "@dialogExitTitle": {
+    "description": "Exit app dialog title"
+  },
+  "dialogExitMessage": "¿Seguro que quieres salir de Aurora?",
+  "@dialogExitMessage": {
+    "description": "Exit app dialog message"
+  },
+  "menuProfileEdit": "Editar perfil",
+  "@menuProfileEdit": {
+    "description": "Edit profile menu item"
+  },
+  "menuSettings": "Ajustes",
+  "@menuSettings": {
+    "description": "Settings menu item"
+  },
+  "profileMenuTitle": "Perfil y ajustes",
+  "menuLogout": "Cerrar sesión",
+  "@menuLogout": {
+    "description": "Logout menu item"
+  },
+  "presenceRecentTitle": "¿Quién estuvo aquí?",
+  "@presenceRecentTitle": {
+    "description": "Heading of the recent presence lines above the profile selection"
+  },
+  "eventLocationTitle": "¿Dónde tiene lugar?",
+  "@eventLocationTitle": {
+    "description": "Title of the sheet that picks where an event takes place"
+  },
+  "eventLocationOther": "Otro lugar",
+  "@eventLocationOther": {
+    "description": "Entry that opens the map to pick a free location"
+  },
+  "eventLocationNone": "Sin lugar",
+  "@eventLocationNone": {
+    "description": "Entry that clears the location of an event"
+  },
+  "eventLocationLabel": "Lugar",
+  "@eventLocationLabel": {
+    "description": "Label of the location row in the event form"
+  },
+  "eventLocationUnnamed": "Lugar en el mapa",
+  "@eventLocationUnnamed": {
+    "description": "Fallback name for a location picked on the map"
+  },
+  "mapLocationNeeded": "Aurora necesita tu ubicación para este mapa. Se queda en el dispositivo.",
+  "@mapLocationNeeded": {
+    "description": "Notice at the bottom of the time map when location permission is missing"
+  },
+  "mapLocationAllow": "Permitir",
+  "@mapLocationAllow": {
+    "description": "Button in the location notice that asks for permission"
+  },
+  "profileSelectionTitle": "¿Quién está aquí ahora?",
+  "@profileSelectionTitle": {
+    "description": "Profile selection screen title"
+  },
+  "profileNewProfile": "Perfil nuevo",
+  "@profileNewProfile": {
+    "description": "New profile button label"
+  },
+  "profileCreationTitle": "Crear un perfil nuevo",
+  "@profileCreationTitle": {
+    "description": "Profile creation screen title"
+  },
+  "profileCreationSubtitle": "¿Quién quiere presentarse?",
+  "@profileCreationSubtitle": {
+    "description": "Profile creation screen subtitle"
+  },
+  "profileCreationDescription": "Crea tu perfil personal con nombre, color y avatar. Cada perfil se puede personalizar por separado y recibe permisos acordes a la edad.",
+  "@profileCreationDescription": {
+    "description": "Profile creation description text"
+  },
+  "profileEditTitle": "Editar perfil",
+  "@profileEditTitle": {
+    "description": "Profile edit screen title"
+  },
+  "profileEditSubtitle": "Ajusta tu configuración",
+  "@profileEditSubtitle": {
+    "description": "Profile edit screen subtitle"
+  },
+  "profileSectionIdentity": "👤 Identidad",
+  "@profileSectionIdentity": {
+    "description": "Identity section title in profile creation/edit"
+  },
+  "profileSectionAge": "🎂 Edad",
+  "@profileSectionAge": {
+    "description": "Age section title in profile creation/edit"
+  },
+  "profileSectionColor": "🎨 Color",
+  "@profileSectionColor": {
+    "description": "Color section title in profile creation/edit"
+  },
+  "profileSectionSecurity": "🔒 Preguntas de seguridad",
+  "@profileSectionSecurity": {
+    "description": "Security questions section title"
+  },
+  "profileWhoAreYou": "¿Quién eres?",
+  "@profileWhoAreYou": {
+    "description": "Who are you page title in profile creation"
+  },
+  "profileWhoAreYouDescription": "Escribe tu nombre y elige un avatar. Así todo el mundo en el sistema puede reconocerte y distinguirte. También puedes hacer una foto, elegir una de la galería o usar una de las plantillas de animales.",
+  "@profileWhoAreYouDescription": {
+    "description": "Who are you page description"
+  },
+  "profileColorTitle": "Tu color propio",
+  "@profileColorTitle": {
+    "description": "Color selection page title"
+  },
+  "profileColorDescription": "Tu color te hace inconfundible dentro del sistema.",
+  "@profileColorDescription": {
+    "description": "Color selection description"
+  },
+  "profileAgeTitle": "¿Cuántos años tienes?",
+  "@profileAgeTitle": {
+    "description": "Age selection page title"
+  },
+  "profileAgeDescription": "Tu edad determina qué funciones puedes usar.",
+  "@profileAgeDescription": {
+    "description": "Age selection description"
+  },
+  "profileSecurityTitle": "Protege tu perfil",
+  "@profileSecurityTitle": {
+    "description": "Security/password page title"
+  },
+  "profileSecurityDescription": "Si quieres, puedes poner una contraseña (mínimo 4 caracteres).",
+  "@profileSecurityDescription": {
+    "description": "Security/password description"
+  },
+  "profilePasswordOptionalInfo": "La contraseña es opcional. Deja los campos vacíos si no quieres poner ninguna.",
+  "@profilePasswordOptionalInfo": {
+    "description": "Password optional info text"
+  },
+  "profileModeChild": "Modo infantil",
+  "@profileModeChild": {
+    "description": "Child mode label for young profiles"
+  },
+  "profileModeFullAccess": "Acceso completo",
+  "@profileModeFullAccess": {
+    "description": "Full access mode label for older profiles"
+  },
+  "profileModeChildDescription": "Acceso a: Chat (dibujos), Diario, Juegos, Cronología",
+  "@profileModeChildDescription": {
+    "description": "Child mode features description"
+  },
+  "profileModeFullDescription": "Acceso a: todas las funciones (Chat, Calendario, Contactos, Medicación, etc.)",
+  "@profileModeFullDescription": {
+    "description": "Full access mode features description"
+  },
+  "profileActionSaveChanges": "Guardar cambios",
+  "@profileActionSaveChanges": {
+    "description": "Save changes button in profile edit"
+  },
+  "profileActionCreateProfile": "Crear perfil ✓",
+  "@profileActionCreateProfile": {
+    "description": "Create profile button label"
+  },
+  "profileDeactivateTitle": "¿Desactivar el perfil?",
+  "@profileDeactivateTitle": {
+    "description": "Deactivate profile dialog title"
+  },
+  "profileDeactivateMessage": "¿Quieres desactivar el perfil «{name}»?\n\nSe ocultará, pero podrás reactivarlo más adelante.",
+  "@profileDeactivateMessage": {
+    "description": "Deactivate profile dialog message",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "profileDeactivated": "Perfil desactivado",
+  "@profileDeactivated": {
+    "description": "Profile deactivated success message"
+  },
+  "profileDeactivate": "Desactivar",
+  "profileEditComingSoon": "La edición llegará pronto",
+  "profileNameExists": "Ya existe un perfil con ese nombre",
+  "@profileNameExists": {
+    "description": "Profile name already exists error message"
+  },
+  "fieldName": "Nombre",
+  "@fieldName": {
+    "description": "Name input field label"
+  },
+  "fieldPassword": "Contraseña",
+  "@fieldPassword": {
+    "description": "Password input field label"
+  },
+  "fieldPasswordConfirm": "Repetir contraseña",
+  "@fieldPasswordConfirm": {
+    "description": "Password confirmation input field label"
+  },
+  "fieldAge": "Edad",
+  "@fieldAge": {
+    "description": "Age input field label"
+  },
+  "fieldColor": "Color",
+  "@fieldColor": {
+    "description": "Color input field label"
+  },
+  "fieldAvatar": "Avatar",
+  "@fieldAvatar": {
+    "description": "Avatar input field label"
+  },
+  "validationRequired": "Campo obligatorio",
+  "@validationRequired": {
+    "description": "Required field validation error"
+  },
+  "validationPasswordLength": "Mínimo 4 caracteres",
+  "@validationPasswordLength": {
+    "description": "Password minimum length validation"
+  },
+  "validationPasswordMismatch": "Las contraseñas no coinciden",
+  "@validationPasswordMismatch": {
+    "description": "Password mismatch validation error"
+  },
+  "errorGeneric": "Error: {error}",
+  "@errorGeneric": {
+    "description": "Generic error message",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "errorNoProfile": "Ningún perfil seleccionado",
+  "@errorNoProfile": {
+    "description": "No profile selected error"
+  },
+  "errorNoPermission": "No tienes permiso para enviar mensajes de chat",
+  "@errorNoPermission": {
+    "description": "No permission to send chat messages"
+  },
+  "chatTitle": "Chat",
+  "@chatTitle": {
+    "description": "Chat screen title"
+  },
+  "chatEmptyTitle": "Todavía no hay mensajes",
+  "@chatEmptyTitle": {
+    "description": "Empty chat state title"
+  },
+  "chatEmptySubtitle": "Comparte lo que piensas con el sistema",
+  "@chatEmptySubtitle": {
+    "description": "Empty chat state subtitle"
+  },
+  "chatMessageDoodle": "[Dibujo]",
+  "@chatMessageDoodle": {
+    "description": "Placeholder text for doodle message"
+  },
+  "chatMessageVoice": "[Mensaje de voz]",
+  "@chatMessageVoice": {
+    "description": "Placeholder text for voice message"
+  },
+  "chatMessageImage": "[Imagen]",
+  "@chatMessageImage": {
+    "description": "Placeholder text for image message"
+  },
+  "chatMessageVideo": "[Vídeo]",
+  "@chatMessageVideo": {
+    "description": "Placeholder text for video message"
+  },
+  "chatErrorSending": "Error al enviar: {error}",
+  "@chatErrorSending": {
+    "description": "Error sending message",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "chatErrorSendingVoice": "Error al enviar el mensaje de voz: {error}",
+  "@chatErrorSendingVoice": {
+    "description": "Error sending voice message",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "chatErrorSendingImage": "Error al enviar la imagen: {error}",
+  "@chatErrorSendingImage": {
+    "description": "Error sending image",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "chatErrorSendingVideo": "Error al enviar el vídeo: {error}",
+  "@chatErrorSendingVideo": {
+    "description": "Error sending video",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "chatErrorSendingDoodle": "Error al enviar: {error}",
+  "@chatErrorSendingDoodle": {
+    "description": "Error sending doodle",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "chatRecordingInProgress": "Grabando...",
+  "chatRecordingHint": "Toca Detener para enviar el mensaje de voz",
+  "chatRecordingStop": "Detener",
+  "chatErrorMicPermission": "Se necesita permiso para el micrófono",
+  "chatErrorRecordingStart": "No se pudo iniciar la grabación",
+  "chatInputHint": "Escribe un mensaje...",
+  "chatMessageFieldLabel": "Mensaje",
+  "chatAddMedia": "Añadir más contenido",
+  "chatSendMessage": "Enviar mensaje",
+  "chatMediaSheetTitle": "Añadir contenido",
+  "chatNoPermissionHint": "Sin permiso para enviar",
+  "calendarTitle": "Calendario",
+  "@calendarTitle": {
+    "description": "Calendar screen title"
+  },
+  "medicationTitle": "Medicación",
+  "@medicationTitle": {
+    "description": "Medication screen title"
+  },
+  "medicationNewTitle": "Nuevo medicamento",
+  "medicationEditTitle": "Editar medicamento",
+  "medicationDetailTitle": "Detalles del medicamento",
+  "medicationNotFound": "Medicamento no encontrado",
+  "medicationNotFoundMessage": "Este medicamento ya no existe",
+  "medicationTabDaily": "Medicación diaria",
+  "@medicationTabDaily": {
+    "description": "Daily medication tab label"
+  },
+  "medicationTabAsNeeded": "Medicación según necesidad",
+  "@medicationTabAsNeeded": {
+    "description": "As-needed medication tab label"
+  },
+  "medicationEmptyTitle": "Sin medicación 💊",
+  "@medicationEmptyTitle": {
+    "description": "Empty medication list title"
+  },
+  "medicationEmptySubtitle": "Añade tu primer medicamento",
+  "@medicationEmptySubtitle": {
+    "description": "Empty medication list subtitle"
+  },
+  "medicationEmptyAsNeededTitle": "Sin medicación según necesidad 🩹",
+  "@medicationEmptyAsNeededTitle": {
+    "description": "Empty as-needed medication title"
+  },
+  "medicationEmptyAsNeededSubtitle": "Añade tu primer medicamento según necesidad",
+  "@medicationEmptyAsNeededSubtitle": {
+    "description": "Empty as-needed medication subtitle"
+  },
+  "medicationToday": "Hoy",
+  "@medicationToday": {
+    "description": "Today header in medication list"
+  },
+  "medicationStatMedications": "Medicamentos",
+  "@medicationStatMedications": {
+    "description": "Medications stat label"
+  },
+  "medicationStatDoses": "Dosis",
+  "@medicationStatDoses": {
+    "description": "Doses stat label"
+  },
+  "medicationMarkedTaken": "{name} marcado como tomado",
+  "@medicationMarkedTaken": {
+    "description": "Medication marked as taken success message",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "medicationMarkedRefused": "{name} marcado como rechazado",
+  "@medicationMarkedRefused": {
+    "description": "Medication marked as refused message",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "medicationRefusalDialogTitle": "Anotar el rechazo",
+  "@medicationRefusalDialogTitle": {
+    "description": "Refusal documentation dialog title"
+  },
+  "medicationRefusalDialogMessage": "{name} se marcará como rechazado.",
+  "@medicationRefusalDialogMessage": {
+    "description": "Refusal dialog message",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "medicationRefusalReasonLabel": "Motivo (opcional)",
+  "@medicationRefusalReasonLabel": {
+    "description": "Refusal reason input label"
+  },
+  "medicationRefusalReasonHint": "p. ej. náuseas, cansancio, etc.",
+  "@medicationRefusalReasonHint": {
+    "description": "Refusal reason input hint"
+  },
+  "medicationRefusalWithoutNote": "Sin nota",
+  "@medicationRefusalWithoutNote": {
+    "description": "Refusal without note button"
+  },
+  "medicationFeedbackDialogTitle": "Añadir una nota",
+  "@medicationFeedbackDialogTitle": {
+    "description": "Medication feedback dialog title"
+  },
+  "medicationFeedbackQuestion": "¿Cómo te sentiste después de tomar {name}?",
+  "@medicationFeedbackQuestion": {
+    "description": "Medication feedback question",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "medicationFeedbackLabel": "Tu experiencia",
+  "@medicationFeedbackLabel": {
+    "description": "Feedback input label"
+  },
+  "medicationFeedbackHint": "p. ej. «me dio sueño», «me ayudó mucho», etc.",
+  "@medicationFeedbackHint": {
+    "description": "Feedback input hint"
+  },
+  "medicationFeedbackSaved": "Nota guardada",
+  "@medicationFeedbackSaved": {
+    "description": "Feedback saved success message"
+  },
+  "medicationFeedbackViewTitle": "Notas",
+  "@medicationFeedbackViewTitle": {
+    "description": "View feedback dialog title"
+  },
+  "diaryTitle": "Diario",
+  "@diaryTitle": {
+    "description": "Diary screen title"
+  },
+  "diaryEmptyTitle": "¡Tu diario te espera! ✨",
+  "@diaryEmptyTitle": {
+    "description": "Empty diary title"
+  },
+  "diaryEmptySubtitle": "Recoge tus pensamientos, vivencias y momentos",
+  "@diaryEmptySubtitle": {
+    "description": "Empty diary subtitle"
+  },
+  "contactsTitle": "Contactos",
+  "@contactsTitle": {
+    "description": "Contacts screen title"
+  },
+  "contactsFilterAll": "Todos",
+  "@contactsFilterAll": {
+    "description": "All contacts filter label"
+  },
+  "contactsEmptyTitle": "Todavía no hay contactos 👥",
+  "@contactsEmptyTitle": {
+    "description": "Empty contacts title"
+  },
+  "contactsEmptySubtitle": "Toca + para añadir un contacto",
+  "@contactsEmptySubtitle": {
+    "description": "Empty contacts subtitle"
+  },
+  "contactsEmptyFilteredTitle": "No se han encontrado contactos 🔍",
+  "@contactsEmptyFilteredTitle": {
+    "description": "Empty filtered contacts title"
+  },
+  "contactsEmptyFilteredSubtitle": "Prueba con otro filtro",
+  "@contactsEmptyFilteredSubtitle": {
+    "description": "Empty filtered contacts subtitle"
+  },
+  "finderTitle": "Buscador",
+  "@finderTitle": {
+    "description": "Finder screen title"
+  },
+  "finderTabLocations": "Lugares",
+  "@finderTabLocations": {
+    "description": "Locations tab label in finder"
+  },
+  "finderTabItems": "Objetos",
+  "@finderTabItems": {
+    "description": "Items tab label in finder"
+  },
+  "finderEmptyLocationsTitle": "Todavía no hay lugares",
+  "@finderEmptyLocationsTitle": {
+    "description": "Empty locations title"
+  },
+  "finderEmptyItemsTitle": "Todavía no hay objetos",
+  "@finderEmptyItemsTitle": {
+    "description": "Empty items title"
+  },
+  "finderEmptyLocationsSubtitle": "Toca + para añadir un lugar",
+  "@finderEmptyLocationsSubtitle": {
+    "description": "Empty locations subtitle"
+  },
+  "finderEmptyItemsSubtitle": "Toca + para añadir un objeto",
+  "@finderEmptyItemsSubtitle": {
+    "description": "Empty items subtitle"
+  },
+  "emergencyTitle": "Emergencia",
+  "@emergencyTitle": {
+    "description": "Emergency screen title"
+  },
+  "emergencyEmptyTitle": "Todavía no hay contactos de emergencia",
+  "@emergencyEmptyTitle": {
+    "description": "Empty emergency contacts title"
+  },
+  "emergencyEmptySubtitle": "Añade contactos con la categoría «Emergencia» para verlos aquí.",
+  "@emergencyEmptySubtitle": {
+    "description": "Empty emergency contacts subtitle"
+  },
+  "emergencyEmptyDescription": "A estos contactos se les puede avisar rápido en una emergencia.",
+  "@emergencyEmptyDescription": {
+    "description": "Emergency contacts description"
+  },
+  "emergencyEmptyAddContact": "Añadir contacto de emergencia",
+  "emergencyEmptyOpenHelp": "Ayuda y teléfonos de crisis",
+  "emergencySendSmsAll": "Enviar SMS de EMERGENCIA a todos",
+  "@emergencySendSmsAll": {
+    "description": "Send emergency SMS to all button"
+  },
+  "emergencyShareAll": "Enviar a todos por la app",
+  "@emergencyShareAll": {
+    "description": "Share emergency message to all button"
+  },
+  "emergencySmsDialogTitle": "¿Enviar SMS de EMERGENCIA a todos?",
+  "@emergencySmsDialogTitle": {
+    "description": "Emergency SMS confirmation dialog title"
+  },
+  "emergencySmsDialogMessage": "El mensaje de emergencia se enviará a {count} contactos.",
+  "@emergencySmsDialogMessage": {
+    "description": "Emergency SMS confirmation dialog message",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "emergencySendNow": "Enviar ahora",
+  "@emergencySendNow": {
+    "description": "Send now button in emergency"
+  },
+  "emergencyMessagePreparing": "Preparando el mensaje de emergencia...",
+  "@emergencyMessagePreparing": {
+    "description": "Emergency message preparing status"
+  },
+  "emergencyErrorSms": "Error al enviar el SMS: {error}",
+  "@emergencyErrorSms": {
+    "description": "SMS send error message",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "emergencyErrorShare": "Error al compartir: {error}",
+  "@emergencyErrorShare": {
+    "description": "Share error message",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsTitle": "Ajustes",
+  "@settingsTitle": {
+    "description": "Settings screen title"
+  },
+  "settingsSectionDebug": "🔧 Opciones de desarrollo",
+  "@settingsSectionDebug": {
+    "description": "Debug options section title"
+  },
+  "settingsDebugInfo": "Estas opciones solo se ven durante el desarrollo",
+  "@settingsDebugInfo": {
+    "description": "Debug options info text"
+  },
+  "settingsDebugSkipCooldown": "⏩ Poner el temporizador en 20 s",
+  "@settingsDebugSkipCooldown": {
+    "description": "Skip password reset cooldown button"
+  },
+  "settingsDebugSkipCooldownInfo": "Perfil: {name}\nRestante: {time}",
+  "@settingsDebugSkipCooldownInfo": {
+    "description": "Cooldown skip info text",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsDebugCooldownSet": "⏩ ¡Temporizador puesto en 20 segundos!\nDespués de 20 s se puede activar la contraseña.",
+  "@settingsDebugCooldownSet": {
+    "description": "Cooldown set success message"
+  },
+  "settingsDebugCooldownError": "❌ Error al poner el temporizador",
+  "@settingsDebugCooldownError": {
+    "description": "Cooldown set error message"
+  },
+  "settingsDeleteAllData": "Borrar todos los datos",
+  "@settingsDeleteAllData": {
+    "description": "Delete all data button"
+  },
+  "settingsDeleteAllDataSubtitle": "Borra todos los perfiles, mensajes, eventos y adjuntos",
+  "@settingsDeleteAllDataSubtitle": {
+    "description": "Delete all data subtitle"
+  },
+  "settingsDeleteConfirmTitle": "⚠️ Aviso",
+  "@settingsDeleteConfirmTitle": {
+    "description": "Delete confirmation dialog title"
+  },
+  "settingsDeleteConfirmMessage": "Esta acción borrará TODOS los datos:\n\n• Todos los perfiles\n• Todos los mensajes de chat\n• Todos los eventos del calendario\n• Toda la medicación y su registro de tomas\n• Todos los contactos\n• Todos los objetos del buscador\n• Todas las entradas del diario de crisis\n• Todos los datos de navegación\n• Todos los ajustes\n• Todos los dibujos adjuntos\n\n¡Esto NO se puede deshacer!",
+  "@settingsDeleteConfirmMessage": {
+    "description": "Delete all data confirmation message"
+  },
+  "settingsDeleteSuccess": "✅ Se han borrado todos los datos",
+  "@settingsDeleteSuccess": {
+    "description": "Delete all data success message"
+  },
+  "settingsSectionManagement": "Administración",
+  "@settingsSectionManagement": {
+    "description": "Management section title"
+  },
+  "settingsPermissions": "Derechos y permisos",
+  "@settingsPermissions": {
+    "description": "Permissions manager menu item"
+  },
+  "settingsPermissionsSubtitle": "Gestionar los derechos de acceso de los perfiles",
+  "@settingsPermissionsSubtitle": {
+    "description": "Permissions manager subtitle"
+  },
+  "settingsSectionGlobal": "Ajustes globales",
+  "@settingsSectionGlobal": {
+    "description": "Global settings section title"
+  },
+  "settingsGlobalTrackingInfo": "¿Qué es el «seguimiento permanente»?",
+  "@settingsGlobalTrackingInfo": {
+    "description": "Global tracking info title"
+  },
+  "settingsGlobalTrackingDescription": "Como administradora puedes controlar el GPS de TODOS los perfiles de forma central. Si está activado:",
+  "@settingsGlobalTrackingDescription": {
+    "description": "Global tracking description"
+  },
+  "settingsGlobalTrackingBullet1": "La ubicación se registra de forma continua",
+  "@settingsGlobalTrackingBullet1": {
+    "description": "Global tracking feature 1"
+  },
+  "settingsGlobalTrackingBullet2": "Funciona en segundo plano",
+  "@settingsGlobalTrackingBullet2": {
+    "description": "Global tracking feature 2"
+  },
+  "settingsGlobalTrackingBullet3": "Prevalece sobre los ajustes de cada perfil",
+  "@settingsGlobalTrackingBullet3": {
+    "description": "Global tracking feature 3"
+  },
+  "settingsGlobalTrackingBullet4": "Se hace seguimiento de todos los perfiles automáticamente",
+  "@settingsGlobalTrackingBullet4": {
+    "description": "Global tracking feature 4"
+  },
+  "settingsGlobalTrackingRequirement": "Requisito: el permiso de Android «Permitir siempre» tiene que estar activado para que el seguimiento funcione con la app cerrada.",
+  "@settingsGlobalTrackingRequirement": {
+    "description": "Global tracking permission requirement"
+  },
+  "settingsGpsPermissionTitle": "Permiso de GPS",
+  "@settingsGpsPermissionTitle": {
+    "description": "GPS permission section title"
+  },
+  "settingsGpsStatusDisabled": "Servicio de GPS desactivado",
+  "@settingsGpsStatusDisabled": {
+    "description": "GPS service disabled status"
+  },
+  "settingsGpsStatusDenied": "Permiso denegado",
+  "@settingsGpsStatusDenied": {
+    "description": "GPS permission denied status"
+  },
+  "settingsGpsStatusDeniedForever": "Denegado de forma permanente",
+  "@settingsGpsStatusDeniedForever": {
+    "description": "GPS permission denied forever status"
+  },
+  "settingsGpsStatusWhileInUse": "Solo mientras usas la app",
+  "@settingsGpsStatusWhileInUse": {
+    "description": "GPS permission while in use status"
+  },
+  "settingsGpsStatusAlways": "Permitido siempre ✓",
+  "@settingsGpsStatusAlways": {
+    "description": "GPS permission always allowed status"
+  },
+  "settingsGpsStatusUnknown": "Desconocido",
+  "@settingsGpsStatusUnknown": {
+    "description": "GPS permission unknown status"
+  },
+  "settingsGpsReady": "¡Perfecto! El seguimiento en segundo plano está listo.",
+  "@settingsGpsReady": {
+    "description": "GPS ready for background tracking message"
+  },
+  "settingsGpsInstructions": "Cómo activar «Permitir siempre»:",
+  "@settingsGpsInstructions": {
+    "description": "GPS permission activation instructions title"
+  },
+  "settingsGpsStep1": "Toca «Abrir ajustes de Android» ↓",
+  "@settingsGpsStep1": {
+    "description": "GPS permission step 1"
+  },
+  "settingsGpsStep2": "Elige «Permisos» → «Ubicación»",
+  "@settingsGpsStep2": {
+    "description": "GPS permission step 2"
+  },
+  "settingsGpsStep3": "Elige «Permitir siempre»",
+  "@settingsGpsStep3": {
+    "description": "GPS permission step 3"
+  },
+  "settingsGpsOpenSettings": "Abrir ajustes de Android",
+  "@settingsGpsOpenSettings": {
+    "description": "Open Android settings button"
+  },
+  "settingsGpsOpenLocationSettings": "Abrir ajustes de ubicación",
+  "@settingsGpsOpenLocationSettings": {
+    "description": "Open location settings button"
+  },
+  "settingsGpsPrivacyNote": "Tu ubicación se queda en este dispositivo. Los mapas la pasan a OpenStreetMap, nunca a nosotros.",
+  "@settingsGpsPrivacyNote": {
+    "description": "GPS privacy note"
+  },
+  "settingsTrackingPermanent": "Seguimiento permanente",
+  "@settingsTrackingPermanent": {
+    "description": "Permanent tracking toggle label"
+  },
+  "settingsTrackingPermanentOn": "El GPS funciona de forma permanente para todos los perfiles",
+  "@settingsTrackingPermanentOn": {
+    "description": "Permanent tracking enabled subtitle"
+  },
+  "settingsTrackingPermanentOff": "El GPS solo cuando cada perfil lo necesite",
+  "@settingsTrackingPermanentOff": {
+    "description": "Permanent tracking disabled subtitle"
+  },
+  "settingsTrackingPermissionRequired": "Se necesita permiso de ubicación",
+  "@settingsTrackingPermissionRequired": {
+    "description": "Tracking permission required message"
+  },
+  "settingsTrackingEnabled": "✅ Seguimiento permanente activado",
+  "@settingsTrackingEnabled": {
+    "description": "Permanent tracking enabled message"
+  },
+  "settingsTrackingDisabled": "✅ Seguimiento permanente desactivado",
+  "@settingsTrackingDisabled": {
+    "description": "Permanent tracking disabled message"
+  },
+  "settingsSectionLegal": "Aspectos legales",
+  "@settingsSectionLegal": {
+    "description": "Legal section title"
+  },
+  "settingsImpressum": "Aviso legal",
+  "@settingsImpressum": {
+    "description": "Imprint menu item"
+  },
+  "settingsImpressumSubtitle": "Información legal",
+  "@settingsImpressumSubtitle": {
+    "description": "Imprint subtitle"
+  },
+  "settingsPrivacy": "Política de privacidad",
+  "@settingsPrivacy": {
+    "description": "Privacy policy menu item"
+  },
+  "settingsPrivacySubtitle": "Cómo protegemos tus datos",
+  "@settingsPrivacySubtitle": {
+    "description": "Privacy policy subtitle"
+  },
+  "settingsAppVersion": "Versión de la app",
+  "@settingsAppVersion": {
+    "description": "App version menu item"
+  },
+  "settingsSectionDiagnostics": "Diagnóstico y soporte",
+  "@settingsSectionDiagnostics": {
+    "description": "Diagnostics & Support section title"
+  },
+  "settingsDebugLog": "Generar registro de diagnóstico",
+  "@settingsDebugLog": {
+    "description": "Generate debug log button"
+  },
+  "settingsDebugLogSubtitle": "Crea información técnica de diagnóstico para compartir",
+  "@settingsDebugLogSubtitle": {
+    "description": "Debug log subtitle"
+  },
+  "settingsDebugLogError": "❌ Error al generar el registro de diagnóstico: {error}",
+  "@settingsDebugLogError": {
+    "description": "Debug log generation error",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsSectionNotifications": "Avisos",
+  "@settingsSectionNotifications": {
+    "description": "Notifications section title"
+  },
+  "settingsNotificationsSubtitle": "Recordatorios de medicación y citas",
+  "@settingsNotificationsSubtitle": {
+    "description": "Notifications subtitle"
+  },
+  "settingsNotificationsInfo": "¿Cómo funcionan los avisos?",
+  "@settingsNotificationsInfo": {
+    "description": "Notifications info title"
+  },
+  "settingsNotificationsBullet1": "Medicación diaria: -30 min, -10 min, 0 min y repeticiones cada +10 min",
+  "@settingsNotificationsBullet1": {
+    "description": "Notifications feature 1"
+  },
+  "settingsNotificationsBullet2": "Medicación según necesidad: avisos de disponibilidad (-30 min, -10 min, -5 min, 0 min)",
+  "@settingsNotificationsBullet2": {
+    "description": "Notifications feature 2"
+  },
+  "settingsNotificationsBullet3": "Citas: recordatorios configurables (de 15 min a 1 día antes)",
+  "@settingsNotificationsBullet3": {
+    "description": "Notifications feature 3"
+  },
+  "settingsNotificationsBullet4": "Funciona incluso con la app cerrada",
+  "@settingsNotificationsBullet4": {
+    "description": "Notifications feature 4"
+  },
+  "settingsNotificationsTest": "Enviar aviso de prueba",
+  "@settingsNotificationsTest": {
+    "description": "Send test notification button"
+  },
+  "settingsNotificationsTestSubtitle": "Comprueba si los avisos funcionan",
+  "@settingsNotificationsTestSubtitle": {
+    "description": "Test notification subtitle"
+  },
+  "settingsNotificationsTestSent": "✅ Aviso de prueba enviado",
+  "@settingsNotificationsTestSent": {
+    "description": "Test notification sent message"
+  },
+  "settingsNotificationsQueue": "Cola",
+  "@settingsNotificationsQueue": {
+    "description": "Notification queue title"
+  },
+  "settingsNotificationsQueuePending": "Avisos programados:",
+  "@settingsNotificationsQueuePending": {
+    "description": "Pending notifications label"
+  },
+  "settingsNotificationsQueueNext": "Siguiente: {time}",
+  "@settingsNotificationsQueueNext": {
+    "description": "Next notification time",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsSectionMaps": "Mapas y ubicación",
+  "@settingsSectionMaps": {
+    "description": "Maps & Location section title"
+  },
+  "settingsMapsSubtitle": "Las secciones del mapa se descargan y se guardan automáticamente al mirarlas",
+  "@settingsMapsSubtitle": {
+    "description": "Maps subtitle"
+  },
+  "settingsCacheStorage": "Almacenamiento en caché",
+  "@settingsCacheStorage": {
+    "description": "Cache storage title"
+  },
+  "settingsCacheSize": "{size} MB / {limit} MB • {count} secciones",
+  "@settingsCacheSize": {
+    "description": "Cache size display",
+    "placeholders": {
+      "size": {
+        "type": "int"
+      },
+      "limit": {
+        "type": "int"
+      },
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsCacheLimit": "Límite de la caché",
+  "@settingsCacheLimit": {
+    "description": "Cache limit menu item"
+  },
+  "settingsCacheLimitSubtitle": "{limit} MB de tamaño máximo",
+  "@settingsCacheLimitSubtitle": {
+    "description": "Cache limit subtitle",
+    "placeholders": {
+      "limit": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsCacheLimitDialogTitle": "Poner un límite a la caché",
+  "@settingsCacheLimitDialogTitle": {
+    "description": "Cache limit dialog title"
+  },
+  "settingsCacheLimitDialogLabel": "Tamaño máximo de la caché: {size} MB",
+  "@settingsCacheLimitDialogLabel": {
+    "description": "Cache limit dialog label",
+    "placeholders": {
+      "size": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsCacheLimitDialogInfo": "Cuando la caché pase de ese límite, se borrarán automáticamente las secciones más antiguas.",
+  "@settingsCacheLimitDialogInfo": {
+    "description": "Cache limit dialog info"
+  },
+  "settingsCacheLimitSet": "✅ Límite de la caché puesto en {limit} MB",
+  "@settingsCacheLimitSet": {
+    "description": "Cache limit set success message",
+    "placeholders": {
+      "limit": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsCachePreDownload": "Descargar mapas por adelantado",
+  "@settingsCachePreDownload": {
+    "description": "Pre-download maps menu item"
+  },
+  "settingsCachePreDownloadSubtitle": "Descargar mapas dentro de un radio",
+  "@settingsCachePreDownloadSubtitle": {
+    "description": "Pre-download maps subtitle"
+  },
+  "settingsCachePreDownloadPlaceholder": "🚧 La descarga por adelantado llegará en la fase 4",
+  "@settingsCachePreDownloadPlaceholder": {
+    "description": "Pre-download placeholder message"
+  },
+  "settingsCacheClear": "Vaciar la caché",
+  "@settingsCacheClear": {
+    "description": "Clear cache menu item"
+  },
+  "settingsCacheClearSubtitle": "Borrar todas las secciones de mapa guardadas",
+  "@settingsCacheClearSubtitle": {
+    "description": "Clear cache subtitle"
+  },
+  "settingsCacheClearDialogTitle": "Vaciar la caché de mapas",
+  "@settingsCacheClearDialogTitle": {
+    "description": "Clear cache dialog title"
+  },
+  "settingsCacheClearDialogMessage": "¿Quieres borrar todas las secciones de mapa guardadas?\n\nLos mapas se volverán a cargar la próxima vez que los mires. Esto puede ayudarte a liberar espacio.",
+  "@settingsCacheClearDialogMessage": {
+    "description": "Clear cache dialog message"
+  },
+  "settingsCacheClearConfirm": "Vaciar la caché",
+  "@settingsCacheClearConfirm": {
+    "description": "Clear cache confirm button"
+  },
+  "settingsCacheCleared": "✅ Caché de mapas vaciada",
+  "@settingsCacheCleared": {
+    "description": "Cache cleared success message"
+  },
+  "settingsSectionApp": "Ajustes de la app",
+  "@settingsSectionApp": {
+    "description": "App settings section title"
+  },
+  "settingsTimeFormat": "Formato de hora",
+  "@settingsTimeFormat": {
+    "description": "Time format menu item"
+  },
+  "settingsTimeFormatSystem": "El del sistema",
+  "@settingsTimeFormatSystem": {
+    "description": "System default time format"
+  },
+  "settingsTimeFormat12h": "Formato de 12 horas",
+  "@settingsTimeFormat12h": {
+    "description": "12-hour time format"
+  },
+  "settingsTimeFormat24h": "Formato de 24 horas",
+  "@settingsTimeFormat24h": {
+    "description": "24-hour time format"
+  },
+  "settingsTimeFormatSystemSubtitle": "Sigue los ajustes del sistema Android",
+  "@settingsTimeFormatSystemSubtitle": {
+    "description": "System time format subtitle"
+  },
+  "settingsTimeFormat12hExample": "p. ej. 2:30 PM",
+  "@settingsTimeFormat12hExample": {
+    "description": "12-hour format example"
+  },
+  "settingsTimeFormat24hExample": "p. ej. 14:30",
+  "@settingsTimeFormat24hExample": {
+    "description": "24-hour format example"
+  },
+  "settingsLanguage": "Idioma",
+  "@settingsLanguage": {
+    "description": "Language setting menu item"
+  },
+  "settingsLanguageChanged": "Idioma cambiado",
+  "@settingsLanguageChanged": {
+    "description": "Language changed confirmation message"
+  },
+  "onboardingSelectLanguage": "Elige tu idioma",
+  "@onboardingSelectLanguage": {
+    "description": "Select language prompt in onboarding"
+  },
+  "onboardingWelcomeTitle": "Te damos la bienvenida a",
+  "@onboardingWelcomeTitle": {
+    "description": "Welcome onboarding page title"
+  },
+  "onboardingWelcomeSubtitle": "Tu compañera segura en el día a día con TID",
+  "@onboardingWelcomeSubtitle": {
+    "description": "Welcome onboarding page subtitle"
+  },
+  "onboardingWelcomeDescription": "Aurora te acompaña a organizar tu día a día y la comunicación dentro de tu sistema.",
+  "@onboardingWelcomeDescription": {
+    "description": "Welcome onboarding page description"
+  },
+  "onboardingPrivacyTitle": "Tus datos son TUYOS",
+  "@onboardingPrivacyTitle": {
+    "description": "Privacy onboarding page title"
+  },
+  "onboardingPrivacyBullet1": "Todos los datos se quedan en tu dispositivo",
+  "@onboardingPrivacyBullet1": {
+    "description": "Privacy feature 1"
+  },
+  "onboardingPrivacyBullet2": "Sin copia en la nube, sin rastreo, sin anuncios",
+  "@onboardingPrivacyBullet2": {
+    "description": "Privacy feature 2"
+  },
+  "onboardingPrivacyBullet3": "Tú tienes el control",
+  "@onboardingPrivacyBullet3": {
+    "description": "Privacy feature 3"
+  },
+  "onboardingPrivacyBullet4": "Transparente y seguro",
+  "@onboardingPrivacyBullet4": {
+    "description": "Privacy feature 4"
+  },
+  "onboardingMultiProfileTitle": "Muchas voces, una app",
+  "@onboardingMultiProfileTitle": {
+    "description": "Multi-profile onboarding page title"
+  },
+  "onboardingMultiProfileDescription": "Cada alter puede tener su propio perfil, con sus colores, sus ajustes y sus permisos.",
+  "@onboardingMultiProfileDescription": {
+    "description": "Multi-profile onboarding page description"
+  },
+  "onboardingLetsGoTitle": "¿List@ para empezar?",
+  "@onboardingLetsGoTitle": {
+    "description": "Let's go onboarding page title"
+  },
+  "onboardingLetsGoDescription": "Crea ahora tu primer perfil. El primero pasa a ser automáticamente el perfil de administración, con todos los derechos.",
+  "@onboardingLetsGoDescription": {
+    "description": "Let's go onboarding page description"
+  },
+  "onboardingButtonNext": "Siguiente →",
+  "@onboardingButtonNext": {
+    "description": "Next button in onboarding"
+  },
+  "onboardingButtonCreateProfile": "Crear perfil →",
+  "@onboardingButtonCreateProfile": {
+    "description": "Create profile button in onboarding"
+  },
+  "splashLoading": "Aurora se está cargando",
+  "@splashLoading": {
+    "description": "Aurora loading text on splash screen"
+  },
+  "splashDidYouKnow": "¿Sabías que...?",
+  "@splashDidYouKnow": {
+    "description": "Did you know label on splash screen"
+  },
+  "splashEmergencyWipeTitle": "Borrado de emergencia",
+  "@splashEmergencyWipeTitle": {
+    "description": "Emergency wipe dialog title"
+  },
+  "splashEmergencyWipeMessage": "AVISO: ¡se borrarán todos los datos para siempre!\n\n• Todos los perfiles\n• Todos los mensajes\n• Todas las entradas del diario\n• Todos los contactos\n• Toda la medicación\n\n¿Continuar?",
+  "@splashEmergencyWipeMessage": {
+    "description": "Emergency wipe dialog message"
+  },
+  "splashEmergencyWipeConfirm": "BORRARLO TODO",
+  "@splashEmergencyWipeConfirm": {
+    "description": "Emergency wipe confirm button"
+  },
+  "passwordResetBannerReady": "La contraseña está lista para activarse",
+  "@passwordResetBannerReady": {
+    "description": "Password ready to activate banner"
+  },
+  "passwordResetBannerRunning": "Restablecimiento de contraseña en curso",
+  "@passwordResetBannerRunning": {
+    "description": "Password reset running banner"
+  },
+  "passwordResetBannerProfile": "Perfil: {name}",
+  "@passwordResetBannerProfile": {
+    "description": "Password reset profile label",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "passwordResetBannerRemaining": "Perfil: {name} • Restante: {time}",
+  "@passwordResetBannerRemaining": {
+    "description": "Password reset remaining time",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "dialogWarning": "Aviso",
+  "@dialogWarning": {
+    "description": "Warning dialog title"
+  },
+  "dialogConfirm": "Confirmar",
+  "@dialogConfirm": {
+    "description": "Confirm dialog button"
+  },
+  "dialogUnderstood": "Entendido",
+  "@dialogUnderstood": {
+    "description": "Understood dialog button"
+  },
+  "dialogYes": "Sí",
+  "@dialogYes": {
+    "description": "Yes dialog button"
+  },
+  "dialogNo": "No",
+  "@dialogNo": {
+    "description": "No dialog button"
+  },
+  "permissionGpsRequired": "⚠️ Hace falta el permiso de GPS «Permitir siempre»",
+  "@permissionGpsRequired": {
+    "description": "GPS permission required warning"
+  },
+  "permissionTrackingDialogTitle": "¿Activar el seguimiento permanente?",
+  "@permissionTrackingDialogTitle": {
+    "description": "Permanent tracking activation dialog title"
+  },
+  "permissionTrackingDialogHeading": "Lo que hace este modo:",
+  "@permissionTrackingDialogHeading": {
+    "description": "Tracking dialog what it does heading"
+  },
+  "permissionTrackingBullet1": "El GPS funciona de forma permanente en segundo plano",
+  "@permissionTrackingBullet1": {
+    "description": "Tracking dialog feature 1"
+  },
+  "permissionTrackingBullet2": "Prevalece sobre los ajustes de seguimiento de TODOS los perfiles",
+  "@permissionTrackingBullet2": {
+    "description": "Tracking dialog feature 2"
+  },
+  "permissionTrackingBullet3": "La cronología recoge todos los movimientos automáticamente",
+  "@permissionTrackingBullet3": {
+    "description": "Tracking dialog feature 3"
+  },
+  "permissionTrackingPrivacyTitle": "Tus datos se quedan en este dispositivo",
+  "@permissionTrackingPrivacyTitle": {
+    "description": "Tracking privacy title"
+  },
+  "permissionTrackingPrivacyMessage": "Aurora guarda todos los datos solo en este dispositivo. Sin rastreo, sin anuncios, sin compartir nada.",
+  "@permissionTrackingPrivacyMessage": {
+    "description": "Tracking privacy message"
+  },
+  "permissionTrackingBatteryWarning": "El GPS en segundo plano puede gastar más batería.",
+  "@permissionTrackingBatteryWarning": {
+    "description": "Battery warning for background GPS"
+  },
+  "permissionTrackingAndroidStatus": "Estado en Android:",
+  "@permissionTrackingAndroidStatus": {
+    "description": "Android status label in tracking dialog"
+  },
+  "permissionTrackingActivate": "Activar",
+  "@permissionTrackingActivate": {
+    "description": "Activate tracking button"
+  },
+  "permissionTrackingDeactivate": "Desactivar",
+  "@permissionTrackingDeactivate": {
+    "description": "Deactivate tracking button"
+  },
+  "permissionTrackingDeactivateTitle": "¿Desactivar el seguimiento permanente?",
+  "@permissionTrackingDeactivateTitle": {
+    "description": "Deactivate permanent tracking dialog title"
+  },
+  "permissionTrackingDeactivateMessage": "El seguimiento por GPS volverá a controlarse perfil por perfil.\n\nCada perfil podrá activarlo o desactivarlo por su cuenta.",
+  "@permissionTrackingDeactivateMessage": {
+    "description": "Deactivate permanent tracking dialog message"
+  },
+  "permissionGuidanceTitle": "Hace falta un ajuste de Android",
+  "@permissionGuidanceTitle": {
+    "description": "Permission guidance dialog title"
+  },
+  "permissionGuidanceMessage": "Para usar el seguimiento permanente necesitas el permiso «Permitir siempre».",
+  "@permissionGuidanceMessage": {
+    "description": "Permission guidance message"
+  },
+  "permissionGuidanceStepsTitle": "Te guío paso a paso:",
+  "@permissionGuidanceStepsTitle": {
+    "description": "Permission guidance steps title"
+  },
+  "permissionGuidanceStep1Title": "Abrir los ajustes de Android",
+  "@permissionGuidanceStep1Title": {
+    "description": "Permission guidance step 1 title"
+  },
+  "permissionGuidanceStep1Button": "Abrir ahora",
+  "@permissionGuidanceStep1Button": {
+    "description": "Permission guidance step 1 button"
+  },
+  "permissionGuidanceStep2Title": "Dentro de los ajustes",
+  "@permissionGuidanceStep2Title": {
+    "description": "Permission guidance step 2 title"
+  },
+  "permissionGuidanceStep2Bullet1": "Toca «Permisos»",
+  "@permissionGuidanceStep2Bullet1": {
+    "description": "Permission guidance step 2 bullet 1"
+  },
+  "permissionGuidanceStep2Bullet2": "Toca «Ubicación»",
+  "@permissionGuidanceStep2Bullet2": {
+    "description": "Permission guidance step 2 bullet 2"
+  },
+  "permissionGuidanceStep2Bullet3": "Elige «Permitir siempre»",
+  "@permissionGuidanceStep2Bullet3": {
+    "description": "Permission guidance step 2 bullet 3"
+  },
+  "permissionGuidanceStep3Message": "Vuelve a Aurora\nLa app detectará el cambio sola.",
+  "@permissionGuidanceStep3Message": {
+    "description": "Permission guidance step 3 message"
+  },
+  "messageError": "Error",
+  "@messageError": {
+    "description": "Error message prefix"
+  },
+  "messageSuccess": "Hecho",
+  "@messageSuccess": {
+    "description": "Success message prefix"
+  },
+  "messageWarning": "Aviso",
+  "@messageWarning": {
+    "description": "Warning message prefix"
+  },
+  "messageInfo": "Información",
+  "@messageInfo": {
+    "description": "Info message prefix"
+  },
+  "messageLoading": "Cargando...",
+  "@messageLoading": {
+    "description": "Loading message"
+  },
+  "misc24HourFormat": "Formato de 24 horas",
+  "@misc24HourFormat": {
+    "description": "24-hour time format label"
+  },
+  "misc12HourFormat": "Formato de 12 horas",
+  "@misc12HourFormat": {
+    "description": "12-hour time format label"
+  },
+  "miscSystemDefault": "El del sistema",
+  "@miscSystemDefault": {
+    "description": "System default label"
+  },
+  "miscUnknown": "Desconocido",
+  "@miscUnknown": {
+    "description": "Unknown label"
+  },
+  "chatDayYesterday": "Ayer",
+  "@chatDayYesterday": {
+    "description": "Day separator in the chat history for the previous day"
+  },
+  "miscToday": "Hoy",
+  "@miscToday": {
+    "description": "Today label"
+  },
+  "miscAll": "Todos",
+  "@miscAll": {
+    "description": "All label"
+  },
+  "notificationChannelName": "Notificaciones de Aurora",
+  "@notificationChannelName": {
+    "description": "Android notification channel name"
+  },
+  "notificationChannelDescription": "Recordatorios de medicamentos y citas",
+  "@notificationChannelDescription": {
+    "description": "Android notification channel description"
+  },
+  "notificationMedicationReminder": "Recordatorio de medicamento",
+  "@notificationMedicationReminder": {
+    "description": "Medication reminder notification title"
+  },
+  "notificationMedicationBodyWithTime": "{name} - {dosage} {time}",
+  "@notificationMedicationBodyWithTime": {
+    "description": "Medication reminder notification body with time",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "dosage": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationMedicationBodyNow": "{name} - {dosage} tomar ahora",
+  "@notificationMedicationBodyNow": {
+    "description": "Medication reminder - take now",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "dosage": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationMedicationAvailableSoon": "Medicamento a demanda disponible pronto",
+  "@notificationMedicationAvailableSoon": {
+    "description": "As-needed medication available soon title"
+  },
+  "notificationMedicationAvailableNow": "Medicamento a demanda disponible ahora",
+  "@notificationMedicationAvailableNow": {
+    "description": "As-needed medication available now title"
+  },
+  "notificationMedicationAvailableBody": "{name} puede tomarse",
+  "@notificationMedicationAvailableBody": {
+    "description": "As-needed medication available body",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationEventReminder": "Recordatorio de cita",
+  "@notificationEventReminder": {
+    "description": "Event reminder notification title"
+  },
+  "notificationEventBody": "{title} {time}",
+  "@notificationEventBody": {
+    "description": "Event reminder notification body",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationTestTitle": "Notificación de prueba",
+  "@notificationTestTitle": {
+    "description": "Test notification title"
+  },
+  "notificationTestBody": "¡Las notificaciones funcionan!",
+  "@notificationTestBody": {
+    "description": "Test notification body"
+  },
+  "notificationTimeInMinutes": "en {minutes} minutos",
+  "@notificationTimeInMinutes": {
+    "description": "Time format - in X minutes",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationTimeIn1Hour": "en 1 hora",
+  "@notificationTimeIn1Hour": {
+    "description": "Time format - in 1 hour"
+  },
+  "notificationTimeInHours": "en {hours} horas",
+  "@notificationTimeInHours": {
+    "description": "Time format - in X hours",
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationTimeNow": "ahora",
+  "@notificationTimeNow": {
+    "description": "Time format - now"
+  },
+  "notificationMedicationTakeNowTitle": "¡Tomar medicamento ahora!",
+  "@notificationMedicationTakeNowTitle": {
+    "description": "Medication take now notification title"
+  },
+  "notificationMedicationNotTakenYet": "¡Aún no tomado!",
+  "@notificationMedicationNotTakenYet": {
+    "description": "Medication not taken yet suffix"
+  },
+  "actionCreate": "Crear",
+  "commonDescription": "Descripción",
+  "commonNotes": "Notas",
+  "commonOptional": "Opcional",
+  "commonCategory": "Categoría",
+  "commonStartTime": "Hora de inicio",
+  "commonEndTime": "Hora de fin",
+  "commonVisibleFor": "Visible para",
+  "commonUnnamed": "Sin nombre",
+  "commentsTitle": "Comentarios",
+  "eventCreate": "Crear cita",
+  "eventNewTitle": "Nueva cita",
+  "eventEditTitle": "Editar cita",
+  "eventDetailTitle": "Cita",
+  "eventNotFound": "Cita no encontrada",
+  "eventNotFoundMessage": "Esta cita ya no existe",
+  "eventDeleteTitle": "¿Borrar cita?",
+  "eventDeleteMessage": "¿Seguro que quieres borrar esta cita?",
+  "eventDeleteConfirmMessage": "Esta cita se borrará definitivamente.",
+  "eventDeleted": "Cita borrada",
+  "eventUpdated": "Cita guardada",
+  "eventCreated": "Cita creada",
+  "eventSelectProfileRequired": "Elige al menos un perfil",
+  "eventEndTimeError": "La hora de fin tiene que ser posterior a la de inicio",
+  "eventTitleLabel": "Título",
+  "eventTitleLabelRequired": "Título *",
+  "eventTitleRequired": "Escribe un título",
+  "eventTitleHint": "p. ej. cita médica",
+  "eventCategoryLabel": "Categoría (opcional)",
+  "eventCategoryHint": "p. ej. cita médica, personal, etc.",
+  "eventDescriptionLabel": "Descripción (opcional)",
+  "contactDistanceAway": "a {distance}",
+  "@contactDistanceAway": {
+    "description": "Air-line distance from the user to a contact",
+    "placeholders": {
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "eventReminderMinutes": "{minutes, plural, =1{1 minuto} other{{minutes} minutos}}",
+  "@eventReminderMinutes": {
+    "description": "Duration chip in the reminder picker",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "eventReminderHours": "{hours, plural, =1{1 hora} other{{hours} horas}}",
+  "@eventReminderHours": {
+    "description": "Duration chip in the reminder picker",
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "eventReminderDay": "1 día",
+  "@eventReminderDay": {
+    "description": "Duration chip in the reminder picker"
+  },
+  "eventReminderNotice": "Aurora te avisa {when} antes de la cita.",
+  "@eventReminderNotice": {
+    "description": "Explains when the reminder will arrive",
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "eventReminderBefore": "Aviso {minutes} min antes",
+  "eventCount": "{count, plural, =0{Sin citas} =1{1 cita} other{{count} citas}}",
+  "noEventsToday": "No hay citas este día",
+  "calendarNothingPlannedToday": "Hoy no hay nada previsto.",
+  "calendarNothingPlannedOnDay": "No hay nada previsto para este día.",
+  "calendarUpcomingTitle": "A continuación",
+  "calendarChooseDay": "Ver otro día",
+  "eventForWhom": "¿Para quién es esta cita?",
+  "eventMoreDetails": "Más información",
+  "contactTitle": "Contacto",
+  "contactNewTitle": "Nuevo contacto",
+  "contactEditTitle": "Editar contacto",
+  "contactNotFound": "Contacto no encontrado",
+  "contactDeleteTitle": "¿Borrar contacto?",
+  "contactDeleteMessage": "Este contacto se borrará definitivamente. Esta acción no se puede deshacer.",
+  "contactImagePickerTitle": "Elegir imagen de contacto",
+  "contactNameLabel": "Nombre *",
+  "contactNameRequired": "Escribe un nombre",
+  "contactRelationLabel": "Relación",
+  "contactRelationHint": "p. ej. madre, terapeuta, amigo...",
+  "contactMarkAsEmergency": "Marcar como contacto de emergencia",
+  "contactEmergencyDescription": "Este contacto aparece en la vista de emergencia y se le puede avisar rápidamente",
+  "contactPhoneLabel": "Teléfono",
+  "contactEmailLabel": "Correo electrónico",
+  "contactDefaultRating": "Valoración predeterminada",
+  "contactDefaultRatingDescription": "Todos los perfiles ven esta valoración de forma predeterminada. Cada perfil puede dar la suya más adelante.",
+  "contactPersonalRating": "Valoración personal",
+  "contactLocationSection": "📍 Ubicación (opcional)",
+  "contactLocationTitle": "📍 Ubicación",
+  "contactLocationDescription": "Añade una ubicación (por ejemplo, domicilio o dirección de la consulta)",
+  "contactLocationSet": "Fijar la ubicación",
+  "contactLocationChange": "Cambiar la ubicación",
+  "contactAddressLabel": "Dirección",
+  "contactAddressHint": "Se detecta automáticamente al fijar la ubicación",
+  "contactVisibleToAll": "Todos los perfiles pueden ver este contacto",
+  "contactInfoSection": "Información",
+  "gpsPermissionRequired": "Se necesita permiso de GPS",
+  "gpsTrackingDisabled": "Seguimiento GPS desactivado",
+  "emergencyContactLabel": "Contacto de emergencia",
+  "diaryEntryNewTitle": "Nueva entrada",
+  "diaryEntryEditTitle": "Editar entrada",
+  "diaryEntryDetailTitle": "Detalles de la entrada",
+  "diaryEntryNotFound": "Entrada no encontrada",
+  "diaryEntryNotFoundMessage": "Esta entrada ya no existe",
+  "diaryEntryDeleteTitle": "Borrar entrada",
+  "diaryEntryDeleteMessage": "¿Seguro que quieres borrar esta entrada? También se borrarán todos los comentarios.",
+  "diaryEntryDeleted": "Entrada borrada",
+  "diaryEntryUpdated": "Entrada actualizada",
+  "diaryEntryCreated": "Entrada creada",
+  "diaryTitleHint": "¿Qué ha pasado?",
+  "diaryTitleRequired": "Escribe un título",
+  "diaryDescriptionHint": "Describe lo que pasó...",
+  "diaryDescriptionRequired": "Escribe una descripción",
+  "diaryPriorityLabel": "Prioridad",
+  "diaryImagesLabel": "Imágenes",
+  "diaryNoImagesYet": "Todavía no hay imágenes",
+  "diaryImagePickerComingSoon": "La selección de imágenes llegará pronto",
+  "diaryCannotEditEntry": "No puedes editar esta entrada",
+  "diaryCannotCreateEntry": "No puedes crear entradas",
+  "commonError": "Error",
+  "commonNoPermission": "Sin permiso",
+  "commonEdited": "Editado",
+  "commonTitle": "Título",
+  "profileNotSelected": "Ningún perfil seleccionado",
+  "actionAdd": "Añadir",
+  "commonSaveError": "Error al guardar: {error}",
+  "timeJustNow": "ahora mismo",
+  "timeMinutesAgo": "{count, plural, =1{hace un minuto} other{hace {count} minutos}}",
+  "timeHoursAgo": "{count, plural, =1{hace una hora} other{hace {count} horas}}",
+  "timeDaysAgo": "{count, plural, =1{hace un día} other{hace {count} días}}",
+  "emergencyCall": "Llamar",
+  "emergencyCallTooltip": "Llamar al contacto",
+  "emergencyNoPhone": "No hay número de teléfono",
+  "emergencySms": "SMS",
+  "emergencySmsTooltip": "Enviar SMS de emergencia",
+  "emergencyApp": "App",
+  "emergencyShareTooltip": "Compartir con una app",
+  "emergencyErrorCall": "Error al llamar: {error}",
+  "emergencyErrorOpen": "Error al abrir: {error}",
+  "actionOpen": "Abrir",
+  "finderLocationEditTitle": "Editar lugar",
+  "finderItemEditTitle": "Editar objeto",
+  "finderLocationNewTitle": "Nuevo lugar",
+  "finderItemNewTitle": "Nuevo objeto",
+  "finderSetPosition": "Fijar la ubicación",
+  "finderChangePosition": "Cambiar la ubicación",
+  "finderAddressLabel": "Dirección",
+  "finderStorageLocationLabel": "Dónde se guarda",
+  "finderStorageLocationHint": "p. ej. cocina, segundo cajón",
+  "finderChoosePhoto": "Elegir foto",
+  "finderAddPhoto": "Añadir foto",
+  "finderAddTag": "Añadir etiqueta",
+  "finderNotFound": "No encontrado",
+  "finderNotFoundMessage": "No se ha encontrado el elemento",
+  "finderDeleteTitle": "¿Borrar?",
+  "finderDeleteMessage": "¿Seguro que quieres borrar {title}?",
+  "commonRequired": "Campo obligatorio",
+  "feedbackTitle": "Enviar comentario",
+  "feedbackPrivacyInfo": "Tu comentario se trata de forma confidencial y solo se procesa internamente. ¡Tus mensajes nos ayudan a mejorar Aurora!",
+  "feedbackSelectCategory": "Elige una categoría:",
+  "fieldPasswordShow": "Mostrar contraseña",
+  "@fieldPasswordShow": {
+    "description": "Tooltip for the eye button that reveals the password"
+  },
+  "fieldPasswordHide": "Ocultar contraseña",
+  "@fieldPasswordHide": {
+    "description": "Tooltip for the eye button that hides the password again"
+  },
+  "feedbackCategoryBug": "Informar de un fallo",
+  "@feedbackCategoryBug": {
+    "description": "Category: report a problem"
+  },
+  "feedbackCategoryWish": "Proponer una idea",
+  "@feedbackCategoryWish": {
+    "description": "Category: suggest an idea"
+  },
+  "feedbackCategoryGeneral": "Comentario general",
+  "@feedbackCategoryGeneral": {
+    "description": "Category: general feedback"
+  },
+  "feedbackCategoryLabel": "Categoría",
+  "feedbackTitleLabel": "Título:",
+  "feedbackTitleHint": "Un resumen breve de tu comentario",
+  "feedbackTitleRequired": "Escribe un título",
+  "feedbackTitleTooShort": "Título demasiado corto (mínimo 5 caracteres)",
+  "feedbackMessageLabel": "Tu mensaje:",
+  "feedbackMessageHint": "Cuéntanos con detalle...",
+  "feedbackMessageRequired": "Escribe un mensaje",
+  "feedbackMessageTooShort": "Mensaje demasiado corto (mínimo 20 caracteres)",
+  "feedbackEmailLabel": "Tu correo electrónico (opcional):",
+  "feedbackEmailHint": "Solo si quieres que te escribamos si tenemos preguntas",
+  "feedbackEmailPlaceholder": "tu@correo.es",
+  "feedbackEmailInvalid": "Escribe una dirección de correo válida",
+  "feedbackAttachImageLabel": "Adjuntar imagen (opcional):",
+  "feedbackAttachImage": "Adjuntar imagen",
+  "feedbackSelectImage": "Elegir imagen",
+  "feedbackSend": "Enviar comentario",
+  "feedbackCopyToClipboard": "Copiar al portapapeles",
+  "feedbackCopiedToClipboard": "¡Comentario copiado al portapapeles!",
+  "feedbackContactLabel": "Contacto",
+  "feedbackErrorOccurred": "Ha ocurrido un error. El informe se ha copiado al portapapeles.",
+  "feedbackCouldNotSend": "No se ha podido enviar el comentario",
+  "feedbackErrorClipboardHint": "Tu comentario se ha copiado al portapapeles. También puedes enviárnoslo por correo a {email}.",
+  "feedbackTechnicalDetails": "Detalles técnicos",
+  "actionChange": "Cambiar",
+  "actionRemove": "Quitar",
+  "onboardingNext": "Siguiente →",
+  "onboardingCreateProfile": "Crear perfil →",
+  "onboardingLetsGo": "¡Vamos allá! →",
+  "onboardingWelcomeTo": "Te damos la bienvenida a",
+  "onboardingSubline": "Tu compañera segura en el día a día con TID",
+  "onboardingDescription": "Aurora te acompaña a organizar tu día a día y la comunicación dentro de tu sistema.",
+  "onboardingPrivacyHeadline": "Tus datos son TUYOS",
+  "onboardingPrivacyPoint1": "Todos los datos se quedan en tu dispositivo",
+  "onboardingPrivacyPoint2": "Sin copia en la nube, sin rastreo, sin anuncios",
+  "onboardingPrivacyPoint3": "Tú tienes el control",
+  "onboardingPrivacyPoint4": "Transparente y seguro",
+  "onboardingMultiProfileHeadline": "Muchas voces, una app",
+  "onboardingLetsGoHeadline": "¿Listo para empezar?",
+  "onboardingHelloName": "¡Hola, {name}!",
+  "onboardingGladYoureHere": "Qué bien que estés aquí.",
+  "onboardingNotAlone": "No estás solo",
+  "onboardingNotAloneDescription": "Podéis escribiros, compartir citas y apoyaros mutuamente.",
+  "onboardingWhatYouCanDo": "Lo que puedes hacer",
+  "onboardingChildAccessDescription": "Con un perfil infantil tienes acceso a:",
+  "onboardingAdultAccessDescription": "Tienes acceso a estas funciones:",
+  "onboardingSafeSpace": "Tu espacio seguro",
+  "onboardingSafeSpaceDescription": "Todo lo que escribes se queda en este dispositivo. Solo se envía lo que tú mismo envías, y siempre puedes volver a leerlo.",
+  "onboardingHaveFun": "¡Que disfrutes de Aurora!",
+  "onboardingFeatureChatChild": "Chat: garabatear y hablar con los demás",
+  "onboardingFeatureDiaryChild": "Diario: escribir tus pensamientos",
+  "onboardingFeatureGamesChild": "Juegos: divertirse y descansar",
+  "onboardingFeatureTimelineChild": "Línea del tiempo: guardar momentos importantes",
+  "onboardingFeatureChat": "Chat: mensajes, garabatos, notas de voz",
+  "onboardingFeatureCalendar": "Calendario: planificar y gestionar citas",
+  "onboardingFeatureContacts": "Contactos: guardar personas importantes",
+  "onboardingFeatureMedication": "Medicación: llevar el control de medicamentos y tomas",
+  "onboardingFeatureDiary": "Diario: anotar pensamientos y vivencias",
+  "onboardingFeatureFinder": "Buscador: reencontrar lugares y cosas",
+  "onboardingFeatureEmergency": "Emergencia: ayuda rápida en momentos de crisis",
+  "onboardingFeatureMantras": "Mantras: frases que calman y afirmaciones",
+  "onboardingFeatureChatBasic": "Chat: funciones básicas disponibles",
+  "featureCarouselHeadline": "Todo lo que Aurora sabe hacer",
+  "featureCarouselSwipeHint": "Desliza por las funciones →",
+  "featureCarouselChatTitle": "Chat",
+  "featureCarouselChatSubtitle": "Comunicación interna",
+  "featureCarouselChatDescription": "Mensajes, dibujos y notas de voz.\nCompartid pensamientos, dibujad juntos o habladlo.",
+  "featureCarouselCalendarTitle": "Calendario",
+  "featureCarouselCalendarSubtitle": "Citas",
+  "featureCarouselCalendarDescription": "Citas con imágenes y lugares.\nTened a la vista las citas importantes, con imágenes y posiciones GPS.",
+  "featureCarouselDiaryTitle": "Diario",
+  "featureCarouselDiarySubtitle": "Pensamientos privados",
+  "featureCarouselDiaryDescription": "Visible para todos o solo para ti.\nGuardad pensamientos: en común para todos los perfiles o en privado.",
+  "featureCarouselFinderTitle": "Buscador",
+  "featureCarouselFinderSubtitle": "Lugares y cosas",
+  "featureCarouselFinderDescription": "Volved a encontrar lugares y cosas.\nGuardad lugares importantes (con mapa) y objetos para reencontrarlos.",
+  "featureCarouselMedicationTitle": "Medicación",
+  "featureCarouselMedicationSubtitle": "Control de medicamentos",
+  "featureCarouselMedicationDescription": "Medicamentos y horas de toma.\nLlevad el control de los medicamentos, las horas y la medicación a demanda.",
+  "featureCarouselGamesTitle": "Juegos y anclaje",
+  "featureCarouselGamesSubtitle": "Calma",
+  "featureCarouselGamesDescription": "Juegos, respiración y anclaje.\nCalmaos con rompecabezas, ejercicios de respiración y técnicas de anclaje.",
+  "featureCarouselEmergencyTitle": "Ayuda",
+  "featureCarouselEmergencySubtitle": "Contactos de emergencia",
+  "featureCarouselEmergencyDescription": "Contactos de emergencia y ayuda rápida.\nGuardad los contactos importantes para momentos de crisis.",
+  "featureCarouselInfoTitle": "Información sobre el TID",
+  "featureCarouselInfoSubtitle": "Información y recursos",
+  "featureCarouselInfoDescription": "Explicado: ¿qué es el TID?\nInformación sobre el trastorno de identidad disociativo y recursos de ayuda.",
+  "commonUnknown": "Desconocido",
+  "timelineTitle": "Línea del tiempo",
+  "timelineHistory": "Historial",
+  "timelineEntries": "{count} entradas",
+  "timelinePositionUpdated": "Posición actualizada",
+  "timelineProfileActive": "{name} activo",
+  "timelineAppStarted": "App iniciada",
+  "timelineProfileSwitched": "Cambio de perfil",
+  "timelineToday": "Hoy, {time}",
+  "timelineYesterday": "Ayer, {time}",
+  "timelineTrackingDisabledTitle": "Seguimiento GPS desactivado",
+  "timelineTrackingDisabledSubtitle": "La línea del tiempo muestra tus cambios de perfil y tus posiciones GPS a lo largo del tiempo.\n\nActiva el seguimiento GPS con el símbolo del satélite arriba a la derecha para recoger datos.",
+  "timelineEmptyTitle": "Todavía no hay datos",
+  "timelineEmptySubtitle": "El seguimiento GPS está activo. Tu posición se registra cada 2 o 3 minutos.\n\nLos cambios de perfil y las posiciones GPS aparecen aquí automáticamente.",
+  "gamesTitle": "Juegos y calma",
+  "gamesSubtitle": "Juegos sencillos para distraerse y descansar.\nSin cronómetros, sin puntos: solo calma.",
+  "gamesComingSoon": "Pronto",
+  "gamesPuzzleTitle": "Puzle",
+  "gamesPuzzleSubtitle": "Rompecabezas o puzle deslizante",
+  "gamesPuzzleDescription": "Relájate con imágenes que calman",
+  "gamesBreathingTitle": "Ejercicios de respiración",
+  "gamesBreathingSubtitle": "Respiración guiada",
+  "gamesBreathingDescription": "Cálmate con ejercicios de respiración sencillos",
+  "memoryCardHidden": "Boca abajo",
+  "@memoryCardHidden": {
+    "description": "Memory card state: face down"
+  },
+  "memoryCardOpen": "Boca arriba",
+  "@memoryCardOpen": {
+    "description": "Memory card state: face up"
+  },
+  "memoryCardFound": "Pareja encontrada",
+  "@memoryCardFound": {
+    "description": "Memory card state: matched"
+  },
+  "memoryAllFound": "Todas las parejas están.",
+  "@memoryAllFound": {
+    "description": "Shown when the memory game is complete"
+  },
+  "memoryNewGame": "Partida nueva",
+  "@memoryNewGame": {
+    "description": "Starts a new memory round"
+  },
+  "gamesDrawingSend": "Enviar al chat",
+  "@gamesDrawingSend": {
+    "description": "Confirm button on the standalone drawing screen"
+  },
+  "gamesDrawingEmpty": "Dibuja algo y luego podrás enviarlo",
+  "@gamesDrawingEmpty": {
+    "description": "Tooltip when the drawing is still empty"
+  },
+  "gamesDrawingSent": "Tu dibujo está ahora en el chat.",
+  "@gamesDrawingSent": {
+    "description": "Confirmation after the drawing was sent"
+  },
+  "memoryCardPosition": "Carta {position} de {total}",
+  "@memoryCardPosition": {
+    "description": "Accessibility label naming a memory card by its place",
+    "placeholders": {
+      "position": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "gamesMemoryTitle": "Memory",
+  "gamesMemorySubtitle": "Encuentra las parejas",
+  "gamesMemoryDescription": "Un memory tranquilo, sin prisa",
+  "gamesDrawingTitle": "Dibujar",
+  "gamesDrawingSubtitle": "Dibujo libre y garabatos",
+  "gamesDrawingDescription": "Exprésate de forma creativa",
+  "puzzleCreateTitle": "Crear puzle",
+  "puzzleRelaxationTitle": "Puzle para relajarse",
+  "puzzleRelaxationSubtitle": "Elige el tipo de puzle y la dificultad. Tómate tu tiempo: aquí nadie puntúa.",
+  "puzzleTypeLabel": "Tipo de puzle",
+  "puzzleTypeJigsaw": "De piezas",
+  "puzzleTypeJigsawDescription": "Arrastra las piezas a su sitio",
+  "puzzleTypeSliding": "Deslizante",
+  "puzzleTypeSlidingDescription": "Mueve las piezas tocándolas",
+  "puzzleDifficultyLabel": "Dificultad",
+  "puzzleDifficultyEasy": "Fácil",
+  "puzzleDifficultyEasyDescription": "Cuadrícula de 3×3, ideal para relajarse",
+  "puzzleDifficultyMedium": "Media",
+  "puzzleDifficultyMediumDescription": "Cuadrícula de 4×4, un pequeño reto",
+  "puzzleDifficultyHard": "Difícil",
+  "puzzleDifficultyHardDescription": "Cuadrícula de 5×5, para quien ya tiene práctica",
+  "puzzleSelectImageAndStart": "Elegir imagen y empezar",
+  "puzzleJigsawTitle": "Puzle de piezas",
+  "puzzleSlidingTitle": "Puzle deslizante",
+  "puzzleMoves": "Movimientos: {count}",
+  "puzzlePreparing": "Preparando el puzle...",
+  "puzzleAvailablePieces": "Piezas disponibles",
+  "puzzleTapToMove": "Toca una pieza para moverla",
+  "puzzleShowHint": "Mostrar ayuda",
+  "puzzleHintMovablePieces": "Pista: puedes mover {count} piezas",
+  "puzzleSolved": "¡Puzle resuelto!",
+  "puzzleSolvedInMoves": "Has resuelto el puzle en {count} movimientos.",
+  "puzzleErrorLoadingImage": "Error al cargar la imagen: {error}",
+  "puzzleErrorSharing": "Error al compartir: {error}",
+  "puzzleImagePickerTitle": "Elegir imagen",
+  "puzzleImagePickerSubtitle": "Elige una imagen que te calme para tu puzle",
+  "puzzleImageLoading": "Cargando la imagen...",
+  "puzzleImageLoadFailed": "No se ha podido cargar la imagen",
+  "puzzleImageSourceGallery": "Galería",
+  "puzzleImageSourceGallerySubtitle": "Elegir una imagen de tu galería",
+  "puzzleImageSourceCamera": "Cámara",
+  "puzzleImageSourceCameraSubtitle": "Hacer una foto nueva",
+  "puzzleImageSourceOnline": "En línea",
+  "puzzleImageSourceOnlineSubtitle": "Una imagen que calma, de internet",
+  "puzzleSelectCategory": "Elegir categoría",
+  "errorNoProfileSelected": "Ningún perfil seleccionado",
+  "mantrasTitle": "Mantras",
+  "mantrasComingSoonTitle": "Mantras: muy pronto ✨",
+  "mantrasComingSoonSubtitle": "Afirmaciones que calman y mantras para los momentos difíciles",
+  "helpResourcesTitle": "Ayuda",
+  "helpHotlinesTitle": "Teléfonos de emergencia 24/7",
+  "helpHotlinesSubtitle": "Apoyo profesional, a cualquier hora",
+  "helpMoreResourcesTitle": "Pronto habrá más recursos",
+  "helpMoreResourcesDescription": "En próximas versiones:\n• Recursos de terapia\n• Grupos de apoyo\n• Material informativo sobre el TID\n• Planes de crisis y estrategias",
+  "moreTitle": "Más funciones",
+  "moreHelpResources": "Ayuda",
+  "moreHelpResourcesDescription": "Información y enlaces a apoyo profesional",
+  "moreGames": "Juegos y calma",
+  "moreGamesDescription": "Respiración, memory y más para distraerse",
+  "moreSettings": "Ajustes",
+  "moreSettingsDescription": "Configuración de la app y privacidad",
+  "permissionsTitle": "Derechos y permisos",
+  "permissionsNoProfiles": "No hay perfiles",
+  "permissionsInfoText": "Aquí puedes gestionar los permisos de cada perfil. Toca un perfil para ver los detalles.",
+  "permissionsAllRightsAdmin": "Todos los derechos (administrador)",
+  "permissionsCount": "{count} permisos",
+  "permissionsAdminBadge": "Admin",
+  "permissionsAdministrator": "Administrador",
+  "permissionsDetailTitle": "Permisos: {name}",
+  "permissionsChangeError": "No se ha podido cambiar el permiso",
+  "permissionsMakeAdminTitle": "Nombrar administrador",
+  "permissionsMakeAdminMessage": "{name} pasará a ser administrador con todos los derechos. ¿Seguir?",
+  "permissionsMakeAdminButton": "Hacer administrador",
+  "permissionsMakeAdminSubtitle": "Concede todos los derechos",
+  "permissionsRevokeAdminTitle": "Quitar el estado de administrador",
+  "permissionsRevokeAdminMessage": "{name} perderá todos los derechos de administrador y tendrá los permisos estándar. ¿Seguir?",
+  "permissionsRevokeAdminSubtitle": "Vuelve a los derechos estándar",
+  "permissionsRevokeAdminError": "No se ha podido quitar el estado de administrador. El primer perfil tiene que seguir siendo administrador.",
+  "permissionsActiveCount": "{active} / {total} activos",
+  "permissionsCategorySystem": "Permisos del sistema",
+  "permissionsCategoryChat": "Chat",
+  "permissionsCategoryCalendar": "Calendario",
+  "permissionsCategoryMedication": "Medicamentos",
+  "permissionsCategoryContacts": "Contactos",
+  "permissionsCategoryFinder": "Buscador (lugares y objetos)",
+  "permissionsCategoryDiary": "Diario",
+  "permissionsCategoryEmergency": "Contactos de emergencia",
+  "permissionsCategorySecurity": "Seguridad",
+  "profileAgeYears": "{age} años",
+  "groundingTitle": "Anclaje",
+  "groundingChooseLabel": "O elige tú algo",
+  "groundingDoneAgain": "Otra vez",
+  "groundingDoneOther": "Otra cosa",
+  "groundingDoneCall": "Llamar a alguien",
+  "groundingOrientationTitle": "Aquí y ahora",
+  "groundingOrientationStep1": "Hoy es",
+  "groundingOrientationStep2": "Mira a tu alrededor. ¿Dónde estás ahora?",
+  "groundingOrientationStep3": "Di quién eres, en voz alta o baja.",
+  "groundingOrientationStep4": "El cuerpo de hoy no es el de entonces.",
+  "groundingOrientationStep5": "Lo que recuerdas ya pasó.",
+  "groundingOrientationStep6": "Estás aquí.",
+  "groundingSensesTitle": "Ver, oír, sentir",
+  "groundingSensesStep1": "Cinco cosas que ves.",
+  "groundingSensesStep2": "Cuatro cosas que oyes.",
+  "groundingSensesStep3": "Tres cosas que puedes tocar.",
+  "groundingSensesStep4": "Dos cosas que hueles.",
+  "groundingSensesStep5": "Una cosa que saboreas.",
+  "groundingSensesStep6": "Estás aquí.",
+  "groundingBodyTitle": "Sentir el cuerpo",
+  "groundingBodyStep1": "Apoya los dos pies planos en el suelo.",
+  "groundingBodyStep2": "Empuja los talones hacia abajo.",
+  "groundingBodyStep3": "Coge algo frío con la mano.",
+  "groundingBodyStep4": "Sujétalo el tiempo que quieras.",
+  "groundingBodyStep5": "Nota tu espalda contra el respaldo.",
+  "groundingBodyStep6": "El suelo te sostiene.",
+  "groundingContainerTitle": "Guardar bajo llave",
+  "groundingContainerStep1": "Imagina un recipiente. Tan grande como quieras.",
+  "groundingContainerStep2": "Tiene una tapa que cierra bien.",
+  "groundingContainerStep3": "Mete dentro lo que ahora es demasiado.",
+  "groundingContainerStep4": "Cierra la tapa.",
+  "groundingContainerStep5": "Ponlo en un sitio que elijas tú.",
+  "groundingContainerStep6": "Puedes volver a abrirlo. Pero no ahora.",
+  "groundingBreathTitle": "Respiración",
+  "groundingBreathStep1": "Coge aire y cuenta hasta cuatro.",
+  "groundingBreathStep2": "Aguanta un momento.",
+  "groundingBreathStep3": "Suelta el aire y cuenta hasta seis.",
+  "groundingBreathStep4": "Otra vez. Sin prisa.",
+  "groundingBreathStep5": "Más lento al salir que al entrar. Con eso basta.",
+  "medicationNameLabel": "Nombre del medicamento",
+  "medicationDosageLabel": "Dosis",
+  "medicationDosageHint": "p. ej. 1 comprimido, 10 mg, 5 ml",
+  "medicationNameRequired": "Escribe un nombre",
+  "medicationDosageRequired": "Escribe la dosis",
+  "medicationTypeQuestion": "¿Qué tipo de medicamento?",
+  "medicationTypeDailyTitle": "Medicación diaria",
+  "medicationTypeDailyExplanation": "A horas fijas, todos los días",
+  "medicationTypeAsNeededTitle": "Medicación a demanda",
+  "medicationTypeAsNeededExplanation": "Solo cuando lo necesitas",
+  "medicationWhenToTake": "¿Cuándo tomarlo?",
+  "medicationSectionMorning": "Por la mañana",
+  "medicationSectionMidday": "A mediodía",
+  "medicationSectionEvening": "Por la tarde",
+  "medicationSectionNight": "Por la noche",
+  "medicationOtherTime": "Otra hora",
+  "medicationSectionNotChosen": "sin seleccionar",
+  "medicationTimeRequired": "Añade al menos una hora de toma",
+  "medicationAsNeededSettings": "Ajustes de medicación a demanda",
+  "medicationMaxDosesLabel": "Máximo al día *",
+  "medicationMaxDosesHint": "p. ej. 3",
+  "medicationMaxDosesHelper": "¿Cuántas veces se puede tomar al día?",
+  "medicationMaxDosesRequired": "Obligatorio para la medicación a demanda",
+  "medicationMaxDosesInvalid": "Escribe un número mayor que 0",
+  "medicationMaxDosesMissing": "Indica el máximo al día",
+  "medicationMinIntervalLabel": "Intervalo mínimo en horas (opcional)",
+  "medicationMinIntervalHint": "p. ej. 4",
+  "medicationMinIntervalHelper": "Tiempo mínimo entre dos tomas",
+  "medicationMinIntervalInvalid": "Escribe un número igual o mayor que 0",
+  "medicationRemindersTitle": "Aurora te avisará",
+  "medicationRemindersOff": "Aurora no dice nada. El medicamento sigue en tu lista y tú decides cuándo mirarla.",
+  "medicationRemindersDaily": "En cada hora de toma Aurora avisa tres veces: 30 minutos antes, 10 minutos antes y a la hora exacta. Si no respondes, una vez más 10 minutos después.",
+  "medicationRemindersNoInterval": "Sin un intervalo mínimo no hay ningún momento que Aurora pueda esperar. Indica abajo un intervalo si quieres que te avise en cuanto se permita la siguiente dosis.",
+  "medicationRemindersAsNeeded": "Tras una toma, Aurora te avisa en cuanto se permite la siguiente y la anuncia 30, 10 y 5 minutos antes.",
+  "medicationPeriodTitle": "Periodo (opcional)",
+  "medicationStartDate": "Fecha de inicio",
+  "medicationEndDate": "Fecha de fin",
+  "medicationNotesLabel": "Notas (opcional)",
+  "medicationNotesHint": "p. ej. tomar con comida",
+  "medicationDescriptionLabel": "Descripción detallada (opcional)",
+  "medicationDescriptionHint": "Ayuda a distinguir medicamentos parecidos",
+  "medicationPhotoTitle": "Foto de la pastilla (opcional)",
+  "medicationPhotoHint": "Una foto ayuda a reconocerlo y evita confusiones",
+  "medicationPhotoTake": "Hacer una foto",
+  "medicationPhotoRetake": "Hacer otra foto",
+  "medicationPhotoError": "No se ha podido cargar la foto: {error}",
+  "medicationActiveTitle": "Activo",
+  "medicationActiveOn": "Aparece en la lista del día",
+  "medicationActiveOff": "Está archivado",
+  "medicationDeleteTitle": "¿Borrar el medicamento?",
+  "medicationDeleteMessage": "¿Seguro que quieres borrar este medicamento?",
+  "medicationDeleteConfirmMessage": "Este medicamento se borrará definitivamente.",
+  "medicationDeleted": "Medicamento borrado",
+  "medicationIntakeTimesLabel": "Horas de toma",
+  "medicationMaxDailyLabel": "Máx. al día",
+  "medicationMinGapLabel": "Intervalo mín.",
+  "medicationStatusLabel": "Estado",
+  "medicationStatusTaken": "Tomado",
+  "medicationStatusRefused": "Rechazado",
+  "medicationStatusSnoozed": "Más tarde",
+  "medicationTake": "Tomar",
+  "medicationTakeAnyway": "Tomarlo igualmente",
+  "medicationDailyLimitReached": "Límite diario alcanzado",
+  "medicationAddFeedback": "Añadir cómo te ha ido",
+  "medicationFeedbackYourExperience": "Cómo te ha ido",
+  "medicationRefusalTitle": "Anotar que se ha rechazado",
+  "medicationIntakesLabel": "Tomas",
+  "medicationNoProfileSelected": "Ningún perfil seleccionado",
+  "medicationNoLogPermission": "Sin permiso para registrar tomas",
+  "commonGallery": "Galería",
+  "commonCamera": "Cámara",
+  "medicationStatusSkipped": "Omitido",
+  "medicationWillBeRefused": "{name} se marcará como rechazado.",
+  "clockTime": "{time}",
+  "@clockTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "medicationReminderAtTime": "Recordatorio a las {time}",
+  "@medicationReminderAtTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "medicationSnoozedUntil": "{name} — aviso a las {time}",
+  "medicationAtTime": "a las {time}",
+  "medicationDoseCountToday": "Disponibles: {available} de {max} hoy",
+  "medicationLastTaken": "Última toma: {time}",
+  "medicationNextPossible": "Siguiente toma posible a las {time}",
+  "medicationNoteLabel": "Nota: {note}",
+  "medicationLimitWarning": "Hoy ya has tomado {count} dosis de {name}. Ese es el límite diario.",
+  "medicationTakenConfirmation": "{name} tomado",
+  "anchorTitle": "Ancla",
+  "anchorSectionWhenHard": "Cuando cuesta",
+  "anchorSectionEveryday": "Día a día",
+  "anchorSectionWhenCalm": "Cuando hay calma",
+  "fabMedication": "Medicamento",
+  "fabDiaryEntry": "Entrada",
+  "fabFinderEntry": "Recordar",
+  "fabContact": "Contacto",
+  "appQuitTitle": "¿Cerrar la app?",
+  "appQuitMessage": "¿Seguro que quieres cerrar Aurora?",
+  "emergencyResetTitle": "Restablecimiento de emergencia",
+  "emergencyResetWarning": "AVISO: se borrarán todos los datos para siempre.\n\nPerfiles, mensajes, citas, medicamentos, contactos: todo.\n\nEste paso no se puede deshacer.",
+  "emergencyResetConfirm": "BORRARLO TODO",
+  "pwResetCancelledTitle": "Restablecimiento cancelado",
+  "pwResetCancelledMessage": "El restablecimiento en curso se ha cancelado con la contraseña antigua. Tu perfil ya está activo.",
+  "pwResetUnderstood": "Entendido",
+  "pwResetNowActiveTitle": "Nueva contraseña activa",
+  "pwResetNowActiveMessage": "La nueva contraseña se activó automáticamente al terminar el tiempo de espera. Tu perfil ya está activo.",
+  "pwResetTitle": "Restablecer la contraseña",
+  "pwResetAnswerQuestions": "Responde a las preguntas de seguridad para restablecerla ahora mismo",
+  "pwResetAnswerN": "Respuesta {number}",
+  "pwResetForgotAnswers": "¿Has olvidado las respuestas?\nInicia el temporizador de 24 horas",
+  "pwResetAnswerAll": "Responde a todas las preguntas",
+  "pwResetAnswersWrong": "Esas respuestas no son correctas.\n\nPuedes intentarlo otra vez o iniciar el temporizador de 24 horas.",
+  "pwResetCheckAnswers": "Comprobar respuestas",
+  "pwResetSetNewTitle": "Poner una contraseña nueva",
+  "pwResetAnswersCorrect": "Has respondido bien a las preguntas de seguridad.",
+  "pwResetImmediateHint": "Escribe tu nueva contraseña. Se activará de inmediato.",
+  "pwResetNewPassword": "Nueva contraseña",
+  "pwResetConfirmPassword": "Confirmar contraseña",
+  "pwResetTooShort": "La contraseña necesita al menos 4 caracteres",
+  "pwResetMismatch": "Las contraseñas no coinciden",
+  "pwResetChanged": "Contraseña cambiada.\n\nYa puedes entrar con la nueva.",
+  "pwResetSetPassword": "Poner la contraseña",
+  "pwResetTimerHint": "Escribe tu nueva contraseña.\n\nAl empezar corre un temporizador de 24 horas; después podrás activarla.",
+  "pwResetStarted": "Restablecimiento iniciado.\n\nTu contraseña antigua sigue activa. En {waitTime} podrás activar la nueva.",
+  "pwResetStartError": "No se ha podido iniciar el restablecimiento",
+  "pwResetStart": "Iniciar restablecimiento",
+  "pwResetRunningTitle": "Restablecimiento en curso",
+  "pwResetWhatsHappening": "¿Qué está pasando?",
+  "pwResetRunningExplanation": "Hace poco pusiste una contraseña nueva. Por seguridad corre ahora un temporizador de 24 horas.\n\n",
+  "pwResetRemaining": "Tiempo restante: {time}",
+  "pwResetReadyTitle": "Listo para activar",
+  "pwResetWaitOver": "El tiempo de espera ha terminado.",
+  "pwResetReadyExplanation": "Pusiste una contraseña nueva el {startTime}. El plazo de seguridad de 24 horas ya ha pasado.",
+  "pwResetIrreversible": "Si la activas, tu contraseña ANTIGUA será sustituida definitivamente por la NUEVA.",
+  "pwResetActivated": "Nueva contraseña activada.\n\nYa puedes entrar con ella.",
+  "pwResetActivateError": "No se ha podido activar la contraseña",
+  "pwResetActivate": "Activar la nueva contraseña",
+  "profileCurrentlyActive": "Perfil en uso ahora mismo",
+  "profilePasswordProtected": "Este perfil está protegido con contraseña",
+  "profilePasswordLabel": "Contraseña",
+  "settingsMapCacheClearQuestion": "¿Borrar todas las teselas de mapa guardadas?",
+  "settingsMapCacheCleared": "Caché de mapas vaciada",
+  "settingsMapPredownloadComingSoon": "La descarga previa llegará en una versión posterior",
+  "settingsCacheLimitTitle": "Fijar el límite de la caché",
+  "settingsCacheLimitValue": "Tamaño máximo de la caché: {size} MB",
+  "settingsCacheLimitMegabytes": "{size} MB",
+  "settingsCacheLimitExplanation": "Cuando la caché supera este límite, se borran automáticamente las teselas más antiguas.",
+  "settingsAllDataDeleted": "Se han borrado todos los datos",
+  "settingsDeleteIncomplete": "No se ha podido borrar todo. Inténtalo de nuevo.",
+  "settingsTrackingEnableTitle": "¿Activar el seguimiento continuo?",
+  "settingsTrackingWhatItDoes": "Lo que hace este modo:",
+  "settingsDataStaysHere": "Tus datos se quedan en este dispositivo",
+  "settingsDataStaysHereExplanation": "Aurora guarda todos los datos solo en local.",
+  "settingsBackgroundGpsBattery": "El GPS en segundo plano puede gastar más batería.",
+  "settingsAndroidStatus": "Estado de Android:",
+  "settingsActivate": "Activar",
+  "settingsDeactivate": "Desactivar",
+  "settingsTrackingDisableTitle": "¿Desactivar el seguimiento continuo?",
+  "settingsTrackingDisableExplanation": "El seguimiento GPS vuelve a controlarse por perfil.",
+  "settingsTestNotificationSent": "Notificación de prueba enviada",
+  "settingsAndroidSettingNeeded": "Hace falta un ajuste de Android",
+  "settingsPermissionNeededFor": "Para usar el seguimiento continuo necesitas el permiso «{permission}».",
+  "settingsStepByStep": "Te lo explico paso a paso:",
+  "settingsOpenAndroidSettings": "Abrir los ajustes de Android",
+  "settingsOpenNow": "Abrir ahora",
+  "settingsInTheSettings": "En los ajustes",
+  "settingsBackToAurora": "Vuelve a Aurora\nLa app detecta el cambio por sí sola.",
+  "settingsUnderstood": "Entendido",
+  "settingsResetPendingFor": "Perfil: {name}\nTiempo restante: {time}",
+  "settingsWhatIs": "¿Qué es «{name}»?",
+  "settingsAdminTrackingExplanation": "Como administrador puedes controlar el seguimiento GPS de TODOS los perfiles a la vez. Cuando está activo:",
+  "settingsPrerequisite": "Antes hace falta el permiso de Android «{permission}».",
+  "settingsGpsPermission": "Permiso de GPS",
+  "settingsBackgroundReady": "Todo listo para el seguimiento continuo.",
+  "settingsHowToEnable": "Cómo activar «{permission}»",
+  "settingsLocationStaysHere": "Tus datos de ubicación se quedan en este dispositivo.",
+  "settingsTrackingAlwaysOn": "Seguimiento siempre activo",
+  "settingsHowNotificationsWork": "¿Cómo funcionan las notificaciones?",
+  "settingsSendTestNotification": "Enviar una notificación de prueba",
+  "settingsCheckNotificationsWork": "Comprueba si llegan las notificaciones",
+  "settingsQueue": "Cola",
+  "settingsScheduledNotifications": "Notificaciones programadas:",
+  "settingsNextAt": "Siguiente: {time}",
+  "settingsCacheUsage": "{used} MB de {limit} MB • {count} teselas",
+  "settingsPercent": "{value} %",
+  "settingsCacheLimitLabel": "Límite de la caché",
+  "settingsPredownloadMaps": "Descargar mapas por adelantado",
+  "settingsPredownloadSubtitle": "Descarga mapas de una zona a tu alrededor",
+  "settingsClearCache": "Vaciar la caché",
+  "settingsClearCacheSubtitle": "Borrar todas las teselas de mapa guardadas",
+  "settingsDiscreetRemindersTitle": "Avisos sin contenido",
+  "settingsDiscreetRemindersOn": "En la pantalla de bloqueo solo pone «Aurora — aviso». Lo que significa lo ves al desbloquear.",
+  "settingsDiscreetRemindersOff": "La pantalla de bloqueo muestra el nombre y la dosis, o la cita, en claro.",
+  "settingsWhatAuroraSends": "Lo que Aurora envía",
+  "settingsWhatAuroraSendsSubtitle": "Consulta cada envío palabra por palabra",
+  "settingsAlwaysAllow": "Permitir siempre",
+  "settingsAlwaysAllowRequired": "Hace falta el permiso de ubicación «Permitir siempre»",
+  "settingsLocalOnly": "Aurora guarda todos los datos solo en local. Sin nube, sin servidores, sin envíos.",
+  "settingsTrackingDisableFull": "El seguimiento GPS vuelve a controlarse por perfil.\n\nCada perfil podrá activarlo y desactivarlo por su cuenta.",
+  "settingsAlwaysAllowNeeded": "Para usar el seguimiento continuo necesitas el permiso «Permitir siempre».",
+  "settingsWhatIsAlwaysOn": "¿Qué es «seguimiento siempre activo»?",
+  "settingsAlwaysAllowPrerequisite": "Antes hace falta el permiso de Android «Permitir siempre», para que el seguimiento siga con la app cerrada.",
+  "settingsHowToEnableAlwaysAllow": "Cómo activar «Permitir siempre»:",
+  "settingsLocationStaysOffline": "Tus datos de ubicación se quedan en este dispositivo. Aurora funciona sin conexión, sin servidores.",
+  "settingsCountValue": "{count}",
+  "settingsTilesCount": "{used} MB de {limit} MB • {count} teselas",
+  "settingsMaxStorage": "{size} MB de almacenamiento máximo",
+  "errorWithDetail": "Error: {error}",
+  "securityQuestionsFillAll": "Rellena las tres preguntas y respuestas",
+  "securityQuestionsSaved": "Preguntas de seguridad guardadas.\n\nYa puedes usarlas para restablecer la contraseña.",
+  "securityQuestionsRemoveTitle": "¿Quitar las preguntas de seguridad?",
+  "securityQuestionsRemoveWarning": "Sin las preguntas de seguridad, el temporizador de 24 horas será la única forma de restablecer la contraseña.",
+  "securityQuestionsRemoved": "Preguntas de seguridad quitadas",
+  "securityQuestionsSetupTitle": "Configurar preguntas de seguridad",
+  "securityQuestionsSetupExplanation": "Configura tres preguntas de seguridad para poder restablecer la contraseña rápido.",
+  "securityQuestionsChooseWisely": "Elige preguntas cuyas respuestas nunca olvidarás",
+  "securityQuestionN": "Pregunta {number}",
+  "securityAnswerToQuestionN": "Respuesta a la pregunta {number}",
+  "securityQuestionHint1": "p. ej. ¿nombre de mi primera mascota?",
+  "securityQuestionHint2": "p. ej. ¿dónde nació mi madre?",
+  "securityQuestionHint3": "p. ej. ¿mi película favorita de niño?",
+  "errorReportPreviewTitle": "Vista previa del informe de error",
+  "errorReportWhatIsSent": "Esto es lo que se envía:",
+  "errorReportContactSection": "Contacto (opcional)",
+  "errorReportContactExplanation": "Solo si quieres que podamos escribirte si tenemos preguntas:",
+  "errorReportEmailLabel": "Dirección de correo (opcional)",
+  "errorReportNewsletter": "Suscribirse a las novedades",
+  "errorReportNewsletterSubtitle": "Recibe novedades sobre Aurora, como mucho una vez al mes",
+  "errorReportEmailUseOnly": "Usamos tu correo solo para preguntas sobre este informe.",
+  "errorReportCopy": "Copiar",
+  "errorReportCopied": "Informe copiado al portapapeles",
+  "errorReportAutoGenerated": "Informe generado automáticamente ({type}).",
+  "errorReportQueued": "Informe aceptado. Se enviará en cuanto vuelvas a estar en línea.",
+  "errorReportFailed": "No se ha podido enviar el informe",
+  "errorReportCopyToClipboard": "Copiar al portapapeles",
+  "permissionsLevel": "Nivel {level}",
+  "permissionsSectionExplanation": "Decide qué áreas puede usar este perfil. Cada área se ajusta por separado:",
+  "permissionsChildPreset": "Ajuste para niños",
+  "permissionsAdultPreset": "Ajuste para adultos",
+  "permissionsCategoryEmergencyDiary": "Diario de emergencia",
+  "permissionsCategoryHelp": "Ayuda",
+  "permissionsCategoryMantras": "Mantras",
+  "permissionsCategoryGames": "Juegos",
+  "permissionsChangeableLater": "Puedes cambiar los permisos cuando quieras en los ajustes",
+  "errorReportRoute": "El informe va directo a los desarrolladores; si no funciona, Aurora abre tu app de correo. Lo enviado aparece en los ajustes, en «Lo que Aurora envía».",
+  "errorReportEmailPrivacy": "Usamos tu correo solo para preguntas sobre este informe y no lo damos a nadie.",
+  "errorReportAutoBody": "Informe generado automáticamente ({type}). Los detalles están en el diagnóstico del dispositivo.",
+  "errorReportClipboardFallback": "El informe está en el portapapeles. También puedes enviárnoslo por correo a {email}.",
+  "mapAddressNotFound": "Dirección no encontrada",
+  "mapNeedsInternet": "Aurora necesita internet para buscar direcciones",
+  "mapDataEnabled": "Datos de mapa activados: el mapa se está cargando",
+  "mapTapOrSearch": "Toca el mapa o busca una dirección",
+  "mapAddressLoading": "Cargando la dirección…",
+  "mapPickTitle": "Añadir un lugar",
+  "mapTapSearchOrLocate": "Toca el mapa, busca una dirección o usa tu ubicación",
+  "mapSearchHint": "Buscar una dirección (p. ej. calle Iglesia 3, Coswig)",
+  "mapDataNotLoaded": "Datos de mapa sin cargar",
+  "mapEnableToMark": "Activa los datos de mapa para marcar lugares en él.",
+  "mapDataFromOsm": "Los datos de mapa vienen de OpenStreetMap.\nAurora necesita conexión a internet una sola vez.",
+  "mapZoomIn": "Acercar",
+  "mapZoomOut": "Alejar",
+  "mapToMyLocation": "A mi ubicación",
+  "feedbackSheetTitle": "Contactar con el desarrollador",
+  "feedbackSheetIntro": "Aurora está en beta abierta y vive de tus comentarios.",
+  "feedbackReplyOnlyIfWanted": "Solo si quieres una respuesta",
+  "errorOpening": "No se ha podido abrir: {error}",
+  "errorLinkNotOpened": "No se ha podido abrir el enlace: {url}",
+  "thankYouTitle": "¡Gracias!",
+  "thankYouReportSent": "Tu informe ha llegado y nos ayuda a mejorar Aurora.",
+  "thankYouReportRecorded": "Se ha registrado tu informe de error",
+  "thankYouJoinCommunity": "Únete a la comunidad",
+  "thankYouDiscord": "Servidor de Discord",
+  "thankYouDiscordSubtitle": "Habla con otras personas usuarias y con el equipo",
+  "thankYouMoreContact": "Otras formas de contactarnos",
+  "thankYouEmailSupport": "Soporte por correo",
+  "thankYouWhatsNext": "¿Qué pasa ahora?",
+  "thankYouBackToApp": "Volver a Aurora",
+  "transparencyDeleteTitle": "¿Borrar esta entrada?",
+  "transparencyDeleteMessage": "La entrada desaparece de esta lista. Lo ya enviado no vuelve por eso.",
+  "transparencyIntro": "Aquí ves cada envío que ha salido de tu dispositivo, palabra por palabra.",
+  "transparencyNothingSent": "Todavía no se ha enviado nada.",
+  "transparencySendUsageData": "Enviar datos de uso anónimos",
+  "transparencyIrreversible": "Lo que ya se ha enviado no se puede recuperar. Está en camino.",
+  "imagePickerAnimalError": "No se ha podido elegir el avatar de animal: {error}",
+  "imagePickerCameraNeeded": "Aurora necesita permiso de cámara para hacer fotos",
+  "imagePickerGalleryNeeded": "Aurora necesita permiso de galería para elegir imágenes",
+  "imagePickerAllowInSettings": "Permitirlo en los ajustes",
+  "imagePickerOpenSettings": "Abrir los ajustes",
+  "imagePickerPickError": "No se ha podido elegir la imagen: {error}",
+  "imagePickerSaveError": "No se ha podido guardar la imagen: {error}",
+  "feedbackThankYouTitle": "Hemos recibido tus comentarios",
+  "feedbackThankYouMessage": "¡Gracias! Tus comentarios nos ayudan a mejorar Aurora.",
+  "feedbackStayInTouch": "Sigamos en contacto",
+  "feedbackAuroraDiscord": "Aurora en Discord",
+  "feedbackWebsite": "Sitio web",
+  "feedbackEmail": "Correo",
+  "crashTitle": "Algo ha salido mal",
+  "crashMessage": "Aurora ha encontrado un error inesperado. Tus datos no se ven afectados.",
+  "crashTechnicalDetails": "Detalles técnicos",
+  "crashReport": "Informar del error",
+  "crashRestart": "Reiniciar la app",
+  "crashContinue": "Seguir de todos modos",
+  "doodleSendDrawing": "Enviar el dibujo",
+  "doodleSticker": "Pegatina",
+  "doodleStrokeWidth": "Grosor del trazo",
+  "doodleStrokeThin": "Trazo fino",
+  "doodleStrokeMedium": "Trazo medio",
+  "doodleStrokeThick": "Trazo grueso",
+  "imagePickerDrawYourself": "Dibujarlo tú",
+  "doodleAvatarTitle": "Dibuja tu imagen",
+  "doodleAvatarDone": "Listo",
+  "doodleAvatarEmptyHint": "Dibuja algo primero",
+  "permCreateProfilesLabel": "Añadir una parte",
+  "permCreateProfilesDesc": "Incorporar una parte nueva a Aurora",
+  "permDeactivateProfilesLabel": "Ocultar una parte",
+  "permDeactivateProfilesDesc": "Ocultar una parte por un tiempo; se puede volver a mostrar",
+  "permManagePermissionsLabel": "Gestionar los permisos",
+  "permManagePermissionsDesc": "Decidir qué pueden hacer las demás partes",
+  "permAccessSettingsLabel": "Ajustes de la app",
+  "permAccessSettingsDesc": "Configurar y ajustar Aurora",
+  "permViewChatLabel": "Leer el chat",
+  "permViewChatDesc": "Ver los mensajes del chat interno",
+  "permSendChatMessageLabel": "Poder enviar de todo",
+  "permSendChatMessageDesc": "Un permiso que cubre todo tipo de mensaje; sustituye a los de abajo",
+  "permSendTextMessageLabel": "Escribir texto",
+  "permSendTextMessageDesc": "Poner mensajes escritos en el chat",
+  "permSendDoodleLabel": "Dibujar",
+  "permSendDoodleDesc": "Compartir dibujos y garabatos",
+  "permSendVoiceMessageLabel": "Hablar",
+  "permSendVoiceMessageDesc": "Grabar algo y enviar tu propia voz",
+  "permSendImageLabel": "Enviar imágenes",
+  "permSendImageDesc": "Hacer fotos o compartirlas desde la galería",
+  "permSendVideoLabel": "Enviar vídeos",
+  "permSendVideoDesc": "Grabar vídeos o compartirlos desde la galería",
+  "permDeleteOwnMessagesLabel": "Borrar los mensajes propios",
+  "permDeleteOwnMessagesDesc": "Retirar solo lo que has escrito tú",
+  "permDeleteAllMessagesLabel": "Borrar mensajes de otras partes",
+  "permDeleteAllMessagesDesc": "Quitar también mensajes de otras partes; esto no se puede deshacer",
+  "permViewCalendarLabel": "Ver el calendario",
+  "permViewCalendarDesc": "Ver lo que viene",
+  "permCreateEventsLabel": "Añadir una cita",
+  "permCreateEventsDesc": "Poner citas nuevas en el calendario",
+  "permEditOwnEventsLabel": "Cambiar las citas propias",
+  "permEditOwnEventsDesc": "Editar solo las citas que has puesto tú",
+  "permEditAllEventsLabel": "Cambiar todas las citas",
+  "permEditAllEventsDesc": "Editar también las citas de otras partes",
+  "permDeleteOwnEventsLabel": "Borrar las citas propias",
+  "permDeleteOwnEventsDesc": "Quitar solo las citas que has puesto tú",
+  "permDeleteAllEventsLabel": "Borrar todas las citas",
+  "permDeleteAllEventsDesc": "Quitar también las citas de otras partes; esto no se puede deshacer",
+  "permAttachEventMediaLabel": "Adjuntos de la cita",
+  "permAttachEventMediaDesc": "Adjuntar imágenes y notas a una cita",
+  "permCommentOnCalendarEventsLabel": "Comentar",
+  "permCommentOnCalendarEventsDesc": "Añadir algo a una cita",
+  "permViewMedicationLabel": "Ver los medicamentos",
+  "permViewMedicationDesc": "Ver qué recibe el cuerpo y cuándo",
+  "permManageMedicationLabel": "Gestionar los medicamentos",
+  "permManageMedicationDesc": "Añadir, cambiar y quitar medicamentos",
+  "permLogMedicationLabel": "Confirmar una toma",
+  "permLogMedicationDesc": "Marcar lo que ya se ha tomado",
+  "permOverrideMedicationLogLabel": "Deshacer una toma",
+  "permOverrideMedicationLogDesc": "Cambiar una confirmación hecha por otra parte",
+  "permCommentOnMedicationLabel": "Comentar",
+  "permCommentOnMedicationDesc": "Añadir algo a un medicamento",
+  "permViewOwnDiaryLabel": "Tu propio diario",
+  "permViewOwnDiaryDesc": "Leer solo las entradas propias",
+  "permViewAllDiariesLabel": "Todos los diarios",
+  "permViewAllDiariesDesc": "Leer también las entradas de otras partes",
+  "permWriteDiaryLabel": "Escribir en el diario",
+  "permWriteDiaryDesc": "Escribir algo en el diario",
+  "permViewContactsLabel": "Ver los contactos",
+  "permViewContactsDesc": "Ver quién está en tu entorno",
+  "permManageContactsLabel": "Gestionar los contactos",
+  "permManageContactsDesc": "Añadir, cambiar y quitar personas",
+  "permCommentOnContactsLabel": "Comentar",
+  "permCommentOnContactsDesc": "Añadir algo sobre una persona",
+  "permViewFinderLabel": "Ver el buscador",
+  "permViewFinderDesc": "Consultar dónde está algo o dónde has estado",
+  "permManageFinderLabel": "Gestionar el buscador",
+  "permManageFinderDesc": "Añadir, cambiar y quitar lugares y objetos",
+  "permCommentOnFinderEntriesLabel": "Comentar",
+  "permCommentOnFinderEntriesDesc": "Añadir algo a un lugar u objeto",
+  "permCreateDiaryEntryLabel": "Escribir una entrada",
+  "permCreateDiaryEntryDesc": "Crear una entrada nueva en el diario",
+  "permEditOwnDiaryEntriesLabel": "Cambiar las entradas propias",
+  "permEditOwnDiaryEntriesDesc": "Editar solo las entradas que has escrito tú",
+  "permEditAllDiaryEntriesLabel": "Cambiar todas las entradas",
+  "permEditAllDiaryEntriesDesc": "Editar también las entradas de otras partes",
+  "permDeleteOwnDiaryEntriesLabel": "Borrar las entradas propias",
+  "permDeleteOwnDiaryEntriesDesc": "Quitar solo las entradas que has escrito tú",
+  "permDeleteAllDiaryEntriesLabel": "Borrar todas las entradas",
+  "permDeleteAllDiaryEntriesDesc": "Quitar también las entradas de otras partes; esto no se puede deshacer",
+  "permCommentOnDiaryEntriesLabel": "Comentar",
+  "permCommentOnDiaryEntriesDesc": "Añadir algo a una entrada",
+  "permViewSharedEntriesLabel": "Entradas compartidas",
+  "permViewSharedEntriesDesc": "Leer entradas compartidas con varias partes",
+  "permViewEmergencyContactsLabel": "Ver los contactos de emergencia",
+  "permViewEmergencyContactsDesc": "Ver a quién se puede acudir en una emergencia",
+  "permCallEmergencyContactsLabel": "Llamar",
+  "permCallEmergencyContactsDesc": "Llamar a alguien directamente en una emergencia",
+  "permEditEmergencyContactsLabel": "Editar los contactos de emergencia",
+  "permEditEmergencyContactsDesc": "Añadir, cambiar y quitar contactos de emergencia",
+  "permResetPasswordsLabel": "Restablecer contraseñas",
+  "permResetPasswordsDesc": "Poner una contraseña nueva a otra parte",
+  "permChangeOwnPasswordLabel": "Cambiar la contraseña propia",
+  "permChangeOwnPasswordDesc": "Poner una contraseña nueva solo para ti",
+  "permEnableBiometricsLabel": "Activar la biometría",
+  "permEnableBiometricsDesc": "Entrar con huella o con la cara",
+  "permViewChatTabLabel": "Área de chat",
+  "permViewChatTabDesc": "Poder ver el chat",
+  "permViewFeedbackTabLabel": "Área de comentarios",
+  "permViewFeedbackTabDesc": "Escribir a quienes desarrollan Aurora",
+  "permViewCalendarTabLabel": "Área de calendario",
+  "permViewCalendarTabDesc": "Poder ver el calendario",
+  "permViewMedicationTabLabel": "Área de medicamentos",
+  "permViewMedicationTabDesc": "Poder ver el plan de medicación",
+  "permViewDiaryTabLabel": "Área de diario",
+  "permViewDiaryTabDesc": "Poder ver el diario",
+  "permViewContactsTabLabel": "Área de contactos",
+  "permViewContactsTabDesc": "Poder ver los contactos",
+  "permViewFinderTabLabel": "Área del buscador",
+  "permViewFinderTabDesc": "Poder ver el buscador",
+  "permViewEmergencyTabLabel": "Área de emergencia",
+  "permViewEmergencyTabDesc": "Poder ver la ayuda de emergencia",
+  "permViewHelpTabLabel": "Área de ayuda",
+  "permViewHelpTabDesc": "Poder ver la ayuda y los servicios de apoyo",
+  "permViewMantrasTabLabel": "Área de mantras",
+  "permViewMantrasTabDesc": "Poder ver los mantras",
+  "permViewGamesTabLabel": "Área de juegos",
+  "permViewGamesTabDesc": "Poder ver los juegos",
+  "permViewTimelineTabLabel": "Área de la línea del tiempo",
+  "permViewTimelineTabDesc": "Ver cuándo estuvo cada parte, y en qué lugar",
+  "permissionYouNeed": "Necesitas: {permission}",
+  "fact01": "El TID (trastorno de identidad disociativo) afecta a cerca del 1-2 % de la población.",
+  "fact02": "Cada persona de un sistema puede tener sus propios gustos, capacidades y recuerdos.",
+  "fact03": "La comunicación interna es un paso importante hacia la estabilidad y la sanación.",
+  "fact04": "La disociación es una reacción natural de protección de la psique.",
+  "fact05": "Muchas personas con TID funcionan bien y llevan vidas plenas.",
+  "fact06": "Aurora se creó específicamente para que las personas de un sistema hablen entre sí.",
+  "fact07": "El área de chat permite hablar de forma segura dentro, sin otras apps.",
+  "fact08": "Cada perfil puede tener sus propios permisos, desde acceso total hasta muy limitado.",
+  "fact09": "El primer perfil pasa a ser automáticamente el administrador, con todos los permisos.",
+  "fact10": "El calendario hace visibles las citas importantes para todas las personas del sistema.",
+  "fact11": "En el área de medicamentos puedes gestionar los diarios y los que se toman a demanda.",
+  "fact12": "El buscador ayuda a anotar objetos perdidos y volver a encontrarlos.",
+  "fact13": "El diario de emergencia registra situaciones difíciles para tu terapeuta.",
+  "fact14": "Los mantras pueden ayudarte a aterrizar durante la disociación o el estrés.",
+  "fact15": "En el área de contactos puedes valorar a personas importantes y añadir notas.",
+  "fact16": "Puedes elegir un color propio para cada perfil.",
+  "fact17": "Las notas de voz permiten comunicarse incluso cuando escribir cuesta.",
+  "fact18": "Los garabatos en el chat ayudan a expresar sentimientos que no caben en palabras.",
+  "fact19": "Tus entradas se quedan en tu dispositivo. Solo se envía lo que escribes en el formulario de comentarios.",
+  "fact20": "Hacer revisiones periódicas con todo el sistema mejora la colaboración.",
+  "fact21": "Un calendario compartido evita solapamientos y estrés.",
+  "fact22": "Las notas del diario de emergencia pueden ayudar mucho en terapia.",
+  "fact23": "Cada persona del sistema puede tener sus propias necesidades: es completamente normal.",
+  "fact24": "Los ejercicios de anclaje ayudan a permanecer en el aquí y ahora.",
+  "fact25": "Las rutinas dan seguridad y estructura a todo el sistema.",
+  "fact26": "Las pausas importan, también para las personas del sistema.",
+  "fact27": "Puedes ocultar perfiles cuando quieras y recuperarlos más tarde.",
+  "fact28": "El administrador puede ajustar los permisos cuando quiera.",
+  "fact29": "Los medicamentos a demanda se pueden registrar en el momento.",
+  "fact30": "En el chat puedes dirigirte a personas concretas.",
+  "fact31": "Aurora usa cifrado fuerte para los datos sensibles.",
+  "fact32": "Las contraseñas nunca se guardan en claro.",
+  "fact33": "Restablecer una contraseña tarda 24 horas, por seguridad.",
+  "fact34": "Todos los mensajes del chat son privados y se guardan en el dispositivo.",
+  "fact35": "Cada paso hacia una mejor comunicación es un logro.",
+  "fact36": "Está bien tener opiniones distintas dentro del sistema.",
+  "fact37": "Colaborar da fuerza, también dentro.",
+  "fact38": "No estás solo: muchas personas viven bien con TID.",
+  "sliderChat0": "👁️ Leer el chat y dibujar",
+  "sliderChat1": "✅ Todo en el chat: texto, dibujos, voz, imágenes, vídeos",
+  "sliderCalendar0": "❌ Sin acceso al calendario",
+  "sliderCalendar1": "👁️ Ver las citas",
+  "sliderCalendar2": "📅 Crear y cambiar las citas propias",
+  "sliderCalendar3": "✅ Gestionar todas las citas y añadir adjuntos",
+  "sliderMedication0": "❌ Sin acceso a los medicamentos",
+  "sliderMedication1": "👁️ Ver la lista de medicamentos",
+  "sliderMedication2": "✅ Confirmar las tomas",
+  "sliderDiary0": "❌ Sin acceso al diario",
+  "sliderDiary1": "👁️ Leer solo el diario propio",
+  "sliderDiary2": "📝 Escribir en el diario propio",
+  "sliderDiary3": "✅ Leer y escribir en todos los diarios",
+  "sliderContacts0": "❌ Sin acceso a los contactos",
+  "sliderContacts1": "👁️ Ver los contactos",
+  "sliderContacts2": "💬 Ver los contactos y comentar",
+  "sliderContacts3": "✅ Gestionar contactos: crear, cambiar, borrar",
+  "sliderFinder0": "❌ Sin acceso al buscador",
+  "sliderFinder1": "👁️ Ver las entradas",
+  "sliderFinder2": "✅ Gestionar las entradas",
+  "sliderEmergencyDiary0": "❌ Sin acceso al diario de emergencia",
+  "sliderEmergencyDiary1": "👁️ Ver las entradas",
+  "sliderEmergencyDiary2": "💬 Crear y comentar entradas, cambiar las propias",
+  "sliderEmergencyDiary3": "✅ Gestionar todas las entradas",
+  "sliderEmergency0": "❌ Sin acceso a los contactos de emergencia",
+  "sliderEmergency1": "👁️ Ver los contactos de emergencia",
+  "sliderEmergency2": "📞 Ver y llamar a los contactos de emergencia",
+  "sliderEmergency3": "✅ Gestionar los contactos de emergencia",
+  "sliderHelp0": "❌ Sin acceso a la ayuda",
+  "sliderHelp1": "✅ Ver la ayuda y los servicios de apoyo",
+  "sliderMantras0": "❌ Sin acceso a los mantras",
+  "sliderMantras1": "✅ Usar los mantras",
+  "sliderGames0": "❌ Sin acceso a los juegos",
+  "sliderGames1": "✅ Jugar",
+  "settingsDeleteAll": "Borrarlo todo",
+  "settingsCacheClearHint": "Los mapas se cargarán de nuevo la próxima vez. Esto puede liberar espacio.",
+  "settingsGpsWhileInUse": "Permitido durante el uso ✓",
+  "settingsGpsNotAllowed": "No permitido",
+  "settingsGpsStatusLine": "⚠️ {status}",
+  "settingsGpsBackgroundRuns": "El GPS funciona todo el tiempo en segundo plano",
+  "settingsGpsOverridesAll": "Sustituye el ajuste de seguimiento de TODOS los perfiles",
+  "settingsStepTapPermission": "Toca «Permisos»",
+  "settingsStepTapLocation": "Toca «Ubicación»",
+  "settingsStepChooseAlways": "Elige «Permitir siempre»",
+  "settingsStepOpenSettings": "Toca abajo «Abrir los ajustes de Android»",
+  "settingsStepPermissionLocation": "Elige «Permisos» → «Ubicación»",
+  "settingsPositionAlways": "La posición se registra de forma continua",
+  "settingsOverridesProfiles": "Sustituye el ajuste de cada perfil",
+  "settingsAllProfilesTracked": "Todos los perfiles se registran automáticamente",
+  "settingsOpenGpsSettings": "Abrir los ajustes de GPS",
+  "settingsGpsRunsForAll": "El GPS funciona todo el tiempo para todos los perfiles",
+  "settingsNotifAsNeeded": "Medicación a demanda: Aurora avisa en cuanto se permite la siguiente dosis, 30, 10 y 5 minutos antes",
+  "settingsNotifWorksClosed": "Funciona también con la app cerrada",
+  "aboutTitle": "Sobre Aurora",
+  "aboutChat": "Hablar entre vosotros: con texto, imágenes, vídeos y notas de voz",
+  "aboutCalendar": "Citas compartidas con avisos y adjuntos",
+  "aboutMedication": "Planes de medicación con registro de cada toma",
+  "aboutEmergencyDiary": "Un cuaderno compartido para crisis y momentos importantes",
+  "aboutContacts": "Tus valoraciones y notas sobre las personas de tu entorno",
+  "aboutFinder": "Volver a encontrar lugares y objetos",
+  "aboutLocalOnly": "Todos los datos se quedan en tu dispositivo: sin nube",
+  "telemetryQuestion": "¿Nos ayudas a mejorar Aurora?",
+  "telemetryExplanation": "Aurora puede contar qué áreas se abren y dónde se interrumpen los procesos. Solo se envía el nombre del evento, el día y la versión de la app: ningún texto, ninguna ubicación y nada que lleve hasta ti. Cada mensaje se envía de inmediato, así que la hora de llegada es también la hora en la que usaste Aurora.",
+  "telemetryChangeLater": "Puedes cambiarlo cuando quieras en los ajustes, en «Lo que Aurora envía». Allí también aparece cada mensaje que ha salido de tu dispositivo.",
+  "releaseNotesTitle": "Lo que ha cambiado",
+  "releaseNotesHighlights": "A partir de ahora, Aurora avisa una vez después de una actualización para contarte qué hay de nuevo. Por lo demás, todo sigue igual: tus contenidos siguen solo en este dispositivo.",
+  "releaseNotesAsk": "Y lo más importante: ¿qué te falta? Aurora se hace para quienes la usan, y hasta ahora nadie nos ha escrito.",
+  "releaseNotesWhatHappens": "Si escribes, solo nos llega tu texto. Ningún identificador, ningún lugar, ningún nombre. Todo lo que se ha enviado aparece en los ajustes, en «Lo que Aurora envía».",
+  "releaseNotesFeedbackAction": "Cuéntanos qué falta",
+  "releaseNotesContinueAction": "Seguir a Aurora",
+  "transparencyIntroFull": "Aquí ves cada envío que ha salido de tu dispositivo, completo y palabra por palabra.",
+  "transparencyIrreversibleFull": "Lo que ya se ha enviado no se puede recuperar. No está asociado a ti, y por eso tampoco se puede encontrar ni borrar.",
+  "transparencyWaitingForConnection": "Esperando conexión",
+  "privacyTitle": "Aviso de privacidad",
+  "privacyAtAGlance": "La privacidad de un vistazo",
+  "privacyWhatIsStored": "¿Qué datos se guardan?",
+  "privacyTransmission": "Envío de datos",
+  "privacyDeletion": "Borrado de datos",
+  "privacyMinors": "Protección de menores",
+  "privacyChanges": "Cambios en este aviso",
+  "privacyClosing": "Aurora: tus datos se quedan contigo.",
+  "mediaImageNotOpened": "No se ha podido abrir la imagen",
+  "mediaVideoNotOpened": "No se ha podido abrir el vídeo",
+  "mediaFromGallery": "De la galería",
+  "mediaPickImage": "Elegir una imagen",
+  "mediaPickVideo": "Elegir un vídeo",
+  "transportDirectToDevelopers": "Directo a los desarrolladores",
+  "transportSendFailed": "No se ha podido enviar. Inténtalo más tarde o mándalo por correo.",
+  "transportRejected": "El servidor ha rechazado el mensaje.",
+  "transportUnreachable": "Ahora mismo no se puede contactar con el servidor.",
+  "transparencyArrived": "Entregado",
+  "transparencyNotSent": "No enviado: {reason}",
+  "transparencyReasonUnknown": "motivo desconocido",
+  "transportTryLaterOrEmail": "Inténtalo más tarde o mándalo por correo.",
+  "transportEmailInstead": "Puedes enviar tus comentarios por correo en su lugar.",
+  "crashDialogTitle": "Aurora se ha cerrado de golpe",
+  "errorDialogTitle": "Aurora ha detectado un problema",
+  "errorHelpUsFix": "¿Nos ayudas a arreglarlo?",
+  "errorSendingFailed": "Ha ocurrido un error al enviar.",
+  "feedbackContactOptions": "Formas de contactarnos",
+  "feedbackInvalidEmail": "Esa dirección de correo no es válida",
+  "feedbackArrived": "¡Gracias por tus comentarios! Han llegado.",
+  "feedbackQueued": "Aceptado. Se enviará en cuanto vuelvas a estar en línea.",
+  "feedbackSendFailed": "No se ha podido enviar. Inténtalo más tarde.",
+  "profilePickImage": "Elegir imagen de perfil",
+  "profilePasswordOptional": "Protege tu perfil con una contraseña (opcional)",
+  "profilePasswordOptionalMin": "Protege tu perfil con una contraseña (opcional, mínimo 4 caracteres)",
+  "thankYouWeReceived": "Hemos recibido tu informe y te escribiremos por correo si tenemos preguntas.",
+  "thankYouWeCheck": "Revisamos tu informe",
+  "thankYouWeFix": "Trabajamos en una solución",
+  "thankYouYouGetMail": "Recibirás un correo en cuanto la solución esté lista",
+  "thankYouNextUpdate": "La solución llegará con la próxima actualización",
+  "mapGpsLoading": "Cargando el GPS…",
+  "mapGpsPositionLoading": "Cargando la posición…",
+  "mapAllowLocation": "Permite el acceso a la ubicación para verte en el mapa",
+  "mapLastKnownPosition": "El mapa muestra tu última posición conocida: {age}.",
+  "pwResetThenReplaced": "✓ Solo entonces se sustituye la contraseña antigua",
+  "pwResetCanActivateNow": "Ya puedes activar tu nueva contraseña",
+  "pwResetRunningShort": "Restablecimiento en curso…",
+  "moodVeryHappy": "Muy feliz",
+  "moodHappy": "Feliz",
+  "moodAnxious": "Con ansiedad",
+  "moodAngry": "Enfadado",
+  "emergencyPositionUnavailable": "Posición no disponible",
+  "emergencyPositionNoPermission": "Posición no disponible (sin permiso)",
+  "emergencyMessageSubject": "Mensaje de emergencia de Aurora",
+  "autoLogoutAfter": "Cerrar sesión automáticamente tras {minutes} minutos sin uso",
+  "pwResetBannerReady": "Contraseña lista para activar",
+  "doodleHistory": "Recorrer el historial",
+  "doodleDraw": "Dibujar",
+  "doodleSendEmptyHint": "Dibuja primero — luego puedes enviar",
+  "anchorTelemetryNotice": "El recuento anónimo está activado — lo que envía Aurora",
+  "timePhaseMorning": "por la mañana",
+  "timePhaseMidday": "al mediodía",
+  "timePhaseAfternoon": "por la tarde",
+  "timePhaseEvening": "al anochecer",
+  "timePhaseNight": "de noche",
+  "greetingMorning": "Buenos días",
+  "greetingDay": "Buenas tardes",
+  "greetingEvening": "Buenas noches",
+  "anchorSwitchProfile": "No soy yo",
+  "greetingNight": "Hola",
+  "quickTimelineYou": "(Tú)",
+  "todayEvents": "{count, plural, one{1 cita hoy} other{{count} citas hoy}}",
+  "@todayEvents": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "todayMedications": "{count, plural, one{1 medicamento hoy} other{{count} medicamentos hoy}}",
+  "@todayMedications": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "workSurfaceActiveProfile": "{name} está aquí ahora",
+  "@workSurfaceActiveProfile": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "doodleUndo": "Deshacer",
+  "doodleClear": "Borrarlo todo",
+  "finderPersonName": "Nombre de la persona",
+  "finderPlaceTitle": "Título para este lugar",
+  "commonLoading": "Cargando…",
+  "puzzleCategoryAnimals": "Animales tiernos que calman",
+  "puzzleCategoryWater": "Mar y agua",
+  "puzzleCategoryFlowers": "Flores y plantas de colores",
+  "gpsTrackingOffTap": "Registro desactivado: toca para activarlo",
+  "gpsTrackingOnTap": "Registro activado: toca para desactivarlo",
+  "gpsNoPermissionHint": "Sin el permiso de ubicación, Aurora no puede empezar a registrar. Puedes concederlo en los ajustes de Android, en Apps → Aurora → Permisos.",
+  "settingsCouldNotOpen": "No se han podido abrir los ajustes.",
+  "settingsOpenAppSettings": "Abrir los ajustes de la app",
+  "gpsWaitingFirstUpdate": "Esperando la primera posición…",
+  "imagePickerOpenCamera": "Abrir la cámara",
+  "imagePickerFromGallery": "Elegir de la galería",
+  "imagePickerAnimalAvatar": "Elegir un avatar de animal",
+  "animalAvatarMug": "Con taza",
+  "animalAvatarHeart": "Con corazón",
+  "animalAvatarThinking": "Pensativo",
+  "animalAvatarSunglasses": "Gafas de sol",
+  "animalAvatarStar": "Con estrella",
+  "animalAvatarMusic": "Música",
+  "animalAvatarThumbsUp": "Pulgar arriba",
+  "animalAvatarCalm": "Tranquilo",
+  "puzzleDragPieces": "Arrastra las piezas a su sitio",
+  "puzzleTapPieces": "Mueve las piezas tocándolas",
+  "feedbackTabSend": "Enviar comentarios",
+  "pwResetRunningFull": "Hace poco pusiste una contraseña nueva. Por seguridad corre ahora un temporizador de 24 horas.\n\n✓ Tu contraseña ANTIGUA sigue activa\n✓ Al terminar el plazo podrás activar la nueva\n✓ Solo entonces se sustituye la antigua",
+  "transportRejectedFull": "El servidor ha rechazado el mensaje. Mándalo por correo en su lugar.",
+  "transportUnreachableFull": "Ahora mismo no se puede contactar con el servidor. Inténtalo más tarde o mándalo por correo.",
+  "transportFailedWithCode": "No se ha podido enviar ({code}). Puedes enviar tus comentarios por correo en su lugar.",
+  "transportNoMailApp": "No se ha podido abrir ninguna app de correo. Puedes copiar el texto y enviarlo tú.",
+  "emergencySmsSubject": "Mensaje de emergencia de Aurora",
+  "pwResetBannerRunning": "Restablecimiento en curso",
+  "puzzleDragHint": "Arrastra las piezas a su sitio",
+  "puzzleTapHint": "Mueve las piezas tocándolas",
+  "medicationConfirm": "Confirmar",
+  "medicationAddFirstAsNeeded": "Añade tu primer medicamento a demanda",
+  "medicationTakenBy": "✓ Tomado por {name}",
+  "medicationRefusedBy": "✗ Rechazado por {name}",
+  "imprintPerLaw": "Información según el § 5 TMG (ley alemana)",
+  "imprintResponsible": "Responsable del contenido",
+  "timelineSkipped": "omitido",
+  "timelineDueSoon": "Pronto",
+  "medicationLater": "más tarde",
+  "debugLogHint": "Este informe contiene datos técnicos de la app. Cópialo con el botón de arriba a la derecha para enviarlo si algo falla.",
+  "unsavedChangesTitle": "Cambios sin guardar",
+  "hotlineForYoung": "Para niños y jóvenes",
+  "hotlineAnonymousFree": "Gratuito y anónimo",
+  "hotlineHoursNumberAgainstSorrow": "Lu–Sa 14–20 h",
+  "hotlineInfoNotAcute": "Información, no ayuda aguda",
+  "hotlineHoursDepressionInfo": "Lu, Ma, Ju 13–17 h · Mi, Vi 8:30–12:30 h",
+  "hotlineChatUnder25": "Asesoramiento por chat, para menores de 25 años",
+  "helpEmergencyDangerTitle": "Si alguien está en peligro inmediato",
+  "helpEmergencyDangerBody": "El número de emergencia funciona día y noche, incluso sin saldo.",
+  "helpEmergencyCallEmergencyNumber": "Emergencias 112",
+  "helpTalkTitle": "Si necesitas hablar o quieres asesoramiento",
+  "helpGroupRoundTheClock": "Disponible las 24 horas",
+  "helpGroupLimitedHours": "Disponible en horarios concretos",
+  "helpSourcesCheckedOn": "Datos verificados el {datum}",
+  "cameraCouldNotOpen": "No se ha podido abrir la cámara",
+  "feedbackDeviceDiagnostics": "--- Diagnóstico del dispositivo ---",
+  "eventNoReminder": "La cita solo está en el calendario. Aurora no avisará por su cuenta.",
+  "unsavedChangesMessage": "Has hecho cambios.\n\n¿Quieres guardarlos?",
+  "confirmSave": "Guardar",
+  "videoCouldNotLoad": "No se ha podido cargar el vídeo",
+  "finderDaily": "a diario",
+  "mapNotAvailable": "Mapa no disponible",
+  "medicationAnotherDose": "¿Quieres tomar otra dosis de todos modos?",
+  "feedbackThankYouReceived": "Hemos recibido tus comentarios y te escribiremos por correo si tenemos preguntas.",
+  "positionAgeYesterday": "de ayer",
+  "timePickerTitle": "Elegir la hora",
+  "reminderPermissionMissingTitle": "Aurora no puede recordarte ahora mismo",
+  "reminderPermissionMissingBody": "{count, plural, =1{Los recordatorios están activados para una hora de toma. Sin el permiso del dispositivo no llegará.} other{Los recordatorios están activados para {count} horas de toma. Sin el permiso del dispositivo no llega ninguno.}}",
+  "@reminderPermissionMissingBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reminderPermissionMissingAction": "Dar permiso",
+  "timePickerHours": "Horas",
+  "timePickerMinutes": "Minutos",
+  "commentsNoneYet": "Todavía sin comentarios",
+  "notificationDiscreetBody": "Aviso: toca para verlo",
+  "reminderNoPermission": "Sin permiso de notificaciones, Aurora no puede avisarte. Puedes concederlo en los ajustes de Android, en Apps → Aurora → Notificaciones.",
+  "telemetryConsentAccept": "Sí, con gusto",
+  "telemetryConsentDecline": "Continuar sin",
+  "transparencyGroupTelemetry": "Telemetría",
+  "telemetryExampleIntro": "Así se ve un mensaje:",
+  "telemetryExampleEvent": "Evento",
+  "telemetryExampleDay": "Día",
+  "telemetryExampleVersion": "Versión de la app",
+  "onboardingDismiss": "No mostrar más",
+  "eventStart": "Inicio",
+  "eventEnd": "Fin",
+  "chatCapturePhoto": "Hacer una foto",
+  "chatCaptureImageShort": "Foto",
+  "doodleErase": "Borrar",
+  "chatRecordVideo": "Grabar un vídeo",
+  "chatRecordVideoSubtitle": "Crear un vídeo nuevo",
+  "actionDiscard": "Descartar",
+  "actionKeep": "Conservar",
+  "actionDetails": "Detalles",
+  "resetWaitingPeriodTitle": "Plazo de espera al restablecer",
+  "fieldNameHint": "p. ej. Max, Ana, Leo",
+  "fieldPasswordHint": "Mínimo 4 caracteres",
+  "fieldPasswordConfirmHint": "Repetir contraseña",
+  "fieldPasswordEnterHint": "Escribe la contraseña",
+  "feedbackCommunityJoin": "Únete a nuestra comunidad",
+  "feedbackDiscord": "Servidor de Discord",
+  "feedbackGithub": "GitHub",
+  "feedbackGithubSubtitle": "Errores e incidencias",
+  "timelineProfileSwitch": "Cambio de perfil",
+  "debugLogReportTitle": "Informe de diagnóstico",
+  "formPickImage": "Elegir una imagen",
+  "permissionGrant": "Conceder el permiso",
+  "pwResetRestart": "Empezar de nuevo",
+  "navBackToAnchor": "Al ancla",
+  "mapGpsPositionLoadingHint": "Un momento, por favor",
+  "voiceRecordingStartFailed": "No se ha podido empezar a grabar",
+  "voiceRecordingStopFailed": "No se ha podido terminar la grabación",
+  "voiceRecordingDiscardFailed": "No se ha podido descartar la grabación",
+  "trackingPermissionDeniedHint": "Permiso de ubicación denegado. Actívalo en los ajustes.",
+  "pwResetVisibleToAll": "El plazo corre a la vista de todo el mundo",
+  "pwResetRestartResetsTimer": "Ojo: volver a empezar reinicia el plazo",
+  "pwResetActivatedAtNextLogin": "La contraseña nueva se activa en el próximo inicio de sesión",
+  "imagePickerCameraDeniedForever": "El permiso de cámara se ha denegado para siempre. Actívalo en los ajustes.",
+  "imagePickerGalleryDeniedForever": "El permiso de galería se ha denegado para siempre. Actívalo en los ajustes.",
+  "permissionCameraTitle": "Permiso de cámara",
+  "permissionGalleryTitle": "Permiso de galería",
+  "profileResetFristExplanation": "Ese es el tiempo que espera un restablecimiento de contraseña antes de surtir efecto. Si inicias sesión durante ese plazo, se cancela.",
+  "cameraNotFound": "No se ha encontrado ninguna cámara",
+  "validationNameRequired": "Escribe un nombre",
+  "validationPasswordRequired": "Escribe la contraseña",
+  "transportCopyManually": "Puedes copiar el texto y enviarlo tú.",
+  "statusSending": "Enviando...",
+  "errorReportSendButton": "Enviar el informe",
+  "settingsGpsStatusAlwaysReady": "✅ Permitido siempre (¡listo!)",
+  "gpsActive": "GPS activo",
+  "gpsOff": "GPS apagado",
+  "gpsStatusUnknown": "Estado del GPS desconocido",
+  "gpsPermissionMissing": "Falta el permiso de ubicación",
+  "gpsServiceDisabled": "Servicio de ubicación desactivado",
+  "permissionMissingShort": "Falta el permiso",
+  "pwResetWrongPassword": "Contraseña incorrecta",
+  "pwResetStartTitle": "¿Empezar el restablecimiento?",
+  "pwResetExpired": "El plazo ha terminado",
+  "pwResetForgotPassword": "¿Has olvidado la contraseña?",
+  "commentWritePlaceholder": "Escribe un comentario...",
+  "profileVisibilityTitle": "A qué perfiles pertenece",
+  "addressUnknown": "Dirección desconocida",
+  "activateNow": "Activar ahora",
+  "eventRemindMe": "Recordatorio",
+  "noProfileAvailable": "Todavía no hay ningún perfil",
+  "ratingVeryNegative": "Muy negativo",
+  "ratingVeryPositive": "Muy positivo",
+  "errorReportHelpUs": "Ayúdanos a arreglar el fallo",
+  "errorReportDetailsSection": "Detalles del informe",
+  "trackingLabel": "Seguimiento GPS: ",
+  "trackingLastUpdate": "Última actualización: {time}",
+  "profileSwitchError": "No se ha podido cambiar de perfil: {error}",
+  "gpsError": "Error de GPS",
+  "statusActive": "Activo",
+  "statusPaused": "En pausa",
+  "timeSecondsAgo": "{count, plural, =1{hace un segundo} other{hace {count} segundos}}",
+  "timeInMinutes": "{count, plural, =1{en un minuto} other{en {count} minutos}}",
+  "timeInHours": "{count, plural, =1{en una hora} other{en {count} horas}}",
+  "timeInDays": "{count, plural, =1{en un día} other{en {count} días}}",
+  "languageFollowApp": "Idioma de la aplicación",
+  "profileLanguageSubtitle": "El idioma en el que Aurora habla con esta parte",
+  "contactCategoryFamily": "Familia",
+  "contactCategoryFriends": "Amigos",
+  "contactCategoryTherapists": "Terapeutas",
+  "contactCategoryDoctors": "Médicos",
+  "contactCategoryEmergency": "Emergencia",
+  "contactCategoryOther": "Otros",
+  "finderTypeLocation": "Lugar",
+  "finderTypeItem": "Objeto",
+  "diaryPriorityLow": "Baja",
+  "diaryPriorityMedium": "Media",
+  "diaryPriorityHigh": "Alta",
+  "diaryPriorityCritical": "Crítica",
+  "moodNeutral": "Neutral",
+  "moodSad": "Triste",
+  "moodVerySad": "Muy triste",
+  "moodExcited": "Emocionado",
+  "timeHoursMinutesAgo": "hace {hours} h {minutes} min",
+  "presenceLastFront": "última vez {when}",
+  "privacyGlanceBody": "Aurora guarda todo en tu dispositivo. Tres cosas salen de él, y solo si tú las provocas o las permites: los comentarios que envías, la telemetría tras tu consentimiento y las peticiones de mapas a OpenStreetMap.\n\nQué se envió y cuándo aparece palabra por palabra en Ajustes, en «Lo que Aurora envía». Nada de ello conduce hasta ti.",
+  "privacyStoredBody": "Estos datos están en la base de datos local de tu dispositivo:\n\n• Partes y ajustes\n• Mensajes entre partes\n• Citas del calendario\n• Planes de medicación y tomas\n• Entradas del diario y de emergencia\n• Contactos con valoraciones y notas\n• Lugares y objetos del buscador\n• Historial de ubicación y cambios de parte\n• Imágenes, vídeos y mensajes de voz\n\nNada de esto se transmite.",
+  "privacyTransmissionBody": "Comentarios: solo cuando envías el formulario. Contienen tu texto, la versión de la app y el modelo del dispositivo. Ningún nombre, ningún identificador, ninguna ubicación.\n\nTelemetría: solo tras tu consentimiento expreso, que puedes retirar en cualquier momento. Un evento lleva tres campos: qué ocurrió, qué día y con qué versión de la app. Sin hora, sin identificador.\n\nMapas: al mostrar un mapa y al resolver una dirección, la sección visible del mapa y tu dirección IP van a OpenStreetMap. Es la condición para que exista un mapa.\n\nNunca se transmiten: historial de ubicación, partes, mensajes, citas, medicación, diario ni contactos.",
+  "privacyPermissions": "Permisos",
+  "privacyPermissionsBody": "• Ubicación: para el mapa, el historial de ubicación y la pantalla de emergencia. Permanece en el dispositivo.\n• Ubicación en segundo plano: solo si activas el registro continuo. Sin ese interruptor no hace falta.\n• Cámara y micrófono: para fotos y mensajes de voz.\n• Almacenamiento: para cargar imágenes y vídeos de tu galería.\n• Notificaciones y alarmas: para recordatorios de medicación y citas.\n\nCada permiso se puede retirar en los ajustes del sistema. La app dirá entonces qué deja de funcionar.",
+  "privacySecurity": "Seguridad de los datos",
+  "privacySecurityBody": "• Todos los datos son locales; no hay sincronización en la nube.\n• Las partes pueden protegerse con contraseña.\n• No hay cuentas de usuario ni inicio de sesión.\n\nLas copias de seguridad son responsabilidad tuya. Si pierdes el dispositivo o se rompe, los datos se pierden: ese es el precio de que no estén en ningún otro sitio.",
+  "privacyDeletionBody": "• Puedes borrar entradas y mensajes concretos.\n• Las partes se pueden desactivar o borrar.\n• En Ajustes existe «Borrar todos los datos».\n• Al desinstalar la app desaparece todo con ella.\n\nLo borrado no se puede recuperar.",
+  "privacyRights": "Tus derechos",
+  "privacyRightsBody": "Según el RGPD tienes derecho de acceso, rectificación, supresión, limitación, portabilidad y oposición. Como todos los datos están en tu dispositivo, ejerces la mayoría directamente en la app.\n\nPara los comentarios enviados y para la telemetría, dirígete a la dirección de abajo. También tienes derecho a presentar una reclamación ante una autoridad de protección de datos.",
+  "privacyMinorsBody": "Aurora puede ser usada por menores. No se recogen sobre ellos datos distintos de los de cualquier otra persona, es decir, ninguno salvo por las tres vías mencionadas arriba.\n\nCon usuarios más jóvenes tiene sentido que una persona responsable acompañe la configuración.",
+  "privacyChangesBody": "Esta declaración puede cambiar con las actualizaciones de la app. La versión vigente es la que ves aquí y lleva su fecha abajo.",
+  "privacyContact": "Responsable y contacto",
+  "privacyAsOf": "Actualizado: {date}",
+  "startupFailedTitle": "Aurora no ha podido iniciarse",
+  "startupFailedBody": "Algo ha fallado al arrancar. Puedes intentarlo de nuevo. Si no funciona, se pueden borrar todos los datos guardados; Aurora empezará vacía.",
+  "startupRetry": "Intentarlo de nuevo",
+  "startupDeleteAll": "Borrar todos los datos",
+  "startupDeleteIncomplete": "No se pudo borrar todo. Una parte sigue aquí.",
+  "reminderPermissionBlocked": "Aurora aún no puede avisarte. Puedes conceder el permiso en los ajustes del sistema.",
+  "reminderOpenSettings": "Abrir ajustes",
+  "settingsTrackingPermissionNeeded": "Para registrar tu camino, Aurora necesita acceso a la ubicación.",
+  "settingsHowToEnableLocation": "Cómo dar acceso a la ubicación:",
+  "settingsStepChooseWhileUsing": "Elige «Mientras usas la aplicación»",
+  "settingsTrackingNotice": "Mientras Aurora registra, hay una notificación en la barra. Sin notificación, no se registra.",
+  "locationTrackingNotificationTitle": "Aurora recuerda tu camino",
+  "locationTrackingNotificationBody": "Para que luego puedas encontrar tus lugares. Se queda en el dispositivo.",
+  "profileContinueAs": "Continuar como {name}",
+  "@profileContinueAs": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "profileContinueInProgress": "Un momento …",
+  "trackingPausedTitle": "Registro en pausa",
+  "trackingPausedBody": "Tras el reinicio, Aurora vuelve a registrar tu recorrido solo cuando la abres. Toca aquí.",
+  "aboutAuroraSemantics": "Acerca de Aurora",
+  "openTimelineSemantics": "Abrir línea de tiempo",
+  "timeMapSemantics": "Abrir línea de tiempo: mapa con hora y lugar"
+}

@@ -1,0 +1,953 @@
+Analyzing Aurora...                                             
+
+warning - The include file 'package:lints/recommended.yaml' in 'F:\Aurora\dis_app_lints\analysis_options.yaml' can't be found when analyzing 'F:\Aurora\dis_app_lints' - dis_app_lints\analysis_options.yaml:1:10 - include_file_not_found
+   info - Unnecessary use of a 'double' literal - lib\controllers\timeline_controller.dart:27:23 - prefer_int_literals
+   info - Unnecessary use of a 'double' literal - lib\controllers\timeline_controller.dart:85:13 - prefer_int_literals
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:76:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:77:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:78:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:79:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:80:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:81:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:82:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:83:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:84:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:85:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:86:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:87:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:88:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:89:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:90:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:91:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:92:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:93:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:94:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:95:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:96:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:97:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:98:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:99:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:100:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:101:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:102:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:103:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:104:3 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\core\di\injection.dart:131:5 - cascade_invocations
+   info - Missing a newline at the end of the file - lib\core\di\injection.dart:527:2 - eol_at_end_of_file
+   info - Missing a newline at the end of the file - lib\core\event_bus.dart:56:2 - eol_at_end_of_file
+   info - Missing a newline at the end of the file - lib\core\events\app_event.dart:6:2 - eol_at_end_of_file
+   info - Missing a newline at the end of the file - lib\core\events\chat_events.dart:38:2 - eol_at_end_of_file
+   info - Missing a newline at the end of the file - lib\core\events\profile_events.dart:56:2 - eol_at_end_of_file
+   info - The code block is missing a specified language - lib\core\logger.dart:396:6 - missing_code_block_language_in_doc_comment
+   info - 'bool' parameters should be named parameters - lib\core\logger.dart:492:22 - avoid_positional_boolean_parameters
+   info - Use of an async 'dart:io' method - lib\core\logger.dart:525:18 - avoid_slow_async_io
+   info - Unnecessary duplication of receiver - lib\core\logger.dart:539:9 - cascade_invocations
+   info - Sort directive sections alphabetically - lib\hive_registrar.g.dart:6:1 - directives_ordering
+   info - Sort directive sections alphabetically - lib\main.dart:4:1 - directives_ordering
+   info - Sort directive sections alphabetically - lib\main.dart:5:1 - directives_ordering
+   info - Sort directive sections alphabetically - lib\main.dart:9:1 - directives_ordering
+   info - Sort directive sections alphabetically - lib\main.dart:38:1 - directives_ordering
+   info - Sort directive sections alphabetically - lib\main.dart:47:1 - directives_ordering
+   info - The value of the argument is redundant because it matches the default value - lib\main.dart:90:28 - avoid_redundant_argument_values
+   info - Unnecessary duplication of receiver - lib\main.dart:120:9 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\main.dart:129:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\main.dart:141:11 - cascade_invocations
+   info - The value of the argument is redundant because it matches the default value - lib\main.dart:222:45 - avoid_redundant_argument_values
+   info - Unnecessary duplication of receiver - lib\main.dart:264:7 - cascade_invocations
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\main.dart:550:47 - deprecated_member_use
+   info - Use an if-null operator to convert a 'null' to a 'bool' - lib\main.dart:702:11 - use_if_null_to_convert_nulls_to_bools
+   info - Unnecessary 'break' statement - lib\main.dart:1031:9 - unnecessary_breaks
+   info - Unnecessary 'break' statement - lib\main.dart:1040:9 - unnecessary_breaks
+   info - Use an if-null operator to convert a 'null' to a 'bool' - lib\main.dart:1362:15 - use_if_null_to_convert_nulls_to_bools
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\main.dart:1378:55 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\main.dart:1379:55 - deprecated_member_use
+   info - The value of the argument is redundant because it matches the default value - lib\main.dart:1466:43 - avoid_redundant_argument_values
+   info - Missing a newline at the end of the file - lib\main.dart:1606:2 - eol_at_end_of_file
+   info - The method '==' should not be overridden in classes not annotated with '@immutable' - lib\models\calendar_event.dart:126:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - The method 'hashCode' should not be overridden in classes not annotated with '@immutable' - lib\models\calendar_event.dart:133:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - Conditional expressions with a 'bool' literal can be simplified - lib\models\calendar_event.g.dart:29:28 - avoid_bool_literals_in_conditional_expressions
+   info - Missing a newline at the end of the file - lib\models\chat_message.dart:115:2 - eol_at_end_of_file
+   info - Conditional expressions with a 'bool' literal can be simplified - lib\models\chat_message.g.dart:25:15 - avoid_bool_literals_in_conditional_expressions
+   info - The method '==' should not be overridden in classes not annotated with '@immutable' - lib\models\comment.dart:121:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - The method 'hashCode' should not be overridden in classes not annotated with '@immutable' - lib\models\comment.dart:127:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - The method '==' should not be overridden in classes not annotated with '@immutable' - lib\models\contact.dart:174:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - The method 'hashCode' should not be overridden in classes not annotated with '@immutable' - lib\models\contact.dart:180:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - Conditional expressions with a 'bool' literal can be simplified - lib\models\contact.g.dart:34:27 - avoid_bool_literals_in_conditional_expressions
+   info - The method '==' should not be overridden in classes not annotated with '@immutable' - lib\models\contact_comment.dart:87:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - The method 'hashCode' should not be overridden in classes not annotated with '@immutable' - lib\models\contact_comment.dart:93:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - The method '==' should not be overridden in classes not annotated with '@immutable' - lib\models\contact_rating.dart:73:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - The method 'hashCode' should not be overridden in classes not annotated with '@immutable' - lib\models\contact_rating.dart:79:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - The method '==' should not be overridden in classes not annotated with '@immutable' - lib\models\diary_comment.dart:86:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - The method 'hashCode' should not be overridden in classes not annotated with '@immutable' - lib\models\diary_comment.dart:92:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - The method '==' should not be overridden in classes not annotated with '@immutable' - lib\models\diary_entry.dart:256:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - The method 'hashCode' should not be overridden in classes not annotated with '@immutable' - lib\models\diary_entry.dart:262:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - Constructor declarations should be before non-constructor declarations - lib\models\feedback_payload.dart:16:9 - sort_constructors_first
+   info - Unnecessary duplication of receiver - lib\models\feedback_payload.dart:45:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\models\feedback_payload.dart:46:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\models\feedback_payload.dart:47:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\models\feedback_payload.dart:51:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\models\feedback_payload.dart:55:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\models\feedback_payload.dart:56:7 - cascade_invocations
+   info - The method '==' should not be overridden in classes not annotated with '@immutable' - lib\models\finder_item.dart:147:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - The method 'hashCode' should not be overridden in classes not annotated with '@immutable' - lib\models\finder_item.dart:153:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - The method '==' should not be overridden in classes not annotated with '@immutable' - lib\models\medication.dart:179:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - The method 'hashCode' should not be overridden in classes not annotated with '@immutable' - lib\models\medication.dart:185:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - The method '==' should not be overridden in classes not annotated with '@immutable' - lib\models\medication.dart:343:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - The method 'hashCode' should not be overridden in classes not annotated with '@immutable' - lib\models\medication.dart:349:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - Conditional expressions with a 'bool' literal can be simplified - lib\models\medication.g.dart:30:17 - avoid_bool_literals_in_conditional_expressions
+   info - The code block is missing a specified language - lib\models\notification_queue_entry.dart:11:4 - missing_code_block_language_in_doc_comment
+   info - Constructor declarations should be before non-constructor declarations - lib\models\permission.dart:491:9 - sort_constructors_first
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - lib\models\profile.dart:62:43 - deprecated_member_use
+   info - The value of the argument is redundant because it matches the default value - lib\models\profile.dart:296:44 - avoid_redundant_argument_values
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - lib\models\profile.dart:425:44 - deprecated_member_use
+   info - Conditional expressions with a 'bool' literal can be simplified - lib\models\profile.g.dart:27:16 - avoid_bool_literals_in_conditional_expressions
+   info - Conditional expressions with a 'bool' literal can be simplified - lib\models\profile.g.dart:30:17 - avoid_bool_literals_in_conditional_expressions
+   info - Conditional expressions with a 'bool' literal can be simplified - lib\models\profile.g.dart:36:32 - avoid_bool_literals_in_conditional_expressions
+   info - The method '==' should not be overridden in classes not annotated with '@immutable' - lib\models\puzzle_config.dart:226:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - The method 'hashCode' should not be overridden in classes not annotated with '@immutable' - lib\models\puzzle_config.dart:232:3 - avoid_equals_and_hash_code_on_mutable_classes
+   info - Sort directive sections alphabetically - lib\modules\calendar\calendar_screen.dart:4:1 - directives_ordering
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\calendar\calendar_screen.dart:13:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\calendar\event_detail_screen.dart:39:46 - unnecessary_non_null_assertion
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\calendar\event_detail_screen.dart:55:68 - deprecated_member_use
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\calendar\event_detail_screen.dart:122:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\calendar\event_detail_screen.dart:150:46 - unnecessary_non_null_assertion
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\calendar\event_detail_screen.dart:203:64 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\calendar\event_detail_screen.dart:234:39 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\calendar\event_detail_screen.dart:256:39 - deprecated_member_use
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\calendar\event_form_screen.dart:175:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\calendar\event_form_screen.dart:219:57 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\calendar\event_form_screen.dart:229:55 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\calendar\event_form_screen.dart:240:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\calendar\event_form_screen.dart:272:46 - unnecessary_non_null_assertion
+   info - Use 'const' with the constructor to improve performance - lib\modules\calendar\event_form_screen.dart:331:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\calendar\event_form_screen.dart:344:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\calendar\event_form_screen.dart:355:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\calendar\event_form_screen.dart:368:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\calendar\event_form_screen.dart:379:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\calendar\event_form_screen.dart:391:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\calendar\event_form_screen.dart:403:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\calendar\event_form_screen.dart:419:13 - prefer_const_constructors
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\calendar\widgets\calendar_create_view.dart:106:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\calendar\widgets\calendar_create_view.dart:171:46 - unnecessary_non_null_assertion
+   info - Sort directive sections alphabetically - lib\modules\calendar\widgets\calendar_timeline_view.dart:6:1 - directives_ordering
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\calendar\widgets\calendar_timeline_view.dart:205:66 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\calendar\widgets\calendar_timeline_view.dart:249:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\calendar\widgets\calendar_timeline_view.dart:369:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\calendar\widgets\calendar_timeline_view.dart:508:46 - unnecessary_non_null_assertion
+   info - Place 'dart:' imports before other imports - lib\modules\chat\chat_screen.dart:3:1 - directives_ordering
+   info - Sort directive sections alphabetically - lib\modules\chat\chat_screen.dart:5:1 - directives_ordering
+warning - Unused import: 'package:dis_app/widgets/animated_list_view.dart' - lib\modules\chat\chat_screen.dart:17:8 - unused_import
+   info - Sort directive sections alphabetically - lib\modules\chat\chat_screen.dart:18:1 - directives_ordering
+   info - 'window' is deprecated and shouldn't be used. Look up the current FlutterView from the context via View.of(context) or consult the PlatformDispatcher directly instead. Deprecated to prepare for the upcoming multi-window support. This feature was deprecated after v3.7.0-32.0.pre - lib\modules\chat\chat_screen.dart:56:49 - deprecated_member_use
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\chat\chat_screen.dart:131:51 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\chat\chat_screen.dart:153:51 - unnecessary_non_null_assertion
+   info - Don't use 'BuildContext's across async gaps - lib\modules\chat\chat_screen.dart:164:38 - use_build_context_synchronously
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\chat\chat_screen.dart:164:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\chat\chat_screen.dart:181:51 - unnecessary_non_null_assertion
+   info - Don't use 'BuildContext's across async gaps - lib\modules\chat\chat_screen.dart:192:38 - use_build_context_synchronously
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\chat\chat_screen.dart:192:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\chat\chat_screen.dart:209:51 - unnecessary_non_null_assertion
+   info - Don't use 'BuildContext's across async gaps - lib\modules\chat\chat_screen.dart:221:38 - use_build_context_synchronously
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\chat\chat_screen.dart:221:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\chat\chat_screen.dart:238:51 - unnecessary_non_null_assertion
+   info - Don't use 'BuildContext's across async gaps - lib\modules\chat\chat_screen.dart:249:38 - use_build_context_synchronously
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\chat\chat_screen.dart:249:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\chat\chat_screen.dart:266:46 - unnecessary_non_null_assertion
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\chat\chat_screen.dart:380:39 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\chat\chat_screen.dart:383:43 - deprecated_member_use
+   info - Sort directive sections alphabetically - lib\modules\chat\widgets\chat_input_field.dart:10:1 - directives_ordering
+   info - Missing an 'await' for the 'Future' computed by this expression - lib\modules\chat\widgets\chat_input_field.dart:105:7 - unawaited_futures
+   info - Missing an 'await' for the 'Future' computed by this expression - lib\modules\chat\widgets\chat_input_field.dart:118:5 - unawaited_futures
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\chat\widgets\chat_input_field.dart:129:43 - unnecessary_non_null_assertion
+   info - Use 'const' with the constructor to improve performance - lib\modules\chat\widgets\chat_input_field.dart:130:22 - prefer_const_constructors
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\chat\widgets\chat_input_field.dart:134:43 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\chat\widgets\chat_input_field.dart:146:53 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\chat\widgets\chat_input_field.dart:157:53 - unnecessary_non_null_assertion
+   info - Don't use 'BuildContext's across async gaps - lib\modules\chat\widgets\chat_input_field.dart:183:40 - use_build_context_synchronously
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\chat\widgets\chat_input_field.dart:183:48 - unnecessary_non_null_assertion
+   info - Don't use 'BuildContext's across async gaps - lib\modules\chat\widgets\chat_input_field.dart:187:38 - use_build_context_synchronously
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\chat\widgets\chat_input_field.dart:187:46 - unnecessary_non_null_assertion
+   info - Use of an async 'dart:io' method - lib\modules\chat\widgets\chat_input_field.dart:203:19 - avoid_slow_async_io
+   info - Use of an async 'dart:io' method - lib\modules\chat\widgets\chat_input_field.dart:230:19 - avoid_slow_async_io
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\chat\widgets\chat_input_field.dart:280:43 - deprecated_member_use
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\chat\widgets\chat_input_field.dart:324:63 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\chat\widgets\chat_input_field.dart:325:63 - unnecessary_non_null_assertion
+   info - Missing a newline at the end of the file - lib\modules\chat\widgets\chat_message_bubble.dart:292:2 - eol_at_end_of_file
+   info - Place 'dart:' imports before other imports - lib\modules\chat\widgets\compact_doodle_field.dart:3:1 - directives_ordering
+warning - Duplicate import - lib\modules\chat\widgets\compact_doodle_field.dart:4:8 - duplicate_import
+   info - Sort directive sections alphabetically - lib\modules\chat\widgets\compact_doodle_field.dart:6:1 - directives_ordering
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\chat\widgets\compact_doodle_field.dart:252:49 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\chat\widgets\compact_doodle_field.dart:340:35 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\chat\widgets\compact_doodle_field.dart:396:48 - deprecated_member_use
+   info - 'textScaleFactorOf' is deprecated and shouldn't be used. Use textScalerOf instead. Use of textScaleFactor was deprecated in preparation for the upcoming nonlinear text scaling support. This feature was deprecated after v3.12.0-2.0.pre - lib\modules\chat\widgets\compact_doodle_field.dart:402:56 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\chat\widgets\compact_doodle_field.dart:407:65 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\chat\widgets\compact_doodle_field.dart:474:47 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\chat\widgets\compact_doodle_field.dart:504:56 - deprecated_member_use
+   info - Sort directive sections alphabetically - lib\modules\chat\widgets\doodle_overlay.dart:5:1 - directives_ordering
+warning - Duplicate import - lib\modules\chat\widgets\doodle_overlay.dart:5:8 - duplicate_import
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\chat\widgets\doodle_overlay.dart:93:41 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\chat\widgets\doodle_overlay.dart:211:66 - deprecated_member_use
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\chat\widgets\empty_chat_state.dart:13:42 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\chat\widgets\empty_chat_state.dart:14:45 - unnecessary_non_null_assertion
+   info - Missing a newline at the end of the file - lib\modules\chat\widgets\empty_chat_state.dart:17:2 - eol_at_end_of_file
+   info - Place 'dart:' imports before other imports - lib\modules\chat\widgets\media_action_buttons.dart:3:1 - directives_ordering
+warning - Duplicate import - lib\modules\chat\widgets\media_action_buttons.dart:4:8 - duplicate_import
+   info - Sort directive sections alphabetically - lib\modules\chat\widgets\media_action_buttons.dart:6:1 - directives_ordering
+   info - Use 'late' for private members with a non-nullable type - lib\modules\chat\widgets\media_action_buttons.dart:44:11 - use_late_for_private_fields_and_variables
+   info - Use of an async 'dart:io' method - lib\modules\chat\widgets\media_action_buttons.dart:88:19 - avoid_slow_async_io
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\chat\widgets\media_action_buttons.dart:211:34 - deprecated_member_use
+warning - Unused import: 'package:dis_app/l10n/app_localizations.dart' - lib\modules\chat\widgets\media_options_sheet.dart:4:8 - unused_import
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\chat\widgets\media_options_sheet.dart:111:41 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\chat\widgets\media_options_sheet.dart:239:30 - deprecated_member_use
+   info - Missing a newline at the end of the file - lib\modules\chat\widgets\profile_selector.dart:77:2 - eol_at_end_of_file
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\chat\widgets\video_message_player.dart:151:47 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\chat\widgets\video_message_player.dart:178:36 - deprecated_member_use
+   info - Use the constant 'EdgeInsets.zero' rather than a constructor returning the same object - lib\modules\chat\widgets\video_message_player.dart:207:34 - use_named_constants
+   info - Unnecessary duplication of receiver - lib\modules\chat\widgets\voice_message_player.dart:71:11 - cascade_invocations
+warning - Unused import: 'package:intl/intl.dart' - lib\modules\contacts\contact_detail_screen.dart:16:8 - unused_import
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\contacts\contact_detail_screen.dart:39:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\contacts\contact_detail_screen.dart:57:46 - unnecessary_non_null_assertion
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\contacts\contact_detail_screen.dart:112:63 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\contacts\contact_detail_screen.dart:141:49 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\contacts\contact_detail_screen.dart:171:47 - deprecated_member_use
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\contacts\contact_detail_screen.dart:239:46 - unnecessary_non_null_assertion
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\contacts\contact_detail_screen.dart:298:37 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\contacts\contact_detail_screen.dart:305:39 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\contacts\contact_detail_screen.dart:335:37 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\contacts\contact_detail_screen.dart:347:45 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\contacts\contact_detail_screen.dart:386:56 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\contacts\contact_detail_screen.dart:396:45 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\contacts\contact_detail_screen.dart:414:39 - deprecated_member_use
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\contacts\contact_form_screen.dart:239:46 - unnecessary_non_null_assertion
+   info - Use 'const' with the constructor to improve performance - lib\modules\contacts\contact_form_screen.dart:295:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\contacts\contact_form_screen.dart:318:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\contacts\contact_form_screen.dart:332:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\contacts\contact_form_screen.dart:359:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\contacts\contact_form_screen.dart:408:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\contacts\contact_form_screen.dart:421:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\contacts\contact_form_screen.dart:434:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\contacts\contact_form_screen.dart:449:13 - prefer_const_constructors
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\contacts\contact_form_screen.dart:456:64 - deprecated_member_use
+   info - Use 'const' with the constructor to improve performance - lib\modules\contacts\contact_form_screen.dart:479:19 - prefer_const_constructors
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\contacts\contact_form_screen.dart:484:43 - deprecated_member_use
+   info - Use 'const' with the constructor to improve performance - lib\modules\contacts\contact_form_screen.dart:487:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\contacts\contact_form_screen.dart:501:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\contacts\contact_form_screen.dart:516:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\contacts\contact_form_screen.dart:534:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\contacts\contact_form_screen.dart:541:15 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\contacts\contact_form_screen.dart:547:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\contacts\contact_form_screen.dart:562:13 - prefer_const_constructors
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\contacts\contact_form_screen.dart:568:62 - deprecated_member_use
+   info - Use 'const' with the constructor to improve performance - lib\modules\contacts\contact_form_screen.dart:592:13 - prefer_const_constructors
+   info - 'ratingNegative' is deprecated and shouldn't be used. AppColors.signal verwenden - lib\modules\contacts\contact_form_screen.dart:627:26 - deprecated_member_use_from_same_package
+   info - 'ratingNeutral' is deprecated and shouldn't be used. AppColors.wait verwenden - lib\modules\contacts\contact_form_screen.dart:629:26 - deprecated_member_use_from_same_package
+   info - 'ratingPositive' is deprecated and shouldn't be used. AppColors.go verwenden - lib\modules\contacts\contact_form_screen.dart:632:26 - deprecated_member_use_from_same_package
+   info - Sort directive sections alphabetically - lib\modules\contacts\contacts_screen.dart:9:1 - directives_ordering
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\contacts\contacts_screen.dart:28:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\contacts\widgets\contact_card.dart:358:54 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\contacts\widgets\contact_card.dart:420:46 - unnecessary_non_null_assertion
+   info - The value of the argument is redundant because it matches the default value - lib\modules\contacts\widgets\contact_card.dart:493:20 - avoid_redundant_argument_values
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\contacts\widgets\rating_widget.dart:65:56 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\contacts\widgets\rating_widget.dart:117:22 - deprecated_member_use
+   info - Sort directive sections alphabetically - lib\modules\diary\diary_screen.dart:4:1 - directives_ordering
+   info - Sort directive sections alphabetically - lib\modules\diary\diary_screen.dart:9:1 - directives_ordering
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\diary\diary_screen.dart:35:46 - unnecessary_non_null_assertion
+   info - Sort directive sections alphabetically - lib\modules\diary\entry_detail_screen.dart:4:1 - directives_ordering
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\diary\entry_detail_screen.dart:44:46 - unnecessary_non_null_assertion
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\diary\entry_detail_screen.dart:61:68 - deprecated_member_use
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\diary\entry_detail_screen.dart:126:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\diary\entry_detail_screen.dart:155:46 - unnecessary_non_null_assertion
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\diary\entry_detail_screen.dart:189:47 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\diary\entry_detail_screen.dart:198:49 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\diary\entry_detail_screen.dart:226:37 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\diary\entry_detail_screen.dart:272:22 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\diary\entry_detail_screen.dart:314:60 - deprecated_member_use
+   info - Missing a newline at the end of the file - lib\modules\diary\entry_detail_screen.dart:324:2 - eol_at_end_of_file
+   info - Sort directive sections alphabetically - lib\modules\diary\entry_form_screen.dart:4:1 - directives_ordering
+warning - Unused import: 'package:dis_app/utils/app_colors.dart' - lib\modules\diary\entry_form_screen.dart:9:8 - unused_import
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\diary\entry_form_screen.dart:110:46 - unnecessary_non_null_assertion
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\diary\entry_form_screen.dart:167:66 - deprecated_member_use
+   info - Use 'const' with the constructor to improve performance - lib\modules\diary\entry_form_screen.dart:197:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\diary\entry_form_screen.dart:218:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\diary\entry_form_screen.dart:234:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\diary\entry_form_screen.dart:248:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\diary\entry_form_screen.dart:268:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\diary\entry_form_screen.dart:295:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\diary\entry_form_screen.dart:320:13 - prefer_const_constructors
+   info - To-do comment doesn't follow the Flutter style - lib\modules\diary\entry_form_screen.dart:336:5 - flutter_style_todos
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\diary\entry_form_screen.dart:337:46 - unnecessary_non_null_assertion
+   info - The value of the argument is redundant because it matches the default value - lib\modules\diary\entry_form_screen.dart:341:13 - avoid_redundant_argument_values
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\diary\entry_form_screen.dart:383:52 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\diary\entry_form_screen.dart:407:52 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\diary\entry_form_screen.dart:418:50 - unnecessary_non_null_assertion
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\diary\entry_form_screen.dart:470:34 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\diary\entry_form_screen.dart:536:62 - deprecated_member_use
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\diary\widgets\entry_card.dart:22:46 - unnecessary_non_null_assertion
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\diary\widgets\entry_card.dart:63:51 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\diary\widgets\entry_card.dart:95:39 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\diary\widgets\entry_card.dart:114:49 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\diary\widgets\entry_card.dart:134:72 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\diary\widgets\entry_card.dart:158:45 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\diary\widgets\entry_card.dart:165:47 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\diary\widgets\entry_card.dart:178:49 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\diary\widgets\entry_card.dart:241:22 - deprecated_member_use
+   info - Sort directive sections alphabetically - lib\modules\emergency\emergency_screen.dart:4:1 - directives_ordering
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\emergency\emergency_screen.dart:37:46 - unnecessary_non_null_assertion
+   info - Unnecessary duplication of receiver - lib\modules\emergency\emergency_screen.dart:50:11 - cascade_invocations
+   info - The value of the argument is redundant because it matches the default value - lib\modules\emergency\emergency_screen.dart:77:41 - avoid_redundant_argument_values
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\emergency\emergency_screen.dart:189:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\emergency\emergency_screen.dart:246:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\emergency\emergency_screen.dart:291:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\emergency\widgets\emergency_contact_card.dart:23:46 - unnecessary_non_null_assertion
+   info - 'emergencyCall' is deprecated and shouldn't be used. AppColors.goDeep verwenden - lib\modules\emergency\widgets\emergency_contact_card.dart:95:36 - deprecated_member_use_from_same_package
+   info - 'emergencySms' is deprecated and shouldn't be used. AppColors.waitDeep verwenden - lib\modules\emergency\widgets\emergency_contact_card.dart:105:36 - deprecated_member_use_from_same_package
+   info - 'emergencyShare' is deprecated and shouldn't be used. AppColors.mist verwenden - lib\modules\emergency\widgets\emergency_contact_card.dart:115:36 - deprecated_member_use_from_same_package
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\emergency\widgets\emergency_contact_card.dart:129:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\emergency\widgets\emergency_contact_card.dart:143:46 - unnecessary_non_null_assertion
+   info - The value of the argument is redundant because it matches the default value - lib\modules\emergency\widgets\emergency_contact_card.dart:150:15 - avoid_redundant_argument_values
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\emergency\widgets\emergency_contact_card.dart:166:46 - unnecessary_non_null_assertion
+   info - The value of the argument is redundant because it matches the default value - lib\modules\emergency\widgets\emergency_contact_card.dart:173:15 - avoid_redundant_argument_values
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\emergency\widgets\hotline_card.dart:19:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\emergency\widgets\hotline_card.dart:119:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\emergency\widgets\hotline_card.dart:131:46 - unnecessary_non_null_assertion
+   info - Sort directive sections alphabetically - lib\modules\feedback\feedback_screen.dart:9:1 - directives_ordering
+warning - Unused import: 'package:dis_app/utils/enhanced_debug_report_generator.dart' - lib\modules\feedback\feedback_screen.dart:13:8 - unused_import
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\feedback\feedback_screen.dart:63:46 - unnecessary_non_null_assertion
+   info - 'groupValue' is deprecated and shouldn't be used. Use a RadioGroup ancestor to manage group value instead. This feature was deprecated after v3.32.0-0.0.pre - lib\modules\feedback\feedback_screen.dart:163:17 - deprecated_member_use
+   info - 'onChanged' is deprecated and shouldn't be used. Use RadioGroup to handle value change instead. This feature was deprecated after v3.32.0-0.0.pre - lib\modules\feedback\feedback_screen.dart:164:17 - deprecated_member_use
+   info - Use the null-aware operator '?.' rather than an explicit 'null' comparison - lib\modules\feedback\feedback_screen.dart:253:30 - prefer_null_aware_operators
+   info - Unnecessary duplication of receiver - lib\modules\feedback\feedback_screen.dart:409:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\modules\feedback\feedback_screen.dart:550:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\modules\feedback\feedback_screen.dart:551:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\modules\feedback\feedback_screen.dart:552:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\modules\feedback\feedback_screen.dart:553:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\modules\feedback\feedback_screen.dart:554:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\modules\feedback\feedback_screen.dart:555:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\modules\feedback\feedback_screen.dart:556:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\modules\feedback\feedback_screen.dart:561:7 - cascade_invocations
+   info - Use of an async 'dart:io' method - lib\modules\feedback\feedback_screen.dart:598:34 - avoid_slow_async_io
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\modules\feedback\feedback_screen.dart:687:30 - use_build_context_synchronously
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\finder\finder_detail_screen.dart:21:46 - unnecessary_non_null_assertion
+   info - Don't use 'BuildContext's across async gaps - lib\modules\finder\finder_detail_screen.dart:59:31 - use_build_context_synchronously
+   info - The value of the argument is redundant because it matches the default value - lib\modules\finder\finder_detail_screen.dart:76:25 - avoid_redundant_argument_values
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\finder\finder_form_screen.dart:201:46 - unnecessary_non_null_assertion
+   info - Use 'const' with the constructor to improve performance - lib\modules\finder\finder_form_screen.dart:266:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\finder\finder_form_screen.dart:278:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\finder\finder_form_screen.dart:288:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\finder\finder_form_screen.dart:291:15 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\finder\finder_form_screen.dart:315:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\finder\finder_form_screen.dart:332:15 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\finder\finder_form_screen.dart:343:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\finder\finder_form_screen.dart:383:13 - prefer_const_constructors
+   info - Sort directive sections alphabetically - lib\modules\finder\finder_screen.dart:10:1 - directives_ordering
+   info - Sort directive sections alphabetically - lib\modules\finder\finder_screen.dart:12:1 - directives_ordering
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\finder\finder_screen.dart:53:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\finder\finder_screen.dart:80:46 - unnecessary_non_null_assertion
+   info - Unnecessary duplication of receiver - lib\modules\finder\finder_screen.dart:88:9 - cascade_invocations
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\finder_item_card.dart:54:47 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\finder_item_card.dart:67:74 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\finder_item_card.dart:75:78 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\finder_item_card.dart:94:74 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\finder_item_card.dart:104:76 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\finder_item_card.dart:124:65 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\finder_item_card.dart:155:58 - deprecated_member_use
+   info - The value of the argument is redundant because it matches the default value - lib\modules\finder\widgets\finder_item_card.dart:157:21 - avoid_redundant_argument_values
+warning - The declaration '_buildIconFallback' isn't referenced - lib\modules\finder\widgets\finder_item_card.dart:163:10 - unused_element
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\finder_item_card.dart:168:54 - deprecated_member_use
+   info - Sort directive sections alphabetically - lib\modules\finder\widgets\map_picker.dart:8:1 - directives_ordering
+warning - Unused import: 'package:dis_app/utils/custom_snackbar.dart' - lib\modules\finder\widgets\map_picker.dart:8:8 - unused_import
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\map_picker.dart:248:30 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\map_picker.dart:252:35 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\map_picker.dart:278:30 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\map_picker.dart:282:35 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\map_picker.dart:318:33 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\map_picker.dart:467:53 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\map_picker.dart:487:60 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\map_picker.dart:491:39 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\map_picker.dart:530:43 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\map_picker.dart:590:45 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\map_picker.dart:645:52 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\map_picker.dart:655:62 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\map_picker.dart:667:43 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\map_picker.dart:675:43 - deprecated_member_use
+   info - The value of the argument is redundant because it matches the default value - lib\modules\finder\widgets\map_view.dart:55:33 - avoid_redundant_argument_values
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\map_view.dart:72:54 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\map_view.dart:75:56 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\map_view.dart:85:60 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\finder\widgets\map_view.dart:91:41 - deprecated_member_use
+   info - Sort directive sections alphabetically - lib\modules\games\games_screen.dart:5:1 - directives_ordering
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\games\games_screen.dart:20:46 - unnecessary_non_null_assertion
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\games\games_screen.dart:137:38 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\games\games_screen.dart:152:29 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\games\games_screen.dart:203:37 - deprecated_member_use
+   info - Sort directive sections alphabetically - lib\modules\games\jigsaw_puzzle_screen.dart:7:1 - directives_ordering
+   info - Use 'late' for private members with a non-nullable type - lib\modules\games\jigsaw_puzzle_screen.dart:32:13 - use_late_for_private_fields_and_variables
+   info - Unnecessary type annotation on a local variable - lib\modules\games\jigsaw_puzzle_screen.dart:50:13 - omit_local_variable_types
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\games\jigsaw_puzzle_screen.dart:103:50 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\games\jigsaw_puzzle_screen.dart:115:46 - unnecessary_non_null_assertion
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\games\jigsaw_puzzle_screen.dart:186:45 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\games\jigsaw_puzzle_screen.dart:239:49 - deprecated_member_use
+   info - Sort directive sections alphabetically - lib\modules\games\puzzle_selection_screen.dart:3:1 - directives_ordering
+   info - Sort directive sections alphabetically - lib\modules\games\puzzle_selection_screen.dart:5:1 - directives_ordering
+   info - Sort directive sections alphabetically - lib\modules\games\puzzle_selection_screen.dart:8:1 - directives_ordering
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\games\puzzle_selection_screen.dart:26:46 - unnecessary_non_null_assertion
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\games\puzzle_selection_screen.dart:147:55 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\games\puzzle_selection_screen.dart:213:55 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\games\puzzle_selection_screen.dart:230:61 - deprecated_member_use
+   info - Missing an 'await' for the 'Future' computed by this expression - lib\modules\games\puzzle_selection_screen.dart:317:17 - unawaited_futures
+   info - Missing an 'await' for the 'Future' computed by this expression - lib\modules\games\puzzle_selection_screen.dart:328:17 - unawaited_futures
+   info - Sort directive sections alphabetically - lib\modules\games\sliding_puzzle_screen.dart:8:1 - directives_ordering
+   info - Use 'late' for private members with a non-nullable type - lib\modules\games\sliding_puzzle_screen.dart:33:13 - use_late_for_private_fields_and_variables
+   info - Unnecessary type annotation on a local variable - lib\modules\games\sliding_puzzle_screen.dart:51:13 - omit_local_variable_types
+   info - Unnecessary duplication of receiver - lib\modules\games\sliding_puzzle_screen.dart:73:7 - cascade_invocations
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\games\sliding_puzzle_screen.dart:87:50 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\games\sliding_puzzle_screen.dart:136:46 - unnecessary_non_null_assertion
+   info - The value of the argument is redundant because it matches the default value - lib\modules\games\sliding_puzzle_screen.dart:297:13 - avoid_redundant_argument_values
+   info - Sort directive sections alphabetically - lib\modules\games\widgets\puzzle_image_picker_dialog.dart:5:1 - directives_ordering
+   info - Sort directive sections alphabetically - lib\modules\games\widgets\puzzle_image_picker_dialog.dart:7:1 - directives_ordering
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\games\widgets\puzzle_image_picker_dialog.dart:33:46 - unnecessary_non_null_assertion
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\games\widgets\puzzle_image_picker_dialog.dart:75:39 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\games\widgets\puzzle_image_picker_dialog.dart:77:58 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\games\widgets\puzzle_image_picker_dialog.dart:168:58 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\games\widgets\puzzle_image_picker_dialog.dart:177:62 - deprecated_member_use
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\games\widgets\puzzle_image_picker_dialog.dart:312:46 - unnecessary_non_null_assertion
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\games\widgets\puzzle_image_picker_dialog.dart:345:28 - deprecated_member_use
+   info - Sort directive sections alphabetically - lib\modules\help\help_resources_screen.dart:8:1 - directives_ordering
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\help\help_resources_screen.dart:17:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\mantras\mantras_screen.dart:18:46 - unnecessary_non_null_assertion
+   info - Sort directive sections alphabetically - lib\modules\medication\medication_detail_screen.dart:4:1 - directives_ordering
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\medication\medication_detail_screen.dart:44:46 - unnecessary_non_null_assertion
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\medication\medication_detail_screen.dart:64:55 - deprecated_member_use
+   info - The value of the argument is redundant because it matches the default value - lib\modules\medication\medication_detail_screen.dart:133:19 - avoid_redundant_argument_values
+   info - The value of the argument is redundant because it matches the default value - lib\modules\medication\medication_detail_screen.dart:170:32 - avoid_redundant_argument_values
+   info - The value of the argument is redundant because it matches the default value - lib\modules\medication\medication_detail_screen.dart:171:31 - avoid_redundant_argument_values
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\medication\medication_detail_screen.dart:190:47 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\medication\medication_detail_screen.dart:267:39 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\medication\medication_detail_screen.dart:289:39 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\medication\medication_detail_screen.dart:316:50 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\medication\medication_detail_screen.dart:326:39 - deprecated_member_use
+   info - Don't use 'BuildContext's across async gaps - lib\modules\medication\medication_form_screen.dart:162:28 - use_build_context_synchronously
+   info - Unnecessary duplication of receiver - lib\modules\medication\medication_form_screen.dart:186:11 - cascade_invocations
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\medication\medication_form_screen.dart:303:46 - unnecessary_non_null_assertion
+   info - Use 'const' with the constructor to improve performance - lib\modules\medication\medication_form_screen.dart:362:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\medication\medication_form_screen.dart:381:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\medication\medication_form_screen.dart:394:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\medication\medication_form_screen.dart:427:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\medication\medication_form_screen.dart:485:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\medication\medication_form_screen.dart:515:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\medication\medication_form_screen.dart:546:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\medication\medication_form_screen.dart:559:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\medication\medication_form_screen.dart:604:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\medication\medication_form_screen.dart:618:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\medication\medication_form_screen.dart:636:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\medication\medication_form_screen.dart:654:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\medication\medication_form_screen.dart:665:25 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\medication\medication_form_screen.dart:687:25 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\medication\medication_form_screen.dart:710:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\medication\medication_form_screen.dart:726:13 - prefer_const_constructors
+   info - Sort directive sections alphabetically - lib\modules\medication\medication_screen.dart:17:1 - directives_ordering
+   info - Sort directive sections alphabetically - lib\modules\medication\medication_screen.dart:21:1 - directives_ordering
+   info - 'medicationRefused' is deprecated and shouldn't be used. AppColors.signal verwenden - lib\modules\medication\medication_screen.dart:137:44 - deprecated_member_use_from_same_package
+warning - The declaration '_addMedication' isn't referenced - lib\modules\medication\medication_screen.dart:291:8 - unused_element
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\medication\medication_screen.dart:302:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\medication\medication_screen.dart:336:54 - unnecessary_non_null_assertion
+warning - Unused import: 'package:dis_app/l10n/app_localizations.dart' - lib\modules\medication\widgets\as_needed_medication_card.dart:3:8 - unused_import
+   info - The value of the argument is redundant because it matches the default value - lib\modules\medication\widgets\as_needed_medication_card.dart:66:32 - avoid_redundant_argument_values
+   info - The referenced name isn't visible in scope - lib\modules\medication\widgets\medication_action_button.dart:5:26 - comment_references
+   info - The referenced name isn't visible in scope - lib\modules\medication\widgets\medication_action_button.dart:5:49 - comment_references
+   info - Constructors in a deprecated class should be deprecated - lib\modules\medication\widgets\medication_action_button.dart:36:9 - deprecated_consistency
+   info - The value of the argument is redundant because it matches the default value - lib\modules\medication\widgets\medication_card.dart:98:38 - avoid_redundant_argument_values
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\medication\widgets\medication_card.dart:263:46 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\medication\widgets\medication_card.dart:266:48 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\medication\widgets\medication_card.dart:358:22 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\medication\widgets\medication_card.dart:360:41 - deprecated_member_use
+   info - Sort directive sections alphabetically - lib\modules\more\more_screen.dart:4:1 - directives_ordering
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\more\more_screen.dart:22:46 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\onboarding\post_login_welcome_screen.dart:96:46 - unnecessary_non_null_assertion
+   info - Sort directive sections alphabetically - lib\modules\onboarding\pre_onboarding_screen.dart:9:1 - directives_ordering
+   info - Use a 'ColoredBox' rather than a 'Container' with only a 'Color' - lib\modules\onboarding\pre_onboarding_screen.dart:248:12 - use_colored_box
+   info - Use 'const' with the constructor to improve performance - lib\modules\onboarding\pre_onboarding_screen.dart:276:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\modules\onboarding\pre_onboarding_screen.dart:279:30 - prefer_const_constructors
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\onboarding\widgets\feature_carousel_page.dart:90:46 - unnecessary_non_null_assertion
+   info - Use a 'ColoredBox' rather than a 'Container' with only a 'Color' - lib\modules\onboarding\widgets\feature_carousel_page.dart:93:12 - use_colored_box
+   info - Use a 'ColoredBox' rather than a 'Container' with only a 'Color' - lib\modules\onboarding\widgets\pre_onboarding_page.dart:29:12 - use_colored_box
+   info - Use 'const' with the constructor to improve performance - lib\modules\onboarding\widgets\pre_onboarding_page.dart:122:41 - prefer_const_constructors
+   info - Sort directive sections alphabetically - lib\modules\permissions\permission_detail_screen.dart:6:1 - directives_ordering
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\permissions\permission_detail_screen.dart:41:46 - unnecessary_non_null_assertion
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\permissions\permission_detail_screen.dart:46:64 - deprecated_member_use
+   info - Unnecessary duplication of receiver - lib\modules\permissions\permission_detail_screen.dart:117:7 - cascade_invocations
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\permissions\permission_detail_screen.dart:210:45 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\permissions\permission_detail_screen.dart:222:45 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\permissions\permission_detail_screen.dart:245:45 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\permissions\permission_detail_screen.dart:280:20 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\permissions\permission_detail_screen.dart:310:45 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\permissions\permission_detail_screen.dart:367:68 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\permissions\permission_detail_screen.dart:440:47 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\permissions\permission_detail_screen.dart:493:31 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\permissions\permission_detail_screen.dart:535:38 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\permissions\permission_detail_screen.dart:537:48 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\permissions\permission_detail_screen.dart:544:46 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\permissions\permission_detail_screen.dart:560:39 - deprecated_member_use
+   info - Sort directive sections alphabetically - lib\modules\permissions\permissions_manager_screen.dart:7:1 - directives_ordering
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\permissions\permissions_manager_screen.dart:18:46 - unnecessary_non_null_assertion
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\permissions\permissions_manager_screen.dart:24:64 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\permissions\permissions_manager_screen.dart:39:66 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\permissions\permissions_manager_screen.dart:56:62 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\permissions\permissions_manager_screen.dart:157:51 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\permissions\permissions_manager_screen.dart:196:45 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\permissions\permissions_manager_screen.dart:205:47 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\permissions\permissions_manager_screen.dart:216:37 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\permissions\permissions_manager_screen.dart:248:56 - deprecated_member_use
+   info - Sort directive sections alphabetically - lib\modules\profile\profile_creation_screen.dart:14:1 - directives_ordering
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:107:48 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:167:48 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:293:60 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:294:57 - unnecessary_non_null_assertion
+   info - Use a 'ColoredBox' rather than a 'Container' with only a 'Color' - lib\modules\profile\profile_creation_screen.dart:371:12 - use_colored_box
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:418:45 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:432:45 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:444:45 - unnecessary_non_null_assertion
+   info - Use a 'ColoredBox' rather than a 'Container' with only a 'Color' - lib\modules\profile\profile_creation_screen.dart:466:12 - use_colored_box
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:513:45 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:526:45 - unnecessary_non_null_assertion
+   info - Use a 'ColoredBox' rather than a 'Container' with only a 'Color' - lib\modules\profile\profile_creation_screen.dart:564:12 - use_colored_box
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:599:45 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:612:45 - unnecessary_non_null_assertion
+   info - Use a 'ColoredBox' rather than a 'Container' with only a 'Color' - lib\modules\profile\profile_creation_screen.dart:647:12 - use_colored_box
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:682:45 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:695:45 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:755:76 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:755:125 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:765:63 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:766:63 - unnecessary_non_null_assertion
+   info - Use a 'ColoredBox' rather than a 'Container' with only a 'Color' - lib\modules\profile\profile_creation_screen.dart:793:12 - use_colored_box
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:828:45 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:841:45 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:861:62 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:886:60 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:900:62 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:926:62 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_creation_screen.dart:955:57 - unnecessary_non_null_assertion
+   info - Local variables should be final - lib\modules\profile\profile_edit_screen.dart:94:7 - prefer_final_locals
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_edit_screen.dart:129:48 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_edit_screen.dart:188:57 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_edit_screen.dart:197:57 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_edit_screen.dart:211:58 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_edit_screen.dart:229:58 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_edit_screen.dart:248:64 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_edit_screen.dart:265:58 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_edit_screen.dart:283:58 - unnecessary_non_null_assertion
+   info - Unnecessary duplication of receiver - lib\modules\profile\profile_selection_screen.dart:89:11 - cascade_invocations
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\modules\profile\profile_selection_screen.dart:95:30 - use_build_context_synchronously
+   info - Unnecessary duplication of receiver - lib\modules\profile\profile_selection_screen.dart:132:11 - cascade_invocations
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\modules\profile\profile_selection_screen.dart:138:30 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\modules\profile\profile_selection_screen.dart:158:13 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\modules\profile\profile_selection_screen.dart:159:42 - use_build_context_synchronously
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_selection_screen.dart:159:50 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_selection_screen.dart:241:55 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_selection_screen.dart:255:55 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_selection_screen.dart:318:63 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_selection_screen.dart:345:63 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_selection_screen.dart:425:41 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_selection_screen.dart:456:45 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_selection_screen.dart:463:56 - unnecessary_non_null_assertion
+   info - The value of the argument is redundant because it matches the default value - lib\modules\profile\profile_selection_screen.dart:464:25 - avoid_redundant_argument_values
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_selection_screen.dart:472:47 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_selection_screen.dart:496:39 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_selection_screen.dart:500:39 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_selection_screen.dart:506:53 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_selection_screen.dart:516:58 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_selection_screen.dart:525:58 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\profile\profile_selection_screen.dart:532:53 - unnecessary_non_null_assertion
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\profile\widgets\app_info_overlay.dart:18:35 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\profile\widgets\app_info_overlay.dart:36:45 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\profile\widgets\app_info_overlay.dart:148:47 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\profile\widgets\app_info_overlay.dart:182:46 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\profile\widgets\app_info_overlay.dart:209:41 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - lib\modules\profile\widgets\color_picker.dart:41:34 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use component accessors like .r or .g, or toARGB32 for an explicit conversion - lib\modules\profile\widgets\color_picker.dart:41:57 - deprecated_member_use
+   info - Missing a newline at the end of the file - lib\modules\profile\widgets\color_picker.dart:77:2 - eol_at_end_of_file
+   info - Missing a newline at the end of the file - lib\modules\profile\widgets\profile_card.dart:120:2 - eol_at_end_of_file
+   info - Use 'const' for final variables initialized to a constant value - lib\modules\profile\widgets\user_marked_color_picker.dart:337:7 - prefer_const_declarations
+   info - Unnecessary duplication of receiver - lib\modules\profile\widgets\user_marked_color_picker.dart:350:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\modules\profile\widgets\user_marked_color_picker.dart:358:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\modules\profile\widgets\user_marked_color_picker.dart:383:7 - cascade_invocations
+   info - Sort directive sections alphabetically - lib\modules\settings\settings_screen.dart:20:1 - directives_ordering
+   info - Sort directive sections alphabetically - lib\modules\settings\settings_screen.dart:21:1 - directives_ordering
+   info - Sort directive sections alphabetically - lib\modules\settings\settings_screen.dart:34:1 - directives_ordering
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\settings\settings_screen.dart:115:46 - unnecessary_non_null_assertion
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\modules\settings\settings_screen.dart:138:35 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\modules\settings\settings_screen.dart:140:23 - use_build_context_synchronously
+   info - To-do comment doesn't follow the Flutter style - lib\modules\settings\settings_screen.dart:220:5 - flutter_style_todos
+   info - The value of the argument is redundant because it matches the default value - lib\modules\settings\settings_screen.dart:226:15 - avoid_redundant_argument_values
+   info - Use of an async 'dart:io' method - lib\modules\settings\settings_screen.dart:364:19 - avoid_slow_async_io
+   info - Don't use 'BuildContext's across async gaps - lib\modules\settings\settings_screen.dart:418:9 - use_build_context_synchronously
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:454:40 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:456:59 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:480:47 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:493:42 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:495:61 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:506:49 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:520:40 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:521:38 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:525:42 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:526:40 - deprecated_member_use
+   info - The value of the argument is redundant because it matches the default value - lib\modules\settings\settings_screen.dart:642:17 - avoid_redundant_argument_values
+   info - Use 'const' with the constructor to improve performance - lib\modules\settings\settings_screen.dart:656:23 - prefer_const_constructors
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:679:37 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:700:35 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:709:37 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:782:38 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:784:57 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:836:38 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:838:57 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:881:39 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:883:58 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:904:47 - deprecated_member_use
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\settings\settings_screen.dart:935:46 - unnecessary_non_null_assertion
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:995:49 - deprecated_member_use
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\modules\settings\settings_screen.dart:1017:27 - use_build_context_synchronously
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:1031:42 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:1140:40 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:1143:42 - deprecated_member_use
+   info - The value of the argument is redundant because it matches the default value - lib\modules\settings\settings_screen.dart:1144:30 - avoid_redundant_argument_values
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:1169:47 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:1182:48 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:1185:50 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:1202:55 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:1284:64 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:1313:67 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:1324:75 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:1343:71 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:1400:70 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:1403:72 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:1421:79 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:1682:34 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\settings_screen.dart:1685:36 - deprecated_member_use
+   info - The value of the argument is redundant because it matches the default value - lib\modules\settings\settings_screen.dart:1686:24 - avoid_redundant_argument_values
+   info - Method invocation or property access on a 'dynamic' target - lib\modules\settings\settings_screen.dart:1789:43 - avoid_dynamic_calls
+   info - 'groupValue' is deprecated and shouldn't be used. Use a RadioGroup ancestor to manage group value instead. This feature was deprecated after v3.32.0-0.0.pre - lib\modules\settings\settings_screen.dart:2038:23 - deprecated_member_use
+   info - 'onChanged' is deprecated and shouldn't be used. Use RadioGroup to handle value change instead. This feature was deprecated after v3.32.0-0.0.pre - lib\modules\settings\settings_screen.dart:2039:23 - deprecated_member_use
+   info - 'groupValue' is deprecated and shouldn't be used. Use a RadioGroup ancestor to manage group value instead. This feature was deprecated after v3.32.0-0.0.pre - lib\modules\settings\settings_screen.dart:2050:23 - deprecated_member_use
+   info - 'onChanged' is deprecated and shouldn't be used. Use RadioGroup to handle value change instead. This feature was deprecated after v3.32.0-0.0.pre - lib\modules\settings\settings_screen.dart:2051:23 - deprecated_member_use
+   info - 'groupValue' is deprecated and shouldn't be used. Use a RadioGroup ancestor to manage group value instead. This feature was deprecated after v3.32.0-0.0.pre - lib\modules\settings\settings_screen.dart:2062:23 - deprecated_member_use
+   info - 'onChanged' is deprecated and shouldn't be used. Use RadioGroup to handle value change instead. This feature was deprecated after v3.32.0-0.0.pre - lib\modules\settings\settings_screen.dart:2063:23 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\widgets\impressum_overlay.dart:18:37 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\widgets\impressum_overlay.dart:21:41 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\widgets\impressum_overlay.dart:114:47 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\widgets\impressum_overlay.dart:126:47 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\widgets\impressum_overlay.dart:159:35 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\widgets\privacy_overlay.dart:18:37 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\widgets\privacy_overlay.dart:21:41 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\widgets\privacy_overlay.dart:173:47 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\widgets\privacy_overlay.dart:185:47 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\modules\settings\widgets\privacy_overlay.dart:218:35 - deprecated_member_use
+   info - Sort directive sections alphabetically - lib\modules\timeline\timeline_screen.dart:4:1 - directives_ordering
+   info - Unnecessary use of a 'double' literal - lib\modules\timeline\timeline_screen.dart:57:56 - prefer_int_literals
+warning - The '!' will have no effect because the receiver can't be null - lib\modules\timeline\timeline_screen.dart:63:46 - unnecessary_non_null_assertion
+   info - The value of the argument is redundant because it matches the default value - lib\modules\timeline\timeline_screen.dart:102:41 - avoid_redundant_argument_values
+   info - The value of the argument is redundant because it matches the default value - lib\modules\timeline\timeline_screen.dart:343:23 - avoid_redundant_argument_values
+   info - Use 'const' with the constructor to improve performance - lib\painters\timeline_grid_painter.dart:56:7 - prefer_const_constructors
+   info - Use 'const' for final variables initialized to a constant value - lib\painters\timeline_grid_painter.dart:72:5 - prefer_const_declarations
+   info - Unnecessary duplication of receiver - lib\painters\timeline_grid_painter.dart:98:5 - cascade_invocations
+   info - Unnecessary type annotation on a local variable - lib\painters\timeline_grid_painter.dart:301:10 - omit_local_variable_types
+   info - The value of the argument is redundant because it matches the default value - lib\screens\feedback_thank_you_screen.dart:179:18 - avoid_redundant_argument_values
+   info - The value of the argument is redundant because it matches the default value - lib\screens\feedback_thank_you_screen.dart:251:20 - avoid_redundant_argument_values
+   info - Unnecessary duplication of receiver - lib\services\calendar_service.dart:139:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\services\comment_service.dart:49:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\services\comment_service.dart:65:5 - cascade_invocations
+   info - To-do comment doesn't follow the Flutter style - lib\services\contact_service.dart:36:5 - flutter_style_todos
+   info - Unnecessary duplication of receiver - lib\services\diary_service.dart:59:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\services\diary_service.dart:73:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\services\diary_service.dart:93:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\services\diary_service.dart:102:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\services\diary_service.dart:111:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\services\diary_service.dart:120:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\services\diary_service.dart:129:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\services\diary_service.dart:201:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\services\diary_service.dart:235:5 - cascade_invocations
+   info - The code block is missing a specified language - lib\services\emergency_message_service.dart:19:6 - missing_code_block_language_in_doc_comment
+   info - To-do comment doesn't follow the Flutter style - lib\services\finder_service.dart:23:5 - flutter_style_todos
+   info - 'desiredAccuracy' is deprecated and shouldn't be used. use settings parameter with AndroidSettings, AppleSettings, WebSettings, or LocationSettings - lib\services\gps_manager.dart:298:9 - deprecated_member_use
+   info - 'timeLimit' is deprecated and shouldn't be used. use settings parameter with AndroidSettings, AppleSettings, WebSettings, or LocationSettings - lib\services\gps_manager.dart:299:9 - deprecated_member_use
+warning - The declaration 'EntityRef._' isn't referenced - lib\services\gps_manager.dart:731:19 - unused_element
+warning - A value for optional parameter 'id' isn't ever given - lib\services\gps_manager.dart:731:47 - unused_element_parameter
+   info - Unnecessary duplication of receiver - lib\services\location_tracking_service.dart:411:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\services\location_tracking_service.dart:425:5 - cascade_invocations
+   info - 'bool' parameters should be named parameters - lib\services\map_service.dart:36:35 - avoid_positional_boolean_parameters
+   info - Unnecessary duplication of receiver - lib\services\medication_service.dart:254:5 - cascade_invocations
+   info - To-do comment doesn't follow the Flutter style - lib\services\newsletter_service.dart:23:3 - flutter_style_todos
+   info - To-do comment doesn't follow the Flutter style - lib\services\newsletter_service.dart:52:9 - flutter_style_todos
+   info - To-do comment doesn't follow the Flutter style - lib\services\newsletter_service.dart:56:7 - flutter_style_todos
+   info - To-do comment doesn't follow the Flutter style - lib\services\newsletter_service.dart:91:3 - flutter_style_todos
+   info - To-do comment doesn't follow the Flutter style - lib\services\newsletter_service.dart:95:7 - flutter_style_todos
+   info - The method is used to change a property - lib\services\notification_service.dart:75:15 - use_setters_to_change_properties
+   info - To-do comment doesn't follow the Flutter style - lib\services\notification_service.dart:719:7 - flutter_style_todos
+   info - Unnecessary duplication of receiver - lib\services\profile_service.dart:56:5 - cascade_invocations
+   info - Use 'const' with the constructor to improve performance - lib\services\tile_cache_manager.dart:20:28 - prefer_const_constructors
+   info - Unnecessary duplication of receiver - lib\services\tile_cache_manager.dart:303:7 - cascade_invocations
+warning - The generic type 'Box<dynamic>' should have explicit type arguments but doesn't - lib\services\timeline_data_service.dart:189:9 - strict_raw_type
+   info - Method invocation or property access on a 'dynamic' target - lib\services\timeline_data_service.dart:215:22 - avoid_dynamic_calls
+   info - Method invocation or property access on a 'dynamic' target - lib\services\timeline_data_service.dart:218:18 - avoid_dynamic_calls
+   info - Method invocation or property access on a 'dynamic' target - lib\services\timeline_data_service.dart:257:30 - avoid_dynamic_calls
+   info - Method invocation or property access on a 'dynamic' target - lib\services\timeline_data_service.dart:257:30 - avoid_dynamic_calls
+   info - To-do comment doesn't follow the Flutter style - lib\services\translation_service.dart:5:1 - flutter_style_todos
+   info - To-do comment doesn't follow the Flutter style - lib\services\translation_service.dart:15:5 - flutter_style_todos
+   info - To-do comment doesn't follow the Flutter style - lib\services\translation_service.dart:31:5 - flutter_style_todos
+   info - To-do comment doesn't follow the Flutter style - lib\services\translation_service.dart:39:5 - flutter_style_todos
+   info - To-do comment doesn't follow the Flutter style - lib\services\translation_service.dart:68:5 - flutter_style_todos
+   info - Unnecessary duplication of receiver - lib\services\transmission_log_service.dart:56:5 - cascade_invocations
+   info - The referenced name isn't visible in scope - lib\utils\app_input_decorations.dart:96:10 - comment_references
+   info - Use of an async 'dart:io' method - lib\utils\attachment_helper.dart:17:16 - avoid_slow_async_io
+   info - Use of an async 'dart:io' method - lib\utils\attachment_helper.dart:80:18 - avoid_slow_async_io
+   info - Use of an async 'dart:io' method - lib\utils\attachment_helper.dart:99:18 - avoid_slow_async_io
+   info - Use of an async 'dart:io' method - lib\utils\attachment_helper.dart:115:17 - avoid_slow_async_io
+   info - Use of an async 'dart:io' method - lib\utils\attachment_helper.dart:126:12 - avoid_slow_async_io
+   info - To-do comment doesn't follow the Flutter style - lib\utils\contact_config.dart:17:49 - flutter_style_todos
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\utils\custom_snackbar.dart:79:34 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\utils\custom_snackbar.dart:104:43 - deprecated_member_use
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:37:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:38:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:39:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:40:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:43:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:48:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:53:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:58:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:63:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:68:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:73:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:78:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:83:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:88:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:93:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:98:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:99:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:100:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:123:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:124:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:125:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:126:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:127:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:128:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:139:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:140:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:141:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:145:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:146:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:147:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:214:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:227:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:272:9 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:275:9 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:327:9 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:330:9 - cascade_invocations
+   info - Use of an async 'dart:io' method - lib\utils\debug_log_generator.dart:395:19 - avoid_slow_async_io
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:429:11 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:430:11 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:431:11 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:432:11 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:433:11 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:467:11 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:614:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:632:11 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:633:11 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:640:9 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:720:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:755:9 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:756:9 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:757:9 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:758:9 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:759:9 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:760:9 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:763:9 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\debug_log_generator.dart:764:9 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\did_you_know_facts.dart:67:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:27:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:32:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:37:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:42:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:47:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:52:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:57:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:58:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:59:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:60:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:61:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:62:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:87:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:88:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:89:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:96:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:103:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:106:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:107:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:108:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:126:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:127:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:128:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:129:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:130:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:132:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:133:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:134:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:146:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:148:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:165:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:166:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:167:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:168:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:181:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:198:9 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:199:9 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:220:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:221:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:231:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:232:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:253:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:254:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:255:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:256:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\enhanced_debug_report_generator.dart:273:5 - cascade_invocations
+   info - The referenced name isn't visible in scope - lib\utils\enhanced_debug_report_generator.dart:312:27 - comment_references
+   info - The referenced name isn't visible in scope - lib\utils\enhanced_debug_report_generator.dart:313:27 - comment_references
+   info - The referenced name isn't visible in scope - lib\utils\enhanced_debug_report_generator.dart:314:43 - comment_references
+   info - Unnecessary duplication of receiver - lib\utils\loading_translations.dart:73:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\loading_translations.dart:82:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\utils\loading_translations.dart:83:5 - cascade_invocations
+warning - Unused import: 'package:latlong2/latlong.dart' - lib\utils\location_helper.dart:2:8 - unused_import
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\utils\time_picker_helper.dart:108:68 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\utils\time_picker_helper.dart:111:70 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\utils\time_picker_helper.dart:124:76 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\utils\time_picker_helper.dart:127:78 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\utils\time_picker_helper.dart:152:76 - deprecated_member_use
+   info - Use 'const' with the constructor to improve performance - lib\widgets\action_button_row.dart:141:24 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\widgets\action_button_row.dart:156:24 - prefer_const_constructors
+   info - Unnecessary use of a null check ('!') - lib\widgets\action_button_row.dart:163:32 - unnecessary_null_checks
+   info - Unnecessary use of a 'double' literal - lib\widgets\animated_empty_state.dart:31:45 - prefer_int_literals
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\widgets\animated_empty_state.dart:44:63 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\widgets\animated_empty_state.dart:45:63 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\widgets\animated_empty_state.dart:51:70 - deprecated_member_use
+   info - Unnecessary use of a 'double' literal - lib\widgets\animated_list_view.dart:32:31 - prefer_int_literals
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\widgets\animated_tap_card.dart:36:35 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\widgets\comments\comment_card.dart:32:52 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\widgets\comments\comment_card.dart:57:47 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\widgets\comments\comment_card.dart:69:43 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\widgets\comments\comment_card.dart:77:39 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\widgets\comments\comment_card.dart:90:37 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\widgets\comments\comment_input_bar.dart:36:33 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\widgets\comments\comment_section.dart:131:47 - deprecated_member_use
+   info - Unnecessary use of a 'double' literal - lib\widgets\contact_avatar.dart:190:34 - prefer_int_literals
+   info - Unnecessary duplication of receiver - lib\widgets\contact_avatar.dart:247:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\widgets\contact_avatar.dart:250:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\widgets\contact_avatar.dart:256:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\widgets\contact_avatar.dart:259:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\widgets\contact_avatar.dart:265:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\widgets\contact_avatar.dart:268:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\widgets\contact_avatar.dart:274:5 - cascade_invocations
+   info - Unnecessary use of a 'double' literal - lib\widgets\contact_developer_fab.dart:62:37 - prefer_int_literals
+   info - Unnecessary use of a 'double' literal - lib\widgets\contact_developer_fab.dart:67:48 - prefer_int_literals
+   info - The referenced name isn't visible in scope - lib\widgets\dialogs\confirmation_dialog.dart:21:17 - comment_references
+   info - The referenced name isn't visible in scope - lib\widgets\dialogs\confirmation_dialog.dart:24:27 - comment_references
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\dialogs\confirmation_dialog.dart:169:20 - avoid_redundant_argument_values
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\dialogs\confirmation_dialog.dart:170:19 - avoid_redundant_argument_values
+   info - Sort directive sections alphabetically - lib\widgets\error_report_dialog.dart:6:1 - directives_ordering
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\error_report_dialog.dart:143:20 - avoid_redundant_argument_values
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\error_report_dialog.dart:439:20 - avoid_redundant_argument_values
+   info - Missing an 'await' for the 'Future' computed by this expression - lib\widgets\error_report_dialog.dart:528:31 - unawaited_futures
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\widgets\error_report_dialog.dart:604:30 - use_build_context_synchronously
+   info - The code block is missing a specified language - lib\widgets\event_avatar.dart:112:4 - missing_code_block_language_in_doc_comment
+   info - 'groupValue' is deprecated and shouldn't be used. Use a RadioGroup ancestor to manage group value instead. This feature was deprecated after v3.32.0-0.0.pre - lib\widgets\feedback_bottom_sheet.dart:173:17 - deprecated_member_use
+   info - 'onChanged' is deprecated and shouldn't be used. Use RadioGroup to handle value change instead. This feature was deprecated after v3.32.0-0.0.pre - lib\widgets\feedback_bottom_sheet.dart:174:17 - deprecated_member_use
+   info - Unnecessary duplication of receiver - lib\widgets\feedback_bottom_sheet.dart:294:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\widgets\feedback_bottom_sheet.dart:303:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\widgets\feedback_bottom_sheet.dart:306:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\widgets\feedback_bottom_sheet.dart:315:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\widgets\feedback_bottom_sheet.dart:328:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\widgets\feedback_bottom_sheet.dart:410:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\widgets\feedback_bottom_sheet.dart:411:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\widgets\feedback_bottom_sheet.dart:412:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\widgets\feedback_bottom_sheet.dart:413:5 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\widgets\feedback_bottom_sheet.dart:417:7 - cascade_invocations
+   info - Unnecessary type annotation on a local variable - lib\widgets\feedback_bottom_sheet.dart:469:5 - omit_local_variable_types
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\feedback_bottom_sheet.dart:489:52 - avoid_redundant_argument_values
+   info - The expression has no effect and can be removed - lib\widgets\feedback_bottom_sheet.dart:505:54 - noop_primitive_operations
+warning - Unused import: 'package:dis_app/widgets/image_picker/image_picker_bottom_sheet.dart' - lib\widgets\form_avatar_picker.dart:1:8 - unused_import
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\widgets\form_avatar_picker.dart:60:60 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\widgets\form_avatar_picker.dart:63:62 - deprecated_member_use
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\gradient_text.dart:46:10 - avoid_redundant_argument_values
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\gradient_text.dart:47:8 - avoid_redundant_argument_values
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\gradient_text.dart:60:10 - avoid_redundant_argument_values
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\gradient_text.dart:61:8 - avoid_redundant_argument_values
+   info - The code block is missing a specified language - lib\widgets\image_picker\image_picker_bottom_sheet.dart:14:4 - missing_code_block_language_in_doc_comment
+   info - The code block is missing a specified language - lib\widgets\image_picker\image_picker_handler.dart:35:4 - missing_code_block_language_in_doc_comment
+   info - The code block is missing a specified language - lib\widgets\image_picker\image_picker_handler.dart:75:4 - missing_code_block_language_in_doc_comment
+   info - Don't use 'BuildContext's across async gaps - lib\widgets\image_picker\image_picker_handler.dart:181:22 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps - lib\widgets\image_picker\image_picker_handler.dart:212:22 - use_build_context_synchronously
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\image_picker\image_picker_handler.dart:332:23 - avoid_redundant_argument_values
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\image_picker\image_picker_handler.dart:413:21 - avoid_redundant_argument_values
+   info - Don't use 'BuildContext's across async gaps - lib\widgets\image_picker\image_picker_handler.dart:521:32 - use_build_context_synchronously
+   info - The code block is missing a specified language - lib\widgets\image_picker\image_picker_handler.dart:555:6 - missing_code_block_language_in_doc_comment
+   info - Unnecessary duplication of receiver - lib\widgets\image_picker\image_picker_handler.dart:626:7 - cascade_invocations
+   info - The code block is missing a specified language - lib\widgets\info_card.dart:13:4 - missing_code_block_language_in_doc_comment
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\map_marker_contact.dart:41:19 - avoid_redundant_argument_values
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\map_marker_event.dart:41:19 - avoid_redundant_argument_values
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\map_marker_location.dart:41:19 - avoid_redundant_argument_values
+   info - Missing a newline at the end of the file - lib\widgets\map_marker_profile_switch.dart:48:2 - eol_at_end_of_file
+   info - Unnecessary duplication of receiver - lib\widgets\overview_map.dart:412:13 - cascade_invocations
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\overview_map.dart:661:28 - avoid_redundant_argument_values
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\overview_map.dart:714:25 - avoid_redundant_argument_values
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\overview_map.dart:779:25 - avoid_redundant_argument_values
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\overview_map.dart:840:25 - avoid_redundant_argument_values
+   info - Unnecessary use of a null check ('!') - lib\widgets\overview_map.dart:879:67 - unnecessary_null_checks
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\overview_map.dart:900:31 - avoid_redundant_argument_values
+   info - Use 'const' with the constructor to improve performance - lib\widgets\overview_map.dart:1268:33 - prefer_const_constructors
+   info - 'getTileProvider' is deprecated and shouldn't be used. Use the `FMTCTileProvider` default constructor instead. This will reduce internal codebase complexity and maximise external flexibility, and works toward a potential future decentralised API design. This feature was deprecated in v10, and will be removed in a future version - lib\widgets\overview_map.dart:1268:55 - deprecated_member_use
+   info - Missing a newline at the end of the file - lib\widgets\overview_map.dart:1316:2 - eol_at_end_of_file
+   info - Sort directive sections alphabetically - lib\widgets\profile_actions_dialog.dart:11:1 - directives_ordering
+   info - Unnecessary duplication of receiver - lib\widgets\profile_actions_dialog.dart:95:11 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\widgets\profile_actions_dialog.dart:118:7 - cascade_invocations
+   info - Unnecessary duplication of receiver - lib\widgets\profile_actions_dialog.dart:141:7 - cascade_invocations
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\widgets\profile_actions_dialog.dart:654:32 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\widgets\profile_actions_dialog.dart:655:32 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\widgets\profile_actions_dialog.dart:658:21 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\widgets\profile_actions_dialog.dart:835:32 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\widgets\profile_actions_dialog.dart:836:32 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\widgets\profile_actions_dialog.dart:842:21 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\widgets\profile_actions_dialog.dart:850:21 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\widgets\profile_actions_dialog.dart:1074:30 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\widgets\profile_actions_dialog.dart:1075:30 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\widgets\profile_actions_dialog.dart:1078:19 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\widgets\profile_actions_dialog.dart:1086:19 - use_build_context_synchronously
+   info - Use 'const' with the constructor to improve performance - lib\widgets\profile_image_widget.dart:180:19 - prefer_const_constructors
+   info - Unnecessary use of a 'double' literal - lib\widgets\profile_image_widget.dart:218:34 - prefer_int_literals
+   info - Unnecessary use of a 'double' literal - lib\widgets\profile_switch_avatar.dart:173:34 - prefer_int_literals
+   info - Missing a newline at the end of the file - lib\widgets\profile_switch_avatar.dart:308:2 - eol_at_end_of_file
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\widgets\profile_visibility_selector.dart:57:46 - deprecated_member_use
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\standard_app_bar.dart:78:46 - avoid_redundant_argument_values
+   info - Unnecessary use of a 'double' literal - lib\widgets\timeline_strahl.dart:39:29 - prefer_int_literals
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\timeline_strahl.dart:60:25 - avoid_redundant_argument_values
+   info - Unnecessary use of a 'double' literal - lib\widgets\timeline_strahl.dart:60:25 - prefer_int_literals
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\timeline_strahl.dart:61:19 - avoid_redundant_argument_values
+   info - Unnecessary duplication of receiver - lib\widgets\timeline_strahl.dart:94:5 - cascade_invocations
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\timeline_strahl.dart:213:23 - avoid_redundant_argument_values
+   info - The value of the argument is redundant because it matches the default value - lib\widgets\timeline_strahl.dart:214:21 - avoid_redundant_argument_values
+   info - Unnecessary use of a 'double' literal - lib\widgets\timeline_strahl.dart:354:14 - prefer_int_literals
+   info - Unnecessary use of a 'double' literal - lib\widgets\timeline_strahl.dart:356:14 - prefer_int_literals
+   info - Unnecessary use of a 'double' literal - lib\widgets\timeline_strahl.dart:358:14 - prefer_int_literals
+   info - Unnecessary use of a 'double' literal - lib\widgets\timeline_strahl.dart:360:14 - prefer_int_literals
+   info - Unnecessary type annotation on a local variable - lib\widgets\timeline_strahl.dart:376:11 - omit_local_variable_types
+   info - Unnecessary type annotation on a local variable - lib\widgets\timeline_strahl.dart:379:11 - omit_local_variable_types
+   info - Unnecessary type annotation on a local variable - lib\widgets\timeline_strahl.dart:380:11 - omit_local_variable_types
+   info - Unnecessary use of a 'double' literal - lib\widgets\timeline_strahl.dart:437:54 - prefer_int_literals
+   info - Unnecessary type annotation on a local variable - lib\widgets\timeline_strahl.dart:455:11 - omit_local_variable_types
+   info - Unnecessary use of a 'double' literal - lib\widgets\timeline_strahl.dart:455:27 - prefer_int_literals
+   info - Unnecessary type annotation on a local variable - lib\widgets\timeline_strahl.dart:456:11 - omit_local_variable_types
+   info - Unnecessary use of a 'double' literal - lib\widgets\timeline_strahl.dart:456:32 - prefer_int_literals
+   info - Unnecessary type annotation on a local variable - lib\widgets\timeline_strahl.dart:459:5 - omit_local_variable_types
+   info - Unnecessary type annotation on a local variable - lib\widgets\timeline_strahl.dart:462:5 - omit_local_variable_types
+   info - To-do comment doesn't follow the Flutter style - lib\widgets\timeline_strahl.dart:659:33 - flutter_style_todos
+   info - Dependencies not sorted alphabetically - pubspec.yaml:38:3 - sort_pub_dependencies
+   info - Dependencies not sorted alphabetically - pubspec.yaml:133:3 - sort_pub_dependencies
+
+949 issues found. (ran in 12.4s)

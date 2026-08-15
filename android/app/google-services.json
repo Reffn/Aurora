@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "110648795442",
+    "project_id": "auroa-7f66b",
+    "storage_bucket": "auroa-7f66b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110648795442:android:59da22335bb5beedadf72b",
+        "android_client_info": {
+          "package_name": "com.disapp.dis_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtIFWWIqzVynVkU7xy6em15PrQzQhWsLM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

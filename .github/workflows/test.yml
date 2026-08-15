@@ -1,0 +1,170 @@
+name: Tests & Quality Checks
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+# Ein Push während eines laufenden Durchgangs beendet den älteren. Ohne diese
+# Regel bauen mehrere Läufe gleichzeitig ein Release-Bundle, und welcher davon
+# den aktuellen Stand prüft, ist nicht mehr erkennbar.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v7
+
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.44.8'
+        channel: 'stable'
+
+    - name: Install dependencies
+      run: flutter pub get
+
+    # dis_app_lints ist ein eigenes Paket im Repository. `flutter pub get` im
+    # Wurzelverzeichnis löst seine Abhängigkeiten nicht auf, dadurch findet der
+    # Analyzer das in seiner analysis_options.yaml eingebundene package:lints
+    # nicht und meldet eine Warnung bei jedem Lauf.
+    - name: Resolve lint package dependencies
+      run: dart pub get -C dis_app_lints
+
+    - name: Generate code (Hive adapters)
+      run: dart run build_runner build --delete-conflicting-outputs
+
+    # custom_lint endet mit Code 1, sobald es überhaupt etwas ausgibt — auch bei
+    # reinem INFO. Dadurch war dieser Job seit Monaten rot, wurde nicht mehr
+    # gelesen, und die nachfolgenden Schritte (Analyse, Tests) liefen nie. Am
+    # 29.11.2025 ging so ein Release mit totem Feedback-Kanal durch eine rote,
+    # ignorierte CI. Deshalb: ERROR und WARNING blockieren, INFO wird gezählt
+    # und angezeigt.
+    # Stand 10.08.2026: 0 Befunde jeder Art. Der Altbestand von 65 INFO ist weg.
+    - name: Run custom lints
+      run: |
+        set -o pipefail
+        dart run custom_lint | tee custom_lint.log || true
+        if grep -qE "• (ERROR|WARNING)$" custom_lint.log; then
+          echo "::error::custom_lint meldet ERROR oder WARNING — siehe Ausgabe oben"
+          exit 1
+        fi
+        INFO_COUNT=$(grep -c "• INFO$" custom_lint.log || true)
+        echo "custom_lint: $INFO_COUNT INFO-Befunde (Altbestand, blockieren nicht)"
+
+    # Gleicher Grund: --no-fatal-infos lässt Fehler und Warnungen weiterhin
+    # fehlschlagen, INFO nicht. Stand 10.08.2026: 369 INFO (von 834), davon
+    # allein 211 cascade_invocations; 0 WARNING, 0 ERROR.
+    - name: Analyze code
+      run: flutter analyze --no-fatal-infos
+
+    - name: Run tests with coverage
+      run: flutter test --coverage
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v7
+      with:
+        file: coverage/lcov.info
+        fail_ci_if_error: false
+
+  release-gate:
+    runs-on: ubuntu-latest
+    needs: test
+    # 45 statt 20 Minuten: Der erste Durchlauf dieses Jobs brach nach 25 Minuten
+    # im Release-Build ab — Gradle zieht die Firebase-Abhängigkeiten auf einem
+    # frischen Runner komplett neu. Ein Tor, das an seiner eigenen Zeitvorgabe
+    # scheitert, prüft nichts.
+    timeout-minutes: 45
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v7
+
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.44.8'
+        channel: 'stable'
+
+    - name: Install dependencies
+      run: flutter pub get
+
+    - name: Generate code
+      run: dart run build_runner build --delete-conflicting-outputs
+
+    # Ohne konfigurierten Transport entsteht kein Artefakt.
+    # Genau dieser Schritt fehlte beim Release am 29.11.2025.
+    - name: Verify transport configuration
+      run: flutter test test/services/transport/transport_config_test.dart
+
+    # The generated bundle is unsigned (key.properties not in repo). This is intentional:
+    # the bundle is used for transport verification only, not for release to app stores.
+    #
+    # Nur arm64: Der Binaerscan unten prueft ohnehin genau eine ABI. Alle vier
+    # ABIs gleichzeitig zu AOT-kompilieren hat den 7-GB-Runner wiederholt in
+    # den OOM getrieben — der Agent stirbt dann mit "runner has received a
+    # shutdown signal", nicht mit einem Timeout. Gleiches Motiv beim
+    # gedeckelten Gradle-Heap.
+    - name: Build release bundle
+      env:
+        GRADLE_OPTS: -Dorg.gradle.jvmargs="-Xmx3g"
+      run: flutter build appbundle --release --target-platform android-arm64
+
+    # Verify that compiled binary contains transport configuration.
+    # The previous release failure (29.11.2025) happened at compile time: the source code was
+    # complete, but an empty String.fromEnvironment() caused the compiler to eliminate the
+    # transport code. This test catches that by searching the compiled .so file for string literals
+    # embedded in each transport's send() method. If either transport is eliminated, its literal
+    # disappears with it. Each transport is verified independently: if either one is missing, the
+    # build fails immediately with a clear message about which transport is broken. The control
+    # probe (app name) validates the search procedure itself.
+    - name: Verify transport configuration in compiled binary
+      run: |
+        # AAB is a ZIP archive containing base/lib/<abi>/libapp.so
+        unzip -q build/app/outputs/bundle/release/app-release.aab -d aab_extracted
+
+        # Find the ABI subdirectory (could be arm64-v8a, armeabi-v7a, x86, x86_64)
+        ABI_DIR=$(find aab_extracted/base/lib -maxdepth 1 -type d ! -name "lib" -exec basename {} \; | head -1)
+        SO_FILE="aab_extracted/base/lib/$ABI_DIR/libapp.so"
+
+        if [ ! -f "$SO_FILE" ]; then
+          echo "ERROR: libapp.so not found at $SO_FILE"
+          exit 1
+        fi
+
+        # Control probe: app name must be in the binary (proves search procedure works)
+        CONTROL_COUNT=$(grep -a -o -F "Aurora" "$SO_FILE" | wc -l)
+        echo "CONTROL PROBE: app name 'Aurora' found: $CONTROL_COUNT occurrences"
+        if [ "$CONTROL_COUNT" -eq 0 ]; then
+          echo "CRITICAL: Verification procedure broken — control probe failed, cannot trust results"
+          exit 1
+        fi
+
+        # Firestore transport: log message from send() method (unique to FirestoreTransport)
+        FIRESTORE_COUNT=$(grep -a -o -F "Feedback wartet auf Verbindung" "$SO_FILE" | wc -l)
+        echo "FIRESTORE TRANSPORT: message 'Feedback wartet auf Verbindung' found: $FIRESTORE_COUNT occurrences"
+        if [ "$FIRESTORE_COUNT" -eq 0 ]; then
+          echo "CRITICAL: FirestoreTransport not found in compiled binary"
+          echo "The transport was eliminated at compile time (empty String.fromEnvironment)."
+          exit 1
+        fi
+
+        # Mailto transport: error message from send() method (unique to MailtoTransport).
+        # Deliberately an ASCII-only fragment: Dart stores strings whose code units all fit
+        # below 256 as one-byte Latin-1 in the snapshot, so an "ö" would sit in the binary as
+        # 0xF6 while this file encodes it as UTF-8 0xC3 0xB6 — the search would never match and
+        # the gate would be permanently red for the wrong reason.
+        MAILTO_COUNT=$(grep -a -o -F "Du kannst den Text kopieren und manuell senden." "$SO_FILE" | wc -l)
+        echo "MAILTO TRANSPORT: message 'Du kannst den Text kopieren und manuell senden.' found: $MAILTO_COUNT occurrences"
+        if [ "$MAILTO_COUNT" -eq 0 ]; then
+          echo "CRITICAL: MailtoTransport not found in compiled binary"
+          echo "The transport was eliminated at compile time (empty String.fromEnvironment)."
+          exit 1
+        fi

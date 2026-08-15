@@ -1,0 +1,20 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/Reffn/Aurora/security/advisories/new
+    about: Never in a public issue. Report privately here, or mail info@3ofus.app.
+
+  - name: Something you cannot describe publicly
+    url: mailto:info@3ofus.app
+    about: A bug involving your own data is still a valid bug. Mail it instead.
+
+  - name: Aurora on Discord
+    url: https://discord.gg/WysKtXGh
+    about: Questions, ideas, or just talking to other people using Aurora.
+
+  - name: You are in crisis right now
+    url: https://www.telefonseelsorge.de
+    about: >-
+      Telefonseelsorge, free and around the clock: 0800 111 0 111 or
+      0800 111 0 222. GitHub is not the place for this, and nobody here can
+      answer fast enough.
