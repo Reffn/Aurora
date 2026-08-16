@@ -5,6 +5,7 @@ import 'package:dis_app/models/transmission_log_entry.dart';
 import 'package:dis_app/services/feedback_sender.dart'
     show TransmissionRecorder;
 import 'package:dis_app/services/transport/feedback_transport.dart';
+import 'package:dis_app/services/transport/firebase_start.dart';
 import 'package:dis_app/services/transport/telemetry_transport.dart';
 import 'package:hive_ce/hive.dart';
 
@@ -18,29 +19,52 @@ class TelemetryDispatcher {
     required Box<PendingTelemetryEvent> queue,
     required TelemetryTransport transport,
     required TransmissionRecorder record,
+    required FirebaseStarter starteFirebase,
     DateTime Function()? now,
   }) : _queue = queue,
        _transport = transport,
        _record = record,
+       _starteFirebase = starteFirebase,
        _now = now ?? DateTime.now;
 
   final Box<PendingTelemetryEvent> _queue;
   final TelemetryTransport _transport;
   final TransmissionRecorder _record;
+  final FirebaseStarter _starteFirebase;
   final DateTime Function() _now;
 
   /// Gibt die Anzahl der Eintraege zurueck, die die Warteschlange verlassen
   /// haben — zugestellt oder vom SDK uebernommen.
   Future<int> flush() async {
-    if (!_transport.isConfigured) {
-      logger.info(LogCategory.service, 'Telemetrie: kein Ziel konfiguriert');
-      return 0;
-    }
-
+    // Erst nachsehen, ob ueberhaupt etwas ansteht — dann erst das Netz
+    // anfassen.
+    //
+    // Die Reihenfolge ist der halbe Fix vom 16.08.2026. Vorher startete
+    // Firebase im App-Start, also auch fuer jemanden mit leerer
+    // Warteschlange: Wer die Telemetrie abgelehnt hat, zeichnet nichts auf,
+    // hat nie etwas Faelliges — und meldete trotzdem bei jedem Kaltstart eine
+    // Installations-ID bei Google an. Steht hier nichts an, faellt der
+    // gesamte Sendepfad aus, samt Handschlag.
     final moment = _now();
     final faellig = _queue.values
         .where((entry) => !entry.dueAt.isAfter(moment))
         .toList(growable: false);
+
+    if (faellig.isEmpty) return 0;
+
+    // Erst jetzt, mit etwas Faelligem in der Hand.
+    if (!await _starteFirebase()) {
+      logger.info(
+        LogCategory.service,
+        'Telemetrie: Firebase nicht gestartet, Warteschlange bleibt',
+      );
+      return 0;
+    }
+
+    if (!_transport.isConfigured) {
+      logger.info(LogCategory.service, 'Telemetrie: kein Ziel konfiguriert');
+      return 0;
+    }
 
     var zugestellt = 0;
 

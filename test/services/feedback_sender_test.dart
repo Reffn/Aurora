@@ -61,6 +61,7 @@ void main() {
         primary: primary,
         fallback: fallback,
         record: recorder,
+        starteFirebase: () async => true,
       ).send(payload);
 
       expect(result.outcome, TransportOutcome.sent);
@@ -80,6 +81,7 @@ void main() {
         primary: primary,
         fallback: fallback,
         record: recorder,
+        starteFirebase: () async => true,
       ).send(payload);
 
       expect(result.outcome, TransportOutcome.pending);
@@ -96,6 +98,7 @@ void main() {
         primary: primary,
         fallback: fallback,
         record: recorder,
+        starteFirebase: () async => true,
       ).send(payload);
 
       expect(result.outcome, TransportOutcome.sent);
@@ -119,6 +122,7 @@ void main() {
         primary: primary,
         fallback: fallback,
         record: recorder,
+        starteFirebase: () async => true,
       ).send(payload);
 
       expect(primary.calls, 0);
@@ -135,6 +139,7 @@ void main() {
         primary: primary,
         fallback: fallback,
         record: recorder,
+        starteFirebase: () async => true,
       ).send(payload);
 
       expect(result.outcome, TransportOutcome.failed);
@@ -152,6 +157,7 @@ void main() {
         primary: primary,
         fallback: _StubTransport(const TransportResult.success()),
         record: recorder,
+        starteFirebase: () async => true,
       ).send(payload);
 
       expect(entries.single.payloadText, payload.toPlainText());

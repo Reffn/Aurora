@@ -64,8 +64,6 @@ import 'package:dis_app/widgets/startup_failure_screen.dart';
 import 'package:dis_app/widgets/time_map.dart';
 import 'package:dis_app/widgets/today_overview_line.dart';
 import 'package:dis_app/widgets/work_surface_scaffold.dart';
-import 'package:firebase_app_check/firebase_app_check.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -147,44 +145,24 @@ void main() {
       // weiterläuft. Siehe `StartupLocale`.
       await StartupLocale.laden();
 
-      // Firebase Initialization (non-blocking: app continues if Firebase unavailable)
-      stepStart = DateTime.now();
-      try {
-        await Firebase.initializeApp();
-        logger.info(
-          LogCategory.ui,
-          '⏱️ Firebase initialized',
-          data: {
-            'duration':
-                '${DateTime.now().difference(stepStart).inMilliseconds}ms',
-          },
-        );
-
-        // Anbieter ausgeschrieben, obwohl er dem Standard entspricht: Wovon
-        // die Echtheitsprüfung abhängt, gehört sichtbar in den Code. Play
-        // Integrity greift nur bei Installationen aus dem Play Store —
-        // seitlich geladene Testbauten liefern deshalb kein gültiges Token,
-        // und die Console zählt sie als „nicht bestätigt".
-        await FirebaseAppCheck.instance.activate(
-          androidProvider: AndroidProvider.playIntegrity,
-        );
-        logger.info(
-          LogCategory.ui,
-          '⏱️ Firebase App Check activated',
-          data: {
-            'duration':
-                '${DateTime.now().difference(stepStart).inMilliseconds}ms',
-          },
-        );
-      } catch (e, stackTrace) {
-        logger.error(
-          LogCategory.service,
-          'Firebase initialization failed - feedback via email will be offered',
-          data: {'error': e.toString()},
-          stackTrace: stackTrace,
-        );
-        // App continues without Firebase feedback transport
-      }
+      // Hier stand bis zum 16.08.2026 der Firebase-Start.
+      //
+      // Bedingungslos, bei jedem Kaltstart, für einen Rückkanal, den die
+      // meisten Menschen nie benutzen. Damit meldete jede Installation eine
+      // dauerhafte Installations-ID bei Google an und tauschte ein
+      // Play-Integrity-Token — bevor irgendjemand zugestimmt oder etwas
+      // gesendet hatte, und ohne dass es im Übertragungsprotokoll auftauchte.
+      // Der Schirm „Was Aurora sendet" sagte „Es wurde noch nichts gesendet",
+      // während die Verbindung stand.
+      //
+      // Jetzt startet Firebase im ersten tatsächlichen Sendeversuch —
+      // `FeedbackSender` und `TelemetryDispatcher` rufen `FirebaseStart`
+      // selbst. Damit ist der Handschlag Teil einer Übertragung, die ohnehin
+      // protokolliert wird, statt eines stillen Vorgangs davor.
+      //
+      // Wer ihn hierher zurückholt, bricht drei Zusagen aus `AGENTS.md` auf
+      // einmal. Bewacht von test/core/keine_stille_verbindung_test.dart.
+      // Siehe docs/befund-stiller-firebase-start.md.
 
       // Flutter Framework Error Handler (für Widget-Build-Errors)
       FlutterError.onError = (FlutterErrorDetails details) {

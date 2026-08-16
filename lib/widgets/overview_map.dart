@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:dis_app/constants/netz_kennung.dart';
 import 'package:dis_app/core/data_entry.dart';
 import 'package:dis_app/core/di/injection.dart';
 import 'package:dis_app/core/logger.dart';
@@ -1833,7 +1834,11 @@ class _StableMapContainerState extends State<_StableMapContainer> {
                 // Tile Layer (STABLE!) with FMTC v10 persistent caching
                 TileLayer(
                   urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                  userAgentPackageName: 'com.aurora.dis_app',
+                  // Nennt den Betreiber, nicht die Diagnose — siehe
+                  // NetzKennung. Der Kachelserver sieht ohnehin schon, welchen
+                  // Ausschnitt jemand ansieht; er muss nicht auch erfahren,
+                  // warum.
+                  userAgentPackageName: NetzKennung.kachelPaketName,
                   tileProvider: FMTCTileProvider(
                     stores: const {
                       'mapStore': BrowseStoreStrategy.readUpdateCreate,

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dis_app/constants/netz_kennung.dart';
 import 'package:dis_app/core/data_entry.dart';
 import 'package:dis_app/l10n/app_texts.dart';
 import 'package:dis_app/models/contact.dart';
@@ -82,6 +83,12 @@ Kannst du mich bitte anrufen.
   }
 
   /// Versucht via Nominatim Reverse Geocoding eine Adresse zu ermitteln
+  ///
+  /// Die Kennung nennt den Betreiber, nicht die Diagnose — siehe
+  /// [NetzKennung]. Diese Anfrage ist die heikelste der App: Sie trägt die
+  /// genauen Koordinaten eines Menschen im Notfall an einen fremden Server.
+  /// Wer sie mit einer Kennung wie „Aurora DIS App" stellt, teilt demselben
+  /// Server nebenbei eine Verdachtsdiagnose mit.
   Future<String?> _reverseGeocode(double lat, double lon) async {
     try {
       final url = Uri.parse(
@@ -91,7 +98,7 @@ Kannst du mich bitte anrufen.
       final response = await http
           .get(
             url,
-            headers: {'User-Agent': 'Aurora DIS App'},
+            headers: {'User-Agent': NetzKennung.userAgent},
           )
           .timeout(const Duration(seconds: 5));
 
