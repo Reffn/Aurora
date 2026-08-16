@@ -53,6 +53,7 @@ import 'package:dis_app/services/tile_cache_manager.dart';
 import 'package:dis_app/services/timeline_data_service.dart';
 import 'package:dis_app/services/translation_service.dart';
 import 'package:dis_app/services/transmission_log_service.dart';
+import 'package:dis_app/services/transport/firebase_start.dart';
 import 'package:dis_app/services/transport/firestore_transport.dart';
 import 'package:dis_app/services/transport/mailto_transport.dart';
 import 'package:dis_app/services/transport/telemetry_transport.dart';
@@ -635,6 +636,9 @@ Future<void> setupDeferredDependencies() async {
       primary: getIt<FirestoreTransport>(),
       fallback: getIt<MailtoTransport>(),
       record: getIt<TransmissionLogService>().record,
+      // Firebase startet im Sendeversuch, nicht im App-Start.
+      // Siehe `FirebaseStart` und docs/befund-stiller-firebase-start.md.
+      starteFirebase: firebaseBeimSendenStarten,
     ),
   );
   logger.info(
@@ -688,6 +692,9 @@ Future<void> setupDeferredDependencies() async {
         queue: telemetryQueueBox,
         transport: telemetryTransport,
         record: getIt<TransmissionLogService>().record,
+        // Nur wenn wirklich etwas ansteht — der Dispatcher prüft die
+        // Warteschlange, bevor er das hier ruft.
+        starteFirebase: firebaseBeimSendenStarten,
       ),
     );
 

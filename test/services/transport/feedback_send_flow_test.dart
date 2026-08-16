@@ -41,6 +41,10 @@ void main() {
       primary: firestore,
       fallback: mailto,
       record: recorder,
+      // Geprüft wird der Ablauf danach, nicht der Firebase-Start selbst.
+      // `true` heißt: Firebase läuft — die Wegwahl trifft wie bisher
+      // `isConfigured`.
+      starteFirebase: () async => true,
     );
   }
 

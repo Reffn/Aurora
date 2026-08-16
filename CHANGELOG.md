@@ -40,6 +40,29 @@ Siehe [ROADMAP.md](ROADMAP.md) und [FEATURES_BACKLOG.md](FEATURES_BACKLOG.md) f�
 ---
 ## [Unveröffentlicht]
 
+Aurora spricht nicht mehr mit Google, bevor jemand etwas sendet — und der
+Bildschirm bleibt aus fremden Aufnahmen heraus.
+
+### Behoben
+- 🔌 **Die App verband sich beim Start mit Google, ohne dass jemand etwas
+  gesendet hatte.** Firebase lief im Startpfad, bei jedem Öffnen, auch bei
+  einem Menschen, der die Telemetrie abgelehnt und das Feedback-Formular nie
+  geöffnet hat. Dabei meldete jede Installation eine dauerhafte Kennung bei
+  Google an — und der Schirm „Was Aurora sendet" sagte weiter „Es wurde noch
+  nichts gesendet". Firebase startet jetzt erst im tatsächlichen
+  Sendeversuch, damit der Handschlag zu einer Übertragung gehört, die auch im
+  Protokoll steht. Inhalte waren davon nie betroffen: kein Anteilsname, keine
+  Nachricht, kein Eintrag. Siehe `docs/befund-stiller-firebase-start.md`
+- 🖼️ **Der App-Wechsler zeigte den letzten Bildschirm.** Android legt ein
+  Vorschaubild an, wenn Aurora in den Hintergrund geht — Anteilsliste oder
+  offener Chat, sichtbar ohne die App zu öffnen und ohne Passwort. Der Inhalt
+  ist jetzt geschützt, ebenso gegen Bildschirmfotos und -aufnahmen. Preis:
+  Abfotografieren aus der App heraus geht nicht mehr
+- 🕵️ **Aurora nannte fremden Servern die Diagnose.** Bei Adresssuche,
+  Kartenkacheln und der Adressermittlung im Notfall stellte sie sich als
+  „Aurora DIS App" vor — im Notfall zusammen mit den genauen Koordinaten.
+  Die Kennung nennt jetzt nur noch den Betreiber
+
 ---
 ## [3.0.18] - 2026-08-09
 

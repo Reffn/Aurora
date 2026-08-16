@@ -55,14 +55,28 @@ void main() {
     );
   }
 
+  /// Zaehlt, wie oft der Dispatcher Firebase starten wollte.
+  ///
+  /// Gehoert zur Zusage und nicht zur Verdrahtung: Wer nichts Faelliges hat,
+  /// darf das Netz nicht anfassen. Siehe den Test „faellt ohne faellige
+  /// Ereignisse aus, ohne Firebase zu starten".
+  var firebaseStarts = 0;
+
+  setUp(() => firebaseStarts = 0);
+
   TelemetryDispatcher buildDispatcher(
     TelemetryTransport transport, {
     DateTime? now,
+    bool firebaseStartet = true,
   }) {
     return TelemetryDispatcher(
       queue: queue,
       transport: transport,
       now: () => now ?? DateTime(2026, 8, 5, 12),
+      starteFirebase: () async {
+        firebaseStarts++;
+        return firebaseStartet;
+      },
       record: ({
         required TransmissionChannel channel,
         required String payloadText,
@@ -150,6 +164,56 @@ void main() {
       final zugestellt = await buildDispatcher(transport).flush();
 
       expect(zugestellt, 0);
+      expect(transport.gesendet, isEmpty);
+      expect(queue.containsKey('faellig'), isTrue);
+      expect(protokoll, isEmpty);
+    });
+
+    // Die Zusage, die der Fix vom 16.08.2026 wiederherstellt.
+    //
+    // Wer die Telemetrie abgelehnt hat, zeichnet nichts auf und hat nie etwas
+    // Faelliges. Vorher startete Firebase trotzdem — im App-Start, ohne
+    // Bedingung — und meldete eine Installations-ID bei Google an. Steht
+    // nichts an, darf das Netz unberuehrt bleiben.
+    test('faellt ohne faellige Ereignisse aus, ohne Firebase zu starten',
+        () async {
+      await enqueue('spaeter', DateTime(2026, 8, 5, 15));
+      final transport = _FakeTransport(const TransportResult.success());
+
+      final zugestellt = await buildDispatcher(transport).flush();
+
+      expect(zugestellt, 0);
+      expect(
+        firebaseStarts,
+        0,
+        reason: 'Ohne etwas Faelliges darf kein Handschlag mit Google '
+            'stattfinden — das war der Befund vom 16.08.2026.',
+      );
+      expect(transport.gesendet, isEmpty);
+      expect(queue.containsKey('spaeter'), isTrue);
+    });
+
+    test('leere Warteschlange faesst das Netz nicht an', () async {
+      final transport = _FakeTransport(const TransportResult.success());
+
+      final zugestellt = await buildDispatcher(transport).flush();
+
+      expect(zugestellt, 0);
+      expect(firebaseStarts, 0);
+    });
+
+    // Kein Netz beim Start ist kein Grund, ein Ereignis zu verlieren.
+    test('behaelt die Warteschlange, wenn Firebase nicht startet', () async {
+      await enqueue('faellig', DateTime(2026, 8, 5, 11));
+      final transport = _FakeTransport(const TransportResult.success());
+
+      final zugestellt = await buildDispatcher(
+        transport,
+        firebaseStartet: false,
+      ).flush();
+
+      expect(zugestellt, 0);
+      expect(firebaseStarts, 1);
       expect(transport.gesendet, isEmpty);
       expect(queue.containsKey('faellig'), isTrue);
       expect(protokoll, isEmpty);

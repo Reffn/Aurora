@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dis_app/constants/netz_kennung.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart';
 
@@ -8,10 +9,11 @@ import 'package:latlong2/latlong.dart';
 /// - Kostenlos
 /// - Rate-Limit: 1 req/sec pro IP (pro Nutzer)
 /// - Erfordert Internet-Verbindung
-/// - User-Agent Pflicht: com.aurora.dis_app
+/// - User-Agent Pflicht — siehe [NetzKennung], warum er die Diagnose nicht
+///   nennt
 class GeocodingService {
   static const String _baseUrl = 'https://nominatim.openstreetmap.org';
-  static const String _userAgent = 'com.aurora.dis_app';
+  static const String _userAgent = NetzKennung.userAgent;
 
   /// Sucht eine Adresse und gibt Koordinaten + Display-Name zurück
   ///

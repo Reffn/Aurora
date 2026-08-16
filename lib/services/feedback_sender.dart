@@ -1,6 +1,7 @@
 import 'package:dis_app/models/feedback_payload.dart';
 import 'package:dis_app/models/transmission_log_entry.dart';
 import 'package:dis_app/services/transport/feedback_transport.dart';
+import 'package:dis_app/services/transport/firebase_start.dart';
 
 /// Schreibt einen Protokolleintrag. Als Funktion injizierbar, damit der
 /// Sendeweg ohne Hive-Box prüfbar bleibt.
@@ -27,14 +28,29 @@ class FeedbackSender {
     required this.primary,
     required this.fallback,
     required this.record,
+    required this.starteFirebase,
   });
 
   final FeedbackTransport primary;
   final FeedbackTransport fallback;
   final TransmissionRecorder record;
 
+  /// Startet Firebase, falls es noch nicht läuft.
+  ///
+  /// Seit dem 16.08.2026 startet Firebase nicht mehr im App-Start, sondern
+  /// hier: im ersten tatsächlichen Sendeversuch. Vorher meldete jede
+  /// Installation bei jedem Kaltstart eine Installations-ID bei Google an —
+  /// für einen Rückkanal, den die meisten Menschen nie benutzen. Siehe
+  /// `FirebaseStart`.
+  ///
+  /// Die Reihenfolge ist zwingend: `primary.isConfigured` fragt über
+  /// `firestoreHatZiel()` die laufende Firebase-App ab und ist vor dem Start
+  /// immer `false`. Ohne diesen Aufruf davor ginge jedes Feedback still über
+  /// die Mail-App, obwohl Firestore erreichbar wäre.
+  final FirebaseStarter starteFirebase;
+
   Future<TransportResult> send(FeedbackPayload payload) async {
-    if (primary.isConfigured) {
+    if (await starteFirebase() && primary.isConfigured) {
       final result = await primary.send(payload);
       await _protocol(payload, result);
 

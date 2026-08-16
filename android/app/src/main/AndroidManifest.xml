@@ -131,6 +131,28 @@
         android:allowBackup="false"
         android:fullBackupContent="false"
         android:dataExtractionRules="@xml/data_extraction_rules">
+
+        <!--
+            Firebase sammelt nichts von sich aus.
+
+            Ohne dieses Attribut legen die Firebase-Bibliotheken beim Start
+            eine Installations-ID an und melden sie bei Google — eine
+            dauerhafte Kennung je Installation. `AGENTS.md` führt genau das
+            unter „Nichts erlaubt Wiedererkennung: … keine Installations-IDs".
+
+            Zweite Hälfte desselben Fixes: Der Firebase-Start selbst ist am
+            16.08.2026 aus `main.dart` in den Sendeweg gewandert, siehe
+            `lib/services/transport/firebase_start.dart`. Das Attribut hier
+            deckt ab, was geschieht, *nachdem* Firebase gestartet wurde — also
+            sobald wirklich jemand Feedback schickt oder der Telemetrie
+            zugestimmt hat.
+
+            Siehe docs/befund-stiller-firebase-start.md.
+        -->
+        <meta-data
+            android:name="firebase_data_collection_default_enabled"
+            android:value="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
