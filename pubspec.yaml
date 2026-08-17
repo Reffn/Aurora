@@ -80,7 +80,7 @@ dependencies:
   # Fragt Play, ob eine neuere Fassung bereitliegt. Nur der flexible Weg —
   # ein blockierender Vollbild-Fluss wäre bei einer App, die auch im
   # dissoziativen Zustand geöffnet wird, die falsche Antwort.
-  in_app_update: ^4.2.3
+  in_app_update: ^5.0.0
 
   # Calendar UI
   table_calendar: ^3.1.2
