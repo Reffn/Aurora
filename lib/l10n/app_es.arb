@@ -102,6 +102,10 @@
   },
   "actionShare": "Compartir",
   "actionDone": "Listo",
+  "actionUndo": "Deshacer",
+  "@actionUndo": {
+    "description": "Undo button label"
+  },
   "mainSettingLogout": "Ajustes / Cerrar sesión",
   "@mainSettingLogout": {
     "description": "Settings/Logout text in AppBar profile button"
@@ -216,6 +220,7 @@
     "description": "Color selection page title"
   },
   "profileColorDescription": "Tu color te hace inconfundible dentro del sistema.",
+  "profileColorTooSimilar": "Demasiado parecido al color de {name}",
   "@profileColorDescription": {
     "description": "Color selection description"
   },
@@ -263,24 +268,135 @@
   "@profileActionCreateProfile": {
     "description": "Create profile button label"
   },
-  "profileDeactivateTitle": "¿Desactivar el perfil?",
-  "@profileDeactivateTitle": {
-    "description": "Deactivate profile dialog title"
+  "profilePauseAction": "Pausar",
+  "@profilePauseAction": {
+    "description": "Button: pause a part. Reversible, never delete or deactivate"
   },
-  "profileDeactivateMessage": "¿Quieres desactivar el perfil «{name}»?\n\nSe ocultará, pero podrás reactivarlo más adelante.",
-  "@profileDeactivateMessage": {
-    "description": "Deactivate profile dialog message",
+  "profilePauseTitle": "¿Pausar a {name}?",
+  "@profilePauseTitle": {
+    "description": "Confirm dialog title for pausing a part",
     "placeholders": {
       "name": {
         "type": "String"
       }
     }
   },
-  "profileDeactivated": "Perfil desactivado",
-  "@profileDeactivated": {
-    "description": "Profile deactivated success message"
+  "profilePauseMessage": "{name} desaparece de la selección. Los mensajes, el diario y todo lo demás se conservan. Puedes retomar a {name} en cualquier momento en Ajustes → «Partes y permisos».",
+  "@profilePauseMessage": {
+    "description": "Confirm dialog text: what pausing does and where the way back is",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   },
-  "profileDeactivate": "Desactivar",
+  "profilePausedSnack": "{name} está en pausa.",
+  "@profilePausedSnack": {
+    "description": "Snackbar after a part was paused, offers undo",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "profileResumeAction": "Retomar",
+  "@profileResumeAction": {
+    "description": "Button: bring a paused part back into the selection"
+  },
+  "profileResumedSnack": "{name} ha vuelto.",
+  "@profileResumedSnack": {
+    "description": "Snackbar after a paused part was brought back",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "partsAndRightsTitle": "Partes y permisos",
+  "@partsAndRightsTitle": {
+    "description": "Title of the screen and settings entry for parts and their rights"
+  },
+  "partsActiveHeader": "Activas",
+  "@partsActiveHeader": {
+    "description": "Group header: parts that are currently in the selection"
+  },
+  "partsPausedHeader": "En pausa",
+  "@partsPausedHeader": {
+    "description": "Group header: paused parts. Same word as medicationStatusPaused"
+  },
+  "partsPauseNamed": "Pausar a {name}",
+  "@partsPauseNamed": {
+    "description": "Quiet button at the bottom of a part's rights page. Never delete or deactivate",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "rightsAdminSummary": "Administrador · puede hacerlo todo",
+  "@rightsAdminSummary": {
+    "description": "One line for an admin part: no list of rights, just this"
+  },
+  "rightsRevokeAdmin": "Dejar el rol de admin",
+  "@rightsRevokeAdmin": {
+    "description": "Action and dialog title: take away the admin role from a part"
+  },
+  "rightsPartly": "Permitido en parte",
+  "@rightsPartly": {
+    "description": "Subtitle of a switch whose rights are only partly set; the switch shows off"
+  },
+  "rightsGroupMedication": "Medicamentos",
+  "@rightsGroupMedication": {
+    "description": "Group header of the rights switches"
+  },
+  "rightsGroupOthers": "Otras partes",
+  "@rightsGroupOthers": {
+    "description": "Group header of the rights switches: what a part may do with other parts' entries"
+  },
+  "rightsGroupManagement": "Administración",
+  "@rightsGroupManagement": {
+    "description": "Group header of the rights switches"
+  },
+  "rightSeeMedication": "Ver los medicamentos",
+  "@rightSeeMedication": {
+    "description": "Rights switch"
+  },
+  "rightChangeMedicationPlan": "Cambiar el plan de medicamentos",
+  "@rightChangeMedicationPlan": {
+    "description": "Rights switch; turning it on also turns on See medication"
+  },
+  "rightChangeOthersEntries": "Cambiar entradas ajenas",
+  "@rightChangeOthersEntries": {
+    "description": "Rights switch: edit other parts' events and diary entries"
+  },
+  "rightDeleteOthersEntries": "Borrar entradas ajenas",
+  "@rightDeleteOthersEntries": {
+    "description": "Rights switch: delete other parts' messages, events and diary entries"
+  },
+  "rightReadOthersDiaries": "Leer diarios ajenos",
+  "@rightReadOthersDiaries": {
+    "description": "Rights switch"
+  },
+  "rightCreateParts": "Añadir partes",
+  "@rightCreateParts": {
+    "description": "Rights switch"
+  },
+  "rightPauseParts": "Pausar partes",
+  "@rightPauseParts": {
+    "description": "Rights switch: pause other parts and bring them back"
+  },
+  "rightGrantRights": "Conceder permisos",
+  "@rightGrantRights": {
+    "description": "Rights switch: change the rights of parts"
+  },
+  "rightChangeSettings": "Cambiar los ajustes",
+  "@rightChangeSettings": {
+    "description": "Rights switch"
+  },
+  "rightResetPasswords": "Restablecer contraseñas",
+  "@rightResetPasswords": {
+    "description": "Rights switch"
+  },
   "profileEditComingSoon": "La edición llegará pronto",
   "profileNameExists": "Ya existe un perfil con ese nombre",
   "@profileNameExists": {
@@ -665,6 +781,9 @@
     }
   },
   "emergencyErrorShare": "Error al compartir: {error}",
+  "emergencySmsAppNotOpened": "No se ha podido abrir la app de SMS",
+  "emergencyPhoneAppNotOpened": "No se ha podido abrir la app de teléfono",
+  "emergencyWebsiteNotOpened": "No se ha podido abrir la página web",
   "@emergencyErrorShare": {
     "description": "Share error message",
     "placeholders": {
@@ -733,18 +852,6 @@
   "@settingsSectionManagement": {
     "description": "Management section title"
   },
-  "settingsPermissions": "Derechos y permisos",
-  "@settingsPermissions": {
-    "description": "Permissions manager menu item"
-  },
-  "settingsPermissionsSubtitle": "Gestionar los derechos de acceso de los perfiles",
-  "@settingsPermissionsSubtitle": {
-    "description": "Permissions manager subtitle"
-  },
-  "settingsSectionGlobal": "Ajustes globales",
-  "@settingsSectionGlobal": {
-    "description": "Global settings section title"
-  },
   "settingsGlobalTrackingInfo": "¿Qué es el «seguimiento permanente»?",
   "@settingsGlobalTrackingInfo": {
     "description": "Global tracking info title"
@@ -777,29 +884,9 @@
   "@settingsGpsPermissionTitle": {
     "description": "GPS permission section title"
   },
-  "settingsGpsStatusDisabled": "Servicio de GPS desactivado",
-  "@settingsGpsStatusDisabled": {
-    "description": "GPS service disabled status"
-  },
-  "settingsGpsStatusDenied": "Permiso denegado",
-  "@settingsGpsStatusDenied": {
-    "description": "GPS permission denied status"
-  },
-  "settingsGpsStatusDeniedForever": "Denegado de forma permanente",
-  "@settingsGpsStatusDeniedForever": {
-    "description": "GPS permission denied forever status"
-  },
-  "settingsGpsStatusWhileInUse": "Solo mientras usas la app",
-  "@settingsGpsStatusWhileInUse": {
-    "description": "GPS permission while in use status"
-  },
   "settingsGpsStatusAlways": "Permitido siempre ✓",
   "@settingsGpsStatusAlways": {
     "description": "GPS permission always allowed status"
-  },
-  "settingsGpsStatusUnknown": "Desconocido",
-  "@settingsGpsStatusUnknown": {
-    "description": "GPS permission unknown status"
   },
   "settingsGpsReady": "¡Perfecto! El seguimiento en segundo plano está listo.",
   "@settingsGpsReady": {
@@ -857,10 +944,6 @@
   "@settingsTrackingDisabled": {
     "description": "Permanent tracking disabled message"
   },
-  "settingsSectionLegal": "Aspectos legales",
-  "@settingsSectionLegal": {
-    "description": "Legal section title"
-  },
   "settingsImpressum": "Aviso legal",
   "@settingsImpressum": {
     "description": "Imprint menu item"
@@ -880,10 +963,6 @@
   "settingsAppVersion": "Versión de la app",
   "@settingsAppVersion": {
     "description": "App version menu item"
-  },
-  "settingsSectionDiagnostics": "Diagnóstico y soporte",
-  "@settingsSectionDiagnostics": {
-    "description": "Diagnostics & Support section title"
   },
   "settingsDebugLog": "Generar registro de diagnóstico",
   "@settingsDebugLog": {
@@ -918,7 +997,7 @@
   "@settingsNotificationsBullet1": {
     "description": "Notifications feature 1"
   },
-  "settingsNotificationsBullet2": "Medicación según necesidad: avisos de disponibilidad (-30 min, -10 min, -5 min, 0 min)",
+  "settingsNotificationsBullet2": "Medicación según necesidad: recordatorios de disponibilidad (-30 min, -10 min, -5 min, 0 min)",
   "@settingsNotificationsBullet2": {
     "description": "Notifications feature 2"
   },
@@ -962,10 +1041,6 @@
   "settingsSectionMaps": "Mapas y ubicación",
   "@settingsSectionMaps": {
     "description": "Maps & Location section title"
-  },
-  "settingsMapsSubtitle": "Las secciones del mapa se descargan y se guardan automáticamente al mirarlas",
-  "@settingsMapsSubtitle": {
-    "description": "Maps subtitle"
   },
   "settingsCacheStorage": "Almacenamiento en caché",
   "@settingsCacheStorage": {
@@ -1061,10 +1136,6 @@
   "@settingsCacheCleared": {
     "description": "Cache cleared success message"
   },
-  "settingsSectionApp": "Ajustes de la app",
-  "@settingsSectionApp": {
-    "description": "App settings section title"
-  },
   "settingsTimeFormat": "Formato de hora",
   "@settingsTimeFormat": {
     "description": "Time format menu item"
@@ -1098,6 +1169,7 @@
     "description": "Language setting menu item"
   },
   "settingsLanguageChanged": "Idioma cambiado",
+  "settingsLanguageProfileWins": "Para ti vale tu propio idioma: {language}. Puedes cambiarlo en la selección de perfil.",
   "@settingsLanguageChanged": {
     "description": "Language changed confirmation message"
   },
@@ -1559,7 +1631,7 @@
       }
     }
   },
-  "eventReminderBefore": "Aviso {minutes} min antes",
+  "eventReminderBefore": "Recordatorio {minutes} min antes",
   "eventCount": "{count, plural, =0{Sin citas} =1{1 cita} other{{count} citas}}",
   "noEventsToday": "No hay citas este día",
   "calendarNothingPlannedToday": "Hoy no hay nada previsto.",
@@ -1777,6 +1849,7 @@
   "timelineProfileSwitched": "Cambio de perfil",
   "timelineToday": "Hoy, {time}",
   "timelineYesterday": "Ayer, {time}",
+  "timelineJumpToNow": "Ahora",
   "timelineTrackingDisabledTitle": "Seguimiento GPS desactivado",
   "timelineTrackingDisabledSubtitle": "La línea del tiempo muestra tus cambios de perfil y tus posiciones GPS a lo largo del tiempo.\n\nActiva el seguimiento GPS con el símbolo del satélite arriba a la derecha para recoger datos.",
   "timelineEmptyTitle": "Todavía no hay datos",
@@ -1891,25 +1964,10 @@
   "moreGamesDescription": "Respiración, memory y más para distraerse",
   "moreSettings": "Ajustes",
   "moreSettingsDescription": "Configuración de la app y privacidad",
-  "permissionsTitle": "Derechos y permisos",
-  "permissionsNoProfiles": "No hay perfiles",
-  "permissionsInfoText": "Aquí puedes gestionar los permisos de cada perfil. Toca un perfil para ver los detalles.",
-  "permissionsAllRightsAdmin": "Todos los derechos (administrador)",
-  "permissionsCount": "{count} permisos",
-  "permissionsAdminBadge": "Admin",
-  "permissionsAdministrator": "Administrador",
-  "permissionsDetailTitle": "Permisos: {name}",
-  "permissionsChangeError": "No se ha podido cambiar el permiso",
   "permissionsMakeAdminTitle": "Nombrar administrador",
   "permissionsMakeAdminMessage": "{name} pasará a ser administrador con todos los derechos. ¿Seguir?",
   "permissionsMakeAdminButton": "Hacer administrador",
-  "permissionsMakeAdminSubtitle": "Concede todos los derechos",
-  "permissionsRevokeAdminTitle": "Quitar el estado de administrador",
   "permissionsRevokeAdminMessage": "{name} perderá todos los derechos de administrador y tendrá los permisos estándar. ¿Seguir?",
-  "permissionsRevokeAdminSubtitle": "Vuelve a los derechos estándar",
-  "permissionsRevokeAdminError": "No se ha podido quitar el estado de administrador. El primer perfil tiene que seguir siendo administrador.",
-  "permissionsActiveCount": "{active} / {total} activos",
-  "permissionsCategorySystem": "Permisos del sistema",
   "permissionsCategoryChat": "Chat",
   "permissionsCategoryCalendar": "Calendario",
   "permissionsCategoryMedication": "Medicamentos",
@@ -1917,7 +1975,6 @@
   "permissionsCategoryFinder": "Buscador (lugares y objetos)",
   "permissionsCategoryDiary": "Diario",
   "permissionsCategoryEmergency": "Contactos de emergencia",
-  "permissionsCategorySecurity": "Seguridad",
   "profileAgeYears": "{age} años",
   "groundingTitle": "Anclaje",
   "groundingChooseLabel": "O elige tú algo",
@@ -2011,6 +2068,26 @@
   "medicationDeleteMessage": "¿Seguro que quieres borrar este medicamento?",
   "medicationDeleteConfirmMessage": "Este medicamento se borrará definitivamente.",
   "medicationDeleted": "Medicamento borrado",
+  "medicationManageTitle": "Gestionar",
+  "medicationRemindersSwitch": "Recordatorios",
+  "medicationRemindersOnShort": "Aurora te avisa a las horas de toma.",
+  "medicationRemindersMutedShort": "Silenciado. El medicamento sigue en el plan, solo que Aurora no avisa.",
+  "medicationMutedBadge": "Silenciado",
+  "medicationPause": "Pausar",
+  "medicationPauseHint": "Desaparece del plan diario, sin recordatorios. El historial se queda y puedes retomarlo cuando quieras.",
+  "medicationResume": "Retomar",
+  "medicationResumeHint": "Vuelve al plan diario, con los recordatorios tal como están.",
+  "medicationRemove": "Eliminar",
+  "medicationRemoveHint": "Borra el medicamento y todo su historial.",
+  "medicationRemoveConfirmMessage": "Se borrarán {name} y todas sus entradas. No se puede deshacer.\n\nSi solo ya no lo tomas: «Pausar» conserva el historial.",
+  "medicationStatusActive": "Activo",
+  "medicationStatusPaused": "En pausa",
+  "medicationMaxDailyValue": "{count} tomas",
+  "medicationMinGapValue": "{hours} horas",
+  "medicationTabHistory": "Historial",
+  "medicationHistoryNothing": "Nada anotado",
+  "medicationHistoryEmptyTitle": "Aún sin historial",
+  "medicationHistoryEmptyHint": "En cuanto alguien anota una toma, aparece aquí, con el día, la hora y quién fue.",
   "medicationIntakeTimesLabel": "Horas de toma",
   "medicationMaxDailyLabel": "Máx. al día",
   "medicationMinGapLabel": "Intervalo mín.",
@@ -2047,7 +2124,7 @@
       }
     }
   },
-  "medicationSnoozedUntil": "{name} — aviso a las {time}",
+  "medicationSnoozedUntil": "{name} — recordatorio a las {time}",
   "medicationAtTime": "a las {time}",
   "medicationDoseCountToday": "Disponibles: {available} de {max} hoy",
   "medicationLastTaken": "Última toma: {time}",
@@ -2109,7 +2186,6 @@
   "profilePasswordLabel": "Contraseña",
   "settingsMapCacheClearQuestion": "¿Borrar todas las teselas de mapa guardadas?",
   "settingsMapCacheCleared": "Caché de mapas vaciada",
-  "settingsMapPredownloadComingSoon": "La descarga previa llegará en una versión posterior",
   "settingsCacheLimitTitle": "Fijar el límite de la caché",
   "settingsCacheLimitValue": "Tamaño máximo de la caché: {size} MB",
   "settingsCacheLimitMegabytes": "{size} MB",
@@ -2127,20 +2203,13 @@
   "settingsTrackingDisableTitle": "¿Desactivar el seguimiento continuo?",
   "settingsTrackingDisableExplanation": "El seguimiento GPS vuelve a controlarse por perfil.",
   "settingsTestNotificationSent": "Notificación de prueba enviada",
-  "settingsAndroidSettingNeeded": "Hace falta un ajuste de Android",
   "settingsPermissionNeededFor": "Para usar el seguimiento continuo necesitas el permiso «{permission}».",
-  "settingsStepByStep": "Te lo explico paso a paso:",
   "settingsOpenAndroidSettings": "Abrir los ajustes de Android",
-  "settingsOpenNow": "Abrir ahora",
-  "settingsInTheSettings": "En los ajustes",
-  "settingsBackToAurora": "Vuelve a Aurora\nLa app detecta el cambio por sí sola.",
   "settingsUnderstood": "Entendido",
   "settingsResetPendingFor": "Perfil: {name}\nTiempo restante: {time}",
   "settingsWhatIs": "¿Qué es «{name}»?",
   "settingsAdminTrackingExplanation": "Como administrador puedes controlar el seguimiento GPS de TODOS los perfiles a la vez. Cuando está activo:",
   "settingsPrerequisite": "Antes hace falta el permiso de Android «{permission}».",
-  "settingsGpsPermission": "Permiso de GPS",
-  "settingsBackgroundReady": "Todo listo para el seguimiento continuo.",
   "settingsHowToEnable": "Cómo activar «{permission}»",
   "settingsLocationStaysHere": "Tus datos de ubicación se quedan en este dispositivo.",
   "settingsTrackingAlwaysOn": "Seguimiento siempre activo",
@@ -2153,12 +2222,10 @@
   "settingsCacheUsage": "{used} MB de {limit} MB • {count} teselas",
   "settingsPercent": "{value} %",
   "settingsCacheLimitLabel": "Límite de la caché",
-  "settingsPredownloadMaps": "Descargar mapas por adelantado",
-  "settingsPredownloadSubtitle": "Descarga mapas de una zona a tu alrededor",
   "settingsClearCache": "Vaciar la caché",
   "settingsClearCacheSubtitle": "Borrar todas las teselas de mapa guardadas",
-  "settingsDiscreetRemindersTitle": "Avisos sin contenido",
-  "settingsDiscreetRemindersOn": "En la pantalla de bloqueo solo pone «Aurora — aviso». Lo que significa lo ves al desbloquear.",
+  "settingsDiscreetRemindersTitle": "Recordatorios sin contenido",
+  "settingsDiscreetRemindersOn": "En la pantalla de bloqueo solo pone «Aurora — recordatorio». Lo que significa lo ves al desbloquear.",
   "settingsDiscreetRemindersOff": "La pantalla de bloqueo muestra el nombre y la dosis, o la cita, en claro.",
   "settingsWhatAuroraSends": "Lo que Aurora envía",
   "settingsWhatAuroraSendsSubtitle": "Consulta cada envío palabra por palabra",
@@ -2280,125 +2347,65 @@
   "doodleAvatarDone": "Listo",
   "doodleAvatarEmptyHint": "Dibuja algo primero",
   "permCreateProfilesLabel": "Añadir una parte",
-  "permCreateProfilesDesc": "Incorporar una parte nueva a Aurora",
   "permDeactivateProfilesLabel": "Ocultar una parte",
-  "permDeactivateProfilesDesc": "Ocultar una parte por un tiempo; se puede volver a mostrar",
   "permManagePermissionsLabel": "Gestionar los permisos",
-  "permManagePermissionsDesc": "Decidir qué pueden hacer las demás partes",
   "permAccessSettingsLabel": "Ajustes de la app",
-  "permAccessSettingsDesc": "Configurar y ajustar Aurora",
   "permViewChatLabel": "Leer el chat",
-  "permViewChatDesc": "Ver los mensajes del chat interno",
   "permSendChatMessageLabel": "Poder enviar de todo",
-  "permSendChatMessageDesc": "Un permiso que cubre todo tipo de mensaje; sustituye a los de abajo",
   "permSendTextMessageLabel": "Escribir texto",
-  "permSendTextMessageDesc": "Poner mensajes escritos en el chat",
   "permSendDoodleLabel": "Dibujar",
-  "permSendDoodleDesc": "Compartir dibujos y garabatos",
   "permSendVoiceMessageLabel": "Hablar",
-  "permSendVoiceMessageDesc": "Grabar algo y enviar tu propia voz",
   "permSendImageLabel": "Enviar imágenes",
-  "permSendImageDesc": "Hacer fotos o compartirlas desde la galería",
   "permSendVideoLabel": "Enviar vídeos",
-  "permSendVideoDesc": "Grabar vídeos o compartirlos desde la galería",
   "permDeleteOwnMessagesLabel": "Borrar los mensajes propios",
-  "permDeleteOwnMessagesDesc": "Retirar solo lo que has escrito tú",
   "permDeleteAllMessagesLabel": "Borrar mensajes de otras partes",
-  "permDeleteAllMessagesDesc": "Quitar también mensajes de otras partes; esto no se puede deshacer",
   "permViewCalendarLabel": "Ver el calendario",
-  "permViewCalendarDesc": "Ver lo que viene",
   "permCreateEventsLabel": "Añadir una cita",
-  "permCreateEventsDesc": "Poner citas nuevas en el calendario",
   "permEditOwnEventsLabel": "Cambiar las citas propias",
-  "permEditOwnEventsDesc": "Editar solo las citas que has puesto tú",
   "permEditAllEventsLabel": "Cambiar todas las citas",
-  "permEditAllEventsDesc": "Editar también las citas de otras partes",
   "permDeleteOwnEventsLabel": "Borrar las citas propias",
-  "permDeleteOwnEventsDesc": "Quitar solo las citas que has puesto tú",
   "permDeleteAllEventsLabel": "Borrar todas las citas",
-  "permDeleteAllEventsDesc": "Quitar también las citas de otras partes; esto no se puede deshacer",
   "permAttachEventMediaLabel": "Adjuntos de la cita",
-  "permAttachEventMediaDesc": "Adjuntar imágenes y notas a una cita",
   "permCommentOnCalendarEventsLabel": "Comentar",
-  "permCommentOnCalendarEventsDesc": "Añadir algo a una cita",
   "permViewMedicationLabel": "Ver los medicamentos",
-  "permViewMedicationDesc": "Ver qué recibe el cuerpo y cuándo",
   "permManageMedicationLabel": "Gestionar los medicamentos",
-  "permManageMedicationDesc": "Añadir, cambiar y quitar medicamentos",
   "permLogMedicationLabel": "Confirmar una toma",
-  "permLogMedicationDesc": "Marcar lo que ya se ha tomado",
   "permOverrideMedicationLogLabel": "Deshacer una toma",
-  "permOverrideMedicationLogDesc": "Cambiar una confirmación hecha por otra parte",
   "permCommentOnMedicationLabel": "Comentar",
-  "permCommentOnMedicationDesc": "Añadir algo a un medicamento",
   "permViewOwnDiaryLabel": "Tu propio diario",
-  "permViewOwnDiaryDesc": "Leer solo las entradas propias",
   "permViewAllDiariesLabel": "Todos los diarios",
-  "permViewAllDiariesDesc": "Leer también las entradas de otras partes",
   "permWriteDiaryLabel": "Escribir en el diario",
-  "permWriteDiaryDesc": "Escribir algo en el diario",
   "permViewContactsLabel": "Ver los contactos",
-  "permViewContactsDesc": "Ver quién está en tu entorno",
   "permManageContactsLabel": "Gestionar los contactos",
-  "permManageContactsDesc": "Añadir, cambiar y quitar personas",
   "permCommentOnContactsLabel": "Comentar",
-  "permCommentOnContactsDesc": "Añadir algo sobre una persona",
   "permViewFinderLabel": "Ver el buscador",
-  "permViewFinderDesc": "Consultar dónde está algo o dónde has estado",
   "permManageFinderLabel": "Gestionar el buscador",
-  "permManageFinderDesc": "Añadir, cambiar y quitar lugares y objetos",
   "permCommentOnFinderEntriesLabel": "Comentar",
-  "permCommentOnFinderEntriesDesc": "Añadir algo a un lugar u objeto",
   "permCreateDiaryEntryLabel": "Escribir una entrada",
-  "permCreateDiaryEntryDesc": "Crear una entrada nueva en el diario",
   "permEditOwnDiaryEntriesLabel": "Cambiar las entradas propias",
-  "permEditOwnDiaryEntriesDesc": "Editar solo las entradas que has escrito tú",
   "permEditAllDiaryEntriesLabel": "Cambiar todas las entradas",
-  "permEditAllDiaryEntriesDesc": "Editar también las entradas de otras partes",
   "permDeleteOwnDiaryEntriesLabel": "Borrar las entradas propias",
-  "permDeleteOwnDiaryEntriesDesc": "Quitar solo las entradas que has escrito tú",
   "permDeleteAllDiaryEntriesLabel": "Borrar todas las entradas",
-  "permDeleteAllDiaryEntriesDesc": "Quitar también las entradas de otras partes; esto no se puede deshacer",
   "permCommentOnDiaryEntriesLabel": "Comentar",
-  "permCommentOnDiaryEntriesDesc": "Añadir algo a una entrada",
   "permViewSharedEntriesLabel": "Entradas compartidas",
-  "permViewSharedEntriesDesc": "Leer entradas compartidas con varias partes",
   "permViewEmergencyContactsLabel": "Ver los contactos de emergencia",
-  "permViewEmergencyContactsDesc": "Ver a quién se puede acudir en una emergencia",
   "permCallEmergencyContactsLabel": "Llamar",
-  "permCallEmergencyContactsDesc": "Llamar a alguien directamente en una emergencia",
   "permEditEmergencyContactsLabel": "Editar los contactos de emergencia",
-  "permEditEmergencyContactsDesc": "Añadir, cambiar y quitar contactos de emergencia",
   "permResetPasswordsLabel": "Restablecer contraseñas",
-  "permResetPasswordsDesc": "Poner una contraseña nueva a otra parte",
   "permChangeOwnPasswordLabel": "Cambiar la contraseña propia",
-  "permChangeOwnPasswordDesc": "Poner una contraseña nueva solo para ti",
   "permEnableBiometricsLabel": "Activar la biometría",
-  "permEnableBiometricsDesc": "Entrar con huella o con la cara",
   "permViewChatTabLabel": "Área de chat",
-  "permViewChatTabDesc": "Poder ver el chat",
   "permViewFeedbackTabLabel": "Área de comentarios",
-  "permViewFeedbackTabDesc": "Escribir a quienes desarrollan Aurora",
   "permViewCalendarTabLabel": "Área de calendario",
-  "permViewCalendarTabDesc": "Poder ver el calendario",
   "permViewMedicationTabLabel": "Área de medicamentos",
-  "permViewMedicationTabDesc": "Poder ver el plan de medicación",
   "permViewDiaryTabLabel": "Área de diario",
-  "permViewDiaryTabDesc": "Poder ver el diario",
   "permViewContactsTabLabel": "Área de contactos",
-  "permViewContactsTabDesc": "Poder ver los contactos",
   "permViewFinderTabLabel": "Área del buscador",
-  "permViewFinderTabDesc": "Poder ver el buscador",
   "permViewEmergencyTabLabel": "Área de emergencia",
-  "permViewEmergencyTabDesc": "Poder ver la ayuda de emergencia",
   "permViewHelpTabLabel": "Área de ayuda",
-  "permViewHelpTabDesc": "Poder ver la ayuda y los servicios de apoyo",
   "permViewMantrasTabLabel": "Área de mantras",
-  "permViewMantrasTabDesc": "Poder ver los mantras",
   "permViewGamesTabLabel": "Área de juegos",
-  "permViewGamesTabDesc": "Poder ver los juegos",
   "permViewTimelineTabLabel": "Área de la línea del tiempo",
-  "permViewTimelineTabDesc": "Ver cuándo estuvo cada parte, y en qué lugar",
   "permissionYouNeed": "Necesitas: {permission}",
   "fact01": "El TID (trastorno de identidad disociativo) afecta a cerca del 1-2 % de la población.",
   "fact02": "Cada persona de un sistema puede tener sus propios gustos, capacidades y recuerdos.",
@@ -2479,21 +2486,17 @@
   "settingsGpsStatusLine": "⚠️ {status}",
   "settingsGpsBackgroundRuns": "El GPS funciona todo el tiempo en segundo plano",
   "settingsGpsOverridesAll": "Sustituye el ajuste de seguimiento de TODOS los perfiles",
-  "settingsStepTapPermission": "Toca «Permisos»",
-  "settingsStepTapLocation": "Toca «Ubicación»",
-  "settingsStepChooseAlways": "Elige «Permitir siempre»",
   "settingsStepOpenSettings": "Toca abajo «Abrir los ajustes de Android»",
   "settingsStepPermissionLocation": "Elige «Permisos» → «Ubicación»",
   "settingsPositionAlways": "La posición se registra de forma continua",
   "settingsOverridesProfiles": "Sustituye el ajuste de cada perfil",
   "settingsAllProfilesTracked": "Todos los perfiles se registran automáticamente",
-  "settingsOpenGpsSettings": "Abrir los ajustes de GPS",
   "settingsGpsRunsForAll": "El GPS funciona todo el tiempo para todos los perfiles",
   "settingsNotifAsNeeded": "Medicación a demanda: Aurora avisa en cuanto se permite la siguiente dosis, 30, 10 y 5 minutos antes",
   "settingsNotifWorksClosed": "Funciona también con la app cerrada",
   "aboutTitle": "Sobre Aurora",
   "aboutChat": "Hablar entre vosotros: con texto, imágenes, vídeos y notas de voz",
-  "aboutCalendar": "Citas compartidas con avisos y adjuntos",
+  "aboutCalendar": "Citas compartidas con recordatorios y adjuntos",
   "aboutMedication": "Planes de medicación con registro de cada toma",
   "aboutEmergencyDiary": "Un cuaderno compartido para crisis y momentos importantes",
   "aboutContacts": "Tus valoraciones y notas sobre las personas de tu entorno",
@@ -2503,7 +2506,6 @@
   "telemetryExplanation": "Aurora puede contar qué áreas se abren y dónde se interrumpen los procesos. Solo se envía el nombre del evento, el día y la versión de la app: ningún texto, ninguna ubicación y nada que lleve hasta ti. Cada mensaje se envía de inmediato, así que la hora de llegada es también la hora en la que usaste Aurora.",
   "telemetryChangeLater": "Puedes cambiarlo cuando quieras en los ajustes, en «Lo que Aurora envía». Allí también aparece cada mensaje que ha salido de tu dispositivo.",
   "releaseNotesTitle": "Lo que ha cambiado",
-  "releaseNotesHighlights": "A partir de ahora, Aurora avisa una vez después de una actualización para contarte qué hay de nuevo. Por lo demás, todo sigue igual: tus contenidos siguen solo en este dispositivo.",
   "releaseNotesAsk": "Y lo más importante: ¿qué te falta? Aurora se hace para quienes la usan, y leemos cada línea que nos llega.",
   "releaseNotesWhatHappens": "Si escribes, solo nos llega tu texto. Ningún identificador, ningún lugar, ningún nombre. Todo lo que se ha enviado aparece en los ajustes, en «Lo que Aurora envía».",
   "releaseNotesFeedbackAction": "Cuéntanos qué falta",
@@ -2547,6 +2549,7 @@
   "profilePasswordOptionalMin": "Protege tu perfil con una contraseña (opcional, mínimo 4 caracteres)",
   "thankYouWeReceived": "Hemos recibido tu informe y te escribiremos por correo si tenemos preguntas.",
   "thankYouWeCheck": "Revisamos tu informe",
+  "thankYouWeReproduce": "Intentamos reproducir el error",
   "thankYouWeFix": "Trabajamos en una solución",
   "thankYouYouGetMail": "Recibirás un correo en cuanto la solución esté lista",
   "thankYouNextUpdate": "La solución llegará con la próxima actualización",
@@ -2687,7 +2690,7 @@
   "timePickerHours": "Horas",
   "timePickerMinutes": "Minutos",
   "commentsNoneYet": "Todavía sin comentarios",
-  "notificationDiscreetBody": "Aviso: toca para verlo",
+  "notificationDiscreetBody": "Recordatorio: toca para verlo",
   "reminderNoPermission": "Sin permiso de notificaciones, Aurora no puede avisarte. Puedes concederlo en los ajustes de Android, en Apps → Aurora → Notificaciones.",
   "telemetryConsentAccept": "Sí, con gusto",
   "telemetryConsentDecline": "Continuar sin",
@@ -2718,6 +2721,8 @@
   "feedbackGithubSubtitle": "Errores e incidencias",
   "timelineProfileSwitch": "Cambio de perfil",
   "debugLogReportTitle": "Informe de diagnóstico",
+  "debugLogCopied": "✅ Informe de diagnóstico copiado al portapapeles ({size} KB)",
+  "debugLogCopyFailed": "No se ha podido copiar: {error}",
   "formPickImage": "Elegir una imagen",
   "permissionGrant": "Conceder el permiso",
   "pwResetRestart": "Empezar de nuevo",
@@ -2735,13 +2740,13 @@
   "permissionCameraTitle": "Permiso de cámara",
   "permissionGalleryTitle": "Permiso de galería",
   "profileResetFristExplanation": "Ese es el tiempo que espera un restablecimiento de contraseña antes de surtir efecto. Si inicias sesión durante ese plazo, se cancela.",
+  "profileResetFristDays": "{count, plural, =1{1 día} other{{count} días}}",
   "cameraNotFound": "No se ha encontrado ninguna cámara",
   "validationNameRequired": "Escribe un nombre",
   "validationPasswordRequired": "Escribe la contraseña",
   "transportCopyManually": "Puedes copiar el texto y enviarlo tú.",
   "statusSending": "Enviando...",
   "errorReportSendButton": "Enviar el informe",
-  "settingsGpsStatusAlwaysReady": "✅ Permitido siempre (¡listo!)",
   "gpsActive": "GPS activo",
   "gpsOff": "GPS apagado",
   "gpsStatusUnknown": "Estado del GPS desconocido",
@@ -2751,6 +2756,7 @@
   "pwResetWrongPassword": "Contraseña incorrecta",
   "pwResetStartTitle": "¿Empezar el restablecimiento?",
   "pwResetExpired": "El plazo ha terminado",
+  "pwResetDeadlineHours": "{hours, plural, =1{Plazo: 1 hora} other{Plazo: {hours} horas}}",
   "pwResetForgotPassword": "¿Has olvidado la contraseña?",
   "commentWritePlaceholder": "Escribe un comentario...",
   "profileVisibilityTitle": "A qué perfiles pertenece",
@@ -2760,6 +2766,9 @@
   "noProfileAvailable": "Todavía no hay ningún perfil",
   "ratingVeryNegative": "Muy negativo",
   "ratingVeryPositive": "Muy positivo",
+  "ratingNegative": "Negativo",
+  "ratingNeutral": "Neutral",
+  "ratingPositive": "Positivo",
   "errorReportHelpUs": "Ayúdanos a arreglar el fallo",
   "errorReportDetailsSection": "Detalles del informe",
   "trackingLabel": "Seguimiento GPS: ",
@@ -2773,6 +2782,8 @@
   "timeInHours": "{count, plural, =1{en una hora} other{en {count} horas}}",
   "timeInDays": "{count, plural, =1{en un día} other{en {count} días}}",
   "languageFollowApp": "Idioma de la aplicación",
+  "profileLanguageOf": "Idioma de {name}: {language}",
+  "profileLanguageOfApp": "Idioma de {name}: el de la app",
   "profileLanguageSubtitle": "El idioma en el que Aurora habla con esta parte",
   "contactCategoryFamily": "Familia",
   "contactCategoryFriends": "Amigos",
@@ -2813,7 +2824,6 @@
   "startupDeleteIncomplete": "No se pudo borrar todo. Una parte sigue aquí.",
   "reminderPermissionBlocked": "Aurora aún no puede avisarte. Puedes conceder el permiso en los ajustes del sistema.",
   "reminderOpenSettings": "Abrir ajustes",
-  "settingsTrackingPermissionNeeded": "Para registrar tu camino, Aurora necesita acceso a la ubicación.",
   "settingsHowToEnableLocation": "Cómo dar acceso a la ubicación:",
   "settingsStepChooseWhileUsing": "Elige «Mientras usas la aplicación»",
   "settingsTrackingNotice": "Mientras Aurora registra, hay una notificación en la barra. Sin notificación, no se registra.",
@@ -2832,5 +2842,74 @@
   "trackingPausedBody": "Tras el reinicio, Aurora vuelve a registrar tu recorrido solo cuando la abres. Toca aquí.",
   "aboutAuroraSemantics": "Acerca de Aurora",
   "openTimelineSemantics": "Abrir línea de tiempo",
-  "timeMapSemantics": "Abrir línea de tiempo: mapa con hora y lugar"
+  "timeMapSemantics": "Abrir línea de tiempo: mapa con hora y lugar",
+  "releaseNotesAllgemein": "Aurora ha crecido un poco. Todo lo que conoces sigue en su sitio, y tus contenidos siguen solo en este dispositivo.",
+  "releaseNotesFassung3022": "Esta vez fueron pequeños arreglos internos para que Aurora siga siendo fiable. Todo lo que conoces sigue en su sitio, y tus contenidos siguen solo en este dispositivo.",
+  "releaseNotesFassung3024": "• Partes: pausar ahora funciona de verdad. Puedes retomar una parte en Ajustes → «Partes y permisos».\n• Permisos: unos pocos interruptores claros en lugar de sesenta casillas.\n• Ajustes: reordenados y accesibles hasta el final.\n• Recordatorios: cuando un recordatorio se elimina, se pausa o se completa, su notificación también desaparece.\n• Ubicación: la grabación ahora también se inicia de forma fiable en interiores.",
+  "releaseNotesFassung3023": "• Medicamentos: gestionar, silenciar y el historial ahora se encuentran más fácilmente.\n• Recordatorios: Aurora te lo explica brevemente antes de que tu dispositivo pida permiso.\n• Anclaje: los ejercicios muestran cómo seguir con un botón Siguiente y deslizando.\n• Chat: el teclado ya no se abre ni se cierra solo.\n• Idiomas: los cinco idiomas están revisados; la fecha y la hora siguen tu idioma.",
+  "updateHinweisTitel": "Aurora se ha actualizado",
+  "updateHinweisText": "Echa un vistazo a lo nuevo.",
+  "reminderAskTitle": "¿Puede Aurora recordártelo?",
+  "reminderAskBody": "Entonces Aurora te avisará a tus horas de toma y antes de las citas. Solo para eso, para nada más.",
+  "reminderAskStepNotifications": "Tu dispositivo va a preguntar por las notificaciones. Toca «Permitir».",
+  "reminderAskStepExactAlarms": "Puede que después muestre «Alarmas y recordatorios». Actívalo para que Aurora llegue puntual.",
+  "reminderAskYes": "Sí, recuérdamelo",
+  "reminderAskNotNow": "Ahora no",
+  "reminderDeniedBody": "Tu dispositivo ha dicho que no. Puedes cambiarlo en cualquier momento en sus ajustes. Hasta entonces todo sigue en tu lista, solo que Aurora no avisará.",
+  "reminderSettingsPathBody": "El permiso está ahora en los ajustes de tu dispositivo. Activa allí las notificaciones de Aurora y volverá a avisarte.",
+  "reminderLater": "Más tarde",
+  "reminderFormNotAllowed": "Aurora aún no puede recordártelo. Se guardará igualmente, solo que el recordatorio no llegará.",
+  "groundingDoneTitle": "El ejercicio ha terminado.",
+  "settingsSectionPersonal": "Para ti",
+  "@settingsSectionPersonal": {
+    "description": "Settings group header: language and time format. Warm and short"
+  },
+  "settingsSectionAbout": "Sobre Aurora",
+  "@settingsSectionAbout": {
+    "description": "Settings group header: what Aurora sends, privacy, imprint, diagnostics, version"
+  },
+  "settingsLocationTitle": "Ubicación",
+  "@settingsLocationTitle": {
+    "description": "Settings row title for the location permission. Below it stands one state word"
+  },
+  "settingsLocationStateAllowed": "Permitida",
+  "@settingsLocationStateAllowed": {
+    "description": "State word under Location: Aurora may use the location. Same verb as settingsLocationActionAllow"
+  },
+  "settingsLocationStateNotAllowed": "Todavía no permitida",
+  "@settingsLocationStateNotAllowed": {
+    "description": "State word under Location: permission not given yet. The row offers settingsLocationActionAllow"
+  },
+  "settingsLocationStateOff": "Desactivada en el dispositivo",
+  "@settingsLocationStateOff": {
+    "description": "State word under Location: location is switched off for the whole device. The row offers settingsLocationActionTurnOn"
+  },
+  "settingsLocationStateBlocked": "Rechazada en Android",
+  "@settingsLocationStateBlocked": {
+    "description": "State word under Location: the system will not ask again, only the Android settings can change it"
+  },
+  "settingsLocationActionAllow": "Permitir",
+  "@settingsLocationActionAllow": {
+    "description": "Button on the Location row: asks the system for the location permission"
+  },
+  "settingsLocationActionTurnOn": "Activar",
+  "@settingsLocationActionTurnOn": {
+    "description": "Button on the Location row: opens the device location settings to switch location on"
+  },
+  "settingsLocationActionOpenAndroid": "Abrir en Android",
+  "@settingsLocationActionOpenAndroid": {
+    "description": "Button on the Location row when the system no longer asks: opens a sheet with the steps in the Android settings"
+  },
+  "settingsOfflineMapsTitle": "Mapas sin conexión",
+  "@settingsOfflineMapsTitle": {
+    "description": "Settings row and page title: stored map tiles, limit, pre-download, clear"
+  },
+  "settingsDiagnosticsTitle": "Diagnóstico",
+  "@settingsDiagnosticsTitle": {
+    "description": "Settings row and page title: debug log and scheduled notifications"
+  },
+  "settingsInfoTooltip": "¿Qué significa esto?",
+  "@settingsInfoTooltip": {
+    "description": "Tooltip and screen reader label of the (i) button that opens an explanation"
+  }
 }

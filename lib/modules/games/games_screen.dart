@@ -45,7 +45,14 @@ class GamesScreen extends StatelessWidget {
     return Scaffold(
       appBar: const StandardAppBar(),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        // Unten kommt die Systemleiste dazu: Android zeichnet randlos, und
+        // die letzte Karte lag sonst halb unter den Navigationsknöpfen.
+        padding: EdgeInsets.fromLTRB(
+          16,
+          16,
+          16,
+          16 + MediaQuery.viewPaddingOf(context).bottom,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

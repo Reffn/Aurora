@@ -22,7 +22,11 @@ class MainActivity : FlutterActivity() {
      */
     override fun onResume() {
         super.onResume()
-        (getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager)
-            ?.cancel(WegaufzeichnungBootReceiver.MELDUNGS_ID)
+        val manager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
+        manager?.cancel(WegaufzeichnungBootReceiver.MELDUNGS_ID)
+        // Dasselbe für den Update-Hinweis: Wer Aurora geöffnet hat, sieht den
+        // Neuerungs-Schirm — die Meldung hat ihren Zweck erfüllt.
+        manager?.cancel(UpdateHinweisReceiver.MELDUNGS_ID)
     }
 }

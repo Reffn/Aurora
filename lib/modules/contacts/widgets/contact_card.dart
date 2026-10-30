@@ -96,9 +96,11 @@ class ContactCard extends StatelessWidget {
 
                         // Letzter Kommentar (neuester = letzter in sortierter Liste)
                         final latestComment = comments.last;
-                        final profile = dataEntry.getProfiles().firstWhere(
+                        // Auch pausierte Anteile: Sonst bekäme ein anderer
+                        // Anteil ihren Kommentar zugeschrieben.
+                        final profile = dataEntry.getAllProfiles().firstWhere(
                           (p) => p.id == latestComment.profileId,
-                          orElse: () => dataEntry.getProfiles().first,
+                          orElse: () => dataEntry.getAllProfiles().first,
                         );
 
                         return Column(

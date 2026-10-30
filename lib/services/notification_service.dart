@@ -344,8 +344,15 @@ class NotificationService extends BaseService {
       // Die genaue Uhrzeit ist eine eigene Freigabe und ein eigener
       // Systembildschirm. Wir fragen danach, aber sie entscheidet nicht
       // darüber, ob überhaupt erinnert wird — siehe unten.
-      final exactAlarmGranted = await androidPlugin
-          ?.requestExactAlarmsPermission();
+      //
+      // Nur nach einem Ja: Am Emulator warf ein „Nicht zulassen" den
+      // Menschen sofort aus der App auf die Systemseite „Wecker und
+      // Erinnerungen" — ein zweiter fremder Schirm direkt nach dem ersten,
+      // für eine Freigabe, die ohne Benachrichtigungen ohnehin nichts
+      // bewirkt.
+      final exactAlarmGranted = (granted ?? false)
+          ? await androidPlugin?.requestExactAlarmsPermission()
+          : false;
 
       logger.info(
         LogCategory.service,

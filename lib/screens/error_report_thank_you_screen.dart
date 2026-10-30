@@ -331,11 +331,7 @@ class ErrorReportThankYouScreen extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           _buildStep(context, '1', l10n.thankYouWeCheck),
-          _buildStep(
-            context,
-            '2',
-            'Wir versuchen, den Fehler zu reproduzieren',
-          ),
+          _buildStep(context, '2', l10n.thankYouWeReproduce),
           _buildStep(context, '3', l10n.thankYouWeFix),
           if (userEmail != null && userEmail!.isNotEmpty)
             _buildStep(

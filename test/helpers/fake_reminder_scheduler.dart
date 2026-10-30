@@ -27,12 +27,31 @@ class FakeReminderScheduler implements ReminderScheduler {
 
   int scheduleCalls = 0;
 
+  /// Was schon in der Leiste steht: Kennung → Schlüssel (auf Android der Tag).
+  ///
+  /// Verhält sich wie Android: Ein `cancel` ohne Tag lässt eine getaggte
+  /// Meldung stehen, nur [dismiss] mit dem richtigen Schlüssel räumt sie ab.
+  /// Die erste Fassung dieser Attrappe lieferte eine Payload, die das echte
+  /// Plugin auf Android nie liefert — die Tests waren grün, am A14 blieb die
+  /// Meldung stehen.
+  final Map<int, String?> shown = {};
+  final List<int> dismissed = [];
+
   /// Vorbelegung für den Ist-Zustand, etwa um Karteileichen zu prüfen.
   void seed(int id) => scheduled[id] = null;
+
+  /// Eine Meldung, die schon gefeuert hat und angezeigt wird.
+  void show(int id, String? key) => shown[id] = key;
 
   @override
   Future<Set<int>> pendingOwnIds() async =>
       scheduled.keys.where(isOwnId).toSet();
+
+  @override
+  Future<Map<int, String?>> shownOwn() async => {
+    for (final entry in shown.entries)
+      if (isOwnId(entry.key)) entry.key: entry.value,
+  };
 
   @override
   Future<void> schedule(
@@ -58,6 +77,13 @@ class FakeReminderScheduler implements ReminderScheduler {
   Future<void> cancel(int id) async {
     cancelled.add(id);
     scheduled.remove(id);
+  }
+
+  @override
+  Future<void> dismiss(int id, {required String key}) async {
+    if (shown[id] != key) return;
+    dismissed.add(id);
+    shown.remove(id);
   }
 
   @override

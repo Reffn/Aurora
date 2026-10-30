@@ -30,24 +30,32 @@ class StepView extends StatelessWidget {
     final step = exercise.steps[index];
     final assetPath = GroundingImages.resolve(step.imageKey);
 
+    var bild = assetPath != null
+        ? Image.asset(
+            assetPath,
+            width: 220,
+            height: 220,
+            fit: BoxFit.contain,
+            // Fehlt das Asset trotz Eintrag, springt das Symbol ein.
+            errorBuilder: (context, error, stack) =>
+                _FallbackSymbol(exercise: exercise),
+          )
+        : _FallbackSymbol(exercise: exercise);
+
+    final hold = step.hold;
+    if (hold != null) {
+      bild = _HoldRing(
+        key: ValueKey('grounding-hold-$index'),
+        duration: hold,
+        color: exercise.color,
+        child: bild,
+      );
+    }
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Expanded(
-          child: Center(
-            child: assetPath != null
-                ? Image.asset(
-                    assetPath,
-                    width: 220,
-                    height: 220,
-                    fit: BoxFit.contain,
-                    // Fehlt das Asset trotz Eintrag, springt das Symbol ein.
-                    errorBuilder: (context, error, stack) =>
-                        _FallbackSymbol(exercise: exercise),
-                  )
-                : _FallbackSymbol(exercise: exercise),
-          ),
-        ),
+        Expanded(child: Center(child: bild)),
         ProgressDots(
           active: index + 1,
           total: exercise.steps.length,
@@ -137,6 +145,56 @@ class StepView extends StatelessWidget {
       default:
         return '';
     }
+  }
+}
+
+/// Der Ring um das Bild, der sich über die Verweildauer füllt.
+///
+/// Das Modell versprach ihn seit dem ersten Tag („zeichnet einen Ring"),
+/// gezeichnet hat ihn nie jemand. Er macht vor, was der Schritt verlangt —
+/// vier Sekunden einatmen, sechs ausatmen — und ist damit die eine
+/// Bewegung, die Richtlinie 11 ausdrücklich erlaubt. Er blockiert nichts:
+/// Weitertippen geht jederzeit, der Ring ist Angebot, nicht Schranke.
+///
+/// Endlich, nicht wiederholend — ein Ring, der nie zur Ruhe kommt, hält
+/// jeden `pumpAndSettle` an. Bei abgeschalteter Bewegung steht er voll.
+class _HoldRing extends StatelessWidget {
+  const _HoldRing({
+    required this.duration,
+    required this.color,
+    required this.child,
+    super.key,
+  });
+
+  final Duration duration;
+  final Color color;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final reduceMotion = MediaQuery.disableAnimationsOf(context);
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0, end: 1),
+      duration: reduceMotion ? Duration.zero : duration,
+      builder: (context, value, child) => Stack(
+        alignment: Alignment.center,
+        children: [
+          SizedBox(
+            width: 256,
+            height: 256,
+            child: CircularProgressIndicator(
+              value: value,
+              strokeWidth: 5,
+              strokeCap: StrokeCap.round,
+              color: color.withValues(alpha: 0.7),
+              backgroundColor: color.withValues(alpha: 0.15),
+            ),
+          ),
+          child!,
+        ],
+      ),
+      child: child,
+    );
   }
 }
 

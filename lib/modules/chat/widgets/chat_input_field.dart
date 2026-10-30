@@ -39,14 +39,36 @@ class ChatInputField extends StatefulWidget {
   State<ChatInputField> createState() => _ChatInputFieldState();
 }
 
-class _ChatInputFieldState extends State<ChatInputField> {
+class _ChatInputFieldState extends State<ChatInputField>
+    with WidgetsBindingObserver {
   final TextEditingController _controller = TextEditingController();
+  final FocusNode _fokus = FocusNode();
   bool _hasText = false;
+  bool _tastaturOffen = false;
 
   @override
   void initState() {
     super.initState();
     _controller.addListener(_onTextChanged);
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  /// Wer die Tastatur schließt, ist mit Schreiben fertig — dann gibt das Feld
+  /// den Fokus ab.
+  ///
+  /// Mit der Zurück-Taste geht nur die Tastatur zu, der Fokus bleibt. Jede
+  /// Überlagerung, die danach auf- und wieder zugeht (Sprachaufnahme,
+  /// Bildansicht), gibt ihn beim Schließen zurück, und die Tastatur sprang
+  /// ungefragt auf. Am Gerät landete der nächste Tipp so als Buchstabe im
+  /// Feld.
+  @override
+  void didChangeMetrics() {
+    if (!mounted) return;
+    final offen = View.of(context).viewInsets.bottom > 0;
+    if (_tastaturOffen && !offen && _fokus.hasPrimaryFocus) {
+      _fokus.unfocus();
+    }
+    _tastaturOffen = offen;
   }
 
   void _onTextChanged() {
@@ -138,6 +160,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
                   textField: true,
                   child: TextField(
                     controller: _controller,
+                    focusNode: _fokus,
                     enabled: widget.enabled && widget.canSendText,
                     maxLines: 4,
                     minLines: 1,
@@ -222,6 +245,8 @@ class _ChatInputFieldState extends State<ChatInputField> {
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _fokus.dispose();
     _controller.dispose();
     super.dispose();
   }

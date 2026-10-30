@@ -4,118 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aurora - DIS Support App | Privacy-First</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Outfit', 'sans-serif'],
-            },
-            animation: {
-              'float': 'float 10s ease-in-out infinite',
-              'float-delayed': 'float 10s ease-in-out 5s infinite',
-              'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            },
-            keyframes: {
-              float: {
-                '0%, 100%': { transform: 'translateY(0) scale(1)' },
-                '50%': { transform: 'translateY(-20px) scale(1.05)' },
-              }
-            }
-          },
-        },
-      }
-    </script>
-    <style>
-      /* Custom scrollbar for a cleaner look */
-      ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #0F1014;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #2d2d35;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #4a4a55;
-      }
-      .hide-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
-      .hide-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
+    <!--
+      Diese Seite lädt nichts von fremden Rechnern. Bis zum 12.08.2026 standen
+      hier vier Verbindungen nach außen, bevor der erste Satz zu lesen war:
 
-      /* Rainbow Glow Animation for Feature Screenshots */
-      @keyframes rainbow-spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
+        cdn.tailwindcss.com   — CSS-Werkzeug zur Laufzeit im Browser
+        fonts.googleapis.com  — Stylesheet der Schrift
+        fonts.gstatic.com     — die Schriftdatei selbst
+        aistudiocdn.com       — React per Importmap (wirkungslos, aber scharf)
 
-      .rainbow-glow-container {
-        position: relative;
-        isolation: isolate;
-      }
+      Dazu kam Google Analytics aus dem Bündel. Auf einer Seite, die
+      „Kein Tracking, keine Analytics, absolut keine Werbung" verspricht.
 
-      .rainbow-glow-container::before {
-        content: '';
-        position: absolute;
-        inset: -3px;
-        background: conic-gradient(
-          from 0deg,
-          #ff0000 0deg,
-          #ff7f00 51deg,
-          #ffff00 102deg,
-          #00ff00 153deg,
-          #00ffff 204deg,
-          #0000ff 255deg,
-          #8b00ff 306deg,
-          #ff0000 360deg
-        );
-        border-radius: 1.125rem;
-        opacity: 0.7;
-        filter: blur(25px);
-        z-index: -1;
-        animation: rainbow-spin 8s linear infinite;
-      }
-
-      .rainbow-glow-container:hover::before {
-        opacity: 0.95;
-        filter: blur(35px);
-      }
-
-      .rainbow-glow-container > * {
-        position: relative;
-        z-index: 1;
-      }
-    </style>
-
-  <script type="importmap">
-{
-  "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0"
-  }
-}
-</script>
-  <script type="module" crossorigin src="/assets/index-C7KUBOFV.js"></script>
-</head>
+      Tailwind wird jetzt beim Bauen aufgelöst (tailwind.config.js), die
+      Schrift liegt unter /fonts, React ist gebündelt. Übrig bleibt: diese
+      Seite und sonst nichts.
+    -->
+    <script type="module" crossorigin src="/assets/index-DIShJQTs.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-C0DaHyVK.css">
+  </head>
   <body class="bg-[#0F1014] text-white overflow-x-hidden antialiased selection:bg-[#FFAB91] selection:text-black">
     <div id="root"></div>
-</body>
+    <!-- 3ofUs house bar: rides the nav's bottom border right of the wordmark, plain HTML/CSS
+         so the privacy promise (nothing from third parties) holds. Same pattern on every 3ofUs site.
+         Ein Link, keine Last: der Browser holt von 3ofus.net nichts, bis jemand draufdrückt. -->
+    <style>
+    .house{position:fixed;z-index:60;top:80px;left:calc(max(0px,(100vw - 72rem)/2) + 9.5rem);transform:translateY(-50%);
+    display:flex;align-items:center;gap:.45em;padding:.3em .85em;border-radius:999px;background:#0F1014;
+    border:1px solid rgba(255,255,255,.14);color:#e5e7eb;font:700 .72rem/1 Outfit,system-ui,sans-serif;letter-spacing:.02em;white-space:nowrap}
+    .house a{color:#FFAB91;text-decoration:none}.house a:hover{text-decoration:underline}.house span[aria-hidden]{opacity:.5}
+    @media (min-width:768px){.house{left:calc(max(0px,(100vw - 72rem)/2) + 10rem)}}
+    </style>
+    <div class="house" role="navigation" aria-label="3ofUs"><a href="https://3ofus.net/">3ofUs</a><span aria-hidden="true">›</span><span>Aurora</span></div>
+  </body>
 </html>

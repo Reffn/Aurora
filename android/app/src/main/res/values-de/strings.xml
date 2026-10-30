@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_hinweis_titel">Aurora ist aktualisiert</string>
+    <string name="update_hinweis_text">Schau kurz rein, was neu ist.</string>
+    <string name="update_hinweis_kanal">Nach einem Update</string>
+</resources>

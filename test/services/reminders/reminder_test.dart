@@ -91,4 +91,57 @@ void main() {
     };
     expect(arten.length, ReminderKind.values.length);
   });
+
+  // Der Schlüssel reist als Payload mit der Meldung. Nur über ihn lässt
+  // sich bei einer schon angezeigten Meldung sagen, wozu sie gehört.
+  group('Vom Schluessel zurueck zum Ziel', () {
+    test('Dosis', () {
+      final dose = DoseTarget(
+        medicationId: 'm1',
+        date: DateTime(2026, 8, 7),
+        scheduledTime: '12:50',
+      );
+      expect(ReminderTarget.fromSeed(dose.seed), dose);
+    });
+
+    test('Bedarfsdosis mit Praefix', () {
+      final dose = DoseTarget(
+        medicationId: 'm1',
+        date: DateTime(2026, 12, 31),
+        scheduledTime: 'prn-14:05',
+      );
+      expect(ReminderTarget.fromSeed(dose.seed), dose);
+    });
+
+    test('Termin', () {
+      final ziel = EventTarget(
+        eventId: 'e1',
+        startTime: DateTime(2026, 8, 7, 17, 30),
+      );
+      expect(ReminderTarget.fromSeed(ziel.seed), ziel);
+    });
+
+    test('Termin in UTC bleibt derselbe Zeitpunkt', () {
+      final ziel = EventTarget(
+        eventId: 'e1',
+        startTime: DateTime.utc(2026, 8, 7, 15, 30),
+      );
+      expect(ReminderTarget.fromSeed(ziel.seed), ziel);
+    });
+
+    test('Unlesbares ergibt null statt einer Ausnahme', () {
+      for (final kaputt in [
+        null,
+        '',
+        'kaputt',
+        'med|m1',
+        'med|m1|2026-8|12:50',
+        'med|m1|2026-8-7|1250',
+        'evt|e1|kein-datum',
+        'xyz|a|b|c',
+      ]) {
+        expect(ReminderTarget.fromSeed(kaputt), isNull, reason: '$kaputt');
+      }
+    });
+  });
 }

@@ -4,10 +4,20 @@ class ContactConfig {
   static const String supportEmail = 'info@3ofus.app';
 
   /// Discord Server Invite-URL (leer = wird nicht angezeigt)
-  static const String discordInviteUrl = 'https://discord.gg/WysKtXGh';
+  ///
+  /// Eine eigene Weiterleitung, kein Einladungscode: `3ofus.net/discord`
+  /// leitet per 302 auf die Einladung (`F:\3ofus-web\firebase.json`). Der
+  /// Code stand bis 3.0.23 fest hier, lief ab und machte den Link in jeder
+  /// ausgelieferten Fassung tot (`Unknown Invite`, gefunden 29.10.2026).
+  /// Jetzt lässt sich die Einladung tauschen, ohne eine neue Fassung zu bauen.
+  static const String discordInviteUrl = 'https://3ofus.net/discord';
 
   /// Website-URL (aus Impressum)
-  static const String websiteUrl = 'https://www.3ofus.app';
+  ///
+  /// Ohne `www`: Für `www.3ofus.app` gibt es keinen DNS-Eintrag. Der Link
+  /// auf dem Dankeschön-Schirm nach dem Feedback lief bis 3.0.23 ins Leere
+  /// (gefunden 29.10.2026).
+  static const String websiteUrl = 'https://3ofus.app';
 
   /// GitHub Repository URL (leer = wird nicht angezeigt)
   static const String githubRepoUrl = 'https://github.com/Reffn/Aurora';

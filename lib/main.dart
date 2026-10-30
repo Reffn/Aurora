@@ -53,11 +53,13 @@ import 'package:dis_app/services/telemetry_consent.dart';
 import 'package:dis_app/services/telemetry_dispatcher.dart';
 import 'package:dis_app/services/telemetry_recorder.dart';
 import 'package:dis_app/services/timeline_data_service.dart';
+import 'package:dis_app/services/update_notice.dart';
 import 'package:dis_app/modules/splash/splash_screen.dart';
 import 'package:dis_app/utils/app_colors.dart';
 import 'package:dis_app/utils/time_phase.dart';
 import 'package:dis_app/widgets/crash_boundary.dart';
 import 'package:dis_app/widgets/gps_status_action.dart';
+import 'package:dis_app/widgets/hintergrund_ohne_fokus.dart';
 import 'package:dis_app/widgets/quick_timeline_band.dart';
 import 'package:dis_app/widgets/reset_banner.dart';
 import 'package:dis_app/widgets/startup_failure_screen.dart';
@@ -774,6 +776,11 @@ class _MyAppState extends State<MyApp> {
                 ),
                 useMaterial3: true,
 
+                // Schirme unter dem aktuellen bekommen keinen Fokus. Sonst
+                // reißt ein Widget, das dort neu eingehängt wird, die
+                // Tastatur aus dem Feld davor (siehe HintergrundOhneFokus).
+                pageTransitionsTheme: HintergrundOhneFokus.theme,
+
                 // Freundlichere Hintergrundfarben (Material 3 Surface statt hart schwarz)
                 scaffoldBackgroundColor: const Color(0xFF1C1B1F),
 
@@ -864,7 +871,17 @@ class _MyAppState extends State<MyApp> {
               ),
               // Reicht die Sprache an Dienste weiter, die keinen
               // BuildContext haben -- Benachrichtigungen und Transports.
-              home: AppTextsBinding(child: homeScreen),
+              //
+              // Im `builder`, nicht um `home`: Die Profilauswahl ersetzt
+              // `home` per `pushReplacement` durch den Hauptschirm, und mit
+              // der Route verschwand die Bindung. Danach folgte `AppTexts`
+              // keinem Sprachwechsel mehr — nach einem Wechsel von einem
+              // deutschen zu einem italienischen Anteil standen in Dialogen
+              // weiter „Abbrechen" und „Kommentare". Der `builder` umschließt
+              // den Navigator und bleibt, was auch immer navigiert.
+              builder: (context, child) =>
+                  AppTextsBinding(child: child ?? const SizedBox.shrink()),
+              home: homeScreen,
             );
           },
         );
@@ -964,6 +981,19 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
     // nicht vermutet.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       unawaited(_zeigeNeuerungenWennFaellig());
+
+      // Die Worte für die Meldung nach dem nächsten Update, in der Sprache,
+      // die Aurora gerade spricht. Erst hier: Vorher gibt es keine
+      // Lokalisierung, und erst ab hier ist die Einrichtung abgeschlossen.
+      if (mounted) {
+        final l10n = AppLocalizations.of(context);
+        unawaited(
+          UpdateNotice.merken(
+            titel: l10n.updateHinweisTitel,
+            text: l10n.updateHinweisText,
+          ),
+        );
+      }
     });
 
     // Reihenfolge im Ankermenü. Sie ist fest und wird nie nach Nutzung
@@ -1189,20 +1219,16 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
     );
     if (!gate.needsShowing) return;
 
-    await Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (_) => ReleaseNotesScreen(
-          gate: gate,
-          appVersion: getIt.isRegistered<TelemetryRecorder>()
-              ? getIt<TelemetryRecorder>().appVersion
-              : null,
-          onDismissed: () {
-            // Der Schirm ist eine Route, kein Startbildschirm: Er schliesst
-            // sich selbst, statt auf einen Rebuild zu warten.
-            if (mounted) Navigator.of(context).maybePop();
-          },
-        ),
-      ),
+    // Nicht selbst pushen: Nach der Profilwahl gibt es zwei MainScreen, und
+    // beide kommen hier an. `zeigen` hält den Schirm einmalig und oben, und
+    // er schließt sich selbst — der Rückruf eines verworfenen MainScreen
+    // schloss in 3.0.22 nichts mehr.
+    await ReleaseNotesScreen.zeigen(
+      Navigator.of(context),
+      gate: gate,
+      appVersion: getIt.isRegistered<TelemetryRecorder>()
+          ? getIt<TelemetryRecorder>().appVersion
+          : null,
     );
   }
 
@@ -1500,18 +1526,36 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
 
     _navigationService.navigateToPage(_allTabDefinitions.indexOf(tab));
 
-    final anteil = getIt<ProfileService>().activeProfile;
-    final vergangenes = getIt<TimelineDataService>().getPastEvents(hours: 12);
-    final kommendes = getIt<TimelineDataService>().getUpcomingEvents();
-    // Ein Band ohne Marken zeigt nur den Avatar — dieselbe Auskunft, die eine
-    // Zeile höher schon steht. Dann bleibt die Leiste besser leer.
-    final bandTraegt =
-        anteil != null &&
-        QuickTimelineBand.hasContent(
-          profile: anteil,
-          pastEvents: vergangenes,
-          upcomingEvents: kommendes,
-        );
+    final zeitachse = getIt<TimelineDataService>();
+
+    // Das Band wird bei jeder Änderung seiner Quellen neu entschieden, nicht
+    // einmal beim Öffnen: Am A14 stand nach dem Löschen eines Medikaments
+    // „✓ Testmittel · 08:00 ⏰ Testmittel" weiter im Kopf.
+    Widget? zeitband() {
+      final anteil = getIt<ProfileService>().activeProfile;
+      if (anteil == null) return null;
+      final vergangenes = zeitachse.getPastEvents(hours: 12);
+      final kommendes = zeitachse.getUpcomingEvents();
+      // Ein Band ohne Marken zeigt nur den Avatar — dieselbe Auskunft, die
+      // eine Zeile höher schon steht. Dann bleibt die Leiste besser leer.
+      if (!QuickTimelineBand.hasContent(
+        profile: anteil,
+        pastEvents: vergangenes,
+        upcomingEvents: kommendes,
+      )) {
+        return null;
+      }
+      return QuickTimelineBand(
+        profile: anteil,
+        pastEvents: vergangenes,
+        upcomingEvents: kommendes,
+        profileNameOf: (id) =>
+            getIt<ProfileService>().profilesBox.get(id)?.name,
+        // Das Band versprach im eigenen Kommentar, zur Chronologie zu
+        // führen — der Rückruf fehlte, der Griff lief ins Leere.
+        onTap: _openTimelineIfAllowed,
+      );
+    }
 
     await Navigator.of(context).push(
       MaterialPageRoute<void>(
@@ -1524,18 +1568,15 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
             final profile = getIt<ProfileService>().activeProfile;
             if (profile != null) _showProfileMenu(context, profile);
           },
-          subHeader: !bandTraegt
-              ? null
-              : QuickTimelineBand(
-                  profile: anteil,
-                  pastEvents: vergangenes,
-                  upcomingEvents: kommendes,
-                  profileNameOf: (id) =>
-                      getIt<ProfileService>().profilesBox.get(id)?.name,
-                  // Das Band versprach im eigenen Kommentar, zur Chronologie
-                  // zu führen — der Rückruf fehlte, der Griff lief ins Leere.
-                  onTap: _openTimelineIfAllowed,
-                ),
+          // Dieselben Boxen, aus denen `TimelineDataService` liest.
+          subHeaderSource: Listenable.merge([
+            zeitachse.medicationsBox.listenable(),
+            zeitachse.medicationLogsBox.listenable(),
+            zeitachse.calendarEventsBox.listenable(),
+            zeitachse.profileSwitchBox.listenable(),
+            zeitachse.profilesBox.listenable(),
+          ]),
+          subHeaderBuilder: zeitband,
           fab: tab.fabConfig?.build(context),
           actions: const [GpsStatusAction(), SizedBox(width: 8)],
           child: tab.screen,

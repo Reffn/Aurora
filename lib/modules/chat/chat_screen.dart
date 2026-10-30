@@ -255,7 +255,10 @@ class _ChatScreenState extends State<ChatScreen> {
       ]),
       builder: (context, _) {
         final messages = _dataEntry.getChatMessages();
-        final profiles = _dataEntry.getProfiles();
+        // Absender per ID auflösen, auch pausierte: Sonst trügen ihre
+        // Nachrichten nur ein Fragezeichen in der Farbe eines gelöschten
+        // Profils.
+        final profiles = _dataEntry.getAllProfiles();
         final activeProfile = _dataEntry.getActiveProfile();
 
         if (messages.isEmpty) {

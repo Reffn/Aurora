@@ -5,6 +5,7 @@ import 'package:dis_app/core/di/injection.dart';
 import 'package:dis_app/core/logger.dart';
 import 'package:dis_app/models/profile.dart';
 import 'package:dis_app/modules/profile/profile_edit_screen.dart';
+import 'package:dis_app/modules/profile/widgets/pause_profile_dialog.dart';
 import 'package:dis_app/modules/profile/widgets/profile_avatar.dart';
 import 'package:dis_app/services/password_reset_service.dart';
 import 'package:dis_app/l10n/supported_languages.dart';
@@ -14,8 +15,15 @@ import 'package:dis_app/widgets/gradient_text.dart';
 import 'package:dis_app/widgets/language_choice_dialog.dart';
 import 'package:flutter/material.dart';
 
+/// Was nach dem Schließen des Dialogs noch geschieht.
+///
+/// Pausieren läuft über den Schirm darunter, nicht über diesen Dialog:
+/// Bestätigung, Snackbar und Rückgängig brauchen einen Kontext, der den
+/// Dialog überdauert.
+enum _AfterClose { pause }
+
 /// Dialog mit Aktionen für ein Profil
-/// Zeigt Optionen: Profil wechseln, Profil bearbeiten
+/// Zeigt Optionen: Profil wechseln, Profil bearbeiten, Sprache, Pausieren
 class ProfileActionsDialog extends StatefulWidget {
   const ProfileActionsDialog({
     required this.profile,
@@ -30,14 +38,17 @@ class ProfileActionsDialog extends StatefulWidget {
     BuildContext context,
     Profile profile, {
     bool requireCurrentProfileLogin = false,
-  }) {
-    return showDialog(
+  }) async {
+    final after = await showDialog<_AfterClose>(
       context: context,
       builder: (context) => ProfileActionsDialog(
         profile: profile,
         requireCurrentProfileLogin: requireCurrentProfileLogin,
       ),
     );
+    if (after == _AfterClose.pause && context.mounted) {
+      await showPauseProfileDialog(context, profile);
+    }
   }
 
   @override
@@ -306,6 +317,7 @@ class _ProfileActionsDialogState extends State<ProfileActionsDialog> {
     final newPasswordController = TextEditingController();
     final confirmPasswordController = TextEditingController();
     String? passwordMismatchError;
+    final l10n = AppLocalizations.of(context);
 
     await showDialog<void>(
       context: context,
@@ -375,7 +387,9 @@ class _ProfileActionsDialogState extends State<ProfileActionsDialog> {
                           const SizedBox(width: 12),
                           Expanded(
                             child: Text(
-                              'Frist: ${widget.profile.resetDurationHours ?? 24} Stunden',
+                              l10n.pwResetDeadlineHours(
+                                widget.profile.resetDurationHours ?? 24,
+                              ),
                               style: TextStyle(
                                 color: Colors.orange[200],
                                 fontSize: 13,
@@ -439,7 +453,7 @@ class _ProfileActionsDialogState extends State<ProfileActionsDialog> {
             TextButton(
               onPressed: () => Navigator.pop(context),
               child: Text(
-                'Abbrechen',
+                l10n.actionCancel,
                 style: TextStyle(color: AppColors.paper),
               ),
             ),
@@ -599,7 +613,22 @@ class _ProfileActionsDialogState extends State<ProfileActionsDialog> {
     final isCurrentProfile = currentProfile?.id == widget.profile.id;
     final requiresLogin =
         !isCurrentProfile || widget.requireCurrentProfileLogin;
-    final canEdit = isCurrentProfile && !widget.requireCurrentProfileLogin;
+    // Ohne Passwort schützt die Anmeldung nichts — ein Tipp auf „Weiter
+    // als …" genügt. Also darf so ein Profil auch hier bearbeitet werden,
+    // etwa das Alter eines Anteils, das beim Anlegen falsch eingetragen wurde
+    // (Rückmeldungen vom 23.08. und 03.09.2026). Mit Passwort bleibt die
+    // Anmeldung davor.
+    final canEdit =
+        (isCurrentProfile && !widget.requireCurrentProfileLogin) ||
+        !widget.profile.hasPassword;
+    // Pausieren handelt mit den Rechten des aktiven Anteils. Bei einer
+    // gesperrten Sitzung hat er sich noch nicht wieder angemeldet — dieselbe
+    // Schranke wie beim Bearbeiten des eigenen Profils (Regel 16). Sonst nur,
+    // wenn es auch gelingt: mit Recht, nicht der aktive Anteil, nicht der
+    // letzte Admin.
+    final canPause =
+        !widget.requireCurrentProfileLogin &&
+        _dataEntry.canPauseProfile(widget.profile.id);
 
     return MediaQuery.withClampedTextScaling(
       maxScaleFactor: 1.3,
@@ -953,12 +982,22 @@ class _ProfileActionsDialogState extends State<ProfileActionsDialog> {
             // In einem System sprechen nicht alle dieselbe Sprache. Wer sich
             // gleich anmeldet, soll seine vorfinden, ohne erst durch die
             // Einstellungen zu gehen und sie damit allen anderen zu setzen.
+            //
+            // Mit Namen, nicht nur „Deutsch": Am Gerät las sich der nackte
+            // Sprachname, als wäre die ganze App deutsch, während der Schirm
+            // dahinter Englisch sprach (App en, Anteil de).
             const SizedBox(height: 8),
             OutlinedButton.icon(
               onPressed: _changeLanguage,
               icon: const Icon(Icons.language),
               label: Text(
-                languageNameFor(_language) ?? l10n.languageFollowApp,
+                switch (languageNameFor(_language)) {
+                  final String sprache => l10n.profileLanguageOf(
+                    widget.profile.name,
+                    sprache,
+                  ),
+                  null => l10n.profileLanguageOfApp(widget.profile.name),
+                },
               ),
               style: OutlinedButton.styleFrom(
                 foregroundColor: AppColors.paper,
@@ -971,6 +1010,28 @@ class _ProfileActionsDialogState extends State<ProfileActionsDialog> {
                 ),
               ),
             ),
+
+            // Nur mit angemeldetem Anteil, etwa über das Reset-Banner im
+            // Anker. Aus der Auswahl heraus ist niemand angemeldet, dort
+            // bleibt der Knopf weg.
+            if (canPause) ...[
+              const SizedBox(height: 8),
+              OutlinedButton.icon(
+                onPressed: () => Navigator.of(context).pop(_AfterClose.pause),
+                icon: const Icon(Icons.pause_circle_outline),
+                label: Text(l10n.profilePauseAction),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: AppColors.paper,
+                  side: BorderSide(
+                    color: AppColors.paper.withValues(alpha: 0.3),
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+            ],
           ],
         ),
         actions: [

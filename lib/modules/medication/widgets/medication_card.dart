@@ -26,6 +26,7 @@ class MedicationCard extends StatelessWidget {
     this.snoozedUntil,
     this.onAddFeedback,
     this.onViewFeedback,
+    this.kannVerwalten = false,
   });
   final Medication medication;
   final String timeOfDay;
@@ -40,6 +41,10 @@ class MedicationCard extends StatelessWidget {
   final VoidCallback onSnooze;
   final VoidCallback? onAddFeedback; // Nur bei taken/refused
   final VoidCallback? onViewFeedback;
+
+  /// Ob der Hinweis unten „Verwalten" heißt oder „Verlauf" — je nachdem,
+  /// was die Detailseite diesem Profil anbietet.
+  final bool kannVerwalten;
 
   @override
   Widget build(BuildContext context) {
@@ -165,6 +170,12 @@ class MedicationCard extends StatelessWidget {
                                   ),
                                 ),
                               ],
+                            ),
+
+                            SizedBox(height: Adaptive.spacing(context, 6)),
+                            ZurDetailseite(
+                              medication: medication,
+                              kannVerwalten: kannVerwalten,
                             ),
 
                             // Status-Badge
@@ -413,6 +424,50 @@ class MedicationCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+/// Sagt, dass die Karte weiterführt — und ob das Medikament stumm ist.
+///
+/// Rückmeldung vom 01.09.2026: „Medikamente rausnehmen nicht möglich". Die
+/// Karte ließ sich antippen, sagte das aber nirgends; Entfernen und
+/// Stummschalten lagen hinter einem Tipp, von dem niemand wusste. Symbol und
+/// Wort, nie eins allein (Richtlinie 5).
+class ZurDetailseite extends StatelessWidget {
+  const ZurDetailseite({
+    required this.medication,
+    required this.kannVerwalten,
+    super.key,
+  });
+
+  final Medication medication;
+  final bool kannVerwalten;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    const leise = TextStyle(fontSize: 13, color: Colors.white70);
+    return Row(
+      children: [
+        if (!medication.remindersEnabled) ...[
+          const Icon(
+            Icons.notifications_off_outlined,
+            size: 16,
+            color: Colors.white70,
+          ),
+          const SizedBox(width: 4),
+          Text(l10n.medicationMutedBadge, style: leise),
+        ],
+        const Spacer(),
+        Text(
+          kannVerwalten
+              ? l10n.medicationManageTitle
+              : l10n.medicationTabHistory,
+          style: leise,
+        ),
+        const Icon(Icons.chevron_right, size: 18, color: Colors.white70),
+      ],
     );
   }
 }

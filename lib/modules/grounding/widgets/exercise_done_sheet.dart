@@ -11,6 +11,7 @@ class ExerciseDoneSheet extends StatelessWidget {
     required this.onAgain,
     required this.onOther,
     required this.onCall,
+    this.color,
     super.key,
   });
 
@@ -18,9 +19,14 @@ class ExerciseDoneSheet extends StatelessWidget {
   final VoidCallback onOther;
   final VoidCallback onCall;
 
+  /// Die Farbe der Übung, die gerade zu Ende ging. Ohne Angabe die
+  /// Primärfarbe — Tests und ältere Aufrufer bleiben gültig.
+  final Color? color;
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final tint = color ?? Theme.of(context).colorScheme.primary;
 
     return SafeArea(
       child: Padding(
@@ -28,10 +34,23 @@ class ExerciseDoneSheet extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              Icons.check_circle_outline,
-              size: 48,
-              color: Theme.of(context).colorScheme.primary,
+            // Derselbe ruhige Kreis wie auf den Schritten davor: Die Übung
+            // ist zu Ende, nicht „geschafft" — kein Konfetti, kein Lob
+            // (Richtlinie 11), nur ein Haken in der Farbe der Übung.
+            Container(
+              width: 96,
+              height: 96,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: tint.withValues(alpha: 0.18),
+              ),
+              child: Icon(Icons.check, size: 52, color: tint),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              l10n.groundingDoneTitle,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 22, height: 1.4),
             ),
             const SizedBox(height: 24),
             _DoneAction(

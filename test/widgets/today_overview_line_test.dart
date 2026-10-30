@@ -112,13 +112,15 @@ void main() {
       expect(find.textContaining('2 Medikamente heute'), findsOneWidget);
     });
 
-    testWidgets('ohne jedes Recht erscheint nichts', (tester) async {
+    // Termine gelten für alle, Medikamente sehen bleibt pro Anteil.
+    testWidgets('ohne jedes Recht bleiben nur die Termine', (tester) async {
       await tester.pumpWidget(
         _app(profile: _profil(const []), events: 5, medications: 5),
       );
       await tester.pumpAndSettle();
 
-      expect(find.byIcon(Icons.event_note), findsNothing);
+      expect(find.textContaining('5 Termine heute'), findsOneWidget);
+      expect(find.textContaining('Medikamente'), findsNothing);
     });
   });
 }

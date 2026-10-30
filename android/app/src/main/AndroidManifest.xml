@@ -220,6 +220,23 @@
             </intent-filter>
         </receiver>
 
+        <!--
+            Sagt nach einem Update einmal, dass Aurora neu ist; ein Tippen
+            öffnet den Neuerungs-Schirm. Nichts verlässt das Gerät — Android
+            ruft MY_PACKAGE_REPLACED an die neue Fassung. Siehe
+            UpdateHinweisReceiver.kt und lib/services/update_notice.dart.
+
+            exported="true" ist Pflicht: Der Broadcast kommt vom System.
+        -->
+        <receiver
+            android:name=".UpdateHinweisReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dis_app/core/data_entry.dart';
 import 'package:dis_app/core/di/injection.dart';
 import 'package:dis_app/l10n/app_localizations.dart';
@@ -5,9 +7,11 @@ import 'package:dis_app/models/calendar_event.dart';
 import 'package:dis_app/models/comment.dart';
 import 'package:dis_app/models/permission.dart';
 import 'package:dis_app/modules/calendar/event_form_screen.dart';
+import 'package:dis_app/utils/reminder_permission.dart';
 import 'package:dis_app/widgets/comments/comment_section.dart';
 import 'package:dis_app/widgets/dialogs/confirmation_dialog.dart';
 import 'package:dis_app/widgets/overview_map.dart';
+import 'package:dis_app/widgets/reminder_permission_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
@@ -24,14 +28,44 @@ class EventDetailScreen extends StatefulWidget {
   State<EventDetailScreen> createState() => _EventDetailScreenState();
 }
 
-class _EventDetailScreenState extends State<EventDetailScreen> {
+class _EventDetailScreenState extends State<EventDetailScreen>
+    with WidgetsBindingObserver {
   final _dataEntry = getIt<DataEntry>();
   final _scrollController = ScrollController();
 
+  /// Bis nachgesehen ist, gilt die Erlaubnis als da — sonst blitzt die
+  /// Warnzeile bei jedem Öffnen kurz auf.
+  bool _hasReminderPermission = true;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    unawaited(_nachsehenErlaubnis());
+  }
+
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _scrollController.dispose();
     super.dispose();
+  }
+
+  /// Wer über „Einstellungen öffnen" die Erlaubnis gibt, kommt hierher
+  /// zurück. Ohne erneutes Nachsehen stünde die Warnung noch da.
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) unawaited(_nachsehenErlaubnis());
+  }
+
+  Future<void> _nachsehenErlaubnis() async {
+    final erlaubt = await hasReminderPermission();
+    if (mounted) setState(() => _hasReminderPermission = erlaubt);
+  }
+
+  Future<void> _erlaubnisGeben() async {
+    await askReminderPermission(context);
+    await _nachsehenErlaubnis();
   }
 
   @override
@@ -63,7 +97,11 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
             controller: _scrollController,
             padding: const EdgeInsets.all(16),
             children: [
-              _EventDetailCard(event: event),
+              _EventDetailCard(
+                event: event,
+                hasReminderPermission: _hasReminderPermission,
+                onRequestPermission: _erlaubnisGeben,
+              ),
               if (canEdit || canDelete) ...[
                 const SizedBox(height: 16),
                 _buildActions(event, canEdit: canEdit, canDelete: canDelete),
@@ -164,9 +202,15 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
 
 /// Event Detail Card - Zeigt Event-Info
 class _EventDetailCard extends StatelessWidget {
-  const _EventDetailCard({required this.event});
+  const _EventDetailCard({
+    required this.event,
+    required this.hasReminderPermission,
+    required this.onRequestPermission,
+  });
 
   final CalendarEvent event;
+  final bool hasReminderPermission;
+  final VoidCallback onRequestPermission;
 
   @override
   Widget build(BuildContext context) {
@@ -339,6 +383,15 @@ class _EventDetailCard extends StatelessWidget {
                   ),
                 ],
               ),
+              // Ohne Erlaubnis klingelt die Erinnerung nicht. Die Zeile
+              // darüber allein wäre ein Versprechen, das das Gerät bricht.
+              if (!hasReminderPermission) ...[
+                const SizedBox(height: 12),
+                ReminderNotAllowedRow(
+                  message: l10n.reminderPermissionMissingTitle,
+                  onRequest: onRequestPermission,
+                ),
+              ],
             ],
           ],
         ),

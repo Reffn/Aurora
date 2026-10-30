@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:dis_app/l10n/app_localizations.dart';
 import 'package:dis_app/modules/feedback/feedback_screen.dart';
+import 'package:dis_app/modules/release_notes/release_notes_inhalt.dart';
 import 'package:dis_app/services/release_notes_gate.dart';
+import 'package:dis_app/widgets/work_surface_scaffold.dart';
 import 'package:flutter/material.dart';
 
 /// Was sich geändert hat — einmal nach dem Update, dann nie wieder.
@@ -26,11 +28,9 @@ import 'package:flutter/material.dart';
 /// Beide Knöpfe sind gleich groß. Wer nur weiterwill, soll dafür nicht den
 /// kleineren treffen müssen.
 ///
-/// **Pflege bei jeder Fassung:** `releaseNotesHighlights` beschreibt, was sich
-/// geändert hat, und gehört vor jedem Release neu gesetzt — in **allen fünf**
-/// Sprachdateien (`lib/l10n/app_{de,en,fr,es,it}.arb`). Bleibt der Text
-/// stehen, liest die eine Person, die den Schirm überhaupt zu Gesicht bekommt,
-/// die Neuigkeit von vorletztem Mal.
+/// **Pflege bei jeder Fassung:** Was sich geändert hat, steht je Nummer in
+/// `release_notes_inhalt.dart` — dort steht auch, wie ein Eintrag angelegt
+/// wird. Ein Test hält jedes Release an, dessen Nummer keinen Eintrag hat.
 class ReleaseNotesScreen extends StatelessWidget {
   const ReleaseNotesScreen({
     required this.onDismissed,
@@ -42,8 +42,8 @@ class ReleaseNotesScreen extends StatelessWidget {
 
   /// Wird gerufen, sobald die Fassung als gesehen vermerkt ist.
   ///
-  /// Darf leer bleiben: Der Vermerk landet in derselben `settings`-Box, auf
-  /// die `main.dart` hört — der Wechsel kommt von selbst.
+  /// Darf leer bleiben: Als Route schließt sich der Schirm selbst (siehe
+  /// [_schliesser]); der Rückruf ist nur noch Nachricht, kein Auftrag.
   final VoidCallback onDismissed;
 
   final ReleaseNotesGate gate;
@@ -62,9 +62,81 @@ class ReleaseNotesScreen extends StatelessWidget {
 
   static const double _buttonHeight = 110;
 
-  Future<void> _weiter() async {
+  /// Die Route, die gerade offen ist — höchstens eine je Prozess.
+  static Route<void>? _offeneRoute;
+
+  /// Nur für Tests: Jeder Test beginnt ohne offene Route.
+  @visibleForTesting
+  static void vergissOffeneRoute() => _offeneRoute = null;
+
+  /// Öffnet den Schirm als Route, aber nie zweimal übereinander.
+  ///
+  /// **Warum das nicht einfach ein `push` ist.** Startet die App auf der
+  /// Profilauswahl, entstehen nach der Wahl zwei `MainScreen`: einer aus dem
+  /// Wechsel von `home`, einer aus dem `pushReplacement` der Auswahl. Beide
+  /// fragen hier an. In 3.0.22 schob jeder seinen eigenen Schirm, und der
+  /// zweite `MainScreen` legte sich über den ersten Schirm — der lag dann
+  /// verdeckt im Stapel, und wer „Weiter" tippte, kam nicht heraus.
+  ///
+  /// Deshalb gilt: Liegt der Schirm schon oben, bleibt es dabei. Liegt er
+  /// verdeckt, geht er, und ein neuer kommt nach oben — dorthin, wo ihn
+  /// jemand sieht.
+  static Future<void> zeigen(
+    NavigatorState navigator, {
+    required ReleaseNotesGate gate,
+    String? appVersion,
+  }) async {
+    final alt = _offeneRoute;
+    if (alt != null && alt.isActive) {
+      if (alt.isCurrent) return;
+      alt.navigator?.removeRoute(alt);
+    }
+
+    final route = MaterialPageRoute<void>(
+      builder: (_) => ReleaseNotesScreen(
+        gate: gate,
+        appVersion: appVersion,
+        onDismissed: () {},
+      ),
+    );
+    _offeneRoute = route;
+    try {
+      await navigator.push(route);
+    } finally {
+      if (identical(_offeneRoute, route)) _offeneRoute = null;
+    }
+  }
+
+  Future<void> _weiter(BuildContext context) async {
+    final schliessen = _schliesser(context);
+
     await gate.markSeen();
     onDismissed();
+    schliessen();
+  }
+
+  /// Schließt die eigene Route — nicht die, die gerade oben liegt, und nicht
+  /// über den Rückruf dessen, der den Schirm geöffnet hat.
+  ///
+  /// Der Rückruf allein trug nicht: Sein Absender war in 3.0.22 oft schon
+  /// verworfen, `mounted` stand auf false, und es schloss sich nichts. Die
+  /// Route kennt sich selbst. Gegriffen wird sie vor dem Warten, denn danach
+  /// ist dieser Kontext womöglich nicht mehr eingehängt.
+  ///
+  /// Als erste Route (`home`) bleibt der Schirm stehen: Dort wechselt der
+  /// Startschirm von selbst, und ein leerer Navigator wäre schlimmer.
+  static VoidCallback _schliesser(BuildContext context) {
+    final route = ModalRoute.of(context);
+    return () {
+      if (route == null || !route.isActive || route.isFirst) return;
+      final navigator = route.navigator;
+      if (navigator == null) return;
+      if (route.isCurrent) {
+        navigator.pop();
+      } else {
+        navigator.removeRoute(route);
+      }
+    };
   }
 
   Future<void> _zumFeedback(BuildContext context) async {
@@ -72,9 +144,11 @@ class ReleaseNotesScreen extends StatelessWidget {
     // Wechsel des Startschirms aus, und dieser Kontext ist danach nicht mehr
     // eingehängt.
     final navigator = Navigator.of(context);
+    final schliessen = _schliesser(context);
 
     await gate.markSeen();
     onDismissed();
+    schliessen();
 
     final oeffnen = onOpenFeedback;
     if (oeffnen != null) {
@@ -82,8 +156,17 @@ class ReleaseNotesScreen extends StatelessWidget {
       return;
     }
 
+    // Im selben Rahmen wie aus dem Ankermenü (`_openWorkSurface`):
+    // `FeedbackScreen` ist Inhalt und bringt kein Material mit. Nackt
+    // geschoben, stürzte er im Release-Bau ab („Null check operator" aus
+    // ListTile) — von 3.0.21 an, gefunden erst am A14.
     await navigator.push(
-      MaterialPageRoute<void>(builder: (_) => const FeedbackScreen()),
+      MaterialPageRoute<void>(
+        builder: (routeContext) => WorkSurfaceScaffold(
+          title: AppLocalizations.of(routeContext).tabFeedback,
+          child: const FeedbackScreen(),
+        ),
+      ),
     );
   }
 
@@ -139,7 +222,8 @@ class ReleaseNotesScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
-                          l10n.releaseNotesHighlights,
+                          releaseNotesFuerFassung(version, l10n) ??
+                              l10n.releaseNotesAllgemein,
                           style: theme.textTheme.bodyLarge,
                         ),
                       ),
@@ -172,7 +256,7 @@ class ReleaseNotesScreen extends StatelessWidget {
                 icon: Icons.arrow_forward,
                 label: l10n.releaseNotesContinueAction,
                 height: _buttonHeight,
-                onPressed: () => unawaited(_weiter()),
+                onPressed: () => unawaited(_weiter(context)),
               ),
             ],
           ),

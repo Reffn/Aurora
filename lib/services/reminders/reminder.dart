@@ -37,6 +37,41 @@ sealed class ReminderTarget {
   String get seed;
 
   int get namespace;
+
+  /// Der Weg zurück: aus dem Schlüssel wieder das Ziel.
+  ///
+  /// Der Schlüssel reist als Payload mit jeder Meldung. Ist eine Meldung
+  /// schon angezeigt, ist er das Einzige, was über sie noch zu erfahren
+  /// ist — die Kennung ist ein Hash und lässt sich nicht umkehren.
+  ///
+  /// Was nicht passt, ergibt `null` statt einer Ausnahme: Meldungen aus
+  /// älteren Fassungen tragen keinen oder einen anderen Schlüssel, und der
+  /// Abgleich soll an ihnen nicht scheitern, sondern sie liegen lassen.
+  static ReminderTarget? fromSeed(String? seed) {
+    if (seed == null) return null;
+    final parts = seed.split('|');
+    switch (parts) {
+      case ['med', final medicationId, final day, final time]:
+        final ymd = day.split('-').map(int.tryParse).toList();
+        final valid =
+            medicationId.isNotEmpty &&
+            ymd.length == 3 &&
+            !ymd.contains(null) &&
+            RegExp(r'^(prn-)?\d{2}:\d{2}$').hasMatch(time);
+        if (!valid) return null;
+        return DoseTarget(
+          medicationId: medicationId,
+          date: DateTime(ymd[0]!, ymd[1]!, ymd[2]!),
+          scheduledTime: time,
+        );
+      case ['evt', final eventId, final start]:
+        final startTime = DateTime.tryParse(start);
+        if (eventId.isEmpty || startTime == null) return null;
+        return EventTarget(eventId: eventId, startTime: startTime);
+      default:
+        return null;
+    }
+  }
 }
 
 /// Eine Dosis — ohne Profil.

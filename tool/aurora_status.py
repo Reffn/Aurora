@@ -61,6 +61,17 @@ SCOPES = [
 
 DEFAULT_OUTPUT = Path.home() / ".config" / "aurora-status" / "status.json"
 
+# Bis wann das Feedback gelesen ist. Fortgeschrieben nur mit `--texte`:
+# Wer nur die Anzahl gesehen hat, hat nichts gelesen.
+#
+# Am 06.10.2026 lagen sechs echte Rueckmeldungen in Firestore, die aelteste
+# seit dem 23.08. — niemand hatte sie bemerkt. Es gibt keine Mail und keinen
+# Push bei neuem Feedback, nur diesen Lauf.
+FEEDBACK_GELESEN = Path.home() / ".config" / "aurora-status" / "feedback_gelesen_bis.txt"
+
+# Rueckgabewert von `--pruefen`, wenn ungelesenes Feedback da ist.
+EXIT_UNGELESEN = 3
+
 # Ohne diese Angabe antwortet die Firestore-REST-Schnittstelle fuer das
 # Standardprojekt der lokalen gcloud-Konfiguration — und das ist hier ein
 # anderes.
@@ -833,17 +844,26 @@ def firestore(mit_texten: bool) -> dict:
             if not felder_holen:
                 params["mask.fieldPaths"] = "__name__"
 
-            antwort = requests.get(
-                f"{basis}/{name}", headers=kopf, params=params, timeout=60
-            )
-            if antwort.status_code != 200:
-                sammlungen[name] = {
-                    "ok": False,
-                    "fehler": f"{antwort.status_code}: {antwort.text[:200]}",
-                }
+            # Firestore liefert seitenweise. Ohne nextPageToken stand hier
+            # genau 300 — eine abgeschnittene Zahl, die wie ein Bestand aussah.
+            dokumente: list[dict] = []
+            fehler = None
+            while True:
+                antwort = requests.get(
+                    f"{basis}/{name}", headers=kopf, params=params, timeout=60
+                )
+                if antwort.status_code != 200:
+                    fehler = f"{antwort.status_code}: {antwort.text[:200]}"
+                    break
+                seite = antwort.json()
+                dokumente.extend(seite.get("documents", []))
+                weiter = seite.get("nextPageToken")
+                if not weiter:
+                    break
+                params["pageToken"] = weiter
+            if fehler:
+                sammlungen[name] = {"ok": False, "fehler": fehler}
                 continue
-
-            dokumente = antwort.json().get("documents", [])
             eintraege = [
                 {
                     "id": d["name"].rsplit("/", 1)[-1],
@@ -1088,6 +1108,15 @@ def main() -> int:
         ),
     )
     parser.add_argument(
+        "--pruefen",
+        action="store_true",
+        help=(
+            "Fragt nur Firestore und meldet ungelesenes Feedback, ohne Texte. "
+            f"Endet mit {EXIT_UNGELESEN}, wenn es welches gibt — fuer eine "
+            "geplante Aufgabe."
+        ),
+    )
+    parser.add_argument(
         "--out",
         default=str(DEFAULT_OUTPUT),
         help=f"Ziel der JSON-Ausgabe. Default: {DEFAULT_OUTPUT}",
@@ -1095,6 +1124,15 @@ def main() -> int:
     args = parser.parse_args()
 
     key_path = Path(args.key).expanduser()
+
+    if args.pruefen:
+        quelle_fs = firestore(mit_texten=False)
+        if not quelle_fs["ok"]:
+            print(f"Firestore nicht erreichbar: {quelle_fs.get('fehler')}")
+            return 1
+        hinweis = _ungelesenes_feedback(quelle_fs)
+        print(hinweis or "Kein ungelesenes Feedback.")
+        return EXIT_UNGELESEN if hinweis else 0
 
     log("Frage Quellen ab …")
     bericht = {
@@ -1128,6 +1166,13 @@ def main() -> int:
     )
 
     print(zusammenfassung(bericht))
+    quelle_fs = next(q for q in bericht["quellen"] if q.get("quelle") == "firestore")
+    hinweis = _ungelesenes_feedback(quelle_fs) if quelle_fs["ok"] else None
+    if hinweis:
+        print()
+        print(hinweis)
+    if args.texte and quelle_fs["ok"]:
+        _feedback_gelesen(quelle_fs)
     print()
     print(f"Vollstaendig als JSON: {ziel}")
     if args.texte:
@@ -1136,5 +1181,42 @@ def main() -> int:
     return 0 if any(q["ok"] for q in bericht["quellen"]) else 1
 
 
+def _juengstes_feedback(quelle_fs: dict) -> str | None:
+    feedback = quelle_fs.get("sammlungen", {}).get("feedback", {})
+    return feedback.get("juengster") if isinstance(feedback, dict) else None
+
+
+def _ungelesenes_feedback(quelle_fs: dict) -> str | None:
+    """Ein Satz, wenn es Feedback gibt, das juenger ist als das zuletzt gelesene."""
+    juengstes = _juengstes_feedback(quelle_fs)
+    if not juengstes:
+        return None
+    gelesen = (
+        FEEDBACK_GELESEN.read_text(encoding="utf-8").strip()
+        if FEEDBACK_GELESEN.exists()
+        else ""
+    )
+    # ISO-Zeitstempel in UTC sortieren sich als Text richtig.
+    if gelesen and juengstes <= gelesen:
+        return None
+    seit = f"seit {gelesen}" if gelesen else "noch nie gelesen"
+    return (
+        f">>> UNGELESENES FEEDBACK ({seit}, juengstes {juengstes}). "
+        "Lesen mit: python tool/aurora_status.py --texte"
+    )
+
+
+def _feedback_gelesen(quelle_fs: dict) -> None:
+    juengstes = _juengstes_feedback(quelle_fs)
+    if juengstes:
+        FEEDBACK_GELESEN.parent.mkdir(parents=True, exist_ok=True)
+        FEEDBACK_GELESEN.write_text(juengstes, encoding="utf-8")
+
+
 if __name__ == "__main__":
+    # Die Windows-Konsole schreibt cp1252; ein einziges „✓" in der
+    # Zusammenfassung brach den ganzen Lauf ab, nachdem alle Quellen schon
+    # abgefragt waren.
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     raise SystemExit(main())

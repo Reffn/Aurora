@@ -1818,6 +1818,18 @@ class _StableMapContainerState extends State<_StableMapContainer> {
                 initialZoom: widget.initialZoom,
                 interactionOptions: const InteractionOptions(
                   flags: InteractiveFlag.pinchZoom | InteractiveFlag.drag,
+                  // flutter_map greift sich beim Einhängen von Haus aus den
+                  // Fokus. Die Karte liegt aber oft in der Route unter einem
+                  // Eingabeschirm, und die Tastatur verkleinert diese Route —
+                  // Profilauswahl und Anker bauen die Karte dabei neu. Der
+                  // Fokus sprang aus dem Textfeld in die Karte, die Tastatur
+                  // ging zu, die Fläche wuchs, die Karte kam neu: Niemand
+                  // konnte einen Namen oder eine Nachricht tippen
+                  // (Rückmeldungen vom 29.09. und 05.10.2026).
+                  //
+                  // Die Pfeiltasten bleiben an, sobald jemand die Karte
+                  // selbst fokussiert — nur das ungefragte Greifen fällt weg.
+                  keyboardOptions: KeyboardOptions(autofocus: false),
                 ),
                 onTap: widget.interactive && widget.onMapTap != null
                     ? (_, latLng) => widget.onMapTap!(latLng)

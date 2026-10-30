@@ -279,7 +279,10 @@ class _TimelineStrahlState extends State<TimelineStrahl> {
       child: ElevatedButton.icon(
         onPressed: _controller.jumpToNow,
         icon: const Icon(Icons.access_time, size: 16),
-        label: const Text('Jetzt', style: TextStyle(fontSize: 12)),
+        label: Text(
+          AppLocalizations.of(context).timelineJumpToNow,
+          style: const TextStyle(fontSize: 12),
+        ),
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.amber,
           foregroundColor: Colors.black,

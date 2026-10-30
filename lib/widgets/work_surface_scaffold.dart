@@ -16,9 +16,14 @@ class WorkSurfaceScaffold extends StatelessWidget {
     this.fab,
     this.actions = const [],
     this.subHeader,
+    this.subHeaderSource,
+    this.subHeaderBuilder,
     this.onProfileTap,
     super.key,
-  });
+  }) : assert(
+         subHeader == null || subHeaderBuilder == null,
+         'Entweder ein festes Band oder ein lebendes, nicht beides.',
+       );
 
   final String title;
   final Widget child;
@@ -44,8 +49,34 @@ class WorkSurfaceScaffold extends StatelessWidget {
   /// Schmale Zeile unter der Kopfzeile — das Marken-Band der Orientierung.
   final Widget? subHeader;
 
+  /// Wann das Band neu entschieden wird — etwa die Hive-Boxen, aus denen es
+  /// liest.
+  ///
+  /// Ein festes [subHeader] wird beim Öffnen der Fläche einmal gebaut. Am A14
+  /// stand danach ein gelöschtes Medikament weiter im Kopf, bis man die Fläche
+  /// verließ. Mit Quelle und [subHeaderBuilder] folgt das Band dem Bestand,
+  /// solange die Fläche offen ist.
+  final Listenable? subHeaderSource;
+
+  /// Baut das Band neu; `null` heißt: keins. Dann entfällt auch der Unterbau
+  /// der Titelleiste — ein leerer Streifen wäre schlimmer als keiner.
+  final Widget? Function()? subHeaderBuilder;
+
   @override
   Widget build(BuildContext context) {
+    final builder = subHeaderBuilder;
+    if (builder == null) return _baue(context, subHeader);
+
+    final quelle = subHeaderSource;
+    if (quelle == null) return _baue(context, builder());
+
+    return ListenableBuilder(
+      listenable: quelle,
+      builder: (context, _) => _baue(context, builder()),
+    );
+  }
+
+  Widget _baue(BuildContext context, Widget? subHeader) {
     final aktiverAnteil = profile;
     final l10n = AppLocalizations.of(context);
 
@@ -153,7 +184,7 @@ class WorkSurfaceScaffold extends StatelessWidget {
             ? null
             : PreferredSize(
                 preferredSize: const Size.fromHeight(40),
-                child: subHeader!,
+                child: subHeader,
               ),
       ),
       body: child,

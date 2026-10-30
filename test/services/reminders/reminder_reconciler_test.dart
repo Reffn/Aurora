@@ -284,4 +284,127 @@ void main() {
       reason: 'wer zweimal aufschiebt, meint das zweite Mal',
     );
   });
+
+  // Was gefeuert hat, ist beim Betriebssystem nicht mehr vorgemerkt — es
+  // steht in der Leiste. Am A14 blieb so nach Löschen, Pausieren und
+  // Stummschalten die Meldung stehen (29.10.2026), und ein anderer Anteil
+  // hätte sie später für eine offene Dosis halten können.
+  group('Schon angezeigte Meldungen', () {
+    final heute = DateTime(2026, 8, 7);
+
+    int zeigeDosis(String zeit) {
+      final dosis = DoseTarget(
+        medicationId: 'm1',
+        date: heute,
+        scheduledTime: zeit,
+      );
+      final id = namespacedId(kNamespaceMedication, 'angezeigt|${dosis.seed}');
+      scheduler.show(id, dosis.seed);
+      return id;
+    }
+
+    int zeigeTermin(DateTime start) {
+      final ziel = EventTarget(eventId: 'e1', startTime: start);
+      final id = namespacedId(kNamespaceEvent, 'angezeigt|${ziel.seed}');
+      scheduler.show(id, ziel.seed);
+      return id;
+    }
+
+    test('Geloeschtes Medikament: die Meldung verschwindet', () async {
+      final id = zeigeDosis('12:50');
+      await baue().reconcile();
+      expect(scheduler.shown.containsKey(id), isFalse);
+    });
+
+    test('Pausiertes Medikament: die Meldung verschwindet', () async {
+      final id = zeigeDosis('12:50');
+      await baue(meds: [medikament.copyWith(isActive: false)]).reconcile();
+      expect(scheduler.shown.containsKey(id), isFalse);
+    });
+
+    test('Stummgeschaltet: die Meldung verschwindet', () async {
+      final id = zeigeDosis('12:50');
+      await baue(
+        meds: [medikament.copyWith(remindersEnabled: false)],
+      ).reconcile();
+      expect(scheduler.shown.containsKey(id), isFalse);
+    });
+
+    test('Gestrichene Einnahmezeit: die Meldung verschwindet', () async {
+      final id = zeigeDosis('12:50');
+      await baue(
+        meds: [
+          medikament.copyWith(timesOfDay: const ['18:00']),
+        ],
+      ).reconcile();
+      expect(scheduler.shown.containsKey(id), isFalse);
+    });
+
+    test('Genommen: die Meldung verschwindet fuer alle Anteile', () async {
+      final id = zeigeDosis('12:50');
+      await baue(
+        meds: [medikament],
+        logs: [
+          MedicationLog(
+            id: 'l1',
+            medicationId: 'm1',
+            takenAt: DateTime(2026, 8, 7, 12, 5),
+            profileId: 'lina',
+            status: MedicationStatus.taken,
+            confirmedAt: DateTime(2026, 8, 7, 12, 5),
+            scheduledTime: '12:50',
+          ),
+        ],
+      ).reconcile();
+      expect(scheduler.shown.containsKey(id), isFalse);
+    });
+
+    test('Eine offene Dosis bleibt stehen, auch wenn ihre Zeit vorbei ist',
+        () async {
+      // Genau diese Meldung ist die, auf die jemand noch reagieren soll.
+      // Der Sollstand kennt sie nicht mehr, weil er nur die Zukunft plant —
+      // ein Abgleich gegen ihn allein hätte sie weggeräumt.
+      final id = zeigeDosis('11:50');
+      await baue(
+        meds: [
+          medikament.copyWith(timesOfDay: const ['11:50']),
+        ],
+      ).reconcile();
+      expect(scheduler.shown.containsKey(id), isTrue);
+      expect(scheduler.dismissed, isEmpty);
+    });
+
+    test('Geloeschter Termin: die Meldung verschwindet', () async {
+      final id = zeigeTermin(DateTime(2026, 8, 7, 17));
+      await baue().reconcile();
+      expect(scheduler.shown.containsKey(id), isFalse);
+    });
+
+    test('Verschobener Termin: die alte Meldung verschwindet', () async {
+      final id = zeigeTermin(DateTime(2026, 8, 7, 17));
+      await baue(
+        events: [termin(start: DateTime(2026, 8, 7, 19))],
+      ).reconcile();
+      expect(scheduler.shown.containsKey(id), isFalse);
+    });
+
+    test('Ein bestehender Termin bleibt stehen', () async {
+      final id = zeigeTermin(DateTime(2026, 8, 7, 17));
+      await baue(events: [termin()]).reconcile();
+      expect(scheduler.shown.containsKey(id), isTrue);
+    });
+
+    test('Ohne lesbaren Schluessel bleibt die Meldung, wo sie ist', () async {
+      // Meldungen aus Fassungen ohne Payload, oder ein Format, das es noch
+      // nicht gab: Was der Abgleich nicht versteht, räumt er nicht weg.
+      final ohne = namespacedId(kNamespaceMedication, 'ohne');
+      final kaputt = namespacedId(kNamespaceMedication, 'kaputt');
+      scheduler
+        ..show(ohne, null)
+        ..show(kaputt, 'med|m1');
+      await baue().reconcile();
+      expect(scheduler.shown.containsKey(ohne), isTrue);
+      expect(scheduler.shown.containsKey(kaputt), isTrue);
+    });
+  });
 }

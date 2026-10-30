@@ -237,11 +237,10 @@ class _PostLoginWelcomeScreenState extends State<PostLoginWelcomeScreen> {
 
   /// Seite 3: Was du tun kannst (dynamische Permissions)
   Widget _buildPermissionsPage(AppLocalizations l10n) {
-    final permissions = widget.profile.parsedPermissions;
     final isChild = widget.profile.age != null && widget.profile.age! < 8;
 
     // Gruppiere Permissions nach Features
-    final features = _getFeatureList(l10n, permissions, isChild);
+    final features = _getFeatureList(l10n, widget.profile, isChild);
 
     return PostLoginWelcomePage(
       headline: l10n.onboardingWhatYouCanDo,
@@ -354,51 +353,54 @@ class _PostLoginWelcomeScreenState extends State<PostLoginWelcomeScreen> {
   }
 
   /// Erstellt Feature-Liste basierend auf Permissions
+  ///
+  /// Fragt über `hasPermission`, damit Rechte für alle und Admins hier
+  /// genauso gelten wie überall sonst.
   List<String> _getFeatureList(
     AppLocalizations l10n,
-    List<Permission> permissions,
+    Profile profile,
     bool isChild,
   ) {
     final features = <String>[];
 
     if (isChild) {
       // Kind-Profil: Einfache Liste
-      if (permissions.contains(Permission.viewChatTab)) {
+      if (profile.hasPermission(Permission.viewChatTab)) {
         features.add(l10n.onboardingFeatureChatChild);
       }
-      if (permissions.contains(Permission.viewDiaryTab)) {
+      if (profile.hasPermission(Permission.viewDiaryTab)) {
         features.add(l10n.onboardingFeatureDiaryChild);
       }
-      if (permissions.contains(Permission.viewGamesTab)) {
+      if (profile.hasPermission(Permission.viewGamesTab)) {
         features.add(l10n.onboardingFeatureGamesChild);
       }
-      if (permissions.contains(Permission.viewTimelineTab)) {
+      if (profile.hasPermission(Permission.viewTimelineTab)) {
         features.add(l10n.onboardingFeatureTimelineChild);
       }
     } else {
       // Erwachsenen-Profil: Gruppierte Features
-      if (permissions.contains(Permission.viewChatTab)) {
+      if (profile.hasPermission(Permission.viewChatTab)) {
         features.add(l10n.onboardingFeatureChat);
       }
-      if (permissions.contains(Permission.viewCalendarTab)) {
+      if (profile.hasPermission(Permission.viewCalendarTab)) {
         features.add(l10n.onboardingFeatureCalendar);
       }
-      if (permissions.contains(Permission.viewContactsTab)) {
+      if (profile.hasPermission(Permission.viewContactsTab)) {
         features.add(l10n.onboardingFeatureContacts);
       }
-      if (permissions.contains(Permission.viewMedicationTab)) {
+      if (profile.hasPermission(Permission.viewMedicationTab)) {
         features.add(l10n.onboardingFeatureMedication);
       }
-      if (permissions.contains(Permission.viewDiaryTab)) {
+      if (profile.hasPermission(Permission.viewDiaryTab)) {
         features.add(l10n.onboardingFeatureDiary);
       }
-      if (permissions.contains(Permission.viewFinderTab)) {
+      if (profile.hasPermission(Permission.viewFinderTab)) {
         features.add(l10n.onboardingFeatureFinder);
       }
-      if (permissions.contains(Permission.viewEmergencyTab)) {
+      if (profile.hasPermission(Permission.viewEmergencyTab)) {
         features.add(l10n.onboardingFeatureEmergency);
       }
-      if (permissions.contains(Permission.viewMantrasTab)) {
+      if (profile.hasPermission(Permission.viewMantrasTab)) {
         features.add(l10n.onboardingFeatureMantras);
       }
     }

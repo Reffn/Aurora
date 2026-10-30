@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dis_app/core/data_entry.dart';
 import 'package:dis_app/core/di/injection.dart';
 import 'package:dis_app/l10n/app_localizations.dart';
@@ -14,6 +16,7 @@ import 'package:dis_app/widgets/aurora_text_field.dart';
 import 'package:dis_app/widgets/dialogs/confirmation_dialog.dart';
 import 'package:dis_app/widgets/form_action_button.dart';
 import 'package:dis_app/widgets/form_scroll_view.dart';
+import 'package:dis_app/widgets/reminder_permission_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
@@ -63,10 +66,16 @@ class _EventFormScreenState extends State<EventFormScreen> {
 
   bool get _isEditing => widget.existingEvent != null;
 
+  /// Darf Aurora gerade erinnern? Jeder Termin trägt eine Erinnerung — die
+  /// Karte unten verspricht sie. Fehlt die Erlaubnis, steht das dort, bevor
+  /// jemand speichert, mit dem Weg daneben.
+  bool _hasReminderPermission = true;
+
   @override
   void initState() {
     super.initState();
     _dataEntry = getIt<DataEntry>();
+    unawaited(_nachsehenErlaubnis());
 
     if (_isEditing) {
       // Bearbeiten: Bestehende Werte laden
@@ -263,7 +272,10 @@ class _EventFormScreenState extends State<EventFormScreen> {
       return false;
     }
 
-    await ensureReminderPermission(context);
+    // Ungefragt kommt Auroras Blatt nur einmal; der Termin wird so oder so
+    // gespeichert. Was ohne Erlaubnis aus der Erinnerung wird, steht in der
+    // Karte oben, nicht erst hier.
+    await askReminderPermission(context, uninvited: true);
     if (!mounted) return false;
 
     final event = CalendarEvent(
@@ -516,19 +528,34 @@ class _EventFormScreenState extends State<EventFormScreen> {
               ),
             ),
             const SizedBox(height: AppSpacing.sm),
-            Text(
-              l10n.eventReminderNotice(
-                _reminderLabel(l10n, _reminderMinutesBefore),
-              ),
-              style: TextStyle(
-                fontSize: 13,
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
-            ),
+            if (_hasReminderPermission)
+              Text(
+                l10n.eventReminderNotice(
+                  _reminderLabel(l10n, _reminderMinutesBefore),
+                ),
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+              )
+            else
+              // Kein Versprechen, das das Gerät verbietet: Statt „Aurora
+              // meldet sich" steht hier, dass sie es gerade nicht darf.
+              ReminderNotAllowedRow(onRequest: _erlaubnisGeben),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _nachsehenErlaubnis() async {
+    final erlaubt = await hasReminderPermission();
+    if (mounted) setState(() => _hasReminderPermission = erlaubt);
+  }
+
+  Future<void> _erlaubnisGeben() async {
+    await askReminderPermission(context);
+    await _nachsehenErlaubnis();
   }
 
   /// Die Dauer, wie sie auf dem Chip steht — in der Sprache des Anteils.

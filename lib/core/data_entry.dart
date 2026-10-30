@@ -15,7 +15,7 @@ import 'package:dis_app/models/contact_rating.dart';
 import 'package:dis_app/models/diary_entry.dart';
 import 'package:dis_app/models/finder_item.dart';
 import 'package:dis_app/models/medication.dart';
-import 'package:dis_app/models/permission.dart';
+import 'package:dis_app/models/part_right.dart';
 import 'package:dis_app/models/profile.dart';
 import 'package:dis_app/services/calendar_service.dart';
 import 'package:dis_app/services/chat_service.dart';
@@ -91,6 +91,7 @@ class DataEntry {
     String queryName,
     T Function() queryFn, {
     Map<String, dynamic>? params,
+    bool warnIfEmpty = true,
   }) {
     return logger.trackSync(
       queryName,
@@ -105,7 +106,7 @@ class DataEntry {
         // Result-Count für Listen loggen
         if (result is List) {
           resultInfo['resultCount'] = result.length;
-          if (result.isEmpty) {
+          if (result.isEmpty && warnIfEmpty) {
             logger.warning(
               LogCategory.dataEntry,
               '$queryName returned empty list',
@@ -182,22 +183,27 @@ class DataEntry {
     _eventBus.publish(ProfileUpdatedEvent(profile));
   }
 
-  /// Profil deaktivieren (Soft Delete)
-  Future<void> deactivateProfile(String profileId) async {
-    if (profileId.isEmpty) {
-      throw ArgumentError('Profile ID darf nicht leer sein');
-    }
+  /// Pausiert einen Anteil. Gibt zurück, ob das gelungen ist.
+  ///
+  /// Früher kam hier nur das Ereignis, und niemand änderte den Zustand: Die
+  /// Oberfläche meldete Erfolg, der Anteil blieb in der Auswahl. Jetzt ändert
+  /// der Dienst den Zustand, und das Ereignis folgt nur bei Erfolg.
+  Future<bool> pauseProfile(String profileId, {String source = 'UI'}) async {
+    _log('pauseProfile', source: source, data: {'profileId': profileId});
 
-    _eventBus.publish(ProfileDeactivatedEvent(profileId));
+    final ok = await _profileService.deactivateProfile(profileId);
+    if (ok) _eventBus.publish(ProfileDeactivatedEvent(profileId));
+    return ok;
   }
 
-  /// Profil reaktivieren
-  Future<void> reactivateProfile(String profileId) async {
-    if (profileId.isEmpty) {
-      throw ArgumentError('Profile ID darf nicht leer sein');
-    }
+  /// Nimmt einen pausierten Anteil wieder auf. Gibt zurück, ob das gelungen
+  /// ist. Braucht dasselbe Recht wie das Pausieren.
+  Future<bool> resumeProfile(String profileId, {String source = 'UI'}) async {
+    _log('resumeProfile', source: source, data: {'profileId': profileId});
 
-    _eventBus.publish(ProfileReactivatedEvent(profileId));
+    final ok = await _profileService.reactivateProfile(profileId);
+    if (ok) _eventBus.publish(ProfileReactivatedEvent(profileId));
+    return ok;
   }
 
   /// Alle Profile abrufen
@@ -317,23 +323,28 @@ class DataEntry {
 
   // ============ Permission Management API ============
 
-  /// Berechtigung an/aus schalten
-  /// Gibt zurück, ob das Umschalten gelungen ist (nicht den neuen Zustand)
-  Future<bool> togglePermission(
+  /// Schaltet einen Schalter pro Anteil mit allen seinen Rechten.
+  /// Gibt zurück, ob das gelungen ist. Rechte anderer Schalter und die für
+  /// alle bleiben, wie sie gespeichert sind.
+  Future<bool> setPartRight(
     String profileId,
-    Permission permission, {
+    PartRight right, {
+    required bool on,
     String source = 'UI',
   }) async {
     _log(
-      'togglePermission',
+      'setPartRight',
       source: source,
-      data: {
-        'profileId': profileId,
-        'permission': permission.persistedValue,
-      },
+      data: {'profileId': profileId, 'right': right.name, 'on': on},
     );
 
-    return _profileService.togglePermission(profileId, permission);
+    final profile = _profileService.profilesBox.get(profileId);
+    if (profile == null) return false;
+
+    final permissions = right
+        .applyTo(profile.parsedPermissions.toSet(), on: on)
+        .toList();
+    return _profileService.updateProfilePermissions(profileId, permissions);
   }
 
   /// Profil zum Administrator ernennen
@@ -674,6 +685,32 @@ class DataEntry {
       () => _profileService.allProfiles,
     );
   }
+
+  /// Pausierte Anteile, nach Name sortiert
+  List<Profile> getPausedProfiles() {
+    return _trackQuery(
+      'getPausedProfiles',
+      () =>
+          _profileService.profiles.where((p) => !p.isActive).toList()
+            ..sort((a, b) => a.name.compareTo(b.name)),
+      // Leer ist hier der Normalfall. Die Abfrage läuft bei jedem Aufbau der
+      // Profilauswahl, und jede Warnung verdrängte eine echte aus dem
+      // Ringpuffer, der in Fehlerberichten mitgeht.
+      warnIfEmpty: false,
+    );
+  }
+
+  /// Ob der aktive Anteil diesen Anteil pausieren darf. Was nicht erlaubt
+  /// ist, bietet die Oberfläche gar nicht erst an.
+  bool canPauseProfile(String profileId) => _profileService.canPause(profileId);
+
+  /// Ob der aktive Anteil pausierte Anteile wieder aufnehmen darf.
+  bool canResumeProfiles() => _profileService.canResume;
+
+  /// Ob der aktive Anteil diesem Anteil die Admin-Rolle nehmen darf. Wie
+  /// beim Pausieren bietet die Oberfläche sonst nichts an.
+  bool canRevokeAdmin(String profileId) =>
+      _profileService.canRevokeAdmin(profileId);
 
   /// Aktives Profil abrufen (synchron)
   Profile? getActiveProfile() {

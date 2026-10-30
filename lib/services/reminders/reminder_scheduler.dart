@@ -14,6 +14,18 @@ abstract class ReminderScheduler {
   /// des Abgleichs. Fremdes bleibt unangetastet.
   Future<Set<int>> pendingOwnIds();
 
+  /// Was schon gefeuert hat und in der Leiste steht: Kennung → Schlüssel
+  /// des Ziels ([ReminderTarget.seed]), `null` wenn die Meldung keinen trägt.
+  ///
+  /// Eine angezeigte Meldung ist nicht mehr vorgemerkt und taucht in
+  /// [pendingOwnIds] nicht auf. Ohne diesen zweiten Blick blieb sie nach
+  /// Löschen, Pausieren und Stummschalten stehen.
+  Future<Map<int, String?>> shownOwn();
+
+  /// Räumt eine angezeigte Meldung ab. [key] ist der Schlüssel aus
+  /// [shownOwn] — auf Android der Tag, ohne den sie sich nicht treffen lässt.
+  Future<void> dismiss(int id, {required String key});
+
   Future<void> schedule(
     Reminder reminder, {
     required String title,
@@ -56,12 +68,18 @@ class PluginReminderScheduler implements ReminderScheduler {
   final String channelId;
   final String channelName;
 
-  NotificationDetails get _details => NotificationDetails(
+  /// [tag] trägt den Schlüssel des Ziels. Auf Android ist er das Einzige,
+  /// was eine angezeigte Meldung über sich verrät: `getActiveNotifications`
+  /// liefert dort Kennung, Tag, Titel und Text — **keine Payload**. Am A14
+  /// blieb die Meldung deshalb trotz Abgleich stehen, solange der Schlüssel
+  /// nur in der Payload reiste (29.10.2026).
+  NotificationDetails _details({String? tag}) => NotificationDetails(
     android: AndroidNotificationDetails(
       channelId,
       channelName,
       importance: Importance.high,
       priority: Priority.high,
+      tag: tag,
     ),
     iOS: const DarwinNotificationDetails(),
   );
@@ -71,6 +89,20 @@ class PluginReminderScheduler implements ReminderScheduler {
     final pending = await _plugin.pendingNotificationRequests();
     return pending.map((p) => p.id).where(isOwnId).toSet();
   }
+
+  @override
+  Future<Map<int, String?>> shownOwn() async {
+    final active = await _plugin.getActiveNotifications();
+    return {
+      for (final notification in active)
+        if (notification.id case final id? when isOwnId(id))
+          id: notification.tag ?? notification.payload,
+    };
+  }
+
+  @override
+  Future<void> dismiss(int id, {required String key}) =>
+      _plugin.cancel(id, tag: key);
 
   @override
   Future<void> schedule(
@@ -93,7 +125,7 @@ class PluginReminderScheduler implements ReminderScheduler {
       title,
       body,
       tz.TZDateTime.from(reminder.fireAt, tz.local),
-      _details,
+      _details(tag: reminder.target.seed),
       androidScheduleMode: exact
           ? AndroidScheduleMode.exactAllowWhileIdle
           : AndroidScheduleMode.inexactAllowWhileIdle,
@@ -121,5 +153,5 @@ class PluginReminderScheduler implements ReminderScheduler {
 
   @override
   Future<void> showNow({required String title, required String body}) =>
-      _plugin.show(999999, title, body, _details);
+      _plugin.show(999999, title, body, _details());
 }

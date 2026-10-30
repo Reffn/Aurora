@@ -21,10 +21,12 @@ class ProfileResetFristSection extends StatelessWidget {
   final Color profilFarbe;
   final ValueChanged<int> onFristChanged;
 
-  static const List<({int stunden, String wort, IconData zeichen})> stufen = [
-    (stunden: 24, wort: '1 Tag', zeichen: Icons.brightness_5),
-    (stunden: 72, wort: '3 Tage', zeichen: Icons.brightness_6),
-    (stunden: 168, wort: '7 Tage', zeichen: Icons.brightness_2),
+  // Die Beschriftung entsteht erst beim Bauen aus `tage`, in der Sprache
+  // der Oberfläche; vorher stand hier fest „3 Tage", auch auf Italienisch.
+  static const List<({int stunden, int tage, IconData zeichen})> stufen = [
+    (stunden: 24, tage: 1, zeichen: Icons.brightness_5),
+    (stunden: 72, tage: 3, zeichen: Icons.brightness_6),
+    (stunden: 168, tage: 7, zeichen: Icons.brightness_2),
   ];
 
   @override
@@ -79,7 +81,7 @@ class _Stufe extends StatelessWidget {
     required this.onTap,
   });
 
-  final ({int stunden, String wort, IconData zeichen}) stufe;
+  final ({int stunden, int tage, IconData zeichen}) stufe;
   final bool gewaehlt;
   final Color farbe;
   final VoidCallback onTap;
@@ -105,7 +107,7 @@ class _Stufe extends StatelessWidget {
               ),
               const SizedBox(height: 6),
               Text(
-                stufe.wort,
+                AppLocalizations.of(context).profileResetFristDays(stufe.tage),
                 style: TextStyle(
                   color: gewaehlt
                       ? Colors.white

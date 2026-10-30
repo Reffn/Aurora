@@ -1,12 +1,14 @@
+import 'dart:async';
+
 import 'package:dis_app/core/data_entry.dart';
 import 'package:dis_app/core/di/injection.dart';
 import 'package:dis_app/core/logger.dart';
 import 'package:dis_app/l10n/app_localizations.dart';
 import 'package:dis_app/main.dart';
-import 'package:dis_app/models/permission.dart';
 import 'package:dis_app/models/profile.dart';
 import 'package:dis_app/modules/onboarding/post_login_welcome_screen.dart';
 import 'package:dis_app/modules/profile/profile_creation_screen.dart';
+import 'package:dis_app/modules/profile/profile_edit_screen.dart';
 import 'package:dis_app/modules/profile/widgets/app_info_overlay.dart';
 import 'package:dis_app/modules/profile/widgets/profile_avatar.dart';
 import 'package:dis_app/modules/settings/widgets/impressum_overlay.dart';
@@ -97,6 +99,11 @@ class _ProfileSelectionScreenState extends State<ProfileSelectionScreen>
   /// Stress, Sehschwäche und Erschöpfung die naheliegende Selbsthilfe.
   static const double rollschwelle = 1.3;
 
+  /// Eine laufende, gesperrte Sitzung: Nur dann gibt es den Rückruf. Der
+  /// zuletzt aktive Anteil muss sich erst wieder anmelden, bevor seine
+  /// Rechte gelten.
+  bool get _sitzungGesperrt => widget.onProfileSelected != null;
+
   @override
   void initState() {
     super.initState();
@@ -136,7 +143,7 @@ class _ProfileSelectionScreenState extends State<ProfileSelectionScreen>
       profile,
       // Ein Rückruf kennzeichnet die Auswahl innerhalb einer laufenden,
       // gesperrten Sitzung. Dann bestätigt sich auch der bisherige Anteil neu.
-      requireCurrentProfileLogin: widget.onProfileSelected != null,
+      requireCurrentProfileLogin: _sitzungGesperrt,
     );
 
     // Nach Dialog-Close: Prüfe ob Profil gewechselt wurde.
@@ -284,303 +291,321 @@ class _ProfileSelectionScreenState extends State<ProfileSelectionScreen>
         child: SafeArea(
           child: FadeTransition(
             opacity: _fadeAnimation,
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                // Kachelbreite kommt aus der verfügbaren Breite, nicht aus
-                // einer festen Zahl: zwei Spalten am Telefon, mehr am Tablet.
-                const outerPadding = 16.0;
-                const columnGap = 16.0;
-                final available = constraints.maxWidth - outerPadding * 2;
+            // Hört auf die Profile über dem LayoutBuilder, nicht erst im
+            // Raster: Die Höhenrechnung zählt die Anteile mit. Kommt einer
+            // dazu oder geht einer, rechnet sie neu, sonst stimmte das
+            // Kartenbudget nicht mehr zum Raster.
+            child: ValueListenableBuilder(
+              valueListenable: _dataEntry.profilesBox.listenable(),
+              builder: (context, _, _) => LayoutBuilder(
+                builder: (context, constraints) {
+                  // Kachelbreite kommt aus der verfügbaren Breite, nicht aus
+                  // einer festen Zahl: zwei Spalten am Telefon, mehr am Tablet.
+                  const outerPadding = 16.0;
+                  const columnGap = 16.0;
+                  final available = constraints.maxWidth - outerPadding * 2;
 
-                // Berechne columns und avatarDiameter EINMAL hier — beide branches
-                // und der Budget-Rechner müssen die gleichen Zahlen benutzen.
-                // Die Deviation wurde am 10.08.2026 mit S24-Clipping erkannt: zwei
-                // Rechnungen → zwei Grid-Layouts → Budget passt nicht zum Rendering.
-                var columns = (available / (96 + columnGap)).floor();
-                if (columns < 1) columns = 1;
-                if (columns > 4) columns = 4;
+                  // Berechne columns und avatarDiameter EINMAL hier — beide branches
+                  // und der Budget-Rechner müssen die gleichen Zahlen benutzen.
+                  // Die Deviation wurde am 10.08.2026 mit S24-Clipping erkannt: zwei
+                  // Rechnungen → zwei Grid-Layouts → Budget passt nicht zum Rendering.
+                  var columns = (available / (96 + columnGap)).floor();
+                  if (columns < 1) columns = 1;
+                  if (columns > 4) columns = 4;
 
-                final tileWidth =
-                    (available - columnGap * (columns - 1)) / columns;
-                // Der Kreis bleibt in der Kachel, deckelt aber bei 148 dp.
-                // Die Zahl ist gemessen, nicht gewählt: Kopf, Zeitzeile und
-                // Frage brauchen 216 dp, ein Telefon lässt rund 600 dp für
-                // das Raster. Eine Reihe kostet Durchmesser + 60 dp, drei
-                // Reihen passen bis 149 dp. Darüber fällt die dritte Reihe
-                // unter die Falz — und mit ihr zwei Anteile.
-                final avatarDiameter = tileWidth > 148.0
-                    ? 148.0
-                    : (tileWidth < 96.0 ? 96.0 : tileWidth);
+                  final tileWidth =
+                      (available - columnGap * (columns - 1)) / columns;
+                  // Der Kreis bleibt in der Kachel, deckelt aber bei 148 dp.
+                  // Die Zahl ist gemessen, nicht gewählt: Kopf, Zeitzeile und
+                  // Frage brauchen 216 dp, ein Telefon lässt rund 600 dp für
+                  // das Raster. Eine Reihe kostet Durchmesser + 60 dp, drei
+                  // Reihen passen bis 149 dp. Darüber fällt die dritte Reihe
+                  // unter die Falz — und mit ihr zwei Anteile.
+                  final avatarDiameter = tileWidth > 148.0
+                      ? 148.0
+                      : (tileWidth < 96.0 ? 96.0 : tileWidth);
 
-                // Diese Fläche steht vor jeder Anmeldung. Anteile mit
-                // Passwort bleiben deshalb ganz draußen — Lauflinie,
-                // Wechselpunkte und Marken.
-                // Die Karte nimmt, was übrig bleibt — nicht umgekehrt.
-                //
-                // Bei festen 260 dp stand am S24 mit zwei Anteilen „Lina" und
-                // „Mina" halb unter der Kante: Kopf, Tageszeile, Karte, Frage
-                // und eine Rasterreihe kamen zusammen auf etwas mehr, als der
-                // Schirm hergibt. Erreichbar war der Name durch Rollen, aber
-                // die eine Angabe, die man auf dieser Fläche lesen muss, war
-                // die erste, die verschwand. Die Reihenfolge ist damit
-                // festgelegt: erst die Wahl vollständig, dann so viel Karte,
-                // wie danach noch hineinpasst.
-                //
-                // Die Zahlen sind gemessen, nicht gewählt: Kopf 60, Tageszeile
-                // 40, die beiden Überschriften mit ihren Abständen 148,
-                // Fußzeile 44. Eine Rasterreihe kostet den Durchmesser plus 62
-                // (Name plus Zeilenabstand).
-                final profileCount = _dataEntry.getProfiles().length + 1;
-                final rows = (profileCount / columns).ceil();
-                const chrome = 60.0 + 40.0 + 148.0 + 44.0;
-                final rasterHeight = rows * (avatarDiameter + 62);
+                  // Diese Fläche steht vor jeder Anmeldung. Anteile mit
+                  // Passwort und pausierte bleiben deshalb ganz draußen —
+                  // Lauflinie, Wechselpunkte und Marken.
+                  // Die Karte nimmt, was übrig bleibt — nicht umgekehrt.
+                  //
+                  // Bei festen 260 dp stand am S24 mit zwei Anteilen „Lina" und
+                  // „Mina" halb unter der Kante: Kopf, Tageszeile, Karte, Frage
+                  // und eine Rasterreihe kamen zusammen auf etwas mehr, als der
+                  // Schirm hergibt. Erreichbar war der Name durch Rollen, aber
+                  // die eine Angabe, die man auf dieser Fläche lesen muss, war
+                  // die erste, die verschwand. Die Reihenfolge ist damit
+                  // festgelegt: erst die Wahl vollständig, dann so viel Karte,
+                  // wie danach noch hineinpasst.
+                  //
+                  // Die Zahlen sind gemessen, nicht gewählt: Kopf 60, Tageszeile
+                  // 40, die beiden Überschriften mit ihren Abständen 148,
+                  // Fußzeile 44. Eine Rasterreihe kostet den Durchmesser plus 62
+                  // (Name plus Zeilenabstand).
+                  final profileCount = _dataEntry.getProfiles().length + 1;
+                  final rows = (profileCount / columns).ceil();
+                  const chrome = 60.0 + 40.0 + 148.0 + 44.0;
+                  final rasterHeight = rows * (avatarDiameter + 62);
 
-                // Bei großer Schrift rollt der ganze Schirm, nicht nur die
-                // Wahl in der Mitte. Das ermöglicht es, alle Inhalte zu
-                // erreichen, auch wenn das Layout zusammenpresst.
-                // Die abgeleitete Skala wird nur für die Layout-Verzweigung begrenzt —
-                // wie Text wirklich gerendert wird, entscheidet ausschließlich die
-                // Systemschrift. Aurora begrenzt nie die Schriftgröße der Nutzerin.
-                final skala = (MediaQuery.textScalerOf(context).scale(14) / 14)
-                    .clamp(0.5, 3.0);
+                  // Bei großer Schrift rollt der ganze Schirm, nicht nur die
+                  // Wahl in der Mitte. Das ermöglicht es, alle Inhalte zu
+                  // erreichen, auch wenn das Layout zusammenpresst.
+                  // Die abgeleitete Skala wird nur für die Layout-Verzweigung begrenzt —
+                  // wie Text wirklich gerendert wird, entscheidet ausschließlich die
+                  // Systemschrift. Aurora begrenzt nie die Schriftgröße der Nutzerin.
+                  final skala =
+                      (MediaQuery.textScalerOf(context).scale(14) / 14).clamp(
+                        0.5,
+                        3.0,
+                      );
 
-                // Seit Aufgabe 2 trägt die Zeitkarte den Standorthinweis
-                // unter sich, statt ihn in den Stapel zu legen. Ohne
-                // Standortrecht wächst sie also — und zwar auch bei
-                // Normalschrift. Wird das nicht vom Kartenbudget abgezogen,
-                // fallen die Namen bei 100 % unter die Kante: derselbe
-                // Fehler wie vorher, nur eine Ebene tiefer.
-                final hinweisHoehe = getIt<GpsManager>().hasGpsPermission.value
-                    ? 0.0
-                    : 56.0 * skala;
+                  // Seit Aufgabe 2 trägt die Zeitkarte den Standorthinweis
+                  // unter sich, statt ihn in den Stapel zu legen. Ohne
+                  // Standortrecht wächst sie also — und zwar auch bei
+                  // Normalschrift. Wird das nicht vom Kartenbudget abgezogen,
+                  // fallen die Namen bei 100 % unter die Kante: derselbe
+                  // Fehler wie vorher, nur eine Ebene tiefer.
+                  final hinweisHoehe =
+                      getIt<GpsManager>().hasGpsPermission.value
+                      ? 0.0
+                      : 56.0 * skala;
 
-                // Berechne das verfügbare Budget für die Karte BEVOR sie begrenzt wird.
-                // Am S24 und 10.08.2026 reichte das Budget bei 1.0x nicht aus:
-                // chrome (292) + rasterHeight (420) + hinweisHoehe (56) = 768,
-                // übrig = 780 - 768 = 12 dp. Die alte clamp(150, 260) hob das
-                // auf 150 und drückte das Raster unter die Falz (Y > 780).
-                // Neue Regel: Wenn Budget < 150, nutze den Rollzweig (sicherer).
-                final rest =
-                    constraints.maxHeight -
-                    chrome -
-                    rasterHeight -
-                    hinweisHoehe;
-                final rollt = skala >= rollschwelle || rest < 150.0;
+                  // Berechne das verfügbare Budget für die Karte BEVOR sie begrenzt wird.
+                  // Am S24 und 10.08.2026 reichte das Budget bei 1.0x nicht aus:
+                  // chrome (292) + rasterHeight (420) + hinweisHoehe (56) = 768,
+                  // übrig = 780 - 768 = 12 dp. Die alte clamp(150, 260) hob das
+                  // auf 150 und drückte das Raster unter die Falz (Y > 780).
+                  // Neue Regel: Wenn Budget < 150, nutze den Rollzweig (sicherer).
+                  final rest =
+                      constraints.maxHeight -
+                      chrome -
+                      rasterHeight -
+                      hinweisHoehe;
+                  final rollt = skala >= rollschwelle || rest < 150.0;
 
-                final mapHeight = rollt
-                    // In der Rollfläche konkurriert die Karte nicht mehr mit
-                    // der Wahl um dieselbe Höhe. Sie bekommt ein bescheidenes
-                    // festes Maß und darf den Rest der Fläche wachsen lassen.
-                    ? 180.0
-                    : rest.clamp(150.0, 260.0);
+                  final mapHeight = rollt
+                      // In der Rollfläche konkurriert die Karte nicht mehr mit
+                      // der Wahl um dieselbe Höhe. Sie bekommt ein bescheidenes
+                      // festes Maß und darf den Rest der Fläche wachsen lassen.
+                      ? 180.0
+                      : rest.clamp(150.0, 260.0);
 
-                final timeMap = TimeMap.fromServices(
-                  height: mapHeight,
-                  hidePasswordProtected: true,
-                );
-
-                // Oben die Lage, unten das Rechtliche, beide fest. Die Wahl
-                // bekommt den Rest und sitzt darin mittig.
-                //
-                // Nicht mit `spaceBetween` über drei Blöcke: Das schiebt den
-                // Kopf hoch und die Wahl in die Schirmmitte, und zwischen
-                // beiden steht dann die Leere, die vorher unten stand. Sie
-                // wandert, sie verschwindet nicht.
-
-                if (rollt) {
-                  // Kopf, Karte, Wahl und Rechtslinks in einer Rollfläche:
-                  // Bei 200 % passt keine Aufteilung mehr, die etwas fest
-                  // hält. Wer rollt, findet alles; wer nichts rollen kann,
-                  // sieht wenigstens nichts Abgeschnittenes.
-                  return SingleChildScrollView(
-                    padding: EdgeInsets.only(bottom: context.safeBottomPadding),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: outerPadding,
-                            vertical: 12,
-                          ),
-                          child: _buildHeader(context),
-                        ),
-                        const SizedBox(height: 8),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: outerPadding,
-                          ),
-                          child: timeMap,
-                        ),
-                        const SizedBox(height: 16),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: outerPadding,
-                          ),
-                          child: Text(
-                            AppLocalizations.of(
-                              context,
-                            ).profileSelectionTitle,
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white.withValues(alpha: 0.75),
-                              letterSpacing: 0.5,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        const SizedBox(height: 28),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: outerPadding,
-                          ),
-                          child: _buildProfileGrid(
-                            context,
-                            columns: columns,
-                            avatarDiameter: avatarDiameter,
-                          ),
-                        ),
-                        const SizedBox(height: 24),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: outerPadding,
-                          ),
-                          child: _buildLegalLinks(context),
-                        ),
-                      ],
-                    ),
+                  final timeMap = TimeMap.fromServices(
+                    height: mapHeight,
+                    hidePasswordProtected: true,
                   );
-                }
 
-                // Standard-Layout: Kopf und Fuß fest, Wahl rollt in der Mitte.
-                // Die Wahl rollt für sich, falls viele Anteile da sind. Kopf
-                // und Fußzeile bleiben dabei stehen — die Zeitangabe soll
-                // nicht weggescrollt werden können.
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: outerPadding,
-                    vertical: 12,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Column(
+                  // Oben die Lage, unten das Rechtliche, beide fest. Die Wahl
+                  // bekommt den Rest und sitzt darin mittig.
+                  //
+                  // Nicht mit `spaceBetween` über drei Blöcke: Das schiebt den
+                  // Kopf hoch und die Wahl in die Schirmmitte, und zwischen
+                  // beiden steht dann die Leere, die vorher unten stand. Sie
+                  // wandert, sie verschwindet nicht.
+
+                  if (rollt) {
+                    // Kopf, Karte, Wahl und Rechtslinks in einer Rollfläche:
+                    // Bei 200 % passt keine Aufteilung mehr, die etwas fest
+                    // hält. Wer rollt, findet alles; wer nichts rollen kann,
+                    // sieht wenigstens nichts Abgeschnittenes.
+                    return SingleChildScrollView(
+                      padding: EdgeInsets.only(
+                        bottom: context.safeBottomPadding,
+                      ),
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          _buildHeader(context),
-
-                          // „Wann bin ich" vor „wer bin ich": Diese Fläche ist
-                          // das Erste nach dem Aufwachen, und Zeitverlust
-                          // gehört zum Krankheitsbild.
-                          //
-                          // Trägt die Zeitkarte, steht das vollständige Datum
-                          // an ihrem Jetzt-Ende und diese beiden Zeilen
-                          // entfallen. Zweimal dasselbe Datum kostet nur den
-                          // Platz, den die Karte braucht — und die Karte sagt
-                          // dazu, wo man war.
-
-                          // „Was dieser Tag trägt", hier als bloße ZAHLEN.
-                          //
-                          // Termine und Medikamente gelten dem Körper, nicht
-                          // dem Anteil — sie stehen deshalb schon vor der
-                          // Wahl da, für jeden. Ohne Rechteprüfung, weil es
-                          // vor der Anmeldung kein Profil gibt, dessen Rechte
-                          // gälten.
-                          //
-                          // Es bleiben Zahlen: Titel, Uhrzeiten und Präparate
-                          // erscheinen erst nach der Wahl. Diese Fläche sieht
-                          // auch ein Dritter mit dem Gerät in der Hand, und
-                          // ein Präparatname verrät eine Diagnose.
-                          TodayOverviewLine(
-                            profile: null,
-                            gateByPermissions: false,
-                            centered: true,
-                            // Über DataEntry, nicht über die Dienste: Der
-                            // Weg durch die UI geht durch die eine Tür
-                            // (`no_direct_service_access`).
-                            countEventsForDay: (day) =>
-                                _dataEntry.getCalendarEventsForDay(day).length,
-                            countMedicationsToday: () =>
-                                _dataEntry.getTodaysMedications().length,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: outerPadding,
+                              vertical: 12,
+                            ),
+                            child: _buildHeader(context),
+                          ),
+                          const SizedBox(height: 8),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: outerPadding,
+                            ),
+                            child: timeMap,
+                          ),
+                          const SizedBox(height: 16),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: outerPadding,
+                            ),
+                            child: Text(
+                              AppLocalizations.of(
+                                context,
+                              ).profileSelectionTitle,
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white.withValues(alpha: 0.75),
+                                letterSpacing: 0.5,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          const SizedBox(height: 28),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: outerPadding,
+                            ),
+                            child: _buildProfileGrid(
+                              context,
+                              columns: columns,
+                              avatarDiameter: avatarDiameter,
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: outerPadding,
+                            ),
+                            child: _buildLegalLinks(context),
                           ),
                         ],
                       ),
+                    );
+                  }
 
-                      Expanded(
-                        // `Center` gibt der Rollfläche lose Vorgaben, damit
-                        // sie sich auf ihren Inhalt zusammenzieht statt die
-                        // volle Höhe zu nehmen. Nur so sitzt die Wahl mittig,
-                        // solange sie passt, und rollt erst, wenn nicht.
-                        child: Center(
-                          child: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                // Erst „Wer war da?", dann „Wer bist du?".
-                                // Die Reihenfolge ist die Aussage: Wer die
-                                // App öffnet, hat oft Stunden verloren. Die
-                                // Antwort darauf steht vor der Frage nach
-                                // dem eigenen Namen, nicht dahinter.
-                                // Entweder die Zeitkarte oder die Zeilen,
-                                // nie beides: Die obere Randleiste der Karte
-                                // sagt bereits, wer wann da war. Daneben
-                                // dieselbe Auskunft als Text wäre nicht mehr
-                                // Information, nur mehr Fläche.
-                                Text(
-                                  AppLocalizations.of(
-                                    context,
-                                  ).presenceRecentTitle,
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white.withValues(alpha: 0.55),
-                                    letterSpacing: 0.3,
+                  // Standard-Layout: Kopf und Fuß fest, Wahl rollt in der Mitte.
+                  // Die Wahl rollt für sich, falls viele Anteile da sind. Kopf
+                  // und Fußzeile bleiben dabei stehen — die Zeitangabe soll
+                  // nicht weggescrollt werden können.
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: outerPadding,
+                      vertical: 12,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            _buildHeader(context),
+
+                            // „Wann bin ich" vor „wer bin ich": Diese Fläche ist
+                            // das Erste nach dem Aufwachen, und Zeitverlust
+                            // gehört zum Krankheitsbild.
+                            //
+                            // Trägt die Zeitkarte, steht das vollständige Datum
+                            // an ihrem Jetzt-Ende und diese beiden Zeilen
+                            // entfallen. Zweimal dasselbe Datum kostet nur den
+                            // Platz, den die Karte braucht — und die Karte sagt
+                            // dazu, wo man war.
+
+                            // „Was dieser Tag trägt", hier als bloße ZAHLEN.
+                            //
+                            // Termine und Medikamente gelten dem Körper, nicht
+                            // dem Anteil — sie stehen deshalb schon vor der
+                            // Wahl da, für jeden. Ohne Rechteprüfung, weil es
+                            // vor der Anmeldung kein Profil gibt, dessen Rechte
+                            // gälten.
+                            //
+                            // Es bleiben Zahlen: Titel, Uhrzeiten und Präparate
+                            // erscheinen erst nach der Wahl. Diese Fläche sieht
+                            // auch ein Dritter mit dem Gerät in der Hand, und
+                            // ein Präparatname verrät eine Diagnose.
+                            TodayOverviewLine(
+                              profile: null,
+                              gateByPermissions: false,
+                              centered: true,
+                              // Über DataEntry, nicht über die Dienste: Der
+                              // Weg durch die UI geht durch die eine Tür
+                              // (`no_direct_service_access`).
+                              countEventsForDay: (day) => _dataEntry
+                                  .getCalendarEventsForDay(day)
+                                  .length,
+                              countMedicationsToday: () =>
+                                  _dataEntry.getTodaysMedications().length,
+                            ),
+                          ],
+                        ),
+
+                        Expanded(
+                          // `Center` gibt der Rollfläche lose Vorgaben, damit
+                          // sie sich auf ihren Inhalt zusammenzieht statt die
+                          // volle Höhe zu nehmen. Nur so sitzt die Wahl mittig,
+                          // solange sie passt, und rollt erst, wenn nicht.
+                          child: Center(
+                            child: SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  // Erst „Wer war da?", dann „Wer bist du?".
+                                  // Die Reihenfolge ist die Aussage: Wer die
+                                  // App öffnet, hat oft Stunden verloren. Die
+                                  // Antwort darauf steht vor der Frage nach
+                                  // dem eigenen Namen, nicht dahinter.
+                                  // Entweder die Zeitkarte oder die Zeilen,
+                                  // nie beides: Die obere Randleiste der Karte
+                                  // sagt bereits, wer wann da war. Daneben
+                                  // dieselbe Auskunft als Text wäre nicht mehr
+                                  // Information, nur mehr Fläche.
+                                  Text(
+                                    AppLocalizations.of(
+                                      context,
+                                    ).presenceRecentTitle,
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white.withValues(
+                                        alpha: 0.55,
+                                      ),
+                                      letterSpacing: 0.3,
+                                    ),
+                                    textAlign: TextAlign.center,
                                   ),
-                                  textAlign: TextAlign.center,
-                                ),
-                                const SizedBox(height: 10),
-                                timeMap,
-                                const SizedBox(height: 40),
+                                  const SizedBox(height: 10),
+                                  timeMap,
+                                  const SizedBox(height: 40),
 
-                                // Leiser als die Namen darunter. Die Frage wird
-                                // einmal gelernt, die Namen liest man bei jedem
-                                // Start — der Inhalt gehört nach vorn, nicht die
-                                // Überschrift.
-                                Text(
-                                  AppLocalizations.of(
-                                    context,
-                                  ).profileSelectionTitle,
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white.withValues(alpha: 0.75),
-                                    letterSpacing: 0.5,
+                                  // Leiser als die Namen darunter. Die Frage wird
+                                  // einmal gelernt, die Namen liest man bei jedem
+                                  // Start — der Inhalt gehört nach vorn, nicht die
+                                  // Überschrift.
+                                  Text(
+                                    AppLocalizations.of(
+                                      context,
+                                    ).profileSelectionTitle,
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.white.withValues(
+                                        alpha: 0.75,
+                                      ),
+                                      letterSpacing: 0.5,
+                                    ),
+                                    textAlign: TextAlign.center,
                                   ),
-                                  textAlign: TextAlign.center,
-                                ),
 
-                                const SizedBox(height: 28),
+                                  const SizedBox(height: 28),
 
-                                // Profil-Raster. Die Reihenfolge ist die der
-                                // Profile selbst (Richtlinie 7) — „Neues Profil"
-                                // steht hinten, damit ein neuer Anteil keinen
-                                // bestehenden verschiebt.
-                                _buildProfileGrid(
-                                  context,
-                                  columns: columns,
-                                  avatarDiameter: avatarDiameter,
-                                ),
-                              ],
+                                  // Profil-Raster. Die Reihenfolge ist die der
+                                  // Profile selbst (Richtlinie 7) — „Neues Profil"
+                                  // steht hinten, damit ein neuer Anteil keinen
+                                  // bestehenden verschiebt.
+                                  _buildProfileGrid(
+                                    context,
+                                    columns: columns,
+                                    avatarDiameter: avatarDiameter,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
 
-                      _buildLegalLinks(context),
-                    ],
-                  ),
-                );
-              },
+                        _buildLegalLinks(context),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ),
@@ -593,9 +618,10 @@ class _ProfileSelectionScreenState extends State<ProfileSelectionScreen>
   /// Das Raster zeigt alle existierenden Profile plus einen "Neues Profil"-Button.
   /// Die Reihenfolge entspricht der Profilreihenfolge (Richtlinie 7).
   ///
-  /// `columns` und `avatarDiameter` werden vom LayoutBuilder übergeben, damit
-  /// die Höhenrechnung und das Rendering synchron bleiben. Doppeltes Rechnen
-  /// führt zu Mismatches: am 10.08.2026 reichte das Budget am S24 nicht aus.
+  /// `columns` und `avatarDiameter` werden vom LayoutBuilder übergeben,
+  /// damit die Höhenrechnung und das Rendering synchron bleiben.
+  /// Doppeltes Rechnen führt zu Mismatches: am 10.08.2026 reichte das Budget
+  /// am S24 nicht aus.
   Widget _buildProfileGrid(
     BuildContext context, {
     required int columns,
@@ -607,73 +633,68 @@ class _ProfileSelectionScreenState extends State<ProfileSelectionScreen>
     final availableWidth = screenWidth - (outerPadding * 2);
     final tileWidth = (availableWidth - (columnGap * (columns - 1))) / columns;
 
-    return ValueListenableBuilder(
-      valueListenable: _dataEntry.profilesBox.listenable(),
-      builder: (context, box, _) {
-        final profiles = _dataEntry.getProfiles();
+    final profiles = _dataEntry.getProfiles();
 
-        return Wrap(
-          spacing: columnGap,
-          runSpacing: 28,
-          alignment: WrapAlignment.center,
-          children: [
-            ...profiles.map((profile) {
-              final lastFront = _lastFront(
-                profile,
-                AppLocalizations.of(context),
-              );
-              return SizedBox(
-                width: tileWidth,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ProfileAvatar(
-                      profile: profile,
-                      size: avatarDiameter,
-                      nameFontSize: 20,
-                      onTap: () async {
-                        await _handleProfileSelection(
-                          context,
-                          profile,
-                        );
-                      },
-                      onLongPress: () {
-                        _showProfileOptions(
-                          context,
-                          profile,
-                        );
-                      },
-                    ),
-                    if (lastFront != null)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4),
-                        child: Text(
-                          AppLocalizations.of(context).presenceLastFront(
-                            lastFront,
-                          ),
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Colors.white.withValues(alpha: 0.5),
-                          ),
-                        ),
-                      ),
-                  ],
+    return Wrap(
+      spacing: columnGap,
+      runSpacing: 28,
+      alignment: WrapAlignment.center,
+      children: [
+        ...profiles.map((profile) {
+          final lastFront = _lastFront(
+            profile,
+            AppLocalizations.of(context),
+          );
+          return SizedBox(
+            width: tileWidth,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ProfileAvatar(
+                  profile: profile,
+                  size: avatarDiameter,
+                  nameFontSize: 20,
+                  onTap: () async {
+                    await _handleProfileSelection(
+                      context,
+                      profile,
+                    );
+                  },
+                  onLongPress: () {
+                    _showProfileOptions(
+                      context,
+                      profile,
+                    );
+                  },
                 ),
-              );
-            }),
-            SizedBox(
-              width: tileWidth,
-              child: _buildAddProfileButton(
-                context,
-                avatarDiameter,
-              ),
+                if (lastFront != null)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4),
+                    child: Text(
+                      AppLocalizations.of(context).presenceLastFront(
+                        lastFront,
+                      ),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Colors.white.withValues(alpha: 0.5),
+                      ),
+                    ),
+                  ),
+              ],
             ),
-          ],
-        );
-      },
+          );
+        }),
+        SizedBox(
+          width: tileWidth,
+          child: _buildAddProfileButton(
+            context,
+            avatarDiameter,
+          ),
+        ),
+      ],
     );
   }
 
@@ -838,10 +859,26 @@ class _ProfileSelectionScreenState extends State<ProfileSelectionScreen>
     );
   }
 
+  /// Langes Drücken: nur „Bearbeiten“.
+  ///
+  /// Pausieren stand hier auch. Die Auswahl steht aber nur ohne angemeldeten
+  /// Anteil (jeder Start, jede Abmeldung) oder bei gesperrter Sitzung da, und
+  /// in beiden Fällen gilt niemandes Recht. Pausieren und Zurückholen liegen
+  /// in Einstellungen → „Anteile & Rechte“ (Regel 30).
   void _showProfileOptions(BuildContext context, Profile profile) {
     final activeProfile = _dataEntry.getActiveProfile();
-    final canDeactivate =
-        activeProfile?.hasPermission(Permission.deactivateProfiles) ?? false;
+    // Ohne Passwort direkt, mit Passwort nur für den angemeldeten Anteil.
+    // Bei gesperrter Sitzung steht `active_profile_id` noch, angemeldet ist
+    // aber niemand: Sonst setzte jeder, der das Telefon hält, dem zuletzt
+    // aktiven Anteil ein neues Passwort, ohne das alte zu kennen. Dieselbe
+    // Schranke wie im Dialog beim Antippen (`requireCurrentProfileLogin`).
+    final canEdit =
+        !profile.hasPassword ||
+        (!_sitzungGesperrt && activeProfile?.id == profile.id);
+
+    // Kein Blatt, das nur aus Absagen besteht: Gibt es nichts anzubieten,
+    // geht auch nichts auf.
+    if (!canEdit) return;
 
     showModalBottomSheet<void>(
       context: context,
@@ -858,77 +895,18 @@ class _ProfileSelectionScreenState extends State<ProfileSelectionScreen>
               ),
               onTap: () {
                 Navigator.pop(context);
-                showCustomSnackBar(
-                  context,
-                  message: AppLocalizations.of(context).profileEditComingSoon,
+                unawaited(
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (context) => ProfileEditScreen(profile: profile),
+                    ),
+                  ),
                 );
               },
             ),
-            if (canDeactivate)
-              ListTile(
-                leading: const Icon(Icons.block, color: Colors.orange),
-                title: Text(
-                  AppLocalizations.of(context).profileDeactivate,
-                  style: const TextStyle(color: Colors.orange),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                  _confirmDeactivate(context, profile);
-                },
-              ),
           ],
         ),
-      ),
-    );
-  }
-
-  void _confirmDeactivate(BuildContext context, Profile profile) {
-    showDialog<void>(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1F1F1F),
-        title: Text(
-          AppLocalizations.of(context).profileDeactivateTitle,
-          style: const TextStyle(color: Colors.white),
-        ),
-        content: Text(
-          AppLocalizations.of(context).profileDeactivateMessage(profile.name),
-          style: const TextStyle(color: Colors.white70),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(AppLocalizations.of(context).actionCancel),
-          ),
-          TextButton(
-            onPressed: () async {
-              try {
-                await _dataEntry.deactivateProfile(profile.id);
-                if (context.mounted) {
-                  Navigator.pop(context);
-                  showCustomSnackBar(
-                    context,
-                    message: AppLocalizations.of(context).profileDeactivated,
-                    type: SnackBarType.success,
-                  );
-                }
-              } catch (e) {
-                if (context.mounted) {
-                  Navigator.pop(context);
-                  showCustomSnackBar(
-                    context,
-                    message: AppLocalizations.of(
-                      context,
-                    ).errorGeneric(e.toString()),
-                    type: SnackBarType.error,
-                  );
-                }
-              }
-            },
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: Text(AppLocalizations.of(context).actionDelete),
-          ),
-        ],
       ),
     );
   }

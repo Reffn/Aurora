@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:dis_app/core/logger.dart';
+import 'package:dis_app/l10n/app_localizations.dart';
 import 'package:dis_app/models/profile.dart';
 import 'package:dis_app/widgets/color_wheel_picker.dart';
 import 'package:flutter/material.dart';
@@ -154,7 +155,9 @@ class _UserMarkedColorPickerState extends State<UserMarkedColorPicker> {
       final collidingProfile = _checkCollision(normalizedPosition);
       setState(() {
         if (collidingProfile != null) {
-          _collisionWarning = "Zu ähnlich zu ${collidingProfile.name}'s Farbe";
+          _collisionWarning = AppLocalizations.of(
+            context,
+          ).profileColorTooSimilar(collidingProfile.name);
         } else {
           _collisionWarning = null;
         }

@@ -1,0 +1,5 @@
+{
+  // Dart CLI Console Settings - verhindert externe dart.exe Fenster
+  "dart.cliConsole": "terminal",
+  "dart.addSdkToTerminalPath": true
+}

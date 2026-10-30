@@ -124,7 +124,7 @@ Kannst du mich bitte anrufen.
     );
 
     if (!await launchUrl(uri)) {
-      throw Exception('SMS-App konnte nicht geöffnet werden');
+      throw Exception(AppTexts.current.emergencySmsAppNotOpened);
     }
   }
 
@@ -156,7 +156,7 @@ Kannst du mich bitte anrufen.
     );
 
     if (!await launchUrl(uri)) {
-      throw Exception('SMS-App konnte nicht geöffnet werden');
+      throw Exception(AppTexts.current.emergencySmsAppNotOpened);
     }
   }
 
@@ -181,7 +181,7 @@ Kannst du mich bitte anrufen.
     final uri = Uri(scheme: 'tel', path: phoneNumber);
 
     if (!await launchUrl(uri)) {
-      throw Exception('Telefon-App konnte nicht geöffnet werden');
+      throw Exception(AppTexts.current.emergencyPhoneAppNotOpened);
     }
   }
 
@@ -191,7 +191,7 @@ Kannst du mich bitte anrufen.
     final uri = Uri(scheme: 'tel', path: cleanNumber);
 
     if (!await launchUrl(uri)) {
-      throw Exception('Telefon-App konnte nicht geöffnet werden');
+      throw Exception(AppTexts.current.emergencyPhoneAppNotOpened);
     }
   }
 
@@ -200,7 +200,7 @@ Kannst du mich bitte anrufen.
     final uri = Uri.parse(url);
 
     if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-      throw Exception('Website konnte nicht geöffnet werden');
+      throw Exception(AppTexts.current.emergencyWebsiteNotOpened);
     }
   }
 }

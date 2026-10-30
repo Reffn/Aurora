@@ -6,9 +6,11 @@ import 'package:dis_app/l10n/app_localizations.dart';
 import 'package:dis_app/models/medication.dart';
 import 'package:dis_app/models/permission.dart';
 import 'package:dis_app/modules/medication/medication_detail_screen.dart';
+import 'package:dis_app/modules/medication/medication_history.dart';
 import 'package:dis_app/modules/medication/widgets/as_needed_medication_card.dart';
 import 'package:dis_app/modules/medication/widgets/medication_card.dart';
 import 'package:dis_app/modules/medication/widgets/medication_feedback_dialog.dart';
+import 'package:dis_app/modules/medication/widgets/medication_history_list.dart';
 import 'package:dis_app/modules/medication/widgets/reminder_permission_banner.dart';
 import 'package:dis_app/services/notification_service.dart';
 import 'package:dis_app/services/reminders/reminder_rules.dart';
@@ -19,6 +21,7 @@ import 'package:dis_app/utils/safe_area_extensions.dart';
 import 'package:dis_app/widgets/aurora_text_field.dart';
 import 'package:dis_app/widgets/animated_empty_state.dart';
 import 'package:dis_app/widgets/animated_list_view.dart';
+import 'package:dis_app/widgets/medication_avatar.dart';
 import 'package:dis_app/widgets/permission_guard.dart';
 import 'package:dis_app/widgets/standard_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -318,13 +321,22 @@ class _MedicationScreenState extends State<MedicationScreen> {
     final l10n = AppLocalizations.of(context);
 
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: StandardAppBar(
           tabBar: TabBar(
+            // Drei Reiter passen bei großer Systemschrift nicht nebeneinander;
+            // abgeschnitten hieß es „Bedarfsmedizi…". Lieber rollen als
+            // Wörter kürzen.
+            isScrollable: true,
+            tabAlignment: TabAlignment.center,
             tabs: [
               Tab(text: l10n.medicationTabDaily),
               Tab(text: l10n.medicationTabAsNeeded),
+              // Rückmeldungen vom 02. und 04.10.2026: Es gab nur „Heute",
+              // und um Mitternacht war der Stand von gestern weg — obwohl
+              // jeder Eintrag in der Box lag.
+              Tab(text: l10n.medicationTabHistory),
             ],
           ),
         ),
@@ -332,6 +344,7 @@ class _MedicationScreenState extends State<MedicationScreen> {
           children: [
             _buildDailyMedicationsView(),
             _buildAsNeededView(),
+            _buildHistoryView(),
           ],
         ),
       ),
@@ -346,13 +359,25 @@ class _MedicationScreenState extends State<MedicationScreen> {
       valueListenable: _dataEntry.medicationsBox.listenable(),
       builder: (context, box, _) {
         final todaysMedications = _dataEntry.getTodaysMedications();
+        final pausiert = _pausiert(MedicationType.daily);
 
         if (todaysMedications.isEmpty) {
           final l10n = AppLocalizations.of(context);
-          return AnimatedEmptyState(
+          final leer = AnimatedEmptyState(
             icon: Icons.medication,
             title: l10n.medicationEmptyTitle,
             subtitle: l10n.medicationEmptySubtitle,
+          );
+          if (pausiert.isEmpty) return leer;
+          return ListView(
+            padding: EdgeInsets.only(bottom: context.safeBottomPaddingForFab),
+            children: [
+              leer,
+              _PausiertGruppe(
+                medikamente: pausiert,
+                onTap: _viewMedicationDetails,
+              ),
+            ],
           );
         }
 
@@ -375,9 +400,16 @@ class _MedicationScreenState extends State<MedicationScreen> {
             top: 16,
             bottom: context.safeBottomPaddingForFab,
           ),
-          itemCount: sortedTimes.length + 1, // +1 für Header
+          // +1 für den Kopf, +1 für die Gruppe „Pausiert", falls es eine gibt
+          itemCount: sortedTimes.length + 1 + (pausiert.isEmpty ? 0 : 1),
           itemBuilder: (context, index) {
             final l10n = AppLocalizations.of(context);
+            if (index == sortedTimes.length + 1) {
+              return _PausiertGruppe(
+                medikamente: pausiert,
+                onTap: _viewMedicationDetails,
+              );
+            }
             if (index == 0) {
               // Header mit Statistik. Er hört selbst auf die Logs: Der
               // äußere Builder oben reagiert nur auf die Medikamente, und
@@ -481,8 +513,10 @@ class _MedicationScreenState extends State<MedicationScreen> {
                       );
 
                       final status = log?.status;
+                      // Auch pausierte: Sonst stünde der aktive Anteil als
+                      // der da, der die Einnahme eingetragen hat.
                       final statusByProfile = log != null
-                          ? _dataEntry.getProfiles().firstWhere(
+                          ? _dataEntry.getAllProfiles().firstWhere(
                               (p) => p.id == log.profileId,
                               orElse: () => activeProfile!,
                             )
@@ -504,6 +538,7 @@ class _MedicationScreenState extends State<MedicationScreen> {
                         onViewFeedback: log?.feedback != null
                             ? () => _viewFeedback(log!.feedback!)
                             : null,
+                        kannVerwalten: _kannVerwalten,
                       );
                     }),
                   ],
@@ -527,12 +562,24 @@ class _MedicationScreenState extends State<MedicationScreen> {
             .getActiveMedications()
             .where((med) => med.type == MedicationType.asNeeded)
             .toList();
+        final pausiert = _pausiert(MedicationType.asNeeded);
 
         if (asNeededMedications.isEmpty) {
-          return AnimatedEmptyState(
+          final leer = AnimatedEmptyState(
             icon: Icons.healing,
             title: l10n.medicationEmptyAsNeededTitle,
             subtitle: l10n.medicationAddFirstAsNeeded,
+          );
+          if (pausiert.isEmpty) return leer;
+          return ListView(
+            padding: EdgeInsets.only(bottom: context.safeBottomPaddingForFab),
+            children: [
+              leer,
+              _PausiertGruppe(
+                medikamente: pausiert,
+                onTap: _viewMedicationDetails,
+              ),
+            ],
           );
         }
 
@@ -545,8 +592,15 @@ class _MedicationScreenState extends State<MedicationScreen> {
                 top: 16,
                 bottom: context.safeBottomPaddingForFab,
               ),
-              itemCount: asNeededMedications.length,
+              itemCount:
+                  asNeededMedications.length + (pausiert.isEmpty ? 0 : 1),
               itemBuilder: (context, index) {
+                if (index == asNeededMedications.length) {
+                  return _PausiertGruppe(
+                    medikamente: pausiert,
+                    onTap: _viewMedicationDetails,
+                  );
+                }
                 final medication = asNeededMedications[index];
                 return AsNeededMedicationCard(medication: medication);
               },
@@ -554,6 +608,60 @@ class _MedicationScreenState extends State<MedicationScreen> {
           },
         );
       },
+    );
+  }
+
+  bool get _kannVerwalten {
+    final profil = _dataEntry.getActiveProfile();
+    if (profil == null) return false;
+    return profil.isAdmin || profil.hasPermission(Permission.manageMedication);
+  }
+
+  /// Pausierte Medikamente einer Art.
+  ///
+  /// Wer im Formular „Aktiv" ausschaltete, verlor das Medikament bisher ganz:
+  /// Es stand in keiner Liste mehr und ließ sich nicht wieder einschalten.
+  List<Medication> _pausiert(MedicationType typ) => _dataEntry
+      .getAllMedications()
+      .where((m) => !m.isActive && m.type == typ)
+      .toList();
+
+  /// Verlauf der letzten zwei Wochen, alle Medikamente.
+  Widget _buildHistoryView() {
+    final l10n = AppLocalizations.of(context);
+    return ValueListenableBuilder(
+      valueListenable: _dataEntry.medicationsBox.listenable(),
+      builder: (context, _, _) => ValueListenableBuilder(
+        valueListenable: _dataEntry.medicationLogsBox.listenable(),
+        builder: (context, logsBox, _) {
+          final tage = verlaufBerechnen(
+            medikamente: _dataEntry.getAllMedications(),
+            eintraege: logsBox.values,
+            jetzt: DateTime.now(),
+          );
+          if (tage.isEmpty) {
+            return AnimatedEmptyState(
+              icon: Icons.history,
+              title: l10n.medicationHistoryEmptyTitle,
+              subtitle: l10n.medicationHistoryEmptyHint,
+            );
+          }
+          return ListView(
+            padding: EdgeInsets.fromLTRB(
+              16,
+              0,
+              16,
+              context.safeBottomPaddingForFab,
+            ),
+            children: [
+              MedicationHistoryList(
+                tage: tage,
+                profile: _dataEntry.getAllProfiles(),
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 
@@ -668,4 +776,61 @@ class _ErlaubnisBandState extends State<_ErlaubnisBand> {
     openPromises: _openPromises,
     onRequest: _fragen,
   );
+}
+
+/// Pausierte Medikamente, unter dem Plan — sichtbar, nicht versteckt.
+///
+/// Eigene Gruppe mit Überschrift (Richtlinie 3). Ein Tipp führt zur
+/// Detailseite, wo „Wieder aufnehmen" steht.
+class _PausiertGruppe extends StatelessWidget {
+  const _PausiertGruppe({required this.medikamente, required this.onTap});
+
+  final List<Medication> medikamente;
+  final void Function(Medication) onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+            child: Row(
+              children: [
+                const Icon(Icons.pause_circle_outline, color: Colors.white54),
+                const SizedBox(width: 8),
+                Text(
+                  l10n.medicationStatusPaused,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white70,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          for (final med in medikamente)
+            Card(
+              child: ListTile(
+                leading: MedicationAvatar(
+                  imagePath: med.imagePath,
+                  name: med.name,
+                  width: 48,
+                  height: 24,
+                  showShadow: false,
+                ),
+                title: Text(med.name),
+                subtitle: Text(med.dosage),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => onTap(med),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
 }

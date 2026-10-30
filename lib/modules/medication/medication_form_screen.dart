@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:dis_app/core/data_entry.dart';
@@ -15,6 +16,7 @@ import 'package:dis_app/widgets/dialogs/confirmation_dialog.dart';
 import 'package:dis_app/widgets/form_action_button.dart';
 import 'package:dis_app/widgets/form_scroll_view.dart';
 import 'package:dis_app/widgets/permission_guard.dart';
+import 'package:dis_app/widgets/reminder_permission_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
@@ -55,12 +57,17 @@ class _MedicationFormScreenState extends State<MedicationFormScreen> {
   int? _minIntervalHours;
   bool _remindersEnabled = true;
 
+  /// Darf Aurora gerade erinnern? Steht im Formular, bevor gespeichert
+  /// wird — ein Versprechen, das das Gerät verbietet, soll man vorher sehen.
+  bool _hasReminderPermission = true;
+
   bool get _isEditing => widget.existingMedication != null;
 
   @override
   void initState() {
     super.initState();
     _dataEntry = getIt<DataEntry>();
+    unawaited(_nachsehenErlaubnis());
 
     if (_isEditing) {
       // Bearbeiten: Bestehende Werte laden
@@ -186,15 +193,36 @@ class _MedicationFormScreenState extends State<MedicationFormScreen> {
     });
   }
 
+  Future<void> _nachsehenErlaubnis() async {
+    final erlaubt = await hasReminderPermission();
+    if (mounted) setState(() => _hasReminderPermission = erlaubt);
+  }
+
+  /// „Erlaubnis geben" aus der Zeile unter dem Schalter. Fragt und sieht
+  /// nach — der Schalter bleibt, wie er ist: Angetippt wurde die Erlaubnis,
+  /// nicht der Wunsch.
+  Future<void> _erlaubnisGeben() async {
+    await askReminderPermission(context);
+    await _nachsehenErlaubnis();
+  }
+
   /// Schaltet die Erinnerungen um — und fragt genau hier nach der Erlaubnis.
   Future<void> _toggleReminders(bool value) async {
     setState(() => _remindersEnabled = value);
     if (!value) return;
 
-    final granted = await ensureReminderPermission(context);
-    if (!granted && mounted) {
-      setState(() => _remindersEnabled = false);
-    }
+    final outcome = await askReminderPermission(context);
+    if (!mounted) return;
+    setState(() {
+      _hasReminderPermission = outcome == ReminderPermissionOutcome.granted;
+      // Nur das eigene „Jetzt nicht" nimmt den Wunsch zurück. Sagt das
+      // Gerät Nein, bleibt er stehen — das Erlaubnisband auf der
+      // Medikamentenseite trägt dann den Weg, statt dass der Wunsch still
+      // verschwindet.
+      if (outcome == ReminderPermissionOutcome.declinedByPerson) {
+        _remindersEnabled = false;
+      }
+    });
   }
 
   /// Beschreibt in Worten, was der Erinnerungs-Schalter tatsächlich auslöst.
@@ -355,14 +383,23 @@ class _MedicationFormScreenState extends State<MedicationFormScreen> {
     // Der Schalter steht von sich aus an. Gefragt wurde bisher nur, wer ihn
     // selbst umlegt — wer die Vorgabe stehen liess, bekam zugesagte
     // Erinnerungen, die nie geplant wurden.
+    //
+    // Ungefragt kommt Auroras Blatt nur einmal: Wer dort „Jetzt nicht" sagt,
+    // wird beim nächsten Speichern nicht wieder gefragt. Die Zeile unter
+    // dem Schalter zeigt den Zustand trotzdem, mit dem Weg daneben.
     if (_remindersEnabled) {
-      final granted = await ensureReminderPermission(context);
+      final outcome = await askReminderPermission(context, uninvited: true);
       if (!mounted) return;
-      if (!granted) setState(() => _remindersEnabled = false);
+      if (outcome == ReminderPermissionOutcome.declinedByPerson) {
+        setState(() => _remindersEnabled = false);
+      }
     }
 
-    // Alle Profile-IDs verwenden (alle Anteile teilen sich einen Körper)
-    final allProfileIds = _dataEntry.getProfiles().map((p) => p.id).toList();
+    // Alle Profile-IDs verwenden (alle Anteile teilen sich einen Körper),
+    // auch die pausierten. Nur die aktiven hätten beim Speichern jeden
+    // pausierten Anteil ausgetragen, und nach dem Wiederaufnehmen fehlte ihm
+    // das Medikament in der Zeitachse.
+    final allProfileIds = _dataEntry.getAllProfiles().map((p) => p.id).toList();
 
     final medication = Medication(
       id: _isEditing ? widget.existingMedication!.id : const Uuid().v4(),
@@ -412,30 +449,6 @@ class _MedicationFormScreenState extends State<MedicationFormScreen> {
     }
   }
 
-  Future<void> _deleteMedication() async {
-    final l10n = AppLocalizations.of(context);
-    final confirmed = await ConfirmationDialog.showDestructive(
-      context: context,
-      title: l10n.medicationDeleteTitle,
-      message: l10n.medicationDeleteMessage,
-    );
-
-    if (confirmed) {
-      try {
-        await _dataEntry.deleteMedication(widget.existingMedication!.id);
-        if (mounted) {
-          Navigator.pop(context);
-        }
-      } catch (e) {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(l10n.errorGeneric(e.toString()))),
-          );
-        }
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -463,14 +476,11 @@ class _MedicationFormScreenState extends State<MedicationFormScreen> {
           title: Text(
             _isEditing ? l10n.medicationEditTitle : l10n.medicationNewTitle,
           ),
-          actions: [
-            if (_isEditing)
-              IconButton(
-                icon: const Icon(Icons.delete),
-                onPressed: _deleteMedication,
-                color: Colors.red,
-              ),
-          ],
+          // Hier stand ein rotes Mülleimer-Symbol ohne Wort. Wer darüber
+          // löschte, landete zurück auf der Detailseite eines Medikaments,
+          // das es nicht mehr gab („nicht gefunden"). Entfernen steht jetzt
+          // genau einmal, beschriftet, unter „Verwalten" auf der
+          // Detailseite.
         ),
         body: Form(
           key: _formKey,
@@ -679,6 +689,10 @@ class _MedicationFormScreenState extends State<MedicationFormScreen> {
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
+                      if (_remindersEnabled && !_hasReminderPermission) ...[
+                        const SizedBox(height: 12),
+                        ReminderNotAllowedRow(onRequest: _erlaubnisGeben),
+                      ],
                     ],
                   ),
                 ),

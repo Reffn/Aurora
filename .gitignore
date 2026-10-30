@@ -33,6 +33,7 @@ test_hive/
 .pub-cache/
 .pub/
 /build/
+/android/build/
 
 # Symbolication related
 app.*.symbols
@@ -79,3 +80,9 @@ docs/gemini_vorlage/
 # Koordinationsbus (F:\agentbus). Der Verkehr zwischen parallel arbeitenden
 # Agenten ist Tagesgeschaeft und gehoert nie in den Verlauf.
 comms/
+
+# Die Website-Quelle (website/) liegt seit dem 29.10.2026 auch hier. Ihre
+# Abhängigkeiten und der Bau gehören nicht in den Verlauf — ausgeliefert wird
+# die Kopie in docs/, siehe website/README.md.
+website/node_modules/
+website/dist/

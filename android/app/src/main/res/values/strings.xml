@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Rückfalltexte für UpdateHinweisReceiver: gelten nur, wenn Aurora noch
+    keine Datei mit den Worten in der gewählten Sprache abgelegt hat —
+    beim ersten Update auf die Fassung, die den Empfänger einführt.
+    Die Texte in der App stehen in lib/l10n (updateHinweisTitel/Text).
+-->
+<resources>
+    <string name="update_hinweis_titel">Aurora has been updated</string>
+    <string name="update_hinweis_text">Take a quick look at what’s new.</string>
+    <string name="update_hinweis_kanal">After an update</string>
+</resources>

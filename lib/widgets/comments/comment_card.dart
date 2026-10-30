@@ -26,7 +26,11 @@ class CommentCard extends StatelessWidget {
       orElse: () => dataEntry.getAllProfiles().first, // Fallback
     );
 
-    final timeFormat = DateFormat('dd.MM.yyyy • HH:mm');
+    // Datum in der Schreibweise der Sprache; „dd.MM.yyyy" stand hier fest
+    // und las sich in der englischen Oberfläche als deutsches Datum.
+    final timeFormat = DateFormat.yMd(
+      Localizations.localeOf(context).toString(),
+    ).addPattern('Hm', ' • ');
 
     return Card(
       margin: const EdgeInsets.only(bottom: 12),

@@ -548,7 +548,7 @@ class _TimelineScreenState extends State<TimelineScreen> {
   ) {
     final now = DateTime.now();
     final difference = now.difference(dateTime);
-    final time = DateFormat('HH:mm').format(dateTime);
+    final time = DateFormat.Hm(locale).format(dateTime);
 
     // Heute
     if (difference.inDays == 0) {
@@ -565,8 +565,8 @@ class _TimelineScreenState extends State<TimelineScreen> {
       return DateFormat('EEEE, HH:mm', locale).format(dateTime);
     }
 
-    // Älter
-    return DateFormat('dd.MM.yyyy, HH:mm').format(dateTime);
+    // Älter — Datum in der Schreibweise der Sprache statt fest „dd.MM.yyyy"
+    return DateFormat.yMd(locale).addPattern('Hm', ', ').format(dateTime);
   }
 
   Color _getAccuracyColor(double accuracy) {

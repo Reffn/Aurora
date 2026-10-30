@@ -42,7 +42,9 @@ class ChatMessageBubble extends StatelessWidget {
     // hatte — und die Farbe taugt nicht mehr zum Auseinanderhalten.
     // message.senderColor bleibt der Rückfall für gelöschte Profile.
     final color = profile?.preferredColor ?? message.senderColor;
-    final timeFormat = DateFormat('HH:mm');
+    final timeFormat = DateFormat.Hm(
+      Localizations.localeOf(context).toString(),
+    );
 
     return Align(
       alignment: alignment,

@@ -104,22 +104,45 @@ class MedicationService extends BaseService {
   }
 
   /// Heutigen Log für ein Medikament + Zeitpunkt abrufen
-  MedicationLog? getTodaysLog(String medicationId, String timeOfDay) {
-    final now = DateTime.now();
-    final todayStart = DateTime(now.year, now.month, now.day);
-    final todayEnd = todayStart.add(const Duration(days: 1));
+  MedicationLog? getTodaysLog(String medicationId, String timeOfDay) =>
+      getLogFor(medicationId, timeOfDay, DateTime.now());
 
-    try {
-      return _logsBox.values.firstWhere((log) {
-        return log.medicationId == medicationId &&
-            log.scheduledTime == timeOfDay &&
-            log.takenAt.isAfter(todayStart) &&
-            log.takenAt.isBefore(todayEnd);
-      });
-    } catch (e) {
-      return null; // Kein Log für heute gefunden
+  /// Der Stand eines Einnahmezeitpunkts an einem Tag — der zuletzt gesetzte.
+  ///
+  /// Jeder Tipp auf „Genommen", „Abgelehnt" oder „Später" legt einen eigenen
+  /// Eintrag an; wer korrigiert, hinterlässt also mehrere. Hier stand
+  /// `firstWhere`, und die Box liefert nach Schlüssel sortiert — die
+  /// Schlüssel sind Zufallskennungen. Nach „Später, dann Genommen" zeigte die
+  /// Karte je nach Kennung weiter „Später". Es gilt, was zuletzt bestätigt
+  /// wurde.
+  MedicationLog? getLogFor(
+    String medicationId,
+    String timeOfDay,
+    DateTime day,
+  ) {
+    final tagBeginn = DateTime(day.year, day.month, day.day);
+    // Nicht `add(Duration(days: 1))`: An der Zeitumstellung hat ein Tag
+    // 23 oder 25 Stunden.
+    final tagEnde = DateTime(day.year, day.month, day.day + 1);
+
+    MedicationLog? juengster;
+    for (final log in _logsBox.values) {
+      if (log.medicationId != medicationId ||
+          log.scheduledTime != timeOfDay ||
+          log.takenAt.isBefore(tagBeginn) ||
+          !log.takenAt.isBefore(tagEnde)) {
+        continue;
+      }
+      if (juengster == null ||
+          _bestaetigt(log).isAfter(_bestaetigt(juengster))) {
+        juengster = log;
+      }
     }
+    return juengster;
   }
+
+  static DateTime _bestaetigt(MedicationLog log) =>
+      log.confirmedAt ?? log.takenAt;
 
   /// Alle Feedbacks für ein Medikament abrufen
   List<MedicationLog> getFeedbacksForMedication(String medicationId) {
@@ -254,6 +277,16 @@ class MedicationService extends BaseService {
   /// Medikament gelöscht
   void _handleMedicationDeleted(MedicationDeletedEvent event) {
     _medicationsBox.delete(event.medicationId);
+
+    // Die Einträge gehen mit. Sie blieben bisher verwaist liegen —
+    // Gesundheitsdaten zu etwas, das es in der App nicht mehr gibt, und
+    // nirgends mehr zu sehen oder zu löschen. Wer den Verlauf behalten will,
+    // pausiert das Medikament, statt es zu entfernen.
+    _logsBox.deleteAll(
+      _logsBox.keys
+          .where((key) => _logsBox.get(key)?.medicationId == event.medicationId)
+          .toList(),
+    );
 
     // Cascade delete: Alle unified Comments löschen
     final commentService = getIt<CommentService>();

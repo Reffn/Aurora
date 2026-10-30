@@ -33,13 +33,16 @@ class CommentSection extends StatefulWidget {
     required this.parentId,
     required this.permission,
     super.key,
-    this.title = 'Kommentare',
+    this.title,
   });
 
   final CommentableType type;
   final String parentId;
   final Permission permission;
-  final String title;
+  /// Ohne Angabe die Übersetzung von „Kommentare". Hier stand das
+  /// deutsche Wort als Vorgabe, und kein Aufrufer setzte etwas anderes —
+  /// jede Sprache las „Kommentare".
+  final String? title;
 
   @override
   State<CommentSection> createState() => _CommentSectionState();
@@ -117,7 +120,7 @@ class _CommentSectionState extends State<CommentSection> {
                     const Icon(Icons.comment, size: 20),
                     const SizedBox(width: 8),
                     Text(
-                      '${widget.title} (${comments.length})',
+                      '${widget.title ?? AppTexts.current.commentsTitle} (${comments.length})',
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,

@@ -59,7 +59,9 @@ Future<void> _seedLinaMina() async {
   final now = DateTime.now();
 
   // --- Profile: vorhandene wiederverwenden, fehlende anlegen -------------
-  final profiles = dataEntry.getProfiles();
+  // Auch pausierte: Sonst legte der Seed einen zweiten Anteil gleichen
+  // Namens an.
+  final profiles = dataEntry.getAllProfiles();
 
   Profile? byName(String name) {
     for (final p in profiles) {

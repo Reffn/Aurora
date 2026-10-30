@@ -9,12 +9,19 @@ enum SnackBarType {
 
 /// Custom SnackBar mit Slide-Animation und Profil-Farbe
 /// Verwendung: showCustomSnackBar(context, message: 'Text', type: SnackBarType.success)
+///
+/// Mit [actionLabel] und [onAction] trägt sie einen Knopf, etwa „Rückgängig".
+/// Ein Tipp darauf schließt sie und ruft [onAction]. [actionIcon] steht
+/// links vom Wort — nie das Wort allein (Richtlinie 5).
 void showCustomSnackBar(
   BuildContext context, {
   required String message,
   SnackBarType type = SnackBarType.info,
   IconData? icon,
   Duration duration = const Duration(seconds: 3),
+  String? actionLabel,
+  IconData? actionIcon,
+  VoidCallback? onAction,
 }) {
   final overlay = Overlay.of(context);
   final profileColor = Theme.of(context).colorScheme.primary;
@@ -95,6 +102,23 @@ void showCustomSnackBar(
                       ),
                     ),
                   ),
+                  if (actionLabel != null && onAction != null) ...[
+                    const SizedBox(width: 8),
+                    TextButton.icon(
+                      onPressed: () {
+                        // Erst schließen: Ein zweiter Tipp fände den Knopf
+                        // nicht mehr und könnte nichts doppelt auslösen.
+                        if (overlayEntry.mounted) overlayEntry.remove();
+                        onAction();
+                      },
+                      icon: Icon(actionIcon ?? Icons.undo, size: 20),
+                      label: Text(actionLabel),
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        minimumSize: const Size(48, 48),
+                      ),
+                    ),
+                  ],
                   // Close button
                   GestureDetector(
                     onTap: () => overlayEntry.remove(),

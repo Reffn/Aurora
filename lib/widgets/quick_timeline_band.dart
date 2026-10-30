@@ -111,7 +111,7 @@ class QuickTimelineBand extends StatelessWidget {
           TimelineMark(
             icon: timelineSymbol(e),
             label:
-                '${DateFormat.Hm().format(e.timestamp)} '
+                '${DateFormat.Hm(l10n.localeName).format(e.timestamp)} '
                 '${timelineLabel(e, profileNameOf)}',
             color: Colors.white70,
           ),

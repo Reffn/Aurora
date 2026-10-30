@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_hinweis_titel">Aurora è stata aggiornata</string>
+    <string name="update_hinweis_text">Dai un’occhiata alle novità.</string>
+    <string name="update_hinweis_kanal">Dopo un aggiornamento</string>
+</resources>

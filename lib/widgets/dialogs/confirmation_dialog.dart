@@ -124,16 +124,17 @@ class ConfirmationDialog {
     required BuildContext context,
     required String title,
     required String message,
-    String yesText = 'Ja',
-    String noText = 'Nein',
+    String? yesText,
+    String? noText,
     IconData? icon,
   }) async {
+    final texts = AppTexts.current;
     final result = await show(
       context: context,
       title: title,
       message: message,
-      cancelText: noText,
-      confirmText: yesText,
+      cancelText: noText ?? texts.dialogNo,
+      confirmText: yesText ?? texts.dialogYes,
       icon: icon,
     );
     return result == ConfirmationResult.confirm;

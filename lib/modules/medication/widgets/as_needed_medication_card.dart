@@ -4,6 +4,7 @@ import 'package:dis_app/l10n/app_localizations.dart';
 import 'package:dis_app/models/medication.dart';
 import 'package:dis_app/models/permission.dart';
 import 'package:dis_app/modules/medication/medication_detail_screen.dart';
+import 'package:dis_app/modules/medication/widgets/medication_card.dart';
 import 'package:dis_app/utils/custom_snackbar.dart';
 import 'package:dis_app/widgets/medication_avatar.dart';
 import 'package:flutter/material.dart';
@@ -107,6 +108,11 @@ class AsNeededMedicationCard extends StatelessWidget {
                   ),
                 ],
               ),
+              const SizedBox(height: 8),
+              ZurDetailseite(
+                medication: medication,
+                kannVerwalten: _kannVerwalten(dataEntry),
+              ),
 
               const SizedBox(height: 12),
               const Divider(),
@@ -143,7 +149,7 @@ class AsNeededMedicationCard extends StatelessWidget {
                     const SizedBox(width: 8),
                     Text(
                       l10n.medicationLastTaken(
-                        DateFormat('HH:mm').format(lastLog.takenAt),
+                        DateFormat.Hm(l10n.localeName).format(lastLog.takenAt),
                       ),
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -168,7 +174,7 @@ class AsNeededMedicationCard extends StatelessWidget {
                     const SizedBox(width: 8),
                     Text(
                       l10n.medicationNextPossible(
-                        DateFormat('HH:mm').format(nextAllowed),
+                        DateFormat.Hm(l10n.localeName).format(nextAllowed),
                       ),
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: Theme.of(context).colorScheme.error,
@@ -323,4 +329,10 @@ class AsNeededMedicationCard extends StatelessWidget {
       type: SnackBarType.success,
     );
   }
+}
+
+bool _kannVerwalten(DataEntry dataEntry) {
+  final profil = dataEntry.getActiveProfile();
+  if (profil == null) return false;
+  return profil.isAdmin || profil.hasPermission(Permission.manageMedication);
 }

@@ -388,10 +388,15 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
                         size: 20,
                       ),
                       const SizedBox(width: 8),
-                      Text(
-                        l10n.contactMarkAsEmergency,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
+                      // Umbrechen statt überlaufen: Auf Italienisch bei
+                      // großer Systemschrift lief die Zeile um 12 px über
+                      // das Ankreuzfeld (Smoketest 06.10.2026).
+                      Flexible(
+                        child: Text(
+                          l10n.contactMarkAsEmergency,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],
@@ -605,15 +610,15 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
       case 1:
         return AppTexts.current.ratingVeryNegative;
       case 2:
-        return 'Negativ';
+        return AppTexts.current.ratingNegative;
       case 3:
-        return 'Neutral';
+        return AppTexts.current.ratingNeutral;
       case 4:
-        return 'Positiv';
+        return AppTexts.current.ratingPositive;
       case 5:
         return AppTexts.current.ratingVeryPositive;
       default:
-        return 'Neutral';
+        return AppTexts.current.ratingNeutral;
     }
   }
 

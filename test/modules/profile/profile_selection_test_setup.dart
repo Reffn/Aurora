@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dis_app/core/data_entry.dart';
 import 'package:dis_app/core/di/injection.dart';
 import 'package:dis_app/core/event_bus.dart';
@@ -44,7 +46,8 @@ class _DummyCalendarService implements CalendarService {
     final dayEnd = dayStart.add(const Duration(days: 1));
 
     return _events.where((event) {
-      return event.startTime.isBefore(dayEnd) && event.endTime.isAfter(dayStart);
+      return event.startTime.isBefore(dayEnd) &&
+          event.endTime.isAfter(dayStart);
     }).toList();
   }
 
@@ -55,7 +58,17 @@ class _DummyCalendarService implements CalendarService {
 }
 
 /// Dummy DataEntry für Tests. ProfileSelectionScreen braucht getProfiles(), profilesBox.listenable(), etc.
+///
+/// Pausieren schreibt wie der echte Dienst in die Box. Die Auswahl hört über
+/// `profilesBox.listenable()` mit, und das hängt an `watch()` — ohne Ereignis
+/// dort bliebe ein pausierter Anteil im Raster stehen, egal was die
+/// Oberfläche tut.
 class _DummyDataEntry implements DataEntry {
+  _DummyDataEntry({required this.darfPausieren});
+
+  /// Steht für `deactivateProfiles` am aktiven Anteil.
+  final bool darfPausieren;
+
   final List<Profile> _profiles = [];
   final List<Contact> _contacts = [];
   late final _profilesBox = _InMemoryBox<Profile>();
@@ -75,12 +88,46 @@ class _DummyDataEntry implements DataEntry {
 
   @override
   List<Profile> getProfiles() {
-    return _profiles;
+    return _profiles.where((p) => p.isActive).toList();
+  }
+
+  @override
+  List<Profile> getAllProfiles() => List.of(_profiles);
+
+  @override
+  Profile? getProfileById(String profileId) {
+    for (final p in _profiles) {
+      if (p.id == profileId) return p;
+    }
+    return null;
   }
 
   @override
   Profile? getActiveProfile() {
     return _profiles.isNotEmpty ? _profiles.first : null;
+  }
+
+  /// Dieselben Regeln wie `ProfileService.canPause`, soweit sie hier zählen:
+  /// Recht, nicht der aktive Anteil, Ziel noch aktiv.
+  @override
+  bool canPauseProfile(String profileId) {
+    if (!darfPausieren) return false;
+    if (profileId == getActiveProfile()?.id) return false;
+    return getProfileById(profileId)?.isActive ?? false;
+  }
+
+  @override
+  Future<bool> pauseProfile(String profileId, {String source = 'UI'}) async {
+    if (!canPauseProfile(profileId)) return false;
+    _setzeAktiv(profileId, aktiv: false);
+    return true;
+  }
+
+  void _setzeAktiv(String profileId, {required bool aktiv}) {
+    final i = _profiles.indexWhere((p) => p.id == profileId);
+    final neu = _profiles[i].copyWith(isActive: aktiv);
+    _profiles[i] = neu;
+    _profilesBox.schreibe(profileId, neu);
   }
 
   @override
@@ -132,6 +179,13 @@ class _DummyDataEntry implements DataEntry {
 /// In-Memory Box für Tests - verhält sich wie eine Hive Box aber gespeichert im RAM
 class _InMemoryBox<T> implements Box<T> {
   final Map<dynamic, T> _data = {};
+  final _ereignisse = StreamController<BoxEvent>.broadcast();
+
+  /// Schreibt wie `put` und meldet es, wie Hive es tut.
+  void schreibe(dynamic key, T value) {
+    _data[key] = value;
+    _ereignisse.add(BoxEvent(key, value, false));
+  }
 
   @override
   Iterable<T> get values => _data.values;
@@ -141,10 +195,12 @@ class _InMemoryBox<T> implements Box<T> {
     return _DummyValueListenable<Box<T>>(this as Box<T>);
   }
 
-  /// Gibt einen leeren Stream zurück für watch()
+  /// Daran hängt `listenable()` aus hive_ce_flutter — die Methode oben ruft
+  /// die Oberfläche nie auf, weil die Erweiterung statisch gewählt wird.
   @override
   Stream<BoxEvent> watch({dynamic key}) {
-    return const Stream.empty();
+    if (key == null) return _ereignisse.stream;
+    return _ereignisse.stream.where((e) => e.key == key);
   }
 
   @override
@@ -173,11 +229,13 @@ class _DummyLocationTrackingService implements LocationTrackingService {
 
   /// Dummy Box für Locationhistorie - TimeMap liest daraus
   @override
-  late Box<LocationHistoryEntry> locationHistoryBox = _InMemoryBox<LocationHistoryEntry>();
+  late Box<LocationHistoryEntry> locationHistoryBox =
+      _InMemoryBox<LocationHistoryEntry>();
 
   /// Dummy Box für ProfileSwitchEvents
   @override
-  late Box<ProfileSwitchEvent> switchEventsBox = _InMemoryBox<ProfileSwitchEvent>();
+  late Box<ProfileSwitchEvent> switchEventsBox =
+      _InMemoryBox<ProfileSwitchEvent>();
 
   @override
   ValueListenable<bool> get hasLocationPermission => _hasLocationPermission;
@@ -205,9 +263,14 @@ class _FakeGpsManager implements GpsManager {
 
 /// Zwei Anteile, „Lina" und „Mina" — dieselbe Lage, in der der Bruch am
 /// S24 am 10. August 2026 auftrat.
+///
+/// [darfPausieren] gibt dem aktiven Anteil (Lina) das Recht, andere zu
+/// pausieren. [mitPasswort] nennt Anteile, die ein Passwort haben.
 Future<void> profilAufbau({
   bool mitTageshinweis = false,
   bool mitStandortrecht = true,
+  bool darfPausieren = false,
+  Set<String> mitPasswort = const {},
 }) async {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -218,7 +281,7 @@ Future<void> profilAufbau({
   await getIt.reset();
 
   // Erstelle ein Dummy DataEntry, das unsere Test-Profile speichert
-  final dummyDataEntry = _DummyDataEntry();
+  final dummyDataEntry = _DummyDataEntry(darfPausieren: darfPausieren);
 
   // Erstelle zwei Test-Profile
   final now = DateTime.now();
@@ -235,8 +298,15 @@ Future<void> profilAufbau({
     createdAt: now,
   );
 
-  dummyDataEntry.addProfile(lina);
-  dummyDataEntry.addProfile(mina);
+  for (final profil in [lina, mina]) {
+    dummyDataEntry.addProfile(
+      profil.copyWith(
+        passwordHash: mitPasswort.contains(profil.name)
+            ? 'hash-von-${profil.name}'
+            : null,
+      ),
+    );
+  }
 
   // Registriere das Dummy DataEntry
   getIt.registerSingleton<DataEntry>(dummyDataEntry);
@@ -252,7 +322,9 @@ Future<void> profilAufbau({
 
   // Registriere weitere Services, die OverviewMap braucht
   getIt.registerSingleton<MapService>(_DummyMapService());
-  getIt.registerSingleton<LocationTrackingService>(_DummyLocationTrackingService());
+  getIt.registerSingleton<LocationTrackingService>(
+    _DummyLocationTrackingService(),
+  );
 
   // Registriere CalendarService mit optional einem Event für heute
   final calendarService = _DummyCalendarService();

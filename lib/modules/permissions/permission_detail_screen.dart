@@ -1,17 +1,25 @@
 import 'package:dis_app/core/data_entry.dart';
 import 'package:dis_app/core/di/injection.dart';
 import 'package:dis_app/l10n/app_localizations.dart';
+import 'package:dis_app/models/part_right.dart';
+import 'package:dis_app/models/part_right_text.dart';
 import 'package:dis_app/models/permission.dart';
-import 'package:dis_app/models/permission_text.dart';
 import 'package:dis_app/models/profile.dart';
+import 'package:dis_app/modules/permissions/widgets/parts_group_header.dart';
+import 'package:dis_app/modules/profile/widgets/pause_profile_dialog.dart';
 import 'package:dis_app/modules/profile/widgets/profile_avatar.dart';
+import 'package:dis_app/utils/app_colors.dart';
+import 'package:dis_app/utils/custom_snackbar.dart';
 import 'package:dis_app/widgets/dialogs/confirmation_dialog.dart';
-import 'package:dis_app/widgets/progress_dots.dart';
-import 'package:dis_app/widgets/state_symbol.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 
-/// Permission Detail Screen - Zeigt und editiert alle Berechtigungen eines Profils
+/// Was ein Anteil darf: für einen Admin eine ruhige Karte, sonst die
+/// Schalter, die etwas bewirken (`PartRight.hasEffect`), in ihren Gruppen.
+///
+/// Angeboten wird nur, was gelingt („errorless“): Admin-Knöpfe nur für einen
+/// aktiven Admin, Abgeben nur, wo der Dienst es zulässt, Pausieren nur mit
+/// Recht.
 class PermissionDetailScreen extends StatefulWidget {
   const PermissionDetailScreen({
     required this.profile,
@@ -24,18 +32,7 @@ class PermissionDetailScreen extends StatefulWidget {
 }
 
 class _PermissionDetailScreenState extends State<PermissionDetailScreen> {
-  final _dataEntry = getIt<DataEntry>();
-
-  /// Prüft, ob das gegebene Profil das erste (älteste) Profil ist
-  bool _isFirstProfile(Profile profile) {
-    final allProfiles = _dataEntry.getProfiles();
-    if (allProfiles.isEmpty) return false;
-
-    final firstProfile = allProfiles.reduce(
-      (a, b) => a.createdAt.isBefore(b.createdAt) ? a : b,
-    );
-    return profile.id == firstProfile.id;
-  }
+  final DataEntry _dataEntry = getIt<DataEntry>();
 
   @override
   Widget build(BuildContext context) {
@@ -43,44 +40,86 @@ class _PermissionDetailScreenState extends State<PermissionDetailScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.permissionsDetailTitle(widget.profile.name)),
+        title: Text(l10n.partsAndRightsTitle),
         backgroundColor: Theme.of(
           context,
         ).colorScheme.primary.withValues(alpha: 0.15),
       ),
       body: ValueListenableBuilder(
         valueListenable: _dataEntry.profilesBox.listenable(),
-        builder: (context, box, _) {
-          // Aktuelles Profil aus Box holen (für Live-Updates)
-          final currentProfile =
-              _dataEntry.profilesBox.get(widget.profile.id) ?? widget.profile;
+        builder: (context, _, _) {
+          // Aus dem Bestand statt aus dem Widget, damit jeder Schalter sofort
+          // zeigt, was gespeichert ist.
+          final profile =
+              _dataEntry.getProfileById(widget.profile.id) ?? widget.profile;
+          final active = _dataEntry.getActiveProfile();
+          final activeIsAdmin = active?.isAdmin == true;
+          final isSelf = active?.id == profile.id;
+          final mayGrant =
+              active?.hasPermission(Permission.managePermissions) == true;
 
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              // Profil-Header
-              _ProfileHeader(profile: currentProfile, l10n: l10n),
+              _Header(profile: profile),
               const SizedBox(height: 24),
-
-              // Admin-Toggle (falls berechtigt)
-              if (!currentProfile.isAdmin)
-                _AdminToggle(
-                  profile: currentProfile,
-                  l10n: l10n,
-                  onToggle: () => _makeAdmin(currentProfile, l10n),
-                  isRevoke: false,
-                )
-              else if (currentProfile.isAdmin &&
-                  !_isFirstProfile(currentProfile))
-                _AdminToggle(
-                  profile: currentProfile,
-                  l10n: l10n,
-                  onToggle: () => _revokeAdmin(currentProfile, l10n),
-                  isRevoke: true,
+              if (profile.isAdmin) ...[
+                const _AdminCard(),
+                if (_dataEntry.canRevokeAdmin(profile.id))
+                  Card(
+                    margin: const EdgeInsets.only(top: 12),
+                    clipBehavior: Clip.antiAlias,
+                    child: _ActionTile(
+                      icon: Icons.remove_moderator_outlined,
+                      label: l10n.rightsRevokeAdmin,
+                      onTap: () => _revokeAdmin(profile),
+                    ),
+                  ),
+              ] else
+                for (final group in PartRightGroup.values)
+                  _RightsGroup(
+                    group: group,
+                    profile: profile,
+                    rights: [
+                      for (final right in PartRight.values)
+                        // Nur Schalter, die etwas bewirken (Regel 32). Auf
+                        // der eigenen Seite fehlt „Rechte vergeben“: Sonst
+                        // sperrt sich ein Nicht-Admin mit einem Tipp selbst
+                        // aus.
+                        if (right.group == group &&
+                            right.hasEffect &&
+                            !(isSelf && right == PartRight.grantRights))
+                          right,
+                    ],
+                    onChanged: mayGrant
+                        ? (right, {required on}) =>
+                              _setRight(profile, right, on: on)
+                        : null,
+                    trailing:
+                        group == PartRightGroup.management && activeIsAdmin
+                        ? _ActionTile(
+                            icon: Icons.admin_panel_settings_outlined,
+                            label: l10n.permissionsMakeAdminButton,
+                            onTap: () => _makeAdmin(profile),
+                          )
+                        : null,
+                  ),
+              if (_dataEntry.canPauseProfile(profile.id)) ...[
+                const SizedBox(height: 8),
+                // Ruhiger Textknopf: Pausieren nimmt nichts weg, der Rückweg
+                // steht unter „Pausiert“.
+                Center(
+                  child: TextButton.icon(
+                    onPressed: () => _pause(profile),
+                    icon: const Icon(Icons.pause_circle_outline),
+                    label: Text(l10n.partsPauseNamed(profile.name)),
+                    style: TextButton.styleFrom(
+                      foregroundColor: AppColors.mist,
+                      minimumSize: const Size(48, 48),
+                    ),
+                  ),
                 ),
-
-              // Permissions nach Kategorie gruppiert
-              ..._buildPermissionSections(currentProfile, l10n),
+              ],
             ],
           );
         },
@@ -88,181 +127,135 @@ class _PermissionDetailScreenState extends State<PermissionDetailScreen> {
     );
   }
 
-  List<Widget> _buildPermissionSections(
+  Future<void> _setRight(
     Profile profile,
-    AppLocalizations l10n,
-  ) {
-    // Gruppiere alle Permissions nach Kategorie
-    final grouped = Permission.values.groupByCategory();
-    final sections = <Widget>[];
-
-    // Sortierte Kategorien (System zuerst)
-    final orderedCategories = [
-      PermissionCategory.system,
-      PermissionCategory.chat,
-      PermissionCategory.calendar,
-      PermissionCategory.medication,
-      PermissionCategory.contacts,
-      PermissionCategory.finder,
-      PermissionCategory.diary,
-      PermissionCategory.emergency,
-      PermissionCategory.security,
-    ];
-
-    for (final category in orderedCategories) {
-      final permissions = grouped[category];
-      if (permissions == null || permissions.isEmpty) continue;
-
-      sections.add(
-        _PermissionSection(
-          category: category,
-          permissions: permissions,
-          profile: profile,
-          l10n: l10n,
-          onToggle: (permission) =>
-              _togglePermission(profile, permission, l10n),
-        ),
-      );
-      sections.add(const SizedBox(height: 16));
-    }
-
-    return sections;
-  }
-
-  Future<void> _togglePermission(
-    Profile profile,
-    Permission permission,
-    AppLocalizations l10n,
-  ) async {
-    final success = await _dataEntry.togglePermission(profile.id, permission);
-
-    if (!success && mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(l10n.permissionsChangeError),
-          backgroundColor: Colors.red,
-        ),
-      );
+    PartRight right, {
+    required bool on,
+  }) async {
+    final l10n = AppLocalizations.of(context);
+    final ok = await _dataEntry.setPartRight(profile.id, right, on: on);
+    // Angeboten wird der Schalter nur mit Recht. Hier landet nur, wem es
+    // zwischen Anzeigen und Tippen genommen wurde.
+    if (!ok && mounted) {
+      showCustomSnackBar(context, message: l10n.commonNoPermission);
     }
   }
 
-  Future<void> _makeAdmin(Profile profile, AppLocalizations l10n) async {
-    // Bestätigungsdialog
+  Future<void> _makeAdmin(Profile profile) async {
+    final l10n = AppLocalizations.of(context);
     final confirmed = await ConfirmationDialog.showYesNo(
       context: context,
       title: l10n.permissionsMakeAdminTitle,
       message: l10n.permissionsMakeAdminMessage(profile.name),
       yesText: l10n.actionConfirm,
       noText: l10n.actionCancel,
-      icon: Icons.admin_panel_settings,
+      icon: Icons.admin_panel_settings_outlined,
     );
+    if (!confirmed) return;
 
-    if (confirmed) {
-      await _dataEntry.makeAdmin(profile.id);
+    final ok = await _dataEntry.makeAdmin(profile.id);
+    if (!ok && mounted) {
+      showCustomSnackBar(context, message: l10n.commonNoPermission);
     }
   }
 
-  Future<void> _revokeAdmin(Profile profile, AppLocalizations l10n) async {
-    // Bestätigungsdialog
+  Future<void> _revokeAdmin(Profile profile) async {
+    final l10n = AppLocalizations.of(context);
     final confirmed = await ConfirmationDialog.showYesNo(
       context: context,
-      title: l10n.permissionsRevokeAdminTitle,
+      title: l10n.rightsRevokeAdmin,
       message: l10n.permissionsRevokeAdminMessage(profile.name),
-      yesText: l10n.actionRemove,
+      yesText: l10n.actionConfirm,
       noText: l10n.actionCancel,
-      icon: Icons.remove_moderator,
+      icon: Icons.remove_moderator_outlined,
     );
+    if (!confirmed) return;
 
-    if (confirmed) {
-      final success = await _dataEntry.revokeAdmin(profile.id);
-      if (!success && mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(l10n.permissionsRevokeAdminError),
-            backgroundColor: Colors.orange,
-          ),
-        );
-      }
+    final ok = await _dataEntry.revokeAdmin(profile.id);
+    if (!ok && mounted) {
+      showCustomSnackBar(context, message: l10n.commonNoPermission);
+    }
+  }
+
+  Future<void> _pause(Profile profile) async {
+    await showPauseProfileDialog(context, profile);
+    if (!mounted) return;
+    // Pausiert gibt es hier nichts mehr zu schalten. Zurück zur Liste, dort
+    // steht der Anteil unter „Pausiert“ mit dem Rückweg.
+    if (_dataEntry.getProfileById(profile.id)?.isActive == false) {
+      Navigator.pop(context);
     }
   }
 }
 
-/// Profil-Header mit Avatar und Info
-class _ProfileHeader extends StatelessWidget {
-  const _ProfileHeader({required this.profile, required this.l10n});
+/// Kopf: Avatar, Name und Alter.
+class _Header extends StatelessWidget {
+  const _Header({required this.profile});
+
   final Profile profile;
-  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final age = profile.age;
+
+    return Row(
+      children: [
+        ProfileAvatar(profile: profile, size: 72, showName: false),
+        const SizedBox(width: 16),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                profile.name,
+                style: const TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              if (age != null) ...[
+                const SizedBox(height: 4),
+                Text(
+                  l10n.profileAgeYears(age),
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: AppColors.mist.withValues(alpha: 0.8),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// Für einen Admin statt einer Liste gesperrter Kästchen: eine Zeile.
+class _AdminCard extends StatelessWidget {
+  const _AdminCard();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Card(
+      margin: EdgeInsets.zero,
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
           children: [
-            ProfileAvatar(profile: profile, size: 64),
+            const Icon(
+              Icons.verified_user_outlined,
+              color: AppColors.mist,
+              size: 28,
+            ),
             const SizedBox(width: 16),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    profile.name,
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  if (profile.age != null) ...[
-                    const SizedBox(height: 4),
-                    Text(
-                      l10n.profileAgeYears(profile.age!),
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.white.withValues(alpha: 0.7),
-                      ),
-                    ),
-                  ],
-                  const SizedBox(height: 8),
-                  if (profile.isAdmin)
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.amber.withValues(alpha: 0.2),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.amber),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(
-                            Icons.verified_user,
-                            size: 16,
-                            color: Colors.amber,
-                          ),
-                          const SizedBox(width: 6),
-                          Text(
-                            l10n.permissionsAdministrator,
-                            style: const TextStyle(
-                              color: Colors.amber,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  else
-                    Text(
-                      l10n.permissionsCount(profile.permissions.length),
-                      style: TextStyle(
-                        color: Colors.white.withValues(alpha: 0.6),
-                      ),
-                    ),
-                ],
+              child: Text(
+                l10n.rightsAdminSummary,
+                style: const TextStyle(fontSize: 16),
               ),
             ),
           ],
@@ -272,225 +265,127 @@ class _ProfileHeader extends StatelessWidget {
   }
 }
 
-/// Admin-Toggle Button
-class _AdminToggle extends StatelessWidget {
-  const _AdminToggle({
+/// Eine Gruppe mit Überschrift und ihren Schaltern, höchstens fünf
+/// (Richtlinie 3).
+class _RightsGroup extends StatelessWidget {
+  const _RightsGroup({
+    required this.group,
     required this.profile,
-    required this.l10n,
-    required this.onToggle,
-    required this.isRevoke,
+    required this.rights,
+    required this.onChanged,
+    this.trailing,
   });
+
+  final PartRightGroup group;
   final Profile profile;
-  final AppLocalizations l10n;
-  final VoidCallback onToggle;
-  final bool isRevoke;
+  final List<PartRight> rights;
+
+  /// `null`, wenn der aktive Anteil keine Rechte vergeben darf: Dann sind
+  /// die Schalter nur zu lesen.
+  final void Function(PartRight right, {required bool on})? onChanged;
+
+  /// Eine Zeile am Ende der Gruppe, etwa „Zum Administrator machen“.
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final color = isRevoke ? Colors.orange : Colors.amber;
-    final icon = isRevoke ? Icons.remove_moderator : Icons.admin_panel_settings;
-    final title = isRevoke
-        ? l10n.permissionsRevokeAdminTitle
-        : l10n.permissionsMakeAdminButton;
-    final subtitle = isRevoke
-        ? l10n.permissionsRevokeAdminSubtitle
-        : l10n.permissionsMakeAdminSubtitle;
+    final change = onChanged;
 
-    return Card(
-      color: color.withValues(alpha: 0.1),
-      child: InkWell(
-        onTap: onToggle,
-        borderRadius: BorderRadius.circular(12),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            children: [
-              Icon(
-                icon,
-                color: color,
-                size: 32,
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      subtitle,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.white.withValues(alpha: 0.7),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Icon(Icons.chevron_right, color: color),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+    // Keine Überschrift über einer leeren Karte.
+    if (rights.isEmpty && trailing == null) return const SizedBox.shrink();
 
-/// Permission-Section (eine Kategorie)
-class _PermissionSection extends StatelessWidget {
-  const _PermissionSection({
-    required this.category,
-    required this.permissions,
-    required this.profile,
-    required this.l10n,
-    required this.onToggle,
-  });
-  final PermissionCategory category;
-  final List<Permission> permissions;
-  final Profile profile;
-  final AppLocalizations l10n;
-  final void Function(Permission) onToggle;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    final activeCount = permissions.where(profile.hasPermission).length;
-
-    return Card(
-      child: Theme(
-        data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-        child: ExpansionTile(
-          initiallyExpanded: category == PermissionCategory.system,
-          leading: Icon(category.icon, color: category.color, size: 32),
-          title: Text(
-            _categoryTitle(),
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-          // Zusätzlich zur Zahl ein Punktemuster: wie viele Rechte in dieser
-          // Kategorie offen sind, ist so ohne Lesen abzählbar.
-          subtitle: Row(
-            children: [
-              ProgressDots(
-                active: activeCount,
-                total: permissions.length,
-                color: category.color,
-              ),
-              const SizedBox(width: 8),
-              Text(
-                l10n.permissionsActiveCount(activeCount, permissions.length),
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.white.withValues(alpha: 0.6),
-                ),
-              ),
-            ],
-          ),
-          children: [
-            ...permissions.map(
-              (permission) => _PermissionTile(
-                permission: permission,
-                categoryColor: category.color,
-                enabled: profile.isAdmin || profile.hasPermission(permission),
-                isAdmin: profile.isAdmin,
-                onToggle: () => onToggle(permission),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  String _categoryTitle() {
-    switch (category) {
-      case PermissionCategory.system:
-        return l10n.permissionsCategorySystem;
-      case PermissionCategory.chat:
-        return l10n.permissionsCategoryChat;
-      case PermissionCategory.calendar:
-        return l10n.permissionsCategoryCalendar;
-      case PermissionCategory.medication:
-        return l10n.permissionsCategoryMedication;
-      case PermissionCategory.contacts:
-        return l10n.permissionsCategoryContacts;
-      case PermissionCategory.finder:
-        return l10n.permissionsCategoryFinder;
-      case PermissionCategory.diary:
-        return l10n.permissionsCategoryDiary;
-      case PermissionCategory.emergency:
-        return l10n.permissionsCategoryEmergency;
-      case PermissionCategory.security:
-        return l10n.permissionsCategorySecurity;
-    }
-  }
-}
-
-/// Einzelne Permission-Checkbox
-class _PermissionTile extends StatelessWidget {
-  const _PermissionTile({
-    required this.permission,
-    required this.categoryColor,
-    required this.enabled,
-    required this.isAdmin,
-    required this.onToggle,
-  });
-  final Permission permission;
-  final Color categoryColor;
-  final bool enabled;
-  final bool isAdmin;
-  final VoidCallback onToggle;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    // Gefährliche Rechte tragen ihre eigene Farbe, damit sie auch dann
-    // herausstechen, wenn niemand die Beschreibung liest.
-    final activeColor = permission.dangerous
-        ? Colors.red.shade300
-        : categoryColor;
-
-    return CheckboxListTile(
-      value: enabled,
-      onChanged: isAdmin
-          ? null
-          : (_) => onToggle(), // Admin kann nicht geändert werden
-      title: Row(
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Flexible(child: Text(permission.label(l10n))),
-          if (permission.dangerous) ...[
-            const SizedBox(width: 8),
-            Icon(
-              Icons.warning,
-              size: 16,
-              color: Colors.red.shade300,
+          PartsGroupHeader(group.label(l10n)),
+          Card(
+            margin: EdgeInsets.zero,
+            clipBehavior: Clip.antiAlias,
+            child: Column(
+              children: [
+                for (final (index, right) in rights.indexed) ...[
+                  if (index > 0) const Divider(height: 1),
+                  _RightSwitch(
+                    right: right,
+                    state: right.stateFor(profile),
+                    onChanged: change == null
+                        ? null
+                        : (on) => change(right, on: on),
+                  ),
+                ],
+                if (trailing case final row?) ...[
+                  const Divider(height: 1),
+                  row,
+                ],
+              ],
             ),
-          ],
+          ),
         ],
       ),
-      subtitle: Text(
-        permission.description(l10n),
-        style: TextStyle(
-          fontSize: 12,
-          color: Colors.white.withValues(alpha: 0.6),
-        ),
+    );
+  }
+}
+
+/// Ein Schalter mit Symbol und Wort, ohne Beschreibung. Halb gesetzt steht
+/// er auf aus und sagt es; Einschalten setzt dann alle seine Rechte.
+class _RightSwitch extends StatelessWidget {
+  const _RightSwitch({
+    required this.right,
+    required this.state,
+    required this.onChanged,
+  });
+
+  final PartRight right;
+  final PartRightState state;
+  final ValueChanged<bool>? onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
+    return SwitchListTile(
+      secondary: Icon(right.icon, color: AppColors.mist),
+      title: Text(right.label(l10n)),
+      subtitle: state == PartRightState.partly
+          ? Text(
+              l10n.rightsPartly,
+              style: TextStyle(
+                fontSize: 13,
+                color: AppColors.mist.withValues(alpha: 0.8),
+              ),
+            )
+          : null,
+      value: state == PartRightState.on,
+      onChanged: onChanged,
+    );
+  }
+}
+
+/// Eine ruhige Zeile für eine Handlung mit Bestätigung.
+class _ActionTile extends StatelessWidget {
+  const _ActionTile({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(icon, color: AppColors.mist),
+      title: Text(label),
+      trailing: Icon(
+        Icons.chevron_right,
+        color: AppColors.mist.withValues(alpha: 0.5),
       ),
-      // Das Symbol trägt die Aussage: gefüllter Kreis in Farbe heißt erlaubt,
-      // blasser Umriss heißt nicht erlaubt. Die Checkbox rechts sagt dasselbe
-      // noch einmal – wer nicht liest, braucht nur eine der beiden.
-      secondary: StateSymbol(
-        icon: permission.icon,
-        color: activeColor,
-        active: enabled,
-        badge: isAdmin ? Icons.lock : null,
-      ),
-      controlAffinity: ListTileControlAffinity.trailing,
+      onTap: onTap,
     );
   }
 }

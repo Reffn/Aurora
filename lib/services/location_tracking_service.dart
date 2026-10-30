@@ -230,17 +230,35 @@ class LocationTrackingService {
       return;
     }
 
+    // Der Abruf fragt bei Bedarf nach der Erlaubnis und hält danach den
+    // Zustand des GpsManagers aktuell.
     final position = await gpsManager.getUserPosition(
       askIfDenied: askForPermission,
     );
-    final hasPermission = position != null;
-    _hasLocationPermission.value = hasPermission; // Update permission state
 
-    if (!hasPermission) {
+    // Erlaubnis und Positionsfix sind zwei Fragen. Hier stand
+    // `hasPermission = position != null` — drinnen läuft der erste Abruf
+    // (zehn Sekunden, hohe Genauigkeit) aber regelmäßig ins Zeitlimit. Dann
+    // startete die Aufzeichnung nicht, auch beim Wiederanlauf nach dem
+    // App-Start nicht, und der Spiegel der Erlaubnis kippte auf `false`,
+    // obwohl der GpsManager sie hatte. Die Erlaubnis kommt von dort, wie in
+    // [_initialize] — der Spiegel folgt per Listener und wird hier nicht
+    // überschrieben.
+    //
+    // Gefragt wird nur ohne Position: Eine Position beweist Erlaubnis und
+    // eingeschalteten Standort schon. Die Zustände frischt der GpsManager
+    // nicht bei jedem Abruf auf (ein Treffer im Zwischenspeicher überspringt
+    // die Prüfung) — ein veraltetes `false` dürfte sonst einen Start
+    // abweisen, der die Position schon in der Hand hat.
+    if (position == null && !gpsManager.isGpsServiceEnabled.value) {
       logger.warning(
         LogCategory.service,
-        'GPS-Permission verweigert oder Position nicht verfügbar',
+        'Standort am Gerät ausgeschaltet — Aufzeichnung startet nicht',
       );
+      throw Exception('Standort am Gerät ausgeschaltet');
+    }
+    if (position == null && !gpsManager.hasGpsPermission.value) {
+      logger.warning(LogCategory.service, 'GPS-Permission verweigert');
       throw Exception('GPS-Permission nicht erteilt');
     }
 
@@ -251,8 +269,9 @@ class LocationTrackingService {
     // einer Störung das Wiederanlaufen beim nächsten Start unmöglich.
     await settingsBox.put(_wunschSchluessel, true);
 
-    // Die erste Position sofort, ohne auf den Takt zu warten.
-    await _recordPosition(position);
+    // Die erste Position sofort, ohne auf den Takt zu warten — sofern es
+    // schon eine gibt. Sonst bringt sie der Strom, sobald das Gerät eine hat.
+    if (position != null) await _recordPosition(position);
 
     final l10n = AppTexts.current;
 

@@ -105,9 +105,10 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen>
   Future<void> _saveProfile() async {
     if (!_formKey.currentState!.validate()) return;
 
-    // Prüfe ob Name bereits existiert
+    // Prüfe ob Name bereits existiert, auch bei pausierten Anteilen: Sonst
+    // stünden nach dem Wiederaufnehmen zwei gleichnamige in der Auswahl.
     final trimmedName = _nameController.text.trim();
-    final nameExists = _dataEntry!.getProfiles().any(
+    final nameExists = _dataEntry!.getAllProfiles().any(
       (p) => p.name.toLowerCase() == trimmedName.toLowerCase(),
     );
 

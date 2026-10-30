@@ -54,7 +54,7 @@ Widget _app(Widget band) {
 
 void main() {
   // Die Inhalts-Rechte, nicht nur die Tab-Rechte: Das Band zeigt Inhalte, und
-  // wer „Kalender ansehen" nicht hat, soll den Termin auch hier nicht sehen.
+  // wer „Medikamente sehen" nicht hat, soll sie auch hier nicht sehen.
   // Der Test stand allein auf den Tab-Rechten und ging deshalb leer aus,
   // nachdem das Band auf die Inhalts-Rechte umgestellt wurde.
   const alleRechte = [
@@ -92,9 +92,9 @@ void main() {
       expect(find.text('15:00 Frau Müller'), findsOneWidget);
     });
 
-    // Medikamente und Termine gehorchen den Rechten des Profils;
-    // Wechsel gelten dem Körper und bleiben.
-    testWidgets('ohne Rechte verschwinden Medikamente und Termine, Wechsel nicht',
+    // Medikamente gehorchen den Rechten des Anteils. Termine gelten für alle,
+    // Wechsel dem Körper, beide bleiben.
+    testWidgets('ohne Rechte verschwinden die Medikamente, Termine und Wechsel bleiben',
         (tester) async {
       await tester.pumpWidget(_app(QuickTimelineBand(
         profile: _marie(const []),
@@ -109,7 +109,7 @@ void main() {
 
       expect(find.text('Sofie'), findsOneWidget);
       expect(find.textContaining('Ibuprofen'), findsNothing);
-      expect(find.textContaining('Frau Müller'), findsNothing);
+      expect(find.text('15:00 Frau Müller'), findsOneWidget);
     });
 
     // „Dev › Dev › Dev" beantwortet nichts — eine Episode, eine Marke.

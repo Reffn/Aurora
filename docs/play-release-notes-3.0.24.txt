@@ -1,0 +1,8 @@
+Neu in dieser Fassung:
+• Anteile pausieren funktioniert jetzt wirklich. Zurückholen geht unter Einstellungen → „Anteile & Rechte“.
+• Rechte: wenige klare Schalter statt sechzig Kästchen.
+• Einstellungen neu sortiert und bis ganz unten erreichbar.
+• Erinnerungen: Ist eine Erinnerung gelöscht, pausiert oder erledigt, verschwindet auch ihre Meldung.
+• Die Standort-Aufzeichnung startet auch drinnen zuverlässig.
+
+Deine Inhalte liegen weiterhin allein auf diesem Gerät.

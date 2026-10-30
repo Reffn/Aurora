@@ -661,7 +661,11 @@ class _ToolRail extends StatelessWidget {
                   onPressed: onSticker,
                 ),
               _RailButton(
-                icon: Icons.auto_fix_normal,
+                // Kein Zauberstab: `auto_fix_normal` las sich als „Magie",
+                // nicht als Radieren — am Gerät erst durch Ausprobieren
+                // erkannt. Material bringt keinen Radiergummi mit, also ist er
+                // gezeichnet.
+                glyph: (color) => _EraserGlyph(color: color),
                 tooltip: l10n.doodleErase,
                 background: eraserMode ? profileColor : null,
                 foreground: eraserMode
@@ -731,14 +735,18 @@ class _FoldedRail extends StatelessWidget {
 
 class _RailButton extends StatelessWidget {
   const _RailButton({
-    required this.icon,
     required this.tooltip,
     required this.onPressed,
+    this.icon,
+    this.glyph,
     this.background,
     this.foreground,
-  });
+  }) : assert(icon != null || glyph != null, 'icon oder glyph angeben');
 
-  final IconData icon;
+  final IconData? icon;
+
+  /// Gezeichnetes Symbol statt eines Icons, für das, was Material nicht hat.
+  final Widget Function(Color color)? glyph;
   final String tooltip;
   final VoidCallback? onPressed;
   final Color? background;
@@ -753,6 +761,7 @@ class _RailButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final enabled = onPressed != null;
+    final farbe = enabled ? (foreground ?? Colors.white) : Colors.white24;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
       child: Material(
@@ -768,10 +777,10 @@ class _RailButton extends StatelessWidget {
               // zuverlässig getroffen wird.
               width: 48,
               height: 48,
-              child: Icon(
-                icon,
-                size: 26,
-                color: enabled ? (foreground ?? Colors.white) : Colors.white24,
+              child: Center(
+                child: glyph != null
+                    ? glyph!(farbe)
+                    : Icon(icon, size: 26, color: farbe),
               ),
             ),
           ),
@@ -779,6 +788,58 @@ class _RailButton extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Ein Radiergummi: schräger Block mit abgesetzter Spitze über einer Linie.
+class _EraserGlyph extends StatelessWidget {
+  const _EraserGlyph({required this.color});
+
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      size: const Size.square(26),
+      painter: _EraserPainter(color),
+    );
+  }
+}
+
+class _EraserPainter extends CustomPainter {
+  _EraserPainter(this.color);
+
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final s = size.width / 26;
+    final fill = Paint()..color = color;
+    final line = Paint()
+      ..color = color
+      ..strokeWidth = 2 * s
+      ..strokeCap = StrokeCap.round
+      ..style = PaintingStyle.stroke;
+
+    canvas
+      ..save()
+      ..translate(13 * s, 11 * s)
+      ..rotate(-math.pi / 4);
+    final body = RRect.fromRectAndRadius(
+      Rect.fromCenter(center: Offset.zero, width: 20 * s, height: 10 * s),
+      Radius.circular(2.5 * s),
+    );
+    // Hinterer Teil voll, Spitze nur umrandet: so liest sich die Form als
+    // Radiergummi und nicht als Kapsel.
+    canvas
+      ..drawRRect(body, line)
+      ..clipRRect(body)
+      ..drawRect(Rect.fromLTRB(-10 * s, -5 * s, 2 * s, 5 * s), fill)
+      ..restore()
+      ..drawLine(Offset(9 * s, 23 * s), Offset(23 * s, 23 * s), line);
+  }
+
+  @override
+  bool shouldRepaint(_EraserPainter oldDelegate) => oldDelegate.color != color;
 }
 
 /// Womit gemalt wird: Strichstärke und Farbe, beide sichtbar.

@@ -30,7 +30,7 @@ class DebugLogOverlay extends StatelessWidget {
             // Copy-Button
             IconButton(
               icon: const Icon(Icons.copy),
-              tooltip: 'In Zwischenablage kopieren',
+              tooltip: l10n.errorReportCopyToClipboard,
               onPressed: () => _copyToClipboard(context),
             ),
           ],
@@ -121,7 +121,7 @@ class DebugLogOverlay extends StatelessWidget {
                       FilledButton.icon(
                         onPressed: () => _copyToClipboard(context),
                         icon: const Icon(Icons.copy, size: 20),
-                        label: const Text('Kopieren'),
+                        label: Text(l10n.errorReportCopy),
                         style: FilledButton.styleFrom(
                           backgroundColor: Colors.blue.shade700,
                         ),
@@ -144,13 +144,15 @@ class DebugLogOverlay extends StatelessWidget {
 
       if (context.mounted) {
         context.showSuccessSnackBar(
-          '✅ Debug-Log in Zwischenablage kopiert (${(logContent.length / 1024).toStringAsFixed(1)} KB)',
+          AppLocalizations.of(context).debugLogCopied(
+            (logContent.length / 1024).toStringAsFixed(1),
+          ),
         );
       }
     } catch (e) {
       if (context.mounted) {
         context.showErrorSnackBar(
-          'Fehler beim Kopieren: $e',
+          AppLocalizations.of(context).debugLogCopyFailed(e.toString()),
         );
       }
     }

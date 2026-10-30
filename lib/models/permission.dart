@@ -22,80 +22,28 @@ enum PermissionCategory {
   security, // Passwörter, Biometrie (später)
 }
 
-/// Symbol und Farbe je Kategorie
-///
-/// Liegt im Modell und nicht im Screen, damit jede Oberfläche dieselbe
-/// Bildsprache verwendet. Ein Anteil, der die Farbe Lila mit Medikamenten
-/// verbindet, soll das überall wiederfinden.
-extension PermissionCategoryAppearance on PermissionCategory {
-  IconData get icon {
-    switch (this) {
-      case PermissionCategory.system:
-        return Icons.security;
-      case PermissionCategory.chat:
-        return Icons.chat;
-      case PermissionCategory.calendar:
-        return Icons.calendar_today;
-      case PermissionCategory.medication:
-        return Icons.medication;
-      case PermissionCategory.diary:
-        return Icons.book;
-      case PermissionCategory.contacts:
-        return Icons.contacts;
-      case PermissionCategory.finder:
-        return Icons.search;
-      case PermissionCategory.emergency:
-        return Icons.emergency;
-      case PermissionCategory.security:
-        return Icons.lock;
-    }
-  }
-
-  Color get color {
-    switch (this) {
-      case PermissionCategory.system:
-        return Colors.red;
-      case PermissionCategory.chat:
-        return Colors.blue;
-      case PermissionCategory.calendar:
-        return Colors.green;
-      case PermissionCategory.medication:
-        return Colors.purple;
-      case PermissionCategory.diary:
-        return Colors.orange;
-      case PermissionCategory.contacts:
-        return Colors.teal;
-      case PermissionCategory.finder:
-        return Colors.cyan;
-      case PermissionCategory.emergency:
-        return Colors.red;
-      case PermissionCategory.security:
-        return Colors.amber;
-    }
-  }
-}
-
 /// Alle verfügbaren Berechtigungen in der App
 enum Permission {
   // ========== SYSTEM (Kritisch!) ==========
   createProfiles(
     PermissionCategory.system,
     Icons.person_add,
-    dangerous: true,
+    perPart: true,
   ),
   deactivateProfiles(
     PermissionCategory.system,
     Icons.person_off,
-    dangerous: true,
+    perPart: true,
   ),
   managePermissions(
     PermissionCategory.system,
     Icons.admin_panel_settings,
-    dangerous: true,
+    perPart: true,
   ),
   accessSettings(
     PermissionCategory.system,
     Icons.settings,
+    perPart: true,
   ),
 
   // ========== CHAT ==========
@@ -137,7 +85,7 @@ enum Permission {
   deleteAllMessages(
     PermissionCategory.chat,
     Icons.delete_forever,
-    dangerous: true,
+    perPart: true,
   ),
 
   // ========== KALENDER ==========
@@ -156,6 +104,7 @@ enum Permission {
   editAllEvents(
     PermissionCategory.calendar,
     Icons.event_repeat,
+    perPart: true,
   ),
   deleteOwnEvents(
     PermissionCategory.calendar,
@@ -164,7 +113,7 @@ enum Permission {
   deleteAllEvents(
     PermissionCategory.calendar,
     Icons.delete_forever,
-    dangerous: true,
+    perPart: true,
   ),
   attachEventMedia(
     PermissionCategory.calendar,
@@ -179,11 +128,12 @@ enum Permission {
   viewMedication(
     PermissionCategory.medication,
     Icons.medication,
+    perPart: true,
   ),
   manageMedication(
     PermissionCategory.medication,
     Icons.medical_services,
-    dangerous: true,
+    perPart: true,
   ),
   logMedication(
     PermissionCategory.medication,
@@ -192,7 +142,7 @@ enum Permission {
   overrideMedicationLog(
     PermissionCategory.medication,
     Icons.restart_alt,
-    dangerous: true,
+    perPart: true,
   ),
   commentOnMedication(
     PermissionCategory.medication,
@@ -207,6 +157,7 @@ enum Permission {
   viewAllDiaries(
     PermissionCategory.diary,
     Icons.library_books,
+    perPart: true,
   ),
   writeDiary(
     PermissionCategory.diary,
@@ -253,7 +204,7 @@ enum Permission {
   editAllDiaryEntries(
     PermissionCategory.diary,
     Icons.edit_document,
-    dangerous: true,
+    perPart: true,
   ),
   deleteOwnDiaryEntries(
     PermissionCategory.diary,
@@ -262,7 +213,7 @@ enum Permission {
   deleteAllDiaryEntries(
     PermissionCategory.diary,
     Icons.delete_forever,
-    dangerous: true,
+    perPart: true,
   ),
   commentOnDiaryEntries(
     PermissionCategory.diary,
@@ -291,7 +242,7 @@ enum Permission {
   resetPasswords(
     PermissionCategory.security,
     Icons.lock_reset,
-    dangerous: true,
+    perPart: true,
   ),
   changeOwnPassword(
     PermissionCategory.security,
@@ -318,6 +269,7 @@ enum Permission {
   viewMedicationTab(
     PermissionCategory.medication,
     Icons.medication,
+    perPart: true,
   ),
   viewDiaryTab(
     PermissionCategory.diary,
@@ -350,7 +302,6 @@ enum Permission {
   viewTimelineTab(
     PermissionCategory.system,
     Icons.timeline,
-    dangerous: true,
   );
 
   /// Kategorie für Gruppierung in UI
@@ -359,13 +310,17 @@ enum Permission {
   /// Symbol für die Darstellung ohne Lesen
   final IconData icon;
 
-  /// Ob diese Berechtigung als gefährlich markiert werden soll (UI: Rot)
-  final bool dangerous;
+  /// Ob dieses Recht je Anteil vergeben wird
+  ///
+  /// Alles andere gilt für alle: Sechzig Kästchen überblickt im
+  /// dissoziativen Zustand niemand. Die Rechte pro Anteil bündelt `PartRight`
+  /// zu zehn Schaltern.
+  final bool perPart;
 
   const Permission(
     this.category,
     this.icon, {
-    this.dangerous = false,
+    this.perPart = false,
   });
 
   /// Hive speichert Enums als String-Namen
@@ -379,24 +334,4 @@ enum Permission {
       return null;
     }
   }
-}
-
-/// Helper Extension für Listen von Permissions
-extension PermissionListExtensions on List<Permission> {
-  /// Gruppiert Permissions nach Kategorie für UI
-  Map<PermissionCategory, List<Permission>> groupByCategory() {
-    final grouped = <PermissionCategory, List<Permission>>{};
-    for (final permission in this) {
-      grouped.putIfAbsent(permission.category, () => []).add(permission);
-    }
-    return grouped;
-  }
-
-  /// Nur System-Rechte (gefährlich)
-  List<Permission> get systemPermissions =>
-      where((p) => p.category == PermissionCategory.system).toList();
-
-  /// Nur gefährliche Rechte
-  List<Permission> get dangerousPermissions =>
-      where((p) => p.dangerous).toList();
 }

@@ -797,6 +797,66 @@ class GpsManager with WidgetsBindingObserver {
     await _checkServiceStatus();
   }
 
+  /// Die laufende Anfrage, solange der Systemdialog offen ist.
+  Future<LocationPermission>? _laufendeAnfrage;
+
+  /// PUBLIC API: Fragt die Nutzerin nach der Standort-Berechtigung, sonst
+  /// nichts.
+  ///
+  /// Für Knöpfe, die genau das versprechen („Freigeben“). Bis zum 29.10.2026
+  /// lief das über [getUserPosition] mit `askIfDenied`: Nach dem Ja kam ein
+  /// Positionsabruf von bis zu zehn Sekunden hinterher, ein gescheiterter
+  /// meldete `fehler_gps_timeout`, einen Fehler, den niemand erlebt hatte,
+  /// und der Tracking-Schalter blieb so lange gesperrt.
+  ///
+  /// Schreibt die Antwort in beide Zustände. Nur hier erfährt die App auf
+  /// Android von `deniedForever`: `checkPermission` meldet dort nur
+  /// `denied`, und das nächste Nachsehen (etwa bei der Rückkehr in die App)
+  /// überschreibt es wieder. Das ist so gewollt.
+  ///
+  /// Ein zweiter Aufruf, solange der erste offen ist, bekommt dieselbe
+  /// Antwort: geolocator wirft sonst wegen einer laufenden Anfrage.
+  Future<LocationPermission> requestPermission() {
+    return _laufendeAnfrage ??= _anfragen().whenComplete(
+      () => _laufendeAnfrage = null,
+    );
+  }
+
+  Future<LocationPermission> _anfragen() async {
+    try {
+      final permission = await Geolocator.requestPermission();
+      final hasPermission =
+          permission == LocationPermission.whileInUse ||
+          permission == LocationPermission.always;
+
+      final previousPermission = _hasGpsPermission.value;
+      _permissionStatus.value = permission;
+      _hasGpsPermission.value = hasPermission;
+
+      if (hasPermission && !previousPermission) {
+        eventBus.publish(LocationPermissionGrantedEvent());
+      } else if (!hasPermission && previousPermission) {
+        eventBus.publish(LocationPermissionDeniedEvent());
+      }
+
+      logger.info(
+        LogCategory.service,
+        'GPS Manager: Permission requested',
+        data: {'result': permission.toString()},
+      );
+      return permission;
+    } on Exception catch (e) {
+      // geolocator meldet fehlende Manifest-Einträge und laufende Anfragen
+      // als eigene Exceptions, die Plattform als PlatformException.
+      logger.error(
+        LogCategory.service,
+        'GPS Manager: Failed to request permission',
+        data: {'error': e.toString()},
+      );
+      return _permissionStatus.value;
+    }
+  }
+
   /// PUBLIC API: Fragt den Berechtigungsstatus frisch beim System ab und
   /// meldet, ob die Wegaufzeichnung damit laufen darf.
   ///

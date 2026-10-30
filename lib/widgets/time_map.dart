@@ -169,10 +169,12 @@ class TimeMap extends StatelessWidget {
   /// Beide Aufrufer — Anker und Profilauswahl — brauchen dieselben vier
   /// Datensätze aus denselben Boxen. Einmal hier, nicht zweimal dort.
   ///
-  /// [hidePasswordProtected] lässt Anteile mit Passwort ganz weg: Lauflinie,
-  /// Wechselpunkte und Marken. Das ist die Einstellung für die
-  /// Profilauswahl, die vor jeder Anmeldung steht. Hinter der Anmeldung ist
-  /// sie falsch — dort hat sich jemand ausgewiesen.
+  /// [hidePasswordProtected] lässt Anteile mit Passwort und pausierte Anteile
+  /// ganz weg: Lauflinie, Wechselpunkte und Marken. Das ist die Einstellung
+  /// für die Profilauswahl, die vor jeder Anmeldung steht. Ein pausierter
+  /// Anteil ist dort aus der Wahl verschwunden (Regeln 14 und 17), sein Weg
+  /// mit Namen und Farbe darf ihn nicht zurückbringen. Hinter der Anmeldung
+  /// ist die Einstellung falsch — dort hat sich jemand ausgewiesen.
   static TimeMap fromServices({
     Key? key,
     Profile? profile,
@@ -184,12 +186,17 @@ class TimeMap extends StatelessWidget {
     // Anteile: vor der Anmeldung nicht.
     final behindLogin = !hidePasswordProtected;
     final since = DateTime.now().subtract(window);
+    // Unter allen Anteilen suchen, auch den pausierten: Nur unter den aktiven
+    // fehlte ein pausierter, galt als offen, und sein Weg stand vor der
+    // Anmeldung auf der Karte.
     bool blocked(String? profileId) {
       if (!hidePasswordProtected || profileId == null) return false;
-      final matches = getIt<DataEntry>().getProfiles().where(
+      final matches = getIt<DataEntry>().getAllProfiles().where(
         (p) => p.id == profileId,
       );
-      return matches.isNotEmpty && matches.first.passwordHash != null;
+      if (matches.isEmpty) return false;
+      final profile = matches.first;
+      return profile.passwordHash != null || !profile.isActive;
     }
 
     final timeline = getIt.isRegistered<TimelineDataService>()
@@ -290,14 +297,15 @@ class TimeMap extends StatelessWidget {
       upcomingEvents: upcoming,
       finderLocations: finderLocations,
       contacts: contactsList,
+      // Der Weg eines pausierten Anteils trägt weiter Namen und Farbe.
       profileNameOf: (id) {
-        final matches = getIt<DataEntry>().getProfiles().where(
+        final matches = getIt<DataEntry>().getAllProfiles().where(
           (p) => p.id == id,
         );
         return matches.isEmpty ? null : matches.first.name;
       },
       profileColorOf: (id) {
-        final matches = getIt<DataEntry>().getProfiles().where(
+        final matches = getIt<DataEntry>().getAllProfiles().where(
           (p) => p.id == id,
         );
         // Nicht Weiß: Der Weg liegt in einer weißen Fassung, damit er über

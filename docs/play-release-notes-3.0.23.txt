@@ -1,0 +1,8 @@
+Neu in dieser Fassung:
+• Medikamente: Verwalten, Stummschalten und der Verlauf sind leichter zu finden.
+• Erinnerungen: Aurora erklärt kurz, bevor dein Gerät nach der Erlaubnis fragt.
+• Halt: Die Übungen zeigen mit Weiter-Knopf und Wischen, wie es weitergeht.
+• Chat: Die Tastatur geht nicht mehr von selbst auf oder zu.
+• Alle fünf Sprachen durchgesehen.
+
+Deine Inhalte liegen weiterhin allein auf diesem Gerät.

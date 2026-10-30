@@ -41,6 +41,55 @@ Siehe [ROADMAP.md](ROADMAP.md) und [FEATURES_BACKLOG.md](FEATURES_BACKLOG.md) f�
 ## [Unveröffentlicht]
 
 ---
+## [3.0.24] - 2026-10-29
+
+Pausieren hält jetzt, was es verspricht, und die Einstellungen sind wieder
+überschaubar.
+
+### Neu
+- ⏸️ **Anteile pausieren wirkt wirklich:** Ein pausierter Anteil verschwindet
+  aus der Auswahl und vor der Anmeldung auch von der Karte; zurück geht es
+  unter Einstellungen → „Anteile & Rechte“. Vorher tat der Knopf nichts
+- 🎚️ **Rechte als wenige Schalter je Anteil** statt 60 Einzelkästchen;
+  Schalter, die in der App noch nichts bewirken, sind ausgeblendet
+- 🗂️ **Einstellungen in fünf Gruppen**, Erklärungen nur auf Wunsch (ⓘ)
+
+### Behoben
+- 📜 Die Einstellungen ließen sich nicht bis ganz unten scrollen
+- 🔔 Angezeigte Erinnerungen blieben stehen, obwohl die Erinnerung gelöscht,
+  pausiert oder als genommen markiert war
+- 📍 Die Standort-Aufzeichnung startete drinnen nicht: Ein langsamer erster
+  Standort galt als fehlende Erlaubnis
+- 🔒 Eine gesperrte Sitzung ließ über das Profilmenü mehr zu als gedacht
+- 💬 Der Discord-Link führte ins Leere; er zeigt jetzt auf 3ofus.net/discord
+
+### Technik
+- Abhängigkeiten aktualisiert, u. a. Hive, Firebase App Check, flutter_map,
+  video_player
+
+## [3.0.23] - 2026-10-06
+
+Aurora erklärt mehr und überrascht weniger: bei Erinnerungen, in den
+Übungen und im Chat.
+
+### Neu
+- 💊 **Medikamente lassen sich verwalten und stummschalten**, der Verlauf
+  ist auffindbar
+- 🔔 **Eine eigene Erklärung vor dem Systemdialog** für Benachrichtigungen;
+  „Jetzt nicht" verbraucht die eine Frage des Geräts nicht. Fehlt die
+  Erlaubnis, sagen Formulare und Termin-Detailseite das, mit einem Weg dazu
+- 🧭 **Halt-Übungen zeigen den Weg:** Weiter-Knopf, Wischen in beide
+  Richtungen, laufende Uhr, ein Ring für den Atemtakt
+- ✨ **Nach einem Update meldet sich Aurora einmal** und sagt, was neu ist
+
+### Behoben
+- ⌨️ Die Tastatur schloss sich von selbst bzw. sprang im Chat ungefragt auf
+- 🔤 Feste deutsche Texte in fremdsprachiger Oberfläche; Datum und Uhrzeit
+  folgen der Sprache; Französisch duzt durchgehend
+- 🧽 Der Radierer im Malbereich sah aus wie ein Zauberstab
+- 📝 „Profil bearbeiten" führte nicht zum Bearbeiten
+- 💬 „Sag uns, was fehlt" stürzte in der Release-Fassung ab
+
 ## [3.0.18] - 2026-08-09
 
 Der Weg zurück nach einem Blackout trägt jetzt: die Aufzeichnung läuft

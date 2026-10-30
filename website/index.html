@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aurora - DIS Support App | Privacy-First</title>
+    <!--
+      Diese Seite lädt nichts von fremden Rechnern. Bis zum 12.08.2026 standen
+      hier vier Verbindungen nach außen, bevor der erste Satz zu lesen war:
+
+        cdn.tailwindcss.com   — CSS-Werkzeug zur Laufzeit im Browser
+        fonts.googleapis.com  — Stylesheet der Schrift
+        fonts.gstatic.com     — die Schriftdatei selbst
+        aistudiocdn.com       — React per Importmap (wirkungslos, aber scharf)
+
+      Dazu kam Google Analytics aus dem Bündel. Auf einer Seite, die
+      „Kein Tracking, keine Analytics, absolut keine Werbung" verspricht.
+
+      Tailwind wird jetzt beim Bauen aufgelöst (tailwind.config.js), die
+      Schrift liegt unter /fonts, React ist gebündelt. Übrig bleibt: diese
+      Seite und sonst nichts.
+    -->
+  </head>
+  <body class="bg-[#0F1014] text-white overflow-x-hidden antialiased selection:bg-[#FFAB91] selection:text-black">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+    <!-- 3ofUs house bar: rides the nav's bottom border right of the wordmark, plain HTML/CSS
+         so the privacy promise (nothing from third parties) holds. Same pattern on every 3ofUs site.
+         Ein Link, keine Last: der Browser holt von 3ofus.net nichts, bis jemand draufdrückt. -->
+    <style>
+    .house{position:fixed;z-index:60;top:80px;left:calc(max(0px,(100vw - 72rem)/2) + 9.5rem);transform:translateY(-50%);
+    display:flex;align-items:center;gap:.45em;padding:.3em .85em;border-radius:999px;background:#0F1014;
+    border:1px solid rgba(255,255,255,.14);color:#e5e7eb;font:700 .72rem/1 Outfit,system-ui,sans-serif;letter-spacing:.02em;white-space:nowrap}
+    .house a{color:#FFAB91;text-decoration:none}.house a:hover{text-decoration:underline}.house span[aria-hidden]{opacity:.5}
+    @media (min-width:768px){.house{left:calc(max(0px,(100vw - 72rem)/2) + 10rem)}}
+    </style>
+    <div class="house" role="navigation" aria-label="3ofUs"><a href="https://3ofus.net/">3ofUs</a><span aria-hidden="true">›</span><span>Aurora</span></div>
+  </body>
+</html>

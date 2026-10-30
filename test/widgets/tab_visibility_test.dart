@@ -102,7 +102,10 @@ void main() {
       expect(visible, orderedEquals(allTestTabs));
     });
 
-    test('ein Anteil ohne viewDiaryTab sieht das Tagebuch nicht', () {
+    // Tagebuch und Kalender gelten für alle: Ein altes Profil ohne die
+    // gespeicherten Tab-Rechte sieht sie trotzdem.
+    test('Tagebuch und Kalender gelten für alle, auch ohne gespeichertes Recht',
+        () {
       final profile = Profile.withColor(
         id: 'test-1',
         name: 'Test User',
@@ -113,35 +116,39 @@ void main() {
 
       final visible = visibleTabsFor(allTestTabs, profile);
 
-      // Nur Chat, Feedback, Halt (immer sichtbar)
-      // Tagebuch und Kalender nicht (brauchen Rechte)
-      expect(visible, hasLength(3));
-      expect(visible, isNot(contains(diaryTab)));
-      expect(visible, isNot(contains(calendarTab)));
-      expect(visible.contains(chatTab), isTrue);
-      expect(visible.contains(feedbackTab), isTrue);
-      expect(visible.contains(groundingTab), isTrue);
+      expect(visible, orderedEquals(allTestTabs));
     });
 
-    test('ein Anteil ohne viewCalendarTab sieht den Kalender nicht', () {
-      final profile = Profile.withColor(
+    // Medikamente sehen bleibt ein Recht pro Anteil, der Filter muss also
+    // weiter greifen.
+    test('ein Anteil ohne viewMedicationTab sieht die Medikamente nicht', () {
+      final medicationTab = TabDefinition(
+        tabItem: TabItem(icon: Icons.medication, label: (l) => 'Medikamente'),
+        screen: const SizedBox.shrink(),
+        fabConfig: null,
+        requiredPermission: Permission.viewMedicationTab,
+        color: Colors.grey,
+        telemetryKey: 'medikamente',
+        section: AnchorSection.everyday,
+      );
+      final tabs = [...allTestTabs, medicationTab];
+
+      Profile profileWith(List<String> permissions) => Profile.withColor(
         id: 'test-2',
         name: 'Test User',
         preferredColor: Colors.blue,
         createdAt: DateTime.now(),
-        permissions: [Permission.viewDiaryTab.name], // Nur Tagebuch
+        permissions: permissions,
       );
 
-      final visible = visibleTabsFor(allTestTabs, profile);
-
-      // Chat, Feedback, Tagebuch, Halt (immer sichtbar oder erlaubt)
-      // Kalender nicht (braucht viewCalendarTab)
-      expect(visible, hasLength(4));
-      expect(visible, isNot(contains(calendarTab)));
-      expect(visible.contains(chatTab), isTrue);
-      expect(visible.contains(feedbackTab), isTrue);
-      expect(visible.contains(diaryTab), isTrue);
-      expect(visible.contains(groundingTab), isTrue);
+      expect(
+        visibleTabsFor(tabs, profileWith([])),
+        orderedEquals(allTestTabs),
+      );
+      expect(
+        visibleTabsFor(tabs, profileWith([Permission.viewMedicationTab.name])),
+        orderedEquals(tabs),
+      );
     });
 
     test('Chat ist immer sichtbar auch ohne viewChatTab', () {

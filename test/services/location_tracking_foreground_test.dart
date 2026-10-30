@@ -24,6 +24,28 @@ void main() {
     return datei.readAsStringSync();
   }
 
+  /// Die ganzen Einstellungen: Schirm, Abschnitte, Unterseiten, Bausteine.
+  /// In welcher Datei der Schalter steht, muss diese Prüfung nicht wissen.
+  /// Rekursiv ab `lib/modules/settings`, damit nichts, was nach `screens/`,
+  /// `widgets/` oder in einen künftigen Unterordner wandert, still aus den
+  /// Verbotsprüfungen fällt.
+  String einstellungenLesen() {
+    final dateien =
+        Directory('lib/modules/settings')
+            .listSync(recursive: true)
+            .whereType<File>()
+            .map((datei) => datei.path)
+            .where((pfad) => pfad.endsWith('.dart'))
+            .toList()
+          ..sort();
+    expect(
+      dateien.map((pfad) => pfad.replaceAll(r'\', '/')),
+      contains(endsWith('lib/modules/settings/settings_screen.dart')),
+      reason: 'Der Einstellungsschirm fehlt — wurde der Ordner verschoben?',
+    );
+    return [for (final pfad in dateien) lies(pfad)].join('\n');
+  }
+
   /// Ohne Kommentarzeilen.
   ///
   /// Sonst schlägt der Test an der Erklärung an, warum der Timer weg musste —
@@ -42,13 +64,15 @@ void main() {
     expect(
       quelle.contains('Timer.periodic'),
       isFalse,
-      reason: 'Ein Timer im App-Prozess stirbt mit der App. '
+      reason:
+          'Ein Timer im App-Prozess stirbt mit der App. '
           'Die Aufzeichnung gehört an den Positionsstrom.',
     );
     expect(
       quelle.contains('positionStream('),
       isTrue,
-      reason: 'Ohne den Strom des GpsManager gibt es keinen '
+      reason:
+          'Ohne den Strom des GpsManager gibt es keinen '
           'Vordergrunddienst und damit keine Aufzeichnung im Hintergrund.',
     );
   });
@@ -59,13 +83,15 @@ void main() {
     expect(
       quelle.contains('foregroundNotificationConfig'),
       isTrue,
-      reason: 'Ohne diese Angabe startet geolocator keinen Dienst, und '
+      reason:
+          'Ohne diese Angabe startet geolocator keinen Dienst, und '
           'Android beendet den Prozess wie jeden anderen.',
     );
     expect(
       quelle.contains('notificationTitle:'),
       isTrue,
-      reason: 'Die Benachrichtigung ist die sichtbare Zusage — '
+      reason:
+          'Die Benachrichtigung ist die sichtbare Zusage — '
           'aufgezeichnet wird nur, solange sie steht.',
     );
   });
@@ -82,18 +108,20 @@ void main() {
     // Testvorrichtung, er braucht drei Hive-Boxen, den EventBus, die
     // Geokodierung und echtes GPS. Deshalb steht hier die strukturelle
     // Bedingung — dieselbe Form wie die drei Tests darüber.
-    final quelle = nurCode(lies('lib/modules/settings/settings_screen.dart'));
+    final quelle = nurCode(einstellungenLesen());
 
     expect(
       quelle.contains('gps_tracking_enabled'),
       isFalse,
-      reason: 'Der Wunsch gehört dem LocationTrackingService. Wer ihn hier '
+      reason:
+          'Der Wunsch gehört dem LocationTrackingService. Wer ihn hier '
           'liest, verwechselt ihn früher oder später mit dem Laufzustand.',
     );
     expect(
       quelle.contains('isTrackingRunning.value'),
       isTrue,
-      reason: 'Vor dem Starten muss die Frage lauten: läuft es gerade? '
+      reason:
+          'Vor dem Starten muss die Frage lauten: läuft es gerade? '
           'Nicht: ist es gewünscht?',
     );
   });
@@ -122,7 +150,7 @@ void main() {
     // Schalter blieb gesperrt und verlangte eine Freigabe, die es seit dem
     // Umbau gar nicht mehr zu erteilen gibt. Die Aufzeichnung war damit
     // unerreichbar — genau die Funktion, um die es bei dem Umbau ging.
-    final einstellungen = nurCode(lies('lib/modules/settings/settings_screen.dart'));
+    final einstellungen = nurCode(einstellungenLesen());
 
     // Anzeigen darf die Flaeche den echten Systemstand — „Immer erlaubt" und
     // „Bei Nutzung erlaubt" sind zwei verschiedene Dinge, und es waere gelogen,
@@ -137,7 +165,8 @@ void main() {
       expect(
         einstellungen.contains(verboten),
         isFalse,
-        reason: 'Die Einstellungen entscheiden wieder ueber '
+        reason:
+            'Die Einstellungen entscheiden wieder ueber '
             '„$verboten". Der Vordergrunddienst laeuft mit „Bei Nutzung '
             'erlauben" — ACCESS_BACKGROUND_LOCATION ist aus dem Manifest, '
             'die Freigabe kann niemand mehr erteilen, und der Schalter '
@@ -154,7 +183,8 @@ void main() {
     expect(
       manager,
       contains('hasAlwaysPermission || hasWhileInUsePermission'),
-      reason: 'Wuerde hier nur „always" gelten, waere der Schalter wieder '
+      reason:
+          'Wuerde hier nur „always" gelten, waere der Schalter wieder '
           'fuer immer gesperrt.',
     );
   });
@@ -169,7 +199,8 @@ void main() {
         expect(
           arb.contains('"$schluessel"'),
           isTrue,
-          reason: 'Für $sprache fehlt $schluessel. Eine Benachrichtigung, '
+          reason:
+              'Für $sprache fehlt $schluessel. Eine Benachrichtigung, '
               'die dauerhaft in der Leiste steht, in der falschen Sprache '
               'ist schlimmer als keine.',
         );

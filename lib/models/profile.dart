@@ -281,8 +281,13 @@ class Profile {
 
   /// Prüft ob dieses Profil eine bestimmte Berechtigung hat
   /// Admin-Profile haben IMMER alle Rechte
+  ///
+  /// Rechte, die für alle gelten, zählen unabhängig vom Gespeicherten: Alten
+  /// Profilen fehlt teils ein einzelnes Recht wie `sendVideo`, und das soll
+  /// nichts mehr sperren.
   bool hasPermission(Permission permission) {
     if (isAdmin) return true; // Admin hat alles
+    if (!permission.perPart) return true;
     return permissions.contains(permission.persistedValue);
   }
 

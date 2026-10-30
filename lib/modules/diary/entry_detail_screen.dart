@@ -171,7 +171,8 @@ class _EntryDetailCard extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    final timeFormat = DateFormat('dd.MM.yyyy • HH:mm');
+    // Datum in der Schreibweise der Sprache statt fest „dd.MM.yyyy".
+    final timeFormat = DateFormat.yMd(l10n.localeName).addPattern('Hm', ' • ');
 
     return Card(
       child: Padding(

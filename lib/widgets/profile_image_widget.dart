@@ -12,6 +12,13 @@ import 'package:flutter/material.dart';
 /// **Smart Fallback:** Falls kein Bild vorhanden, zeigt automatisch Regenbogen-Initialen
 /// basierend auf profileName und profileColor
 class ProfileImageWidget extends StatelessWidget {
+  /// Vorlagen, die mit d80095a aus dem Paket genommen wurden.
+  static const entfernteVorlagen = {
+    'assets/images/Hund.png',
+    'assets/images/Katze.webp',
+    'assets/images/Girafe.png',
+  };
+
   const ProfileImageWidget({
     required this.avatarPath,
     required this.size,
@@ -105,6 +112,18 @@ class ProfileImageWidget extends StatelessWidget {
   Widget _buildImageWidget(double imageSize) {
     // Kein Avatar-Pfad → Smart Fallback anzeigen
     if (avatarPath == null) {
+      return _buildSmartFallback(imageSize);
+    }
+
+    // Bilder, die es nicht mehr gibt, gar nicht erst laden.
+    //
+    // Bis zum 14.08.2026 gab es Hund, Katze und Giraffe als Vorlagen; sie
+    // sind wegen ungeklärter Nutzungsrechte entfernt. Wer eines gewählt
+    // hatte, sah seitdem die Initialen — und jeder Neuaufbau schrieb einen
+    // Ladefehler ins Protokoll, am A14 dutzendfach pro Sekunde, während die
+    // Tastatur aufging. Der gespeicherte Pfad bleibt unangetastet: Das Bild
+    // gehört zur Identität eines Anteils, das tauscht die App nicht still aus.
+    if (entfernteVorlagen.contains(avatarPath)) {
       return _buildSmartFallback(imageSize);
     }
 

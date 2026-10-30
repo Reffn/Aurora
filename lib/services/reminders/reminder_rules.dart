@@ -112,6 +112,52 @@ Set<Reminder> desiredReminders({
   return _applyBudget(result, budget, onDropped);
 }
 
+/// Ob eine **schon angezeigte** Meldung noch stimmt.
+///
+/// [desiredReminders] plant nur die Zukunft. Was gefeuert hat, steht dort
+/// nicht mehr — auch dann nicht, wenn die Dosis noch offen ist und die
+/// Meldung genau die ist, auf die jemand reagieren soll. Ein Abgleich gegen
+/// den Sollstand allein hätte sie weggeräumt. Deshalb eine eigene, zeitlose
+/// Frage: Gibt es das Ziel noch, und ist es noch offen?
+///
+/// Am A14 blieb die Meldung nach Löschen, Pausieren und Stummschalten
+/// stehen (29.10.2026). In einem System sieht sie dann womöglich ein
+/// anderer Anteil und hält sie für eine offene Dosis.
+bool isStillCurrent(
+  ReminderTarget target, {
+  required List<Medication> medications,
+  required List<MedicationLog> logs,
+  List<CalendarEvent> events = const [],
+}) {
+  switch (target) {
+    case DoseTarget(:final medicationId, :final date, :final scheduledTime):
+      final medication = medications
+          .where((m) => m.id == medicationId)
+          .firstOrNull;
+      if (medication == null) return false;
+      if (!medication.isActive || !medication.remindersEnabled) return false;
+
+      // „Du kannst wieder nehmen" ist ein Hinweis, keine Dosis — er hängt
+      // an keiner festen Zeit, die gestrichen werden könnte.
+      if (scheduledTime.startsWith('prn-')) {
+        return medication.type == MedicationType.asNeeded;
+      }
+
+      if (medication.type != MedicationType.daily) return false;
+      if (!medication.timesOfDay.contains(scheduledTime)) return false;
+      if (!_appliesOn(medication, date)) return false;
+
+      // R3 gilt auch rückwirkend: Hat ein Anteil die Dosis eingetragen,
+      // ist die Meldung für alle erledigt.
+      return !_isSettled(_latestLogByDose(logs)[target]);
+
+    case EventTarget(:final eventId, :final startTime):
+      // Ein verschobener Termin hat eine neue Meldung bekommen; die alte
+      // nennt eine Zeit, die nicht mehr gilt.
+      return events.any((e) => e.id == eventId && e.startTime == startTime);
+  }
+}
+
 /// Die eine Erinnerung eines Termins.
 ///
 /// Termine kennen keine Wiederholungen und keine Bestätigung — es gibt

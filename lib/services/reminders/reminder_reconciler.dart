@@ -181,11 +181,12 @@ class ReminderReconciler {
     try {
       final medications = _readMedications();
       final events = _readEvents();
+      final logs = _readLogs();
       var dropped = 0;
 
       final desired = desiredReminders(
         medications: medications,
-        logs: _readLogs(),
+        logs: logs,
         events: events,
         notificationsAllowed: await _readPermission(),
         now: _clock(),
@@ -211,6 +212,12 @@ class ReminderReconciler {
       for (final id in toRemove) {
         await _scheduler.cancel(id);
       }
+
+      final dismissed = await _dismissStaleShown(
+        medications: medications,
+        logs: logs,
+        events: events,
+      );
 
       final texts = ReminderTexts(discreet: presentation.discreet);
       final medById = {for (final m in medications) m.id: m};
@@ -292,6 +299,7 @@ class ReminderReconciler {
           'kept': result.kept,
           'dropped': result.dropped,
           'skipped': skipped,
+          'dismissed': dismissed,
           'rounds': rounds,
           'rewriteAll': rewriteAll,
         },
@@ -307,6 +315,45 @@ class ReminderReconciler {
         stackTrace: stackTrace,
       );
       return const ReconcileResult.failed();
+    }
+  }
+
+  /// Räumt angezeigte Meldungen ab, deren Ziel nicht mehr gilt.
+  ///
+  /// Eigener Fehlerfang: Kann die Plattform die Leiste nicht lesen, bleibt
+  /// es beim alten Verhalten — die Planung selbst darf daran nicht scheitern.
+  Future<int> _dismissStaleShown({
+    required List<Medication> medications,
+    required List<MedicationLog> logs,
+    required List<CalendarEvent> events,
+  }) async {
+    try {
+      final shown = await _scheduler.shownOwn();
+      var dismissed = 0;
+      for (final MapEntry(key: id, value: key) in shown.entries) {
+        // Ohne lesbaren Schlüssel lässt sich nichts entscheiden — dann
+        // bleibt die Meldung, wo sie ist. So liegen auch Meldungen aus
+        // Fassungen vor dem 29.10.2026, die noch keinen Tag tragen.
+        final target = ReminderTarget.fromSeed(key);
+        if (key == null || target == null) continue;
+        final current = isStillCurrent(
+          target,
+          medications: medications,
+          logs: logs,
+          events: events,
+        );
+        if (current) continue;
+        await _scheduler.dismiss(id, key: key);
+        dismissed++;
+      }
+      return dismissed;
+    } catch (e, stackTrace) {
+      logger.warning(
+        LogCategory.service,
+        'ReminderReconciler: angezeigte Meldungen nicht lesbar',
+        data: {'error': e.toString(), 'stackTrace': stackTrace.toString()},
+      );
+      return 0;
     }
   }
 }
