@@ -171,18 +171,6 @@
   "@profileNewProfile": {
     "description": "New profile button label"
   },
-  "profileCreationTitle": "Crea un nuovo profilo",
-  "@profileCreationTitle": {
-    "description": "Profile creation screen title"
-  },
-  "profileCreationSubtitle": "Chi ha voglia di presentarsi?",
-  "@profileCreationSubtitle": {
-    "description": "Profile creation screen subtitle"
-  },
-  "profileCreationDescription": "Crea il tuo profilo con nome, colore e avatar. Ogni profilo si imposta per conto suo e riceve permessi adatti all’età.",
-  "@profileCreationDescription": {
-    "description": "Profile creation description text"
-  },
   "profileEditTitle": "Modifica profilo",
   "@profileEditTitle": {
     "description": "Profile edit screen title"
@@ -357,43 +345,43 @@
   "@rightsGroupManagement": {
     "description": "Group header of the rights switches"
   },
-  "rightSeeMedication": "Vedere i farmaci",
+  "rightSeeMedication": "Può vedere i farmaci",
   "@rightSeeMedication": {
     "description": "Rights switch"
   },
-  "rightChangeMedicationPlan": "Modificare il piano dei farmaci",
+  "rightChangeMedicationPlan": "Può modificare il piano dei farmaci",
   "@rightChangeMedicationPlan": {
     "description": "Rights switch; turning it on also turns on See medication"
   },
-  "rightChangeOthersEntries": "Modificare le voci altrui",
+  "rightChangeOthersEntries": "Può modificare le voci altrui",
   "@rightChangeOthersEntries": {
     "description": "Rights switch: edit other parts' events and diary entries"
   },
-  "rightDeleteOthersEntries": "Eliminare le voci altrui",
+  "rightDeleteOthersEntries": "Può eliminare le voci altrui",
   "@rightDeleteOthersEntries": {
     "description": "Rights switch: delete other parts' messages, events and diary entries"
   },
-  "rightReadOthersDiaries": "Leggere i diari altrui",
+  "rightReadOthersDiaries": "Può leggere i diari altrui",
   "@rightReadOthersDiaries": {
     "description": "Rights switch"
   },
-  "rightCreateParts": "Aggiungere parti",
+  "rightCreateParts": "Può aggiungere parti",
   "@rightCreateParts": {
     "description": "Rights switch"
   },
-  "rightPauseParts": "Mettere in pausa le parti",
+  "rightPauseParts": "Può mettere in pausa le parti",
   "@rightPauseParts": {
     "description": "Rights switch: pause other parts and bring them back"
   },
-  "rightGrantRights": "Assegnare diritti",
+  "rightGrantRights": "Può assegnare diritti",
   "@rightGrantRights": {
     "description": "Rights switch: change the rights of parts"
   },
-  "rightChangeSettings": "Modificare le impostazioni",
+  "rightChangeSettings": "Può modificare le impostazioni",
   "@rightChangeSettings": {
     "description": "Rights switch"
   },
-  "rightResetPasswords": "Reimpostare le password",
+  "rightResetPasswords": "Può reimpostare le password",
   "@rightResetPasswords": {
     "description": "Rights switch"
   },
@@ -1177,61 +1165,9 @@
   "@onboardingSelectLanguage": {
     "description": "Select language prompt in onboarding"
   },
-  "onboardingWelcomeTitle": "Ti diamo il benvenuto in",
-  "@onboardingWelcomeTitle": {
-    "description": "Welcome onboarding page title"
-  },
-  "onboardingWelcomeSubtitle": "La tua compagna sicura nella vita di ogni giorno con il DID",
-  "@onboardingWelcomeSubtitle": {
-    "description": "Welcome onboarding page subtitle"
-  },
-  "onboardingWelcomeDescription": "Aurora ti accompagna a organizzare le tue giornate e la comunicazione dentro il tuo sistema.",
-  "@onboardingWelcomeDescription": {
-    "description": "Welcome onboarding page description"
-  },
-  "onboardingPrivacyTitle": "I tuoi dati sono TUOI",
-  "@onboardingPrivacyTitle": {
-    "description": "Privacy onboarding page title"
-  },
-  "onboardingPrivacyBullet1": "Tutti i dati restano sul tuo dispositivo",
-  "@onboardingPrivacyBullet1": {
-    "description": "Privacy feature 1"
-  },
   "onboardingPrivacyBullet2": "Nessun backup nel cloud, nessun tracciamento, nessuna pubblicità",
   "@onboardingPrivacyBullet2": {
     "description": "Privacy feature 2"
-  },
-  "onboardingPrivacyBullet3": "Decidi tu",
-  "@onboardingPrivacyBullet3": {
-    "description": "Privacy feature 3"
-  },
-  "onboardingPrivacyBullet4": "Trasparente e sicuro",
-  "@onboardingPrivacyBullet4": {
-    "description": "Privacy feature 4"
-  },
-  "onboardingMultiProfileTitle": "Tante voci, una sola app",
-  "@onboardingMultiProfileTitle": {
-    "description": "Multi-profile onboarding page title"
-  },
-  "onboardingMultiProfileDescription": "Ogni alter può avere il suo profilo, con i suoi colori, le sue impostazioni e i suoi permessi.",
-  "@onboardingMultiProfileDescription": {
-    "description": "Multi-profile onboarding page description"
-  },
-  "onboardingLetsGoTitle": "Pront* a cominciare?",
-  "@onboardingLetsGoTitle": {
-    "description": "Let's go onboarding page title"
-  },
-  "onboardingLetsGoDescription": "Crea ora il tuo primo profilo. Il primo diventa in automatico il profilo di amministrazione, con tutti i diritti.",
-  "@onboardingLetsGoDescription": {
-    "description": "Let's go onboarding page description"
-  },
-  "onboardingButtonNext": "Avanti →",
-  "@onboardingButtonNext": {
-    "description": "Next button in onboarding"
-  },
-  "onboardingButtonCreateProfile": "Crea il profilo →",
-  "@onboardingButtonCreateProfile": {
-    "description": "Create profile button in onboarding"
   },
   "splashLoading": "Aurora si sta caricando",
   "@splashLoading": {
@@ -1778,67 +1714,10 @@
   "actionChange": "Modifica",
   "actionRemove": "Rimuovi",
   "onboardingNext": "Avanti →",
-  "onboardingCreateProfile": "Crea profilo →",
-  "onboardingLetsGo": "Si comincia! →",
   "onboardingWelcomeTo": "Benvenuto in",
   "onboardingSubline": "La tua compagna sicura nella vita con il DID",
   "onboardingDescription": "Aurora ti accompagna nell'organizzare la giornata e la comunicazione dentro il tuo sistema.",
-  "onboardingPrivacyHeadline": "I tuoi dati sono TUOI",
-  "onboardingPrivacyPoint1": "Tutti i dati restano sul tuo dispositivo",
-  "onboardingPrivacyPoint2": "Nessun backup nel cloud, nessun tracciamento, nessuna pubblicità",
-  "onboardingPrivacyPoint3": "Il controllo è tuo",
-  "onboardingPrivacyPoint4": "Trasparente e sicuro",
-  "onboardingMultiProfileHeadline": "Tante voci, una sola app",
-  "onboardingLetsGoHeadline": "Pronto per iniziare?",
-  "onboardingHelloName": "Ciao {name}!",
-  "onboardingGladYoureHere": "Bello che tu sia qui.",
-  "onboardingNotAlone": "Non sei solo",
-  "onboardingNotAloneDescription": "Potete scrivervi, condividere appuntamenti e sostenervi a vicenda.",
-  "onboardingWhatYouCanDo": "Cosa puoi fare",
-  "onboardingChildAccessDescription": "Con un profilo bambino hai accesso a:",
-  "onboardingAdultAccessDescription": "Hai accesso a queste funzioni:",
-  "onboardingSafeSpace": "Il tuo spazio sicuro",
-  "onboardingSafeSpaceDescription": "Tutto ciò che scrivi resta su questo dispositivo. Viene inviato solo ciò che invii tu, e puoi sempre rileggerlo.",
-  "onboardingHaveFun": "Buon proseguimento con Aurora!",
-  "onboardingFeatureChatChild": "Chat: scarabocchiare e parlare con gli altri",
-  "onboardingFeatureDiaryChild": "Diario: scrivere i tuoi pensieri",
-  "onboardingFeatureGamesChild": "Giochi: divertirsi e rilassarsi",
-  "onboardingFeatureTimelineChild": "Linea del tempo: conservare i momenti importanti",
-  "onboardingFeatureChat": "Chat: messaggi, scarabocchi, messaggi vocali",
-  "onboardingFeatureCalendar": "Calendario: pianificare e gestire gli appuntamenti",
-  "onboardingFeatureContacts": "Contatti: salvare le persone importanti",
-  "onboardingFeatureMedication": "Farmaci: tenere traccia di farmaci e assunzioni",
-  "onboardingFeatureDiary": "Diario: annotare pensieri ed esperienze",
-  "onboardingFeatureFinder": "Trova: ritrovare luoghi e cose",
-  "onboardingFeatureEmergency": "Emergenza: aiuto rapido nei momenti di crisi",
-  "onboardingFeatureMantras": "Mantra: frasi che calmano e affermazioni",
-  "onboardingFeatureChatBasic": "Chat: funzioni di base disponibili",
-  "featureCarouselHeadline": "Tutto quello che Aurora sa fare",
-  "featureCarouselSwipeHint": "Scorri tra le funzioni →",
-  "featureCarouselChatTitle": "Chat",
-  "featureCarouselChatSubtitle": "Comunicazione interna",
-  "featureCarouselChatDescription": "Messaggi, scarabocchi e messaggi vocali.\nCondividete pensieri, disegnate insieme o parlatevi.",
-  "featureCarouselCalendarTitle": "Calendario",
-  "featureCarouselCalendarSubtitle": "Appuntamenti",
-  "featureCarouselCalendarDescription": "Appuntamenti con immagini e luoghi.\nTenete d'occhio gli appuntamenti importanti, con immagini e posizioni GPS.",
-  "featureCarouselDiaryTitle": "Diario",
-  "featureCarouselDiarySubtitle": "Pensieri privati",
-  "featureCarouselDiaryDescription": "Visibile a tutti o solo a te.\nAnnotate i pensieri: in comune per tutti i profili o in privato.",
-  "featureCarouselFinderTitle": "Trova",
-  "featureCarouselFinderSubtitle": "Luoghi e cose",
-  "featureCarouselFinderDescription": "Ritrovate luoghi e cose.\nSalvate luoghi importanti (con mappa) e oggetti per ritrovarli.",
-  "featureCarouselMedicationTitle": "Farmaci",
-  "featureCarouselMedicationSubtitle": "Monitoraggio dei farmaci",
-  "featureCarouselMedicationDescription": "Farmaci e orari di assunzione.\nTenete traccia dei farmaci, degli orari e dei farmaci al bisogno.",
-  "featureCarouselGamesTitle": "Giochi e radicamento",
-  "featureCarouselGamesSubtitle": "Calma",
-  "featureCarouselGamesDescription": "Giochi, respirazione e radicamento.\nCalmatevi con rompicapi, esercizi di respirazione e tecniche di radicamento.",
-  "featureCarouselEmergencyTitle": "Aiuto",
-  "featureCarouselEmergencySubtitle": "Contatti di emergenza",
-  "featureCarouselEmergencyDescription": "Contatti di emergenza e aiuto rapido.\nSalvate i contatti importanti per i momenti di crisi.",
-  "featureCarouselInfoTitle": "Informazioni sul DID",
-  "featureCarouselInfoSubtitle": "Informazioni e risorse",
-  "featureCarouselInfoDescription": "Spiegato: che cos'è il DID?\nInformazioni sul disturbo dissociativo dell'identità e risorse.",
+  "onboardingPrivacyOneLine": "Tutto resta su questo dispositivo.",
   "commonUnknown": "Sconosciuto",
   "timelineTitle": "Linea del tempo",
   "timelineHistory": "Cronologia",
@@ -2013,8 +1892,6 @@
   "groundingBreathStep1": "Inspira e conta fino a quattro.",
   "groundingBreathStep2": "Trattieni un attimo.",
   "groundingBreathStep3": "Espira e conta fino a sei.",
-  "groundingBreathStep4": "Di nuovo. Senza fretta.",
-  "groundingBreathStep5": "Più lento fuori che dentro. Basta così.",
   "medicationNameLabel": "Nome del farmaco",
   "medicationDosageLabel": "Dose",
   "medicationDosageHint": "ad es. 1 compressa, 10 mg, 5 ml",
@@ -2846,6 +2723,7 @@
   "releaseNotesAllgemein": "Aurora è cresciuta un po'. Tutto ciò che conosci resta al suo posto, e i tuoi contenuti restano solo su questo dispositivo.",
   "releaseNotesFassung3022": "Questa volta si è trattato di piccole riparazioni dietro le quinte, perché Aurora resti affidabile. Tutto ciò che conosci resta al suo posto, e i tuoi contenuti restano solo su questo dispositivo.",
   "releaseNotesFassung3024": "• Parti: la pausa ora funziona davvero. Puoi riprendere una parte da Impostazioni → «Parti e diritti».\n• Diritti: pochi interruttori chiari invece di sessanta caselle.\n• Impostazioni: riordinate e raggiungibili fino in fondo.\n• Promemoria: quando un promemoria viene eliminato, messo in pausa o completato, sparisce anche la sua notifica.\n• Posizione: la registrazione ora parte in modo affidabile anche al chiuso.",
+  "releaseNotesFassung3025": "• La pausa ora è in cima alla pagina di una parte.\n• Inizio più breve: due passi fino al tuo primo profilo.\n• Data e momento della giornata in una fascia sotto «Aurora».\n• L'esercizio di respirazione ti guida un minuto senza toccare.",
   "releaseNotesFassung3023": "• Farmaci: gestire, silenziare e lo storico ora si trovano più facilmente.\n• Promemoria: Aurora ti spiega in breve prima che il tuo dispositivo chieda il permesso.\n• Radicamento: gli esercizi mostrano come andare avanti con un pulsante Avanti e scorrendo.\n• Chat: la tastiera non si apre né si chiude più da sola.\n• Lingue: tutte e cinque le lingue sono state riviste; data e ora seguono la tua lingua.",
   "updateHinweisTitel": "Aurora è stata aggiornata",
   "updateHinweisText": "Dai un’occhiata alle novità.",

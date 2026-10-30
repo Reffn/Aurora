@@ -16,8 +16,20 @@ import 'package:dis_app/widgets/profile_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
-/// Screen zum Erstellen eines neuen Profils
-/// Multi-Page Onboarding-Style mit warmen Pastell-Design
+/// Ein neues Profil anlegen — seit 3.0.25 in zwei Schritten.
+///
+/// 1. Name, Bild und Farbe (die Farbe ist vorausgewählt).
+/// 2. Alter und, wer mag, ein Passwort.
+///
+/// Bis 3.0.24 waren es fünf: eine Einleitung („Wer möchte sich
+/// vorstellen?“), dann Name und Bild, Farbe, Alter, Passwort — je eine Seite.
+/// Zusammen mit der Vorstellung davor und den Begrüßungsseiten danach waren
+/// es rund sechzehn Schirme bis zur App. Am Gerät entschieden: kurz.
+///
+/// Wird das **erste** Profil angelegt, wird es sofort aktiv: Die Startkette
+/// in `main.dart` wechselt dann von selbst auf den Hauptschirm, ohne
+/// Startauswahl und ohne „Weiter als …“. Jedes weitere Profil kommt über
+/// „Neues Profil“ und führt wie bisher zurück.
 class ProfileCreationScreen extends StatefulWidget {
   const ProfileCreationScreen({super.key});
 
@@ -25,8 +37,7 @@ class ProfileCreationScreen extends StatefulWidget {
   State<ProfileCreationScreen> createState() => _ProfileCreationScreenState();
 }
 
-class _ProfileCreationScreenState extends State<ProfileCreationScreen>
-    with SingleTickerProviderStateMixin {
+class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _nameFocusNode = FocusNode();
@@ -35,7 +46,6 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen>
   DataEntry? _dataEntry;
 
   late PageController _pageController;
-  late AnimationController _logoAnimationController;
   int _currentPage = 0;
 
   Color _selectedColor = Colors.blue;
@@ -58,28 +68,11 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen>
       _dataEntry = getIt<DataEntry>();
     }
     _pageController = PageController();
-    _logoAnimationController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 2),
-    );
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (MediaQuery.disableAnimationsOf(context)) {
-      _logoAnimationController
-        ..stop()
-        ..value = 0;
-    } else if (!_logoAnimationController.isAnimating) {
-      _logoAnimationController.repeat(reverse: true);
-    }
   }
 
   @override
   void dispose() {
     _pageController.dispose();
-    _logoAnimationController.dispose();
     _nameController.dispose();
     _nameFocusNode.dispose();
     _passwordController.dispose();
@@ -127,6 +120,9 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen>
 
     try {
       final isFirstProfile = _dataEntry!.getProfiles().isEmpty;
+      // Gar keins, auch kein pausiertes: Nur dann ist dieser Schirm der
+      // Startschirm der App und nicht eine Route über der Auswahl.
+      final keinesVorher = _dataEntry!.getAllProfiles().isEmpty;
 
       final avatarPath = _selectedAvatarPath;
 
@@ -165,10 +161,18 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen>
 
       await _dataEntry!.createProfile(profile);
 
-      // Navigation-Logik:
-      // - Erstes Profil: Automatische Navigation zu MainScreen (MyApp lauscht)
-      // - Weitere Profile: Navigator.pop() zurück zum vorherigen Screen
-      if (!isFirstProfile && mounted) {
+      if (keinesVorher) {
+        // Das erste Profil wird gleich aktiv. Dieser Schirm ist dann `home`,
+        // nichts liegt über ihm: Die Startkette in `main.dart` sieht ein
+        // aktives Profil und baut den Hauptschirm — keine Startauswahl, kein
+        // „Weiter als …“. Hat es ein Passwort, ist das in Ordnung: Es wurde
+        // eben erst getippt.
+        //
+        // Jeder spätere Start löscht `active_profile_id` weiterhin und
+        // beginnt in der Auswahl; die Sperre bleibt, wie sie ist.
+        await _dataEntry!.changeActiveProfile(profile);
+      } else if (mounted) {
+        // Über „Neues Profil“: zurück zur Auswahl.
         Navigator.pop(context);
       }
     } catch (e) {
@@ -187,7 +191,10 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen>
   }
 
   /// Index der Seite, auf der der Profilname eingegeben wird.
-  static const int _identityPageIndex = 1;
+  static const int _identityPageIndex = 0;
+
+  /// Die letzte Seite: Alter und Passwort. Ihr Knopf legt das Profil an.
+  static const int _lastPageIndex = 1;
 
   void _nextPage() {
     // Der Name ist Pflicht. Ohne diese Prüfung blättert man vier Seiten weiter
@@ -204,7 +211,7 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen>
       return;
     }
 
-    if (_currentPage < 4) {
+    if (_currentPage < _lastPageIndex) {
       _pageController.animateToPage(
         _currentPage + 1,
         duration: const Duration(milliseconds: 300),
@@ -234,7 +241,7 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen>
           bottom: false,
           // Leiste und Inhalt liegen untereinander, nicht übereinander.
           //
-          // Vorher baute jede der fünf Seiten Indikator und Knopf selbst,
+          // Vorher baute jede Seite Indikator und Knopf selbst,
           // innerhalb ihres Scroll-Inhalts — dadurch konnte jeder Seiteninhalt
           // den Knopf unter den Bildschirmrand schieben, bei der Farbseite war
           // er nur durch Scrollen erreichbar.
@@ -248,7 +255,7 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen>
               Expanded(
                 child: Stack(
                   children: [
-                    // PageView mit 5 Seiten
+                    // Zwei Seiten: wer, dann wie alt und wie geschützt.
                     Form(
                       key: _formKey,
                       child: PageView(
@@ -261,11 +268,8 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen>
                           setState(() => _currentPage = index);
                         },
                         children: [
-                          _buildWelcomePage(),
                           _buildIdentityPage(),
-                          _buildColorPage(),
                           _buildAgePage(),
-                          _buildPasswordPage(),
                         ],
                       ),
                     ),
@@ -304,7 +308,7 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen>
                     _buildPageIndicator(),
                     const SizedBox(height: 24),
                     _buildNavigationButton(
-                      _currentPage < 4
+                      _currentPage < _lastPageIndex
                           ? '${AppLocalizations.of(context).actionContinue} →'
                           : AppLocalizations.of(
                               context,
@@ -324,7 +328,7 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen>
   Widget _buildPageIndicator() {
     return OnboardingPageIndicator(
       currentPage: _currentPage,
-      totalPages: 5,
+      totalPages: _lastPageIndex + 1,
       activeColor: const Color(0xFFFFB6C1), // Pastell Rosa
       inactiveColor: const Color(0xFF4A4458), // Warmes Dunkelgrau
     );
@@ -383,90 +387,7 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen>
     );
   }
 
-  /// Page 1: Willkommen
-  Widget _buildWelcomePage() {
-    return ColoredBox(
-      color: AppColors.ink,
-      child: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.only(
-            left: 32,
-            right: 32,
-            top: 72,
-            bottom: 28,
-          ),
-          child: Column(
-            children: [
-              _pageHeader(
-                framed: false,
-                symbol: AnimatedBuilder(
-                  animation: _logoAnimationController,
-                  builder: (context, child) {
-                    return DecoratedBox(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0xFFFFB6C1).withValues(
-                              alpha:
-                                  0.3 + (_logoAnimationController.value * 0.2),
-                            ),
-                            blurRadius:
-                                20 + (_logoAnimationController.value * 8),
-                            spreadRadius:
-                                4 + (_logoAnimationController.value * 2),
-                          ),
-                          BoxShadow(
-                            color: const Color(0xFF87CEEB).withValues(
-                              alpha:
-                                  0.2 + (_logoAnimationController.value * 0.15),
-                            ),
-                            blurRadius:
-                                26 + (_logoAnimationController.value * 10),
-                            spreadRadius:
-                                6 + (_logoAnimationController.value * 3),
-                          ),
-                        ],
-                      ),
-                      child: Image.asset(
-                        'assets/images/logo_rainbow.png',
-                        height: 84,
-                        width: 84,
-                        fit: BoxFit.contain,
-                      ),
-                    );
-                  },
-                ),
-                title: AppLocalizations.of(context).profileCreationTitle,
-              ),
-              _pageDescription(
-                AppLocalizations.of(context).profileCreationSubtitle,
-              ),
-
-              const SizedBox(height: 24),
-
-              // Description
-              Text(
-                AppLocalizations.of(context).profileCreationDescription,
-                style: TextStyle(
-                  color: const Color(0xFFD4C5B9).withValues(alpha: 0.9),
-                  fontSize: 15,
-                  height: 1.5,
-                ),
-                textAlign: TextAlign.center,
-              ),
-
-              const SizedBox(height: 60), // Mehr Platz vor Indicator
-              // Platz für die feste Leiste am unteren Rand
-              const SizedBox(height: _navigationBarHeight),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  /// Page 2: Identität (Name, Avatar)
+  /// Seite 1: Name, Bild und Farbe.
   Widget _buildIdentityPage() {
     return ColoredBox(
       color: AppColors.ink,
@@ -517,6 +438,26 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen>
                 showPasswordFields: false,
               ),
 
+              // Die Farbe auf derselben Seite. Vorausgewählt ist eine, damit
+              // niemand hier hängen bleibt; ändern lässt sie sich später in
+              // „Profil bearbeiten“.
+              const SizedBox(height: 32),
+              _sectionTitle(
+                AppLocalizations.of(context).profileColorTitle,
+                AppLocalizations.of(context).profileColorDescription,
+              ),
+              const SizedBox(height: 16),
+              ProfileColorSection(
+                selectedColor: _selectedColor,
+                onColorChanged: (color, position) {
+                  setState(() {
+                    _selectedColor = color;
+                    _selectedColorPosition = position;
+                  });
+                },
+                existingProfiles: _dataEntry!.getProfiles(),
+              ),
+
               const SizedBox(height: 40),
 
               // Platz für die feste Leiste am unteren Rand
@@ -528,7 +469,6 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen>
     );
   }
 
-  /// Page 3: Farbauswahl
   /// Kopfzeile einer Assistentenseite: Sinnbild links, Text rechts.
   ///
   /// Vorher stand das Sinnbild als 120-Pixel-Kreis mittig über Titel und
@@ -537,8 +477,7 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen>
   /// Schirms, auf kleinen Geräten aus dem Bild heraus. Nebeneinander braucht
   /// derselbe Kopf rund 250 Pixel weniger.
   ///
-  /// Alle fünf Seiten teilen sich diesen Aufbau. Vorher stand er fünfmal
-  /// ausgeschrieben da, mit fünf leicht verschiedenen Schriftgrößen.
+  /// Beide Seiten teilen sich diesen Aufbau.
   Widget _pageHeader({
     required Widget symbol,
     required String title,
@@ -601,54 +540,7 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen>
     );
   }
 
-  Widget _buildColorPage() {
-    return ColoredBox(
-      color: AppColors.ink,
-      child: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.only(
-            left: 32,
-            right: 32,
-            top: 72,
-            bottom: 28,
-          ),
-          child: Column(
-            children: [
-              _pageHeader(
-                symbol: const Text('🎨', style: TextStyle(fontSize: 40)),
-                title: AppLocalizations.of(context).profileColorTitle,
-                gradient: const [Color(0xFFFFB6C1), Color(0xFFB4E7CE)],
-              ),
-              _pageDescription(
-                AppLocalizations.of(context).profileColorDescription,
-              ),
-
-              const SizedBox(height: 32),
-
-              // Color Section
-              ProfileColorSection(
-                selectedColor: _selectedColor,
-                onColorChanged: (color, position) {
-                  setState(() {
-                    _selectedColor = color;
-                    _selectedColorPosition = position;
-                  });
-                },
-                existingProfiles: _dataEntry!.getProfiles(),
-              ),
-
-              const SizedBox(height: 40),
-
-              // Platz für die feste Leiste am unteren Rand
-              const SizedBox(height: _navigationBarHeight),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  /// Page 4: Alter
+  /// Seite 2: Alter und Passwort.
   Widget _buildAgePage() {
     return ColoredBox(
       color: AppColors.ink,
@@ -760,41 +652,15 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen>
                 ),
               ),
 
-              const SizedBox(height: 40),
-
-              // Platz für die feste Leiste am unteren Rand
-              const SizedBox(height: _navigationBarHeight),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  /// Page 5: Passwort (Optional)
-  Widget _buildPasswordPage() {
-    return ColoredBox(
-      color: AppColors.ink,
-      child: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.only(
-            left: 32,
-            right: 32,
-            top: 72,
-            bottom: 28,
-          ),
-          child: Column(
-            children: [
-              _pageHeader(
-                symbol: const Text('🔐', style: TextStyle(fontSize: 40)),
-                title: AppLocalizations.of(context).profileSecurityTitle,
-                gradient: const [Color(0xFF87CEEB), Color(0xFFDDA0DD)],
-              ),
-              _pageDescription(
+              // Das Passwort auf derselben Seite, nach dem Alter: Die
+              // Rechte-Vorlage hängt am Alter, nicht am Passwort — beides
+              // auf einer Seite ändert daran nichts.
+              const SizedBox(height: 32),
+              _sectionTitle(
+                AppLocalizations.of(context).profileSecurityTitle,
                 AppLocalizations.of(context).profileSecurityDescription,
               ),
-
-              const SizedBox(height: 32),
+              const SizedBox(height: 16),
 
               // Password Fields
               Column(
@@ -884,6 +750,28 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen>
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  /// Überschrift eines zweiten Abschnitts auf derselben Seite: kleiner als
+  /// die Kopfzeile, damit die Seite einen Anfang hat und nicht zwei.
+  Widget _sectionTitle(String title, String description) {
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: AppColors.paperBright,
+            ),
+          ),
+          _pageDescription(description),
+        ],
       ),
     );
   }

@@ -135,17 +135,12 @@ class AnchorMenu extends StatelessWidget {
   /// nichts). Am 11. August 2026 am Gerät gesehen.
   final Widget Function(double verfuegbareHoehe)? banner;
 
-  /// Was unter dem Bannerblock frei bleiben muss, damit die erste Kachelreihe
-  /// beim Öffnen ganz im Bild steht.
-  ///
-  /// Gruppenüberschrift (28 Polster + gut 20 Schrift) plus eine Kachelreihe
-  /// ([AnchorTile.minHeight] und ihre 5 dp Rand oben und unten).
-  ///
-  /// Gilt für normale Systemschrift. Bei 200 % wächst die Reihe über ihre
-  /// Mindesthöhe hinaus und kann wieder anschneiden — dort trägt das
-  /// Scrollen, und die ausgeblendete Kante zeigt, dass es weitergeht. Diese
-  /// Reserve verspricht den ganzen Blick, nicht die ganze Schriftgröße.
-  static const double reserveFuerErsteReihe = 50 + AnchorTile.minHeight + 10;
+  // Hier stand `reserveFuerErsteReihe = 50 + AnchorTile.minHeight + 10`:
+  // eine feste Zahl für Überschrift und erste Kachelreihe, „gilt für normale
+  // Systemschrift“. Bei 200 % wuchsen beide darüber hinaus, und am Emulator
+  // standen von „Chat“ und „Kalender“ nur die Symbole über der Leiste — die
+  // Wörter lagen dahinter. Jetzt messen sich Überschrift und erste Reihe
+  // selbst, siehe `_mitErsterReihe`.
 
   @override
   Widget build(BuildContext context) {
@@ -204,24 +199,32 @@ class AnchorMenu extends StatelessWidget {
             // der Spalte übrig gelassen haben — gemessen, nicht geschätzt.
             child: LayoutBuilder(
               builder: (context, constraints) {
-                final fuerDenBlock =
-                    constraints.maxHeight - AnchorMenu.reserveFuerErsteReihe;
+                // Was beim Öffnen ganz zu sehen sein muss, steht in dieser
+                // Höhe: die Liste ohne ihr oberes Polster und ohne den Saum
+                // unten, in dem sie ausblendet.
+                final sichtbar = constraints.maxHeight - 8 - _FadingEdges.fade;
+                final erste = quiet.isEmpty ? null : quiet.first;
 
                 return _FadingEdges(
                   child: ListView(
                     padding: EdgeInsets.only(
                       top: 8,
-                      // Ohne Leiste trägt die Liste den Systemleisten-Abstand
-                      // selbst. Mit Leiste bringt die ihn mit — sonst stünde er
-                      // doppelt.
                       bottom:
                           24 +
                           _FadingEdges.fade +
                           (actions.isEmpty ? context.safeBottomPadding : 0),
                     ),
                     children: [
-                      ?banner?.call(fuerDenBlock),
-                      for (final group in quiet) ...[
+                      if (banner != null && erste != null) ...[
+                        _mitErsterReihe(banner!(sichtbar), erste, sichtbar),
+                        if (erste.entries.length > 2)
+                          _TileGrid(entries: erste.entries.sublist(2)),
+                        const SizedBox(height: 12),
+                      ] else
+                        ?banner?.call(sichtbar),
+                      for (final group in quiet.skip(
+                        banner != null && erste != null ? 1 : 0,
+                      )) ...[
                         _GroupHeading(group.label),
                         _TileGrid(entries: group.entries),
                         const SizedBox(height: 12),
@@ -250,6 +253,31 @@ class AnchorMenu extends StatelessWidget {
 /// Zwei Fingerbreit reichen dafür. Mehr würde Inhalt schlucken, den man lesen
 /// will, und die Liste hält unten ohnehin genug Polster, dass die letzte
 /// Kachel nie im Verlauf stehen bleibt.
+/// Bannerblock, erste Überschrift und erste Kachelreihe in einer Spalte,
+/// die höchstens [sichtbar] hoch wird.
+///
+/// Überschrift und Reihe nehmen ihre natürliche Höhe — bei 200 % Schrift
+/// eben mehr —, der Block bekommt als einziges `Flexible` den Rest und gibt
+/// ihn an die Karte weiter, die dann kleiner wird. So steht die erste Reihe
+/// beim Öffnen ganz im Bild, gleich wie hoch Kopf, Band und Hinweise
+/// geworden sind: Es gibt keine Zahl mehr, die mit der Schrift wachsen
+/// müsste.
+Widget _mitErsterReihe(Widget block, AnchorGroup erste, double sichtbar) =>
+    ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: sichtbar.clamp(0.0, double.infinity),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Flexible(child: block),
+          _GroupHeading(erste.label),
+          _TileGrid(entries: erste.entries.take(2).toList()),
+        ],
+      ),
+    );
+
 class _FadingEdges extends StatelessWidget {
   const _FadingEdges({required this.child});
 

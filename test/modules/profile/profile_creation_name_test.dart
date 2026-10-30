@@ -83,17 +83,15 @@ void main() {
     );
     await tester.pump(const Duration(milliseconds: 100));
 
-    // Seite 2: Name, anders geschrieben als beim pausierten Anteil.
+    // Erste Seite: Name, anders geschrieben als beim pausierten Anteil.
+    await tester.enterText(find.byType(TextField).first, 'mira');
+    await tester.pump();
+
+    // Weiter zur letzten Seite; Farbe, Alter und Passwort spielen keine Rolle.
     await tester.tap(find.textContaining(l10n.actionContinue));
     // Der erste Frame startet das Blättern, der zweite beendet es.
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
-    await tester.enterText(find.byType(TextField).first, 'mira');
-    await tester.pump();
-
-    // Direkt zur letzten Seite; Farbe, Alter und Passwort spielen keine Rolle.
-    tester.widget<PageView>(find.byType(PageView)).controller!.jumpToPage(4);
-    await tester.pump(const Duration(milliseconds: 100));
 
     await tester.tap(find.text(l10n.profileActionCreateProfile));
     await tester.pump(const Duration(milliseconds: 100));

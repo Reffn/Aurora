@@ -42,7 +42,9 @@ void main() {
   });
 
   test('jeder Onboarding-Schritt hat ein Abbruchereignis', () {
-    // Die fuenf Seiten aus pre_onboarding_screen.dart
+    // Seit 3.0.25 hat pre_onboarding_screen.dart nur noch die Seite
+    // "willkommen". Die anderen vier bleiben gefordert: Aeltere Fassungen
+    // senden sie weiter, und der Server muss sie annehmen.
     const schritte = [
       'willkommen',
       'privacy',

@@ -146,17 +146,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileNewProfile => 'New Profile';
 
   @override
-  String get profileCreationTitle => 'Create new profile';
-
-  @override
-  String get profileCreationSubtitle =>
-      'Who would like to introduce themselves?';
-
-  @override
-  String get profileCreationDescription =>
-      'Create your personal profile with name, color, and avatar. Each profile can be customized individually and receives appropriate permissions based on age.';
-
-  @override
   String get profileEditTitle => 'Edit profile';
 
   @override
@@ -290,34 +279,34 @@ class AppLocalizationsEn extends AppLocalizations {
   String get rightsGroupManagement => 'Management';
 
   @override
-  String get rightSeeMedication => 'See medication';
+  String get rightSeeMedication => 'Can see medication';
 
   @override
-  String get rightChangeMedicationPlan => 'Change medication plan';
+  String get rightChangeMedicationPlan => 'Can change the medication plan';
 
   @override
-  String get rightChangeOthersEntries => 'Change others\' entries';
+  String get rightChangeOthersEntries => 'Can change others\' entries';
 
   @override
-  String get rightDeleteOthersEntries => 'Delete others\' entries';
+  String get rightDeleteOthersEntries => 'Can delete others\' entries';
 
   @override
-  String get rightReadOthersDiaries => 'Read others\' diaries';
+  String get rightReadOthersDiaries => 'Can read others\' diaries';
 
   @override
-  String get rightCreateParts => 'Create parts';
+  String get rightCreateParts => 'Can create parts';
 
   @override
-  String get rightPauseParts => 'Pause parts';
+  String get rightPauseParts => 'Can pause parts';
 
   @override
-  String get rightGrantRights => 'Grant rights';
+  String get rightGrantRights => 'Can grant rights';
 
   @override
-  String get rightChangeSettings => 'Change settings';
+  String get rightChangeSettings => 'Can change settings';
 
   @override
-  String get rightResetPasswords => 'Reset passwords';
+  String get rightResetPasswords => 'Can reset passwords';
 
   @override
   String get profileEditComingSoon => 'Edit coming soon';
@@ -945,50 +934,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingSelectLanguage => 'Choose your language';
 
   @override
-  String get onboardingWelcomeTitle => 'Welcome to';
-
-  @override
-  String get onboardingWelcomeSubtitle =>
-      'Your safe companion in everyday life with DIS';
-
-  @override
-  String get onboardingWelcomeDescription =>
-      'Aurora is your shared safe space. Here you can express yourself freely and stay in touch with the other parts in the system.';
-
-  @override
-  String get onboardingPrivacyTitle => 'Your data belongs to YOU';
-
-  @override
-  String get onboardingPrivacyBullet1 => 'All data stays local on your device';
-
-  @override
   String get onboardingPrivacyBullet2 => 'No cloud backup, no tracking, no ads';
-
-  @override
-  String get onboardingPrivacyBullet3 => 'You have full control';
-
-  @override
-  String get onboardingPrivacyBullet4 => 'Transparent and secure';
-
-  @override
-  String get onboardingMultiProfileTitle => 'Many voices, one app';
-
-  @override
-  String get onboardingMultiProfileDescription =>
-      'Every part gets its own profile – with its own colour, its own picture and its own permissions.';
-
-  @override
-  String get onboardingLetsGoTitle => 'Ready to start?';
-
-  @override
-  String get onboardingLetsGoDescription =>
-      'Create your first profile now. The first profile automatically becomes the admin profile with full access rights.';
-
-  @override
-  String get onboardingButtonNext => 'Next →';
-
-  @override
-  String get onboardingButtonCreateProfile => 'Create profile →';
 
   @override
   String get splashLoading => 'Aurora is loading';
@@ -1810,12 +1756,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingNext => 'Next →';
 
   @override
-  String get onboardingCreateProfile => 'Create Profile →';
-
-  @override
-  String get onboardingLetsGo => 'Let\'s Go! →';
-
-  @override
   String get onboardingWelcomeTo => 'Welcome to';
 
   @override
@@ -1827,193 +1767,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Aurora supports you in organizing your daily life and communicating within your system.';
 
   @override
-  String get onboardingPrivacyHeadline => 'Your Data Belongs to YOU';
-
-  @override
-  String get onboardingPrivacyPoint1 => 'All data stays locally on your device';
-
-  @override
-  String get onboardingPrivacyPoint2 => 'No cloud backup, no tracking, no ads';
-
-  @override
-  String get onboardingPrivacyPoint3 => 'You have full control';
-
-  @override
-  String get onboardingPrivacyPoint4 => 'Transparent and secure';
-
-  @override
-  String get onboardingMultiProfileHeadline => 'Many Voices, One App';
-
-  @override
-  String get onboardingLetsGoHeadline => 'Ready to Start?';
-
-  @override
-  String onboardingHelloName(String name) {
-    return 'Hello $name!';
-  }
-
-  @override
-  String get onboardingGladYoureHere => 'Glad you\'re here.';
-
-  @override
-  String get onboardingNotAlone => 'You\'re Not Alone';
-
-  @override
-  String get onboardingNotAloneDescription =>
-      'You can chat with each other, share appointments, and support one another.';
-
-  @override
-  String get onboardingWhatYouCanDo => 'What You Can Do';
-
-  @override
-  String get onboardingChildAccessDescription =>
-      'As a child profile, you have access to:';
-
-  @override
-  String get onboardingAdultAccessDescription =>
-      'These features are available to you:';
-
-  @override
-  String get onboardingSafeSpace => 'Your Safe Space';
-
-  @override
-  String get onboardingSafeSpaceDescription =>
-      'All your data stays locally on this device. No cloud backup, no tracking, no ads. You have full control.';
-
-  @override
-  String get onboardingHaveFun => 'Have fun with Aurora!';
-
-  @override
-  String get onboardingFeatureChatChild => 'Chat - Doodle and talk with others';
-
-  @override
-  String get onboardingFeatureDiaryChild => 'Diary - Write down your thoughts';
-
-  @override
-  String get onboardingFeatureGamesChild => 'Games - Have fun and relax';
-
-  @override
-  String get onboardingFeatureTimelineChild =>
-      'Timeline - Capture important moments';
-
-  @override
-  String get onboardingFeatureChat =>
-      'Chat - Messages, doodles, voice messages';
-
-  @override
-  String get onboardingFeatureCalendar =>
-      'Calendar - Plan and manage appointments';
-
-  @override
-  String get onboardingFeatureContacts => 'Contacts - Save important people';
-
-  @override
-  String get onboardingFeatureMedication =>
-      'Medication - Track medications and schedules';
-
-  @override
-  String get onboardingFeatureDiary =>
-      'Diary - Record thoughts and experiences';
-
-  @override
-  String get onboardingFeatureFinder => 'Finder - Find places and things again';
-
-  @override
-  String get onboardingFeatureEmergency =>
-      'Emergency - Quick help in crisis situations';
-
-  @override
-  String get onboardingFeatureMantras =>
-      'Mantras - Calming phrases and affirmations';
-
-  @override
-  String get onboardingFeatureChatBasic => 'Chat - Basic features available';
-
-  @override
-  String get featureCarouselHeadline => 'What Aurora Can Do';
-
-  @override
-  String get featureCarouselSwipeHint => 'Swipe through the features →';
-
-  @override
-  String get featureCarouselChatTitle => 'Chat';
-
-  @override
-  String get featureCarouselChatSubtitle => 'Internal Communication';
-
-  @override
-  String get featureCarouselChatDescription =>
-      'Messages, doodles & voice messages.\nShare thoughts, draw together, or talk with each other.';
-
-  @override
-  String get featureCarouselCalendarTitle => 'Calendar';
-
-  @override
-  String get featureCarouselCalendarSubtitle => 'Events & Appointments';
-
-  @override
-  String get featureCarouselCalendarDescription =>
-      'Appointments with images & locations.\nKeep track of important dates with images and GPS positions.';
-
-  @override
-  String get featureCarouselDiaryTitle => 'Diary';
-
-  @override
-  String get featureCarouselDiarySubtitle => 'Private Thoughts';
-
-  @override
-  String get featureCarouselDiaryDescription =>
-      'Visible to all or just for you.\nRecord thoughts - public for all profiles or private just for yourself.';
-
-  @override
-  String get featureCarouselFinderTitle => 'Finder';
-
-  @override
-  String get featureCarouselFinderSubtitle => 'Places & Things';
-
-  @override
-  String get featureCarouselFinderDescription =>
-      'Find places and things again.\nSave important locations (with map) and items so you can find them again.';
-
-  @override
-  String get featureCarouselMedicationTitle => 'Medication';
-
-  @override
-  String get featureCarouselMedicationSubtitle => 'Medication Tracker';
-
-  @override
-  String get featureCarouselMedicationDescription =>
-      'Medications & schedules.\nTrack medications, intake times, and as-needed medication.';
-
-  @override
-  String get featureCarouselGamesTitle => 'Games & Grounding';
-
-  @override
-  String get featureCarouselGamesSubtitle => 'Relaxation';
-
-  @override
-  String get featureCarouselGamesDescription =>
-      'Games, breathing exercises & grounding.\nCalm yourself with puzzles, breathing exercises, and grounding techniques.';
-
-  @override
-  String get featureCarouselEmergencyTitle => 'Help Resources';
-
-  @override
-  String get featureCarouselEmergencySubtitle => 'Emergency Contacts';
-
-  @override
-  String get featureCarouselEmergencyDescription =>
-      'Emergency contacts & quick help.\nStore important contacts for crisis situations.';
-
-  @override
-  String get featureCarouselInfoTitle => 'DID Information';
-
-  @override
-  String get featureCarouselInfoSubtitle => 'Knowledge & Resources';
-
-  @override
-  String get featureCarouselInfoDescription =>
-      'Explained: What is DID?\nInformation about Dissociative Identity Disorder and resources.';
+  String get onboardingPrivacyOneLine => 'Everything stays on this device.';
 
   @override
   String get commonUnknown => 'Unknown';
@@ -2489,12 +2243,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get groundingBreathStep3 => 'Breathe out and count to six.';
-
-  @override
-  String get groundingBreathStep4 => 'Again. No rush.';
-
-  @override
-  String get groundingBreathStep5 => 'Slower out than in. That is enough.';
 
   @override
   String get medicationNameLabel => 'Medication name';
@@ -5227,6 +4975,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get releaseNotesFassung3024 =>
       '• Parts: pausing really works now. You can bring a part back under Settings → “Parts & rights”.\n• Rights: a few clear switches instead of sixty checkboxes.\n• Settings: newly sorted and reachable all the way down.\n• Reminders: when a reminder is deleted, paused or done, its notification goes away too.\n• Location: recording now starts reliably indoors as well.';
+
+  @override
+  String get releaseNotesFassung3025 =>
+      '• Pausing is now at the top of a part\'s page.\n• Shorter start: two steps to your first profile.\n• Date and time of day sit in a band under “Aurora”.\n• The breathing exercise guides you through a minute, no tapping.';
 
   @override
   String get releaseNotesFassung3023 =>

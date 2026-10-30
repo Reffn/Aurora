@@ -8,6 +8,7 @@ import 'package:dis_app/models/profile.dart';
 import 'package:dis_app/modules/games/games_screen.dart';
 import 'package:dis_app/modules/grounding/data/grounding_exercises.dart';
 import 'package:dis_app/modules/grounding/exercise_player_screen.dart';
+import 'package:dis_app/modules/grounding/widgets/breath_pacer.dart';
 import 'package:dis_app/services/calendar_service.dart';
 import 'package:dis_app/services/chat_service.dart';
 import 'package:dis_app/services/comment_service.dart';
@@ -87,12 +88,16 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  testWidgets('Die Atemübung ist erreichbar und landet bei der echten Übung',
-      (tester) async {
+  testWidgets('Die Atemübung ist erreichbar und landet bei der echten Übung', (
+    tester,
+  ) async {
     await zeigeSpiele(tester);
 
     await tester.tap(find.text('Atemübungen'));
-    await tester.pumpAndSettle();
+    // Nicht `pumpAndSettle`: Der Takt läuft eine Minute lang Frame für
+    // Frame, ein Warten auf Stillstand wartete ihn bis zum Abschluss ab.
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
 
     expect(find.byType(ExercisePlayerScreen), findsOneWidget);
 
@@ -102,13 +107,22 @@ void main() {
     expect(
       spieler.exercise.id,
       GroundingExercises.breath.id,
-      reason: 'Es muss dieselbe Übung sein, die „Halt" anbietet — keine '
+      reason:
+          'Es muss dieselbe Übung sein, die „Halt" anbietet — keine '
           'zweite Fassung, die getrennt gepflegt werden müsste.',
+    );
+    expect(
+      find.byType(BreathPacer),
+      findsOneWidget,
+      reason:
+          'Auch von hier aus läuft der Atem als Takt, nicht als '
+          'Schrittfolge zum Antippen.',
     );
   });
 
-  testWidgets('Die Atemübung wird nicht mehr als „Bald" geführt',
-      (tester) async {
+  testWidgets('Die Atemübung wird nicht mehr als „Bald" geführt', (
+    tester,
+  ) async {
     await zeigeSpiele(tester);
 
     final karte = find.ancestor(

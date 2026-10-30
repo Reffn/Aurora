@@ -7,6 +7,8 @@ import 'package:dis_app/services/release_notes_gate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../support/text_scale_harness.dart';
+
 /// Der Neuerungs-Schirm sagt, was *diese* Fassung bringt.
 ///
 /// Bis 3.0.22 stand dort ein einziger fester Satz: „Aurora meldet sich ab
@@ -41,6 +43,67 @@ void main() {
       );
       expect(text!.trim(), isNotEmpty);
     }
+  });
+
+  // Abnahme am Emulator, 3.0.25: Mit fünf langen Punkten rutschte „Und das
+  // Wichtigere: Was fehlt dir?“ halb unter die Kante über dem Knopf „Sag
+  // uns, was fehlt“. Die Neuigkeiten sind der Anlass, die Frage ist der
+  // Zweck des Schirms — sie darf nicht hinter den Neuigkeiten verschwinden.
+  test('die laufende Fassung hat höchstens vier Punkte', () {
+    final fassung = fassungAusPubspec();
+
+    for (final sprache in AppLocalizations.supportedLocales) {
+      final text = releaseNotesFuerFassung(
+        fassung,
+        lookupAppLocalizations(sprache),
+      )!;
+      final punkte = '•'.allMatches(text).length;
+      expect(punkte, inInclusiveRange(1, 4), reason: '$fassung, $sprache');
+
+      // Je Punkt eine Zeile Sinn. Gemessen wird in Zeichen, nicht in
+      // Pixeln: Die Testschrift ist etwa doppelt so breit wie die echte,
+      // eine Aussage „passt ohne Rollen“ ließe sich hier nicht treffen.
+      for (final zeile in text.split('\n')) {
+        expect(
+          zeile.length,
+          lessThanOrEqualTo(72),
+          reason: '$fassung, $sprache: „$zeile“',
+        );
+      }
+    }
+  });
+
+  // Wird es doch länger — große Schrift, eine Sprache mit langen Wörtern —,
+  // rollt die Fläche über den Knöpfen, und nichts liegt unter ihnen.
+  testWidgets('bei 200 % rollt der Text, und nichts liegt unter den Knöpfen', (
+    tester,
+  ) async {
+    final fassung = fassungAusPubspec();
+    final l10n = lookupAppLocalizations(const Locale('de'));
+    await pumpScaled(
+      tester,
+      ReleaseNotesScreen(
+        gate: ReleaseNotesGate.inMemory(currentVersion: fassung),
+        appVersion: fassung,
+        onDismissed: () {},
+      ),
+      scale: 2,
+      deviceSize: geraetA14.size,
+      pixelRatio: geraetA14.ratio,
+    );
+
+    final letzter = find.text(l10n.releaseNotesWhatHappens);
+    await tester.scrollUntilVisible(
+      letzter,
+      100,
+      scrollable: find.byType(Scrollable).last,
+    );
+    await tester.pumpAndSettle();
+
+    final knopf = tester.getRect(
+      find.byKey(const Key('release_notes_feedback')),
+    );
+    expect(tester.getRect(letzter).bottom, lessThanOrEqualTo(knopf.top));
   });
 
   test('unbekannte oder fehlende Fassung: nichts Eigenes', () {

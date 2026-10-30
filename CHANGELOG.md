@@ -41,6 +41,44 @@ Siehe [ROADMAP.md](ROADMAP.md) und [FEATURES_BACKLOG.md](FEATURES_BACKLOG.md) f�
 ## [Unveröffentlicht]
 
 ---
+## [3.0.25] - 2026-10-30
+
+Kürzer hinein, leichter zu finden: Der Weg zum ersten Profil schrumpft von
+rund sechzehn Schirmen auf vier, und was am Gerät gesucht wurde, steht jetzt
+dort, wo man hinschaut.
+
+### Neu
+- 🚪 **Kurzer Einstieg:** Willkommen, Sprache und ein Satz zum Datenschutz
+  auf einer Seite; die Profilanlage hat zwei Schritte statt fünf (Name, Bild
+  und Farbe; dann Alter und Passwort). Das erste Profil führt direkt auf den
+  Hauptschirm, ohne Startauswahl und ohne „Weiter als …“
+- 👋 **Keine Begrüßungsseiten** mehr nach der ersten Anmeldung eines Anteils
+- 🕰️ **Datum und Tageszeit als breites Band** direkt unter „Aurora“, auf dem
+  Anker und in der Startauswahl; die Zeitkarte trägt nur noch den Ort
+
+### Geändert
+- ⏸️ **Pausieren oben auf der Seite** eines Anteils, als umrandeter Knopf
+  direkt unter dem Namen statt klein und grau ganz unten
+- 🎚️ **Rechte heißen „Darf …“** („Darf Anteile pausieren“) — vorher las sich
+  ein Schalter wie die Handlung selbst
+- 🪪 **„Das bin ich nicht“** ist ein umrandeter Knopf mit Symbol, 48 dp hoch
+- 🫁 **Atemübung als Takt:** Ein Kreis wächst beim Einatmen (4 s), steht beim
+  Halten (2 s) und schrumpft beim Ausatmen (6 s), fünf Runden lang, ohne
+  Tippen. „Fertig“ steht jederzeit unten. Vorher führte sie genau einen
+  Atemzug, und weiter ging es nur per Tipp — mitten im Atemzug. Ohne
+  Systembewegung steht der Kreis still, die Wörter wechseln weiter
+- 🖼️ **Jeder Halt-Schritt zeigt ein eigenes Symbol** im Kreis der Übung;
+  vorher trugen alle Schritte dasselbe Übungssymbol
+- 📏 **In Halt springt nichts mehr:** Bild und Satz bleiben an ihrem Platz,
+  ob der Satz eine oder zwei Zeilen hat
+
+### Technik
+- Funktionskarussell, Begrüßungsseiten und 76 verwaiste Texte je Sprache
+  entfernt (73 aus dem alten Einstieg, dazu eine doppelte Datenschutzzeile und
+  zwei Atem-Schritte, die der Takt übernimmt)
+- Die Meldung „Einrichtung abgeschlossen“ ist aus der Dependency Injection
+  herausgelöst und hat jetzt Tests
+
 ## [3.0.24] - 2026-10-29
 
 Pausieren hält jetzt, was es verspricht, und die Einstellungen sind wieder

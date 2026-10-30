@@ -374,24 +374,6 @@ abstract class AppLocalizations {
   /// **'Neues Profil'**
   String get profileNewProfile;
 
-  /// Profile creation screen title
-  ///
-  /// In de, this message translates to:
-  /// **'Neues Profil erstellen'**
-  String get profileCreationTitle;
-
-  /// Profile creation screen subtitle
-  ///
-  /// In de, this message translates to:
-  /// **'Wer möchte sich vorstellen?'**
-  String get profileCreationSubtitle;
-
-  /// Profile creation description text
-  ///
-  /// In de, this message translates to:
-  /// **'Erstelle dein persönliches Profil mit Namen, Farbe und Avatar. Jedes Profil kann individuell angepasst werden und erhält passende Berechtigungen basierend auf dem Alter.'**
-  String get profileCreationDescription;
-
   /// Profile edit screen title
   ///
   /// In de, this message translates to:
@@ -623,61 +605,61 @@ abstract class AppLocalizations {
   /// Rights switch
   ///
   /// In de, this message translates to:
-  /// **'Medikamente sehen'**
+  /// **'Darf Medikamente sehen'**
   String get rightSeeMedication;
 
   /// Rights switch; turning it on also turns on See medication
   ///
   /// In de, this message translates to:
-  /// **'Medikamentenplan ändern'**
+  /// **'Darf den Medikamentenplan ändern'**
   String get rightChangeMedicationPlan;
 
   /// Rights switch: edit other parts' events and diary entries
   ///
   /// In de, this message translates to:
-  /// **'Einträge anderer ändern'**
+  /// **'Darf Einträge anderer ändern'**
   String get rightChangeOthersEntries;
 
   /// Rights switch: delete other parts' messages, events and diary entries
   ///
   /// In de, this message translates to:
-  /// **'Einträge anderer löschen'**
+  /// **'Darf Einträge anderer löschen'**
   String get rightDeleteOthersEntries;
 
   /// Rights switch
   ///
   /// In de, this message translates to:
-  /// **'Tagebücher anderer lesen'**
+  /// **'Darf Tagebücher anderer lesen'**
   String get rightReadOthersDiaries;
 
   /// Rights switch
   ///
   /// In de, this message translates to:
-  /// **'Anteile anlegen'**
+  /// **'Darf Anteile anlegen'**
   String get rightCreateParts;
 
   /// Rights switch: pause other parts and bring them back
   ///
   /// In de, this message translates to:
-  /// **'Anteile pausieren'**
+  /// **'Darf Anteile pausieren'**
   String get rightPauseParts;
 
   /// Rights switch: change the rights of parts
   ///
   /// In de, this message translates to:
-  /// **'Rechte vergeben'**
+  /// **'Darf Rechte vergeben'**
   String get rightGrantRights;
 
   /// Rights switch
   ///
   /// In de, this message translates to:
-  /// **'Einstellungen ändern'**
+  /// **'Darf Einstellungen ändern'**
   String get rightChangeSettings;
 
   /// Rights switch
   ///
   /// In de, this message translates to:
-  /// **'Passwörter zurücksetzen'**
+  /// **'Darf Passwörter zurücksetzen'**
   String get rightResetPasswords;
 
   /// Profile edit coming soon message
@@ -1790,89 +1772,11 @@ abstract class AppLocalizations {
   /// **'Wähle deine Sprache'**
   String get onboardingSelectLanguage;
 
-  /// Welcome onboarding page title
-  ///
-  /// In de, this message translates to:
-  /// **'Willkommen bei'**
-  String get onboardingWelcomeTitle;
-
-  /// Welcome onboarding page subtitle
-  ///
-  /// In de, this message translates to:
-  /// **'Deine sichere Begleiterin im Alltag mit DIS'**
-  String get onboardingWelcomeSubtitle;
-
-  /// Post-login welcome description
-  ///
-  /// In de, this message translates to:
-  /// **'Aurora ist euer geschützter Raum. Hier kannst du dich frei ausdrücken und mit den anderen Anteilen im System in Verbindung bleiben.'**
-  String get onboardingWelcomeDescription;
-
-  /// Privacy onboarding page title
-  ///
-  /// In de, this message translates to:
-  /// **'Deine Daten gehören DIR'**
-  String get onboardingPrivacyTitle;
-
-  /// Privacy feature 1
-  ///
-  /// In de, this message translates to:
-  /// **'Alle Daten bleiben lokal auf deinem Gerät'**
-  String get onboardingPrivacyBullet1;
-
   /// Privacy feature 2
   ///
   /// In de, this message translates to:
   /// **'Keine Cloud-Sicherung, kein Tracking, keine Werbung'**
   String get onboardingPrivacyBullet2;
-
-  /// Privacy feature 3
-  ///
-  /// In de, this message translates to:
-  /// **'Du hast die volle Kontrolle'**
-  String get onboardingPrivacyBullet3;
-
-  /// Privacy feature 4
-  ///
-  /// In de, this message translates to:
-  /// **'Transparent und sicher'**
-  String get onboardingPrivacyBullet4;
-
-  /// Multi-profile onboarding page title
-  ///
-  /// In de, this message translates to:
-  /// **'Viele Stimmen, eine App'**
-  String get onboardingMultiProfileTitle;
-
-  /// Multi-profile description
-  ///
-  /// In de, this message translates to:
-  /// **'Jeder Anteil bekommt ein eigenes Profil – mit eigener Farbe, eigenem Bild und eigenen Rechten.'**
-  String get onboardingMultiProfileDescription;
-
-  /// Let's go onboarding page title
-  ///
-  /// In de, this message translates to:
-  /// **'Bereit anzufangen?'**
-  String get onboardingLetsGoTitle;
-
-  /// Let's go description
-  ///
-  /// In de, this message translates to:
-  /// **'Erstelle jetzt dein erstes Profil. Das erste Profil wird automatisch zum Admin-Profil mit vollen Zugriffsrechten.'**
-  String get onboardingLetsGoDescription;
-
-  /// Next button in onboarding
-  ///
-  /// In de, this message translates to:
-  /// **'Weiter →'**
-  String get onboardingButtonNext;
-
-  /// Create profile button in onboarding
-  ///
-  /// In de, this message translates to:
-  /// **'Profil erstellen →'**
-  String get onboardingButtonCreateProfile;
 
   /// Aurora loading text on splash screen
   ///
@@ -3294,18 +3198,6 @@ abstract class AppLocalizations {
   /// **'Weiter →'**
   String get onboardingNext;
 
-  /// Create profile button
-  ///
-  /// In de, this message translates to:
-  /// **'Profil erstellen →'**
-  String get onboardingCreateProfile;
-
-  /// Let's go button
-  ///
-  /// In de, this message translates to:
-  /// **'Los geht\'s! →'**
-  String get onboardingLetsGo;
-
   /// Welcome to text
   ///
   /// In de, this message translates to:
@@ -3324,341 +3216,11 @@ abstract class AppLocalizations {
   /// **'Aurora unterstützt dich beim Organisieren deines Alltags und der Kommunikation innerhalb deines Systems.'**
   String get onboardingDescription;
 
-  /// Privacy page headline
+  /// Single privacy sentence on the one-page welcome before the first profile (since 3.0.25)
   ///
   /// In de, this message translates to:
-  /// **'Deine Daten gehören DIR'**
-  String get onboardingPrivacyHeadline;
-
-  /// Privacy bullet point 1
-  ///
-  /// In de, this message translates to:
-  /// **'Alle Daten bleiben lokal auf deinem Gerät'**
-  String get onboardingPrivacyPoint1;
-
-  /// Privacy bullet point 2
-  ///
-  /// In de, this message translates to:
-  /// **'Keine Cloud-Sicherung, kein Tracking, keine Werbung'**
-  String get onboardingPrivacyPoint2;
-
-  /// Privacy bullet point 3
-  ///
-  /// In de, this message translates to:
-  /// **'Du hast die volle Kontrolle'**
-  String get onboardingPrivacyPoint3;
-
-  /// Privacy bullet point 4
-  ///
-  /// In de, this message translates to:
-  /// **'Transparent und sicher'**
-  String get onboardingPrivacyPoint4;
-
-  /// Multi-profile page headline
-  ///
-  /// In de, this message translates to:
-  /// **'Viele Stimmen, eine App'**
-  String get onboardingMultiProfileHeadline;
-
-  /// Let's go page headline
-  ///
-  /// In de, this message translates to:
-  /// **'Bereit anzufangen?'**
-  String get onboardingLetsGoHeadline;
-
-  /// Hello greeting with name
-  ///
-  /// In de, this message translates to:
-  /// **'Hallo {name}!'**
-  String onboardingHelloName(String name);
-
-  /// Glad you're here subline
-  ///
-  /// In de, this message translates to:
-  /// **'Schön, dass du da bist.'**
-  String get onboardingGladYoureHere;
-
-  /// Not alone headline
-  ///
-  /// In de, this message translates to:
-  /// **'Du bist nicht allein'**
-  String get onboardingNotAlone;
-
-  /// Not alone description
-  ///
-  /// In de, this message translates to:
-  /// **'Ihr könnt miteinander chatten, Termine teilen und euch gegenseitig unterstützen.'**
-  String get onboardingNotAloneDescription;
-
-  /// What you can do headline
-  ///
-  /// In de, this message translates to:
-  /// **'Was du tun kannst'**
-  String get onboardingWhatYouCanDo;
-
-  /// Child access description
-  ///
-  /// In de, this message translates to:
-  /// **'Als Kind-Profil hast du Zugriff auf:'**
-  String get onboardingChildAccessDescription;
-
-  /// Adult access description
-  ///
-  /// In de, this message translates to:
-  /// **'Diese Funktionen stehen dir zur Verfügung:'**
-  String get onboardingAdultAccessDescription;
-
-  /// Safe space headline
-  ///
-  /// In de, this message translates to:
-  /// **'Dein sicherer Raum'**
-  String get onboardingSafeSpace;
-
-  /// Safe space description
-  ///
-  /// In de, this message translates to:
-  /// **'Alle deine Einträge bleiben auf diesem Gerät. Gesendet wird nur, was du selbst absendest — und du kannst es jederzeit nachlesen.'**
-  String get onboardingSafeSpaceDescription;
-
-  /// Have fun subline
-  ///
-  /// In de, this message translates to:
-  /// **'Viel Spaß mit Aurora!'**
-  String get onboardingHaveFun;
-
-  /// Chat feature for children
-  ///
-  /// In de, this message translates to:
-  /// **'Chat - Kritzeln und mit anderen sprechen'**
-  String get onboardingFeatureChatChild;
-
-  /// Diary feature for children
-  ///
-  /// In de, this message translates to:
-  /// **'Tagebuch - Deine Gedanken aufschreiben'**
-  String get onboardingFeatureDiaryChild;
-
-  /// Games feature for children
-  ///
-  /// In de, this message translates to:
-  /// **'Spiele - Spaß haben und entspannen'**
-  String get onboardingFeatureGamesChild;
-
-  /// Timeline feature for children
-  ///
-  /// In de, this message translates to:
-  /// **'Timeline - Wichtige Momente festhalten'**
-  String get onboardingFeatureTimelineChild;
-
-  /// Chat feature for adults
-  ///
-  /// In de, this message translates to:
-  /// **'Chat - Nachrichten, Kritzeleien, Sprachnachrichten'**
-  String get onboardingFeatureChat;
-
-  /// Calendar feature
-  ///
-  /// In de, this message translates to:
-  /// **'Kalender - Termine planen und verwalten'**
-  String get onboardingFeatureCalendar;
-
-  /// Contacts feature
-  ///
-  /// In de, this message translates to:
-  /// **'Kontakte - Wichtige Personen speichern'**
-  String get onboardingFeatureContacts;
-
-  /// Medication feature
-  ///
-  /// In de, this message translates to:
-  /// **'Medikation - Medikamente und Einnahmen tracken'**
-  String get onboardingFeatureMedication;
-
-  /// Diary feature for adults
-  ///
-  /// In de, this message translates to:
-  /// **'Tagebuch - Gedanken und Erlebnisse festhalten'**
-  String get onboardingFeatureDiary;
-
-  /// Finder feature
-  ///
-  /// In de, this message translates to:
-  /// **'Finder - Orte und Dinge wiederfinden'**
-  String get onboardingFeatureFinder;
-
-  /// Emergency feature
-  ///
-  /// In de, this message translates to:
-  /// **'Notfall - Schnelle Hilfe in Krisensituationen'**
-  String get onboardingFeatureEmergency;
-
-  /// Mantras feature
-  ///
-  /// In de, this message translates to:
-  /// **'Mantras - Beruhigende Sätze und Affirmationen'**
-  String get onboardingFeatureMantras;
-
-  /// Basic chat feature fallback
-  ///
-  /// In de, this message translates to:
-  /// **'Chat - Grundfunktionen verfügbar'**
-  String get onboardingFeatureChatBasic;
-
-  /// Feature carousel headline
-  ///
-  /// In de, this message translates to:
-  /// **'Was Aurora alles kann'**
-  String get featureCarouselHeadline;
-
-  /// Swipe hint
-  ///
-  /// In de, this message translates to:
-  /// **'Wisch durch die Features →'**
-  String get featureCarouselSwipeHint;
-
-  /// Chat title
-  ///
-  /// In de, this message translates to:
-  /// **'Chat'**
-  String get featureCarouselChatTitle;
-
-  /// Chat subtitle
-  ///
-  /// In de, this message translates to:
-  /// **'Interne Kommunikation'**
-  String get featureCarouselChatSubtitle;
-
-  /// Chat description
-  ///
-  /// In de, this message translates to:
-  /// **'Nachrichten, Kritzeleien & Sprachnachrichten.\nTeilt Gedanken, malt zusammen oder sprecht miteinander.'**
-  String get featureCarouselChatDescription;
-
-  /// Calendar title
-  ///
-  /// In de, this message translates to:
-  /// **'Kalender'**
-  String get featureCarouselCalendarTitle;
-
-  /// Calendar subtitle
-  ///
-  /// In de, this message translates to:
-  /// **'Events & Termine'**
-  String get featureCarouselCalendarSubtitle;
-
-  /// Calendar description
-  ///
-  /// In de, this message translates to:
-  /// **'Termine mit Bildern & Standorten.\nBehaltet wichtige Termine im Blick, mit Bildern und GPS-Positionen.'**
-  String get featureCarouselCalendarDescription;
-
-  /// Diary title
-  ///
-  /// In de, this message translates to:
-  /// **'Tagebuch'**
-  String get featureCarouselDiaryTitle;
-
-  /// Diary subtitle
-  ///
-  /// In de, this message translates to:
-  /// **'Private Gedanken'**
-  String get featureCarouselDiarySubtitle;
-
-  /// Diary description
-  ///
-  /// In de, this message translates to:
-  /// **'Für alle sichtbar oder nur für dich.\nHaltet Gedanken fest - öffentlich für alle Profile oder privat nur für euch.'**
-  String get featureCarouselDiaryDescription;
-
-  /// Finder title
-  ///
-  /// In de, this message translates to:
-  /// **'Finder'**
-  String get featureCarouselFinderTitle;
-
-  /// Finder subtitle
-  ///
-  /// In de, this message translates to:
-  /// **'Orte & Dinge'**
-  String get featureCarouselFinderSubtitle;
-
-  /// Finder description
-  ///
-  /// In de, this message translates to:
-  /// **'Findet Orte und Dinge wieder.\nSpeichert wichtige Orte (mit Karte) und Gegenstände, damit ihr sie wiederfindet.'**
-  String get featureCarouselFinderDescription;
-
-  /// Medication title
-  ///
-  /// In de, this message translates to:
-  /// **'Medikation'**
-  String get featureCarouselMedicationTitle;
-
-  /// Medication subtitle
-  ///
-  /// In de, this message translates to:
-  /// **'Medikamenten-Tracker'**
-  String get featureCarouselMedicationSubtitle;
-
-  /// Medication description
-  ///
-  /// In de, this message translates to:
-  /// **'Medikamente & Einnahmezeiten.\nTrackt Medikamente, Einnahmezeiten und Bedarfsmedikation.'**
-  String get featureCarouselMedicationDescription;
-
-  /// Games title
-  ///
-  /// In de, this message translates to:
-  /// **'Spiele & Grounding'**
-  String get featureCarouselGamesTitle;
-
-  /// Games subtitle
-  ///
-  /// In de, this message translates to:
-  /// **'Entspannung'**
-  String get featureCarouselGamesSubtitle;
-
-  /// Games description
-  ///
-  /// In de, this message translates to:
-  /// **'Spiele, Atemübungen & Grounding.\nBeruhigt euch mit Puzzles, Atemübungen und Grounding-Techniken.'**
-  String get featureCarouselGamesDescription;
-
-  /// Emergency title
-  ///
-  /// In de, this message translates to:
-  /// **'Hilfsangebote'**
-  String get featureCarouselEmergencyTitle;
-
-  /// Emergency subtitle
-  ///
-  /// In de, this message translates to:
-  /// **'Notfallkontakte'**
-  String get featureCarouselEmergencySubtitle;
-
-  /// Emergency description
-  ///
-  /// In de, this message translates to:
-  /// **'Notfallkontakte & schnelle Hilfe.\nHinterlegt wichtige Kontakte für Krisensituationen.'**
-  String get featureCarouselEmergencyDescription;
-
-  /// Info title
-  ///
-  /// In de, this message translates to:
-  /// **'DIS-Informationen'**
-  String get featureCarouselInfoTitle;
-
-  /// Info subtitle
-  ///
-  /// In de, this message translates to:
-  /// **'Wissen & Ressourcen'**
-  String get featureCarouselInfoSubtitle;
-
-  /// Info description
-  ///
-  /// In de, this message translates to:
-  /// **'Erklärt: Was ist DIS?\nInformationen über Dissoziative Identitätsstörung und Ressourcen.'**
-  String get featureCarouselInfoDescription;
+  /// **'Alles bleibt auf diesem Gerät.'**
+  String get onboardingPrivacyOneLine;
 
   /// Unknown label
   ///
@@ -4517,18 +4079,6 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Atme aus und zähl bis sechs.'**
   String get groundingBreathStep3;
-
-  /// No description provided for @groundingBreathStep4.
-  ///
-  /// In de, this message translates to:
-  /// **'Nochmal. Ohne Eile.'**
-  String get groundingBreathStep4;
-
-  /// No description provided for @groundingBreathStep5.
-  ///
-  /// In de, this message translates to:
-  /// **'Langsamer raus als rein. Das reicht.'**
-  String get groundingBreathStep5;
 
   /// No description provided for @medicationNameLabel.
   ///
@@ -9245,6 +8795,12 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'• Anteile: Pausieren funktioniert jetzt wirklich. Zurückholen geht unter Einstellungen → „Anteile & Rechte“.\n• Rechte: wenige klare Schalter statt sechzig Kästchen.\n• Einstellungen: neu sortiert und bis ganz unten erreichbar.\n• Erinnerungen: Ist eine Erinnerung gelöscht, pausiert oder erledigt, verschwindet auch ihre Meldung.\n• Standort: Die Aufzeichnung startet jetzt auch drinnen zuverlässig.'**
   String get releaseNotesFassung3024;
+
+  /// Neuerungen der Fassung 3.0.25, vier Zeilen mit Aufzählungspunkt
+  ///
+  /// In de, this message translates to:
+  /// **'• Pausieren steht oben auf der Seite eines Anteils.\n• Kürzerer Anfang: in zwei Schritten zum ersten Profil.\n• Datum und Tageszeit stehen als Band unter „Aurora“.\n• Die Atemübung führt ohne Tippen durch eine Minute.'**
+  String get releaseNotesFassung3025;
 
   /// Neuerungen der Fassung 3.0.23, fünf Zeilen mit Aufzählungspunkt
   ///

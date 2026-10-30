@@ -171,18 +171,6 @@
   "@profileNewProfile": {
     "description": "New profile button label"
   },
-  "profileCreationTitle": "Créer un nouveau profil",
-  "@profileCreationTitle": {
-    "description": "Profile creation screen title"
-  },
-  "profileCreationSubtitle": "Qui veut se présenter ?",
-  "@profileCreationSubtitle": {
-    "description": "Profile creation screen subtitle"
-  },
-  "profileCreationDescription": "Crée ton profil personnel avec un nom, une couleur et un avatar. Chaque profil se règle séparément et reçoit des droits adaptés à l’âge.",
-  "@profileCreationDescription": {
-    "description": "Profile creation description text"
-  },
   "profileEditTitle": "Modifier le profil",
   "@profileEditTitle": {
     "description": "Profile edit screen title"
@@ -357,43 +345,43 @@
   "@rightsGroupManagement": {
     "description": "Group header of the rights switches"
   },
-  "rightSeeMedication": "Voir les médicaments",
+  "rightSeeMedication": "Peut voir les médicaments",
   "@rightSeeMedication": {
     "description": "Rights switch"
   },
-  "rightChangeMedicationPlan": "Modifier le plan de médicaments",
+  "rightChangeMedicationPlan": "Peut modifier le plan de médicaments",
   "@rightChangeMedicationPlan": {
     "description": "Rights switch; turning it on also turns on See medication"
   },
-  "rightChangeOthersEntries": "Modifier les entrées des autres",
+  "rightChangeOthersEntries": "Peut modifier les entrées des autres",
   "@rightChangeOthersEntries": {
     "description": "Rights switch: edit other parts' events and diary entries"
   },
-  "rightDeleteOthersEntries": "Supprimer les entrées des autres",
+  "rightDeleteOthersEntries": "Peut supprimer les entrées des autres",
   "@rightDeleteOthersEntries": {
     "description": "Rights switch: delete other parts' messages, events and diary entries"
   },
-  "rightReadOthersDiaries": "Lire les journaux des autres",
+  "rightReadOthersDiaries": "Peut lire les journaux des autres",
   "@rightReadOthersDiaries": {
     "description": "Rights switch"
   },
-  "rightCreateParts": "Ajouter des parts",
+  "rightCreateParts": "Peut ajouter des parts",
   "@rightCreateParts": {
     "description": "Rights switch"
   },
-  "rightPauseParts": "Mettre des parts en pause",
+  "rightPauseParts": "Peut mettre des parts en pause",
   "@rightPauseParts": {
     "description": "Rights switch: pause other parts and bring them back"
   },
-  "rightGrantRights": "Attribuer des droits",
+  "rightGrantRights": "Peut attribuer des droits",
   "@rightGrantRights": {
     "description": "Rights switch: change the rights of parts"
   },
-  "rightChangeSettings": "Modifier les réglages",
+  "rightChangeSettings": "Peut modifier les réglages",
   "@rightChangeSettings": {
     "description": "Rights switch"
   },
-  "rightResetPasswords": "Réinitialiser les mots de passe",
+  "rightResetPasswords": "Peut réinitialiser les mots de passe",
   "@rightResetPasswords": {
     "description": "Rights switch"
   },
@@ -1177,61 +1165,9 @@
   "@onboardingSelectLanguage": {
     "description": "Select language prompt in onboarding"
   },
-  "onboardingWelcomeTitle": "Bienvenue sur",
-  "@onboardingWelcomeTitle": {
-    "description": "Welcome onboarding page title"
-  },
-  "onboardingWelcomeSubtitle": "Ta compagne sûre au quotidien avec le TDI",
-  "@onboardingWelcomeSubtitle": {
-    "description": "Welcome onboarding page subtitle"
-  },
-  "onboardingWelcomeDescription": "Aurora t’accompagne pour organiser ton quotidien et la communication au sein de ton système.",
-  "@onboardingWelcomeDescription": {
-    "description": "Welcome onboarding page description"
-  },
-  "onboardingPrivacyTitle": "Tes données t’appartiennent",
-  "@onboardingPrivacyTitle": {
-    "description": "Privacy onboarding page title"
-  },
-  "onboardingPrivacyBullet1": "Toutes les données restent sur ton appareil",
-  "@onboardingPrivacyBullet1": {
-    "description": "Privacy feature 1"
-  },
   "onboardingPrivacyBullet2": "Pas de sauvegarde dans le cloud, pas de pistage, pas de pub",
   "@onboardingPrivacyBullet2": {
     "description": "Privacy feature 2"
-  },
-  "onboardingPrivacyBullet3": "C’est toi qui décides",
-  "@onboardingPrivacyBullet3": {
-    "description": "Privacy feature 3"
-  },
-  "onboardingPrivacyBullet4": "Transparent et sûr",
-  "@onboardingPrivacyBullet4": {
-    "description": "Privacy feature 4"
-  },
-  "onboardingMultiProfileTitle": "Plusieurs voix, une seule app",
-  "@onboardingMultiProfileTitle": {
-    "description": "Multi-profile onboarding page title"
-  },
-  "onboardingMultiProfileDescription": "Chaque alter peut avoir son propre profil, avec ses couleurs, ses réglages et ses droits.",
-  "@onboardingMultiProfileDescription": {
-    "description": "Multi-profile onboarding page description"
-  },
-  "onboardingLetsGoTitle": "Prêt·e à commencer ?",
-  "@onboardingLetsGoTitle": {
-    "description": "Let's go onboarding page title"
-  },
-  "onboardingLetsGoDescription": "Crée ton premier profil maintenant. Le premier devient automatiquement le profil d’administration, avec tous les droits.",
-  "@onboardingLetsGoDescription": {
-    "description": "Let's go onboarding page description"
-  },
-  "onboardingButtonNext": "Suivant →",
-  "@onboardingButtonNext": {
-    "description": "Next button in onboarding"
-  },
-  "onboardingButtonCreateProfile": "Créer le profil →",
-  "@onboardingButtonCreateProfile": {
-    "description": "Create profile button in onboarding"
   },
   "splashLoading": "Aurora se charge",
   "@splashLoading": {
@@ -1778,67 +1714,10 @@
   "actionChange": "Modifier",
   "actionRemove": "Retirer",
   "onboardingNext": "Suivant →",
-  "onboardingCreateProfile": "Créer un profil →",
-  "onboardingLetsGo": "C'est parti ! →",
   "onboardingWelcomeTo": "Bienvenue dans",
   "onboardingSubline": "Ta compagne sûre au quotidien avec le TDI",
   "onboardingDescription": "Aurora t'accompagne pour organiser ton quotidien et la communication au sein de ton système.",
-  "onboardingPrivacyHeadline": "Tes données t'appartiennent",
-  "onboardingPrivacyPoint1": "Toutes les données restent sur ton appareil",
-  "onboardingPrivacyPoint2": "Pas de sauvegarde dans le cloud, pas de pistage, pas de publicité",
-  "onboardingPrivacyPoint3": "Tu gardes le contrôle",
-  "onboardingPrivacyPoint4": "Transparent et sûr",
-  "onboardingMultiProfileHeadline": "Plusieurs voix, une seule app",
-  "onboardingLetsGoHeadline": "Prêt à commencer ?",
-  "onboardingHelloName": "Bonjour {name} !",
-  "onboardingGladYoureHere": "Content que tu sois là.",
-  "onboardingNotAlone": "Tu n'es pas seul",
-  "onboardingNotAloneDescription": "Vous pouvez discuter, partager des rendez-vous et vous soutenir mutuellement.",
-  "onboardingWhatYouCanDo": "Ce que tu peux faire",
-  "onboardingChildAccessDescription": "Avec un profil enfant, tu as accès à :",
-  "onboardingAdultAccessDescription": "Ces fonctions te sont accessibles :",
-  "onboardingSafeSpace": "Ton espace sûr",
-  "onboardingSafeSpaceDescription": "Tout ce que tu écris reste sur cet appareil. Seul ce que tu envoies toi-même part, et tu peux toujours le relire.",
-  "onboardingHaveFun": "Bonne route avec Aurora !",
-  "onboardingFeatureChatChild": "Chat : gribouiller et parler avec les autres",
-  "onboardingFeatureDiaryChild": "Journal : écrire tes pensées",
-  "onboardingFeatureGamesChild": "Jeux : s'amuser et se détendre",
-  "onboardingFeatureTimelineChild": "Frise : garder les moments importants",
-  "onboardingFeatureChat": "Chat : messages, gribouillages, messages vocaux",
-  "onboardingFeatureCalendar": "Calendrier : planifier et gérer les rendez-vous",
-  "onboardingFeatureContacts": "Contacts : enregistrer les personnes importantes",
-  "onboardingFeatureMedication": "Médication : suivre médicaments et prises",
-  "onboardingFeatureDiary": "Journal : noter pensées et expériences",
-  "onboardingFeatureFinder": "Repères : retrouver lieux et objets",
-  "onboardingFeatureEmergency": "Urgence : aide rapide en cas de crise",
-  "onboardingFeatureMantras": "Mantras : phrases apaisantes et affirmations",
-  "onboardingFeatureChatBasic": "Chat : fonctions de base disponibles",
-  "featureCarouselHeadline": "Tout ce qu'Aurora sait faire",
-  "featureCarouselSwipeHint": "Fais défiler les fonctions →",
-  "featureCarouselChatTitle": "Chat",
-  "featureCarouselChatSubtitle": "Communication interne",
-  "featureCarouselChatDescription": "Messages, gribouillages et messages vocaux.\nPartagez des pensées, dessinez ensemble ou parlez-vous.",
-  "featureCarouselCalendarTitle": "Calendrier",
-  "featureCarouselCalendarSubtitle": "Rendez-vous",
-  "featureCarouselCalendarDescription": "Des rendez-vous avec images et lieux.\nGardez les rendez-vous importants en vue, avec images et positions GPS.",
-  "featureCarouselDiaryTitle": "Journal",
-  "featureCarouselDiarySubtitle": "Pensées privées",
-  "featureCarouselDiaryDescription": "Visible pour tous ou seulement pour toi.\nGardez vos pensées : en commun pour tous les profils ou en privé.",
-  "featureCarouselFinderTitle": "Repères",
-  "featureCarouselFinderSubtitle": "Lieux et objets",
-  "featureCarouselFinderDescription": "Retrouvez lieux et objets.\nEnregistrez les lieux importants (avec carte) et les objets pour les retrouver.",
-  "featureCarouselMedicationTitle": "Médication",
-  "featureCarouselMedicationSubtitle": "Suivi des médicaments",
-  "featureCarouselMedicationDescription": "Médicaments et heures de prise.\nSuivez les médicaments, les heures de prise et les médicaments au besoin.",
-  "featureCarouselGamesTitle": "Jeux et ancrage",
-  "featureCarouselGamesSubtitle": "Détente",
-  "featureCarouselGamesDescription": "Jeux, respiration et ancrage.\nApaisez-vous avec des casse-tête, des exercices de respiration et des techniques d'ancrage.",
-  "featureCarouselEmergencyTitle": "Aide",
-  "featureCarouselEmergencySubtitle": "Contacts d'urgence",
-  "featureCarouselEmergencyDescription": "Contacts d'urgence et aide rapide.\nEnregistrez les contacts importants pour les moments de crise.",
-  "featureCarouselInfoTitle": "Informations sur le TDI",
-  "featureCarouselInfoSubtitle": "Savoir et ressources",
-  "featureCarouselInfoDescription": "Expliqué : qu'est-ce que le TDI ?\nDes informations sur le trouble dissociatif de l'identité et des ressources.",
+  "onboardingPrivacyOneLine": "Tout reste sur cet appareil.",
   "commonUnknown": "Inconnu",
   "timelineTitle": "Frise chronologique",
   "timelineHistory": "Historique",
@@ -2013,8 +1892,6 @@
   "groundingBreathStep1": "Inspire et compte jusqu'à quatre.",
   "groundingBreathStep2": "Retiens un instant.",
   "groundingBreathStep3": "Expire et compte jusqu'à six.",
-  "groundingBreathStep4": "Encore. Sans te presser.",
-  "groundingBreathStep5": "Plus lentement dehors que dedans. Cela suffit.",
   "medicationNameLabel": "Nom du médicament",
   "medicationDosageLabel": "Dose",
   "medicationDosageHint": "p. ex. 1 comprimé, 10 mg, 5 ml",
@@ -2846,6 +2723,7 @@
   "releaseNotesAllgemein": "Aurora a un peu grandi. Tout ce que tu connais reste à sa place — et tes contenus restent uniquement sur cet appareil.",
   "releaseNotesFassung3022": "Cette fois, ce sont de petites réparations en coulisses, pour qu'Aurora reste fiable. Tout ce que tu connais reste à sa place, et tes contenus restent uniquement sur cet appareil.",
   "releaseNotesFassung3024": "• Parts : la mise en pause fonctionne vraiment maintenant. Tu peux reprendre une part dans Réglages → « Parts & droits ».\n• Droits : quelques interrupteurs clairs au lieu de soixante cases.\n• Réglages : réorganisés et accessibles jusqu'en bas.\n• Rappels : quand un rappel est supprimé, mis en pause ou fait, sa notification disparaît aussi.\n• Position : l'enregistrement démarre maintenant de façon fiable aussi à l'intérieur.",
+  "releaseNotesFassung3025": "• La mise en pause est maintenant en haut de la page d'une part.\n• Début plus court : deux étapes jusqu'à ton premier profil.\n• La date et le moment de la journée, dans une bande sous « Aurora ».\n• L'exercice de respiration te guide une minute sans toucher.",
   "releaseNotesFassung3023": "• Médicaments : gérer, mettre en sourdine et l'historique sont maintenant plus faciles à trouver.\n• Rappels : Aurora t'explique en bref avant que ton appareil demande l'autorisation.\n• Ancrage : les exercices montrent la suite avec un bouton Suivant et en glissant.\n• Chat : le clavier ne s'ouvre et ne se ferme plus tout seul.\n• Langues : les cinq langues ont été relues ; la date et l'heure suivent ta langue.",
   "updateHinweisTitel": "Aurora a été mise à jour",
   "updateHinweisText": "Jette un œil à ce qui est nouveau.",

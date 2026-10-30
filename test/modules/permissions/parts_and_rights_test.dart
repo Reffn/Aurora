@@ -544,7 +544,76 @@ void main() {
     await snackbarAuslaufen(tester);
   });
 
-  testWidgets('Pausieren unten auf der Seite, danach steht er unter Pausiert', (
+  // Am Gerät gefunden (3.0.24): Der Knopf stand klein und grau unter allen
+  // Schaltergruppen, und der Schalter „Anteile pausieren“ — ein Recht — sah
+  // aus wie die Handlung. Jetzt steht die Handlung oben unter dem Namen,
+  // sichtbar ohne Scrollen, mit Symbol und Wort und einer Fläche von 48 dp.
+  testWidgets('Pausieren steht oben unter dem Namen, ohne Scrollen sichtbar', (
+    tester,
+  ) async {
+    aufbau();
+    await listeZeigen(tester);
+    await anteilOeffnen(tester, 'mira');
+
+    // Ein Telefon, nicht die hohe Testfläche: 360 × 780 dp.
+    tester.view.physicalSize = const Size(1080, 2340);
+    tester.view.devicePixelRatio = 3;
+    await warte(tester);
+
+    final wort = find.text(l10n.partsPauseNamed('mira'));
+    expect(wort, findsOneWidget);
+    final knopf = find.ancestor(
+      of: wort,
+      matching: find.byWidgetPredicate((w) => w is ButtonStyleButton),
+    );
+    expect(knopf, findsOneWidget);
+    expect(
+      tester.widget(knopf),
+      isNot(isA<TextButton>()),
+      reason: 'umrandet oder tonal, kein grauer Textknopf',
+    );
+    expect(
+      find.descendant(of: knopf, matching: find.byType(Icon)),
+      findsOneWidget,
+      reason: 'Symbol und Wort (Regel 5)',
+    );
+
+    final flaeche = tester.getRect(knopf);
+    expect(flaeche.height, greaterThanOrEqualTo(48));
+    expect(flaeche.bottom, lessThanOrEqualTo(780), reason: 'ohne Scrollen');
+    // Unter dem Namen, über der ersten Schaltergruppe.
+    expect(flaeche.top, greaterThan(tester.getRect(find.text('mira')).bottom));
+    expect(
+      flaeche.bottom,
+      lessThan(
+        tester.getTopLeft(find.text(PartRightGroup.medication.label(l10n))).dy,
+      ),
+    );
+  });
+
+  // Die Schalter sind Erlaubnisse, keine Handlungen. „Anteile pausieren“
+  // neben einem Schalter las sich wie der Knopf zum Pausieren; dasselbe gilt
+  // für „Einträge anderer löschen“ und „Rechte vergeben“. Alle sagen jetzt,
+  // was der Anteil darf.
+  testWidgets('jeder Schalter sagt, was der Anteil darf', (tester) async {
+    aufbau();
+    await listeZeigen(tester);
+    await anteilOeffnen(tester, 'mira');
+
+    final titel = [
+      for (final tile in tester.widgetList<SwitchListTile>(
+        find.byType(SwitchListTile),
+      ))
+        (tile.title! as Text).data!,
+    ];
+    expect(titel, hasLength(6));
+    for (final t in titel) {
+      expect(t, startsWith('Darf '), reason: t);
+    }
+    expect(find.text('Darf Anteile pausieren'), findsOneWidget);
+  });
+
+  testWidgets('Pausieren oben auf der Seite, danach steht er unter Pausiert', (
     tester,
   ) async {
     aufbau();

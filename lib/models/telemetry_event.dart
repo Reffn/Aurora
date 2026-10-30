@@ -12,6 +12,10 @@ enum TelemetryEventName {
   onboardingBegonnen('onboarding_begonnen'),
   onboardingBeendet('onboarding_beendet'),
   onboardingAbgebrochenWillkommen('onboarding_abgebrochen_willkommen'),
+  // Die vier folgenden werden seit 3.0.25 nicht mehr ausgelöst, die Seiten
+  // sind entfallen (die Vorstellung hat nur noch eine). Sie bleiben, weil
+  // ältere Fassungen sie weiter senden und `firestore.rules` sie annehmen
+  // muss — ein Test koppelt beide Listen.
   onboardingAbgebrochenPrivacy('onboarding_abgebrochen_privacy'),
   onboardingAbgebrochenFeatures('onboarding_abgebrochen_features'),
   onboardingAbgebrochenProfile('onboarding_abgebrochen_profile'),

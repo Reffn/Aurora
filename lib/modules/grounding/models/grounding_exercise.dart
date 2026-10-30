@@ -12,6 +12,7 @@ class GroundingExercise {
     required this.icon,
     required this.color,
     required this.steps,
+    this.pacedRounds,
   });
 
   /// Stabile Kennung, z. B. 'orientation'. Wird nicht angezeigt.
@@ -26,7 +27,19 @@ class GroundingExercise {
   final Color color;
 
   final List<GroundingStep> steps;
+
+  /// Läuft die Übung als durchgehender Takt statt als Schrittfolge, steht
+  /// hier die Zahl der Runden; `null` heißt Schrittfolge.
+  ///
+  /// Ein Takt durchläuft die Schritte mit [GroundingStep.breathPhase] je
+  /// Runde einmal, jeden so lange wie sein [GroundingStep.hold], ohne Tippen
+  /// (`BreathPacer`). Bis 3.0.24 war auch der Atem eine Schrittfolge: Wer
+  /// atmete, musste mitten im Atemzug tippen.
+  final int? pacedRounds;
 }
+
+/// Was der Atem in einer Phase des Takts tut. Der Kreis folgt ihr.
+enum BreathPhase { inhale, hold, exhale }
 
 /// Ein Schritt innerhalb einer Übung
 @immutable
@@ -36,6 +49,7 @@ class GroundingStep {
     required this.textKey,
     this.hold,
     this.showsCurrentDateTime = false,
+    this.breathPhase,
   });
 
   /// Schlüssel, nie ein Pfad. Aufgelöst über [GroundingImages].
@@ -52,4 +66,8 @@ class GroundingStep {
   /// Nur der erste Schritt der Orientierungsübung zeigt echtes Datum und
   /// echte Uhrzeit. Der einzige dynamische Inhalt im ganzen Modul.
   final bool showsCurrentDateTime;
+
+  /// Nur in einem Takt ([GroundingExercise.pacedRounds]): Einatmen, Halten
+  /// oder Ausatmen. Die Dauer ist [hold].
+  final BreathPhase? breathPhase;
 }

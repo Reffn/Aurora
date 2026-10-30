@@ -6,7 +6,6 @@ import 'package:dis_app/core/logger.dart';
 import 'package:dis_app/l10n/app_localizations.dart';
 import 'package:dis_app/main.dart';
 import 'package:dis_app/models/profile.dart';
-import 'package:dis_app/modules/onboarding/post_login_welcome_screen.dart';
 import 'package:dis_app/modules/profile/profile_creation_screen.dart';
 import 'package:dis_app/modules/profile/profile_edit_screen.dart';
 import 'package:dis_app/modules/profile/widgets/app_info_overlay.dart';
@@ -23,6 +22,7 @@ import 'package:dis_app/widgets/gradient_text.dart';
 import 'package:dis_app/widgets/profile_actions_dialog.dart';
 import 'package:dis_app/widgets/time_map.dart';
 import 'package:dis_app/widgets/today_overview_line.dart';
+import 'package:dis_app/widgets/zeit_band.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 
@@ -34,8 +34,12 @@ import 'package:hive_ce_flutter/hive_flutter.dart';
 class ProfileSelectionScreen extends StatefulWidget {
   const ProfileSelectionScreen({
     this.onProfileSelected,
+    this.jetzt = DateTime.now,
     super.key,
   });
+
+  /// Die Uhr für das Zeitband. Nur Tests setzen eine andere.
+  final DateTime Function() jetzt;
 
   /// Wird nur bei einer laufenden App-Sitzung gesetzt. Der normale App-Start
   /// behält dadurch seine bisherige Navigation, während eine Sitzungssperre
@@ -125,7 +129,7 @@ class _ProfileSelectionScreenState extends State<ProfileSelectionScreen>
   }
 
   /// Behandelt Profil-Auswahl: Zeigt Dialog mit Passwort-Check,
-  /// navigiert dann zu PostLoginWelcome oder MainScreen
+  /// navigiert dann zum MainScreen
   Future<void> _handleProfileSelection(
     BuildContext context,
     Profile profile,
@@ -163,70 +167,19 @@ class _ProfileSelectionScreenState extends State<ProfileSelectionScreen>
           return;
         }
 
-        // Prüfe ob Post-Login Welcome bereits gesehen wurde
-        if (!activeProfile!.hasSeenPostLoginWelcome) {
-          logger.info(
-            LogCategory.ui,
-            'Navigating to PostLoginWelcomeScreen',
-            data: {'profileId': activeProfile.id.substring(0, 8)},
-          );
+        // Direkt zum Hauptschirm. Bis 3.0.24 kamen beim ersten Anmelden
+        // eines Anteils drei bis vier Begrüßungsseiten dazwischen
+        // (`PostLoginWelcomeScreen`); sie sind mit dem kurzen Einstieg
+        // entfallen — für das erste Profil und für jedes spätere.
+        logger.breadcrumb(
+          BreadcrumbType.navigation,
+          'Navigate to MainScreen',
+        );
 
-          // Breadcrumb: Welcome screen
-          logger.breadcrumb(
-            BreadcrumbType.navigation,
-            'Navigate to PostLoginWelcomeScreen',
-          );
-
-          // Zeige Post-Login Welcome Screen
-          final nav = Navigator.of(context);
-          await nav.pushReplacement(
-            MaterialPageRoute<void>(
-              builder: (context) => PostLoginWelcomeScreen(
-                profile: activeProfile,
-                onComplete: () async {
-                  // Markiere Welcome als gesehen
-                  final dataEntry = getIt<DataEntry>();
-                  final updatedProfile = activeProfile.copyWith(
-                    hasSeenPostLoginWelcome: true,
-                  );
-                  await dataEntry.updateProfile(updatedProfile);
-
-                  // Navigiere zu MainScreen
-                  if (context.mounted) {
-                    logger.breadcrumb(
-                      BreadcrumbType.navigation,
-                      'Navigate to MainScreen from Welcome',
-                    );
-
-                    await Navigator.of(context).pushReplacement(
-                      MaterialPageRoute<void>(
-                        builder: (context) => const MainScreen(),
-                      ),
-                    );
-                  }
-                },
-              ),
-            ),
-          );
-        } else {
-          logger.info(
-            LogCategory.ui,
-            'Navigating directly to MainScreen',
-            data: {'profileId': activeProfile.id.substring(0, 8)},
-          );
-
-          // Breadcrumb: MainScreen
-          logger.breadcrumb(
-            BreadcrumbType.navigation,
-            'Navigate to MainScreen',
-          );
-
-          // Welcome bereits gesehen - direkt zu MainScreen
-          final nav = Navigator.of(context);
-          await nav.pushReplacement(
-            MaterialPageRoute<void>(builder: (context) => const MainScreen()),
-          );
-        }
+        final nav = Navigator.of(context);
+        await nav.pushReplacement(
+          MaterialPageRoute<void>(builder: (context) => const MainScreen()),
+        );
       } catch (e, stackTrace) {
         logger.error(
           LogCategory.ui,
@@ -343,9 +296,27 @@ class _ProfileSelectionScreenState extends State<ProfileSelectionScreen>
                   // 40, die beiden Überschriften mit ihren Abständen 148,
                   // Fußzeile 44. Eine Rasterreihe kostet den Durchmesser plus 62
                   // (Name plus Zeilenabstand).
+                  //
+                  // Dazu seit 3.0.25 das Zeitband unter dem Kopf plus 8
+                  // Abstand. Datum und Uhrzeit standen vorher in der Karte
+                  // und kosteten dort Kartenhöhe; jetzt kosten sie Kopfhöhe
+                  // und gehören in diese Rechnung. Das Band wird gerechnet,
+                  // nicht geschätzt: Auf Telefonbreite bricht ein langes
+                  // Datum zweizeilig um, und eine feste Zahl für eine Zeile
+                  // schob die Namen um genau diese Zeile unter die Kante.
                   final profileCount = _dataEntry.getProfiles().length + 1;
                   final rows = (profileCount / columns).ceil();
-                  const chrome = 60.0 + 40.0 + 148.0 + 44.0;
+                  final chrome =
+                      60.0 +
+                      ZeitBand.hoeheFuer(
+                        context,
+                        breite: available,
+                        jetzt: widget.jetzt,
+                      ) +
+                      8 +
+                      40.0 +
+                      148.0 +
+                      44.0;
                   final rasterHeight = rows * (avatarDiameter + 62);
 
                   // Bei großer Schrift rollt der ganze Schirm, nicht nur die
@@ -423,6 +394,12 @@ class _ProfileSelectionScreenState extends State<ProfileSelectionScreen>
                             ),
                             child: _buildHeader(context),
                           ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: outerPadding,
+                            ),
+                            child: ZeitBand(jetzt: widget.jetzt),
+                          ),
                           const SizedBox(height: 8),
                           Padding(
                             padding: const EdgeInsets.symmetric(
@@ -490,13 +467,12 @@ class _ProfileSelectionScreenState extends State<ProfileSelectionScreen>
 
                             // „Wann bin ich" vor „wer bin ich": Diese Fläche ist
                             // das Erste nach dem Aufwachen, und Zeitverlust
-                            // gehört zum Krankheitsbild.
-                            //
-                            // Trägt die Zeitkarte, steht das vollständige Datum
-                            // an ihrem Jetzt-Ende und diese beiden Zeilen
-                            // entfallen. Zweimal dasselbe Datum kostet nur den
-                            // Platz, den die Karte braucht — und die Karte sagt
-                            // dazu, wo man war.
+                            // gehört zum Krankheitsbild. Datum und Tageszeit
+                            // stehen deshalb direkt unter der Wortmarke, als
+                            // Band über die ganze Breite — seit 3.0.25 nicht
+                            // mehr in der Karte.
+                            ZeitBand(jetzt: widget.jetzt),
+                            const SizedBox(height: 8),
 
                             // „Was dieser Tag trägt", hier als bloße ZAHLEN.
                             //

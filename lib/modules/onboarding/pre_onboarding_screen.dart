@@ -1,14 +1,10 @@
 import 'dart:async';
-import 'dart:math' as math;
 
 import 'package:dis_app/core/di/injection.dart';
 import 'package:dis_app/core/startup_locale.dart';
 import 'package:dis_app/l10n/app_localizations.dart';
 import 'package:dis_app/models/telemetry_event.dart';
 import 'package:dis_app/modules/onboarding/widgets/dismissable_onboarding_wrapper.dart';
-import 'package:dis_app/modules/onboarding/widgets/feature_carousel_page.dart';
-import 'package:dis_app/modules/onboarding/widgets/onboarding_page_indicator.dart';
-import 'package:dis_app/modules/onboarding/widgets/pre_onboarding_page.dart';
 import 'package:dis_app/services/release_notes_gate.dart';
 import 'package:dis_app/services/telemetry_recorder.dart';
 import 'package:dis_app/utils/app_colors.dart';
@@ -16,14 +12,18 @@ import 'package:dis_app/widgets/gradient_text.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_ce/hive.dart';
 
-/// Pre-Onboarding Screen - Stage 1 des Onboarding Systems
-/// Zeigt 5 Einführungs-Seiten vor dem ersten Profil:
-/// 1. Willkommen (mit Rainbow "Aurora")
-/// 2. Privacy First
-/// 3. Feature-Carousel (horizontal wischbar)
-/// 4. Multi-Profile System
-/// 5. Let's Go
-/// Kann mit "Nicht mehr anzeigen" übersprungen werden
+/// Die Vorstellung vor dem ersten Profil — seit 3.0.25 eine Seite.
+///
+/// Willkommen, Sprache und ein Satz zum Datenschutz („Alles bleibt auf
+/// diesem Gerät.“). Bis 3.0.24 waren es fünf Seiten: Willkommen, Datenschutz,
+/// ein Funktionskarussell, „Mehrere Profile“ und „Bereit?“ — zusammen mit
+/// Profilanlage und Begrüßungsseiten rund sechzehn Schirme bis zur App. Am
+/// Gerät war das zu lang für jemanden, der gerade nur anfangen will.
+///
+/// Danach kommt die Telemetrie-Frage, dann das erste Profil.
+///
+/// „Nicht mehr anzeigen“ bleibt als Ausgang: Wer keine Sprache wählt, kommt
+/// darüber trotzdem weiter.
 class PreOnboardingScreen extends StatefulWidget {
   const PreOnboardingScreen({super.key});
 
@@ -35,9 +35,7 @@ class PreOnboardingScreen extends StatefulWidget {
 
 class _PreOnboardingScreenState extends State<PreOnboardingScreen>
     with SingleTickerProviderStateMixin {
-  late PageController _pageController;
   late AnimationController _animationController;
-  int _currentPage = 0;
   bool _hasSelectedLocale = false;
   String? _selectedLocaleCode;
   Box<dynamic>? _settingsBox;
@@ -54,7 +52,6 @@ class _PreOnboardingScreenState extends State<PreOnboardingScreen>
   @override
   void initState() {
     super.initState();
-    _pageController = PageController();
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
@@ -117,32 +114,25 @@ class _PreOnboardingScreenState extends State<PreOnboardingScreen>
 
   @override
   void dispose() {
-    _pageController.dispose();
     _animationController.dispose();
     super.dispose();
   }
 
-  /// Reihenfolge wie im PageView. Stabile Schlüssel, keine Beschriftungen.
-  static const List<String> _stepKeys = [
-    'willkommen',
-    'privacy',
-    'features',
-    'profile',
-    'los_gehts',
-  ];
-
-  Future<void> _dismissOnboarding() async {
-    // Der Abbruch ist selbst ein Ereignis. So verlässt nie eine Schrittfolge
-    // das Gerät, und die Quote ergibt sich aus dem Verhältnis der Zähler.
-    //
-    // Dieser Weg wird für beide Ausgänge genommen: „Nicht mehr anzeigen" und
-    // das Durchklicken bis zur letzten Seite. Die Seitenzahl unterscheidet sie.
+  /// Schließt die Vorstellung ab.
+  ///
+  /// [abgebrochen] heißt „Nicht mehr anzeigen“, sonst „Weiter“. Der Ausgang
+  /// wird mitgegeben, nicht aus der Seitenzahl gelesen: Bei einer Seite ist
+  /// jede Seite die letzte, und ein Abbruch hätte sich als Ende gemeldet.
+  ///
+  /// Der Abbruch ist ein eigenes Ereignis, damit nie eine Schrittfolge das
+  /// Gerät verlässt; die Quote ergibt sich aus dem Verhältnis der Zähler.
+  /// Die Abbruch-Ereignisse der entfallenen Seiten (privacy, features,
+  /// profile, los_gehts) bleiben im Enum — ältere Fassungen senden sie.
+  Future<void> _dismissOnboarding({required bool abgebrochen}) async {
     _recordTelemetry(
-      _currentPage >= _stepKeys.length - 1
-          ? TelemetryEventName.onboardingBeendet
-          : TelemetryEventName.fromWireName(
-              'onboarding_abgebrochen_${_stepKeys[_currentPage]}',
-            ),
+      abgebrochen
+          ? TelemetryEventName.onboardingAbgebrochenWillkommen
+          : TelemetryEventName.onboardingBeendet,
     );
 
     final settingsBox = await Hive.openBox<dynamic>('settings');
@@ -167,58 +157,17 @@ class _PreOnboardingScreenState extends State<PreOnboardingScreen>
     // MyApp lauscht auf settingsBox und wechselt automatisch den Screen
   }
 
-  void _nextPage() {
-    if (_currentPage < 4) {
-      // Jetzt 5 Seiten statt 4
-      _pageController.animateToPage(
-        _currentPage + 1,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-    } else {
-      // Letzte Seite - Onboarding abschließen
-      _dismissOnboarding();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: DismissableOnboardingWrapper(
-        onDismiss: _dismissOnboarding,
+        onDismiss: () => _dismissOnboarding(abgebrochen: true),
         child: Column(
           children: [
-            // PageView mit 5 Seiten (nimmt restlichen Platz)
-            Expanded(
-              child: PageView(
-                controller: _pageController,
-                onPageChanged: (index) {
-                  setState(() {
-                    _currentPage = index;
-                  });
-                },
-                children: [
-                  // Seite 1: Willkommen bei Aurora (mit Rainbow-Text)
-                  _buildWelcomePage(theme, l10n, screenHeight),
-
-                  // Seite 2: Privacy First (ohne "Open Source")
-                  _buildPrivacyPage(l10n),
-
-                  // Seite 3: Feature-Carousel (NEU)
-                  const FeatureCarouselPage(),
-
-                  // Seite 4: Multi-Profile System
-                  _buildMultiProfilePage(l10n),
-
-                  // Seite 5: Let's Go
-                  _buildLetsGoPage(l10n),
-                ],
-              ),
-            ),
+            Expanded(child: _buildWelcomePage(l10n, screenHeight)),
 
             // Navigation-Bereich (minimale Höhe, passt sich an Inhalt an)
             Container(
@@ -227,92 +176,78 @@ class _PreOnboardingScreenState extends State<PreOnboardingScreen>
               child: SafeArea(
                 top: false,
                 minimum: const EdgeInsets.only(bottom: 8),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const SizedBox(height: 8),
-                    // Page Indicator
-                    OnboardingPageIndicator(
-                      currentPage: _currentPage,
-                      totalPages: 5,
-                      activeColor: const Color(0xFFFFB6C1), // Pastell Rosa
-                      inactiveColor: const Color(
-                        0xFF4A4458,
-                      ), // Warmes Dunkelgrau
-                    ),
-                    const SizedBox(height: 12),
-                    // Weiter Button
-                    //
-                    // Der Verlauf liegt auf dem Container, der Knopf darin ist
-                    // durchsichtig. Flutter graut deshalb nur die Schrift aus —
-                    // ohne die folgende Fallunterscheidung leuchtet ein
-                    // gesperrter Knopf wie ein bedienbarer, und ein Tippen
-                    // bleibt wirkungslos, ohne dass es jemand sehen kann.
-                    Builder(
-                      builder: (context) {
-                        final canProceed =
-                            _currentPage > 0 || _hasSelectedLocale;
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 12),
+                  // Weiter Button
+                  //
+                  // Der Verlauf liegt auf dem Container, der Knopf darin ist
+                  // durchsichtig. Flutter graut deshalb nur die Schrift aus —
+                  // ohne die folgende Fallunterscheidung leuchtet ein
+                  // gesperrter Knopf wie ein bedienbarer, und ein Tippen
+                  // bleibt wirkungslos, ohne dass es jemand sehen kann.
+                  child: Builder(
+                    builder: (context) {
+                      final canProceed = _hasSelectedLocale;
 
-                        return Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            gradient: LinearGradient(
-                              colors: canProceed
-                                  ? const [
-                                      Color(0xFFFFB6C1), // Pastell Rosa
-                                      Color(0xFF87CEEB), // Pastell Blau
-                                    ]
-                                  : const [
-                                      AppColors.slate,
-                                      AppColors.slate,
-                                    ],
-                            ),
-                            border: canProceed
-                                ? null
-                                : Border.all(color: AppColors.line),
-                            boxShadow: canProceed
-                                ? [
-                                    BoxShadow(
-                                      color: const Color(
-                                        0xFFFFB6C1,
-                                      ).withValues(alpha: 0.4),
-                                      blurRadius: 12,
-                                      offset: const Offset(0, 4),
-                                    ),
+                      return Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          gradient: LinearGradient(
+                            colors: canProceed
+                                ? const [
+                                    Color(0xFFFFB6C1), // Pastell Rosa
+                                    Color(0xFF87CEEB), // Pastell Blau
                                   ]
-                                : null,
+                                : const [
+                                    AppColors.slate,
+                                    AppColors.slate,
+                                  ],
                           ),
-                          child: ElevatedButton(
-                            onPressed: canProceed ? _nextPage : null,
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
-                              // Dunkle Schrift auf dem hellen Verlauf statt
-                              // weißer Schrift mit Schlagschatten.
-                              foregroundColor: AppColors.inkDeep,
-                              disabledForegroundColor: AppColors.faint,
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              elevation: 0,
-                              shadowColor: Colors.transparent,
+                          border: canProceed
+                              ? null
+                              : Border.all(color: AppColors.line),
+                          boxShadow: canProceed
+                              ? [
+                                  BoxShadow(
+                                    color: const Color(
+                                      0xFFFFB6C1,
+                                    ).withValues(alpha: 0.4),
+                                    blurRadius: 12,
+                                    offset: const Offset(0, 4),
+                                  ),
+                                ]
+                              : null,
+                        ),
+                        child: ElevatedButton(
+                          onPressed: canProceed
+                              ? () => _dismissOnboarding(abgebrochen: false)
+                              : null,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            // Dunkle Schrift auf dem hellen Verlauf statt
+                            // weißer Schrift mit Schlagschatten.
+                            foregroundColor: AppColors.inkDeep,
+                            disabledForegroundColor: AppColors.faint,
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
                             ),
-                            child: Text(
-                              _currentPage < 4
-                                  ? l10n.onboardingNext
-                                  : l10n.onboardingCreateProfile,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 0.5,
-                              ),
+                            elevation: 0,
+                            shadowColor: Colors.transparent,
+                          ),
+                          child: Text(
+                            l10n.onboardingNext,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 0.5,
                             ),
                           ),
-                        );
-                      },
-                    ),
-                  ],
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
@@ -322,11 +257,7 @@ class _PreOnboardingScreenState extends State<PreOnboardingScreen>
     );
   }
 
-  Widget _buildWelcomePage(
-    ThemeData theme,
-    AppLocalizations l10n,
-    double screenHeight,
-  ) {
+  Widget _buildWelcomePage(AppLocalizations l10n, double screenHeight) {
     return ColoredBox(
       color: AppColors.ink,
       child: SafeArea(
@@ -401,6 +332,13 @@ class _PreOnboardingScreenState extends State<PreOnboardingScreen>
                   textAlign: TextAlign.center,
                 ),
 
+                const SizedBox(height: 20),
+
+                // Der Datenschutz in einem Satz. Bis 3.0.24 eine eigene Seite
+                // mit vier Punkten; was im Einzelnen gilt, steht in den
+                // Einstellungen unter „Was Aurora sendet“.
+                _buildPrivacyLine(l10n),
+
                 // Sprach-Auswahl (immer anzeigen, mit Markierung)
                 SizedBox(height: screenHeight * 0.03),
                 Text(
@@ -421,32 +359,54 @@ class _PreOnboardingScreenState extends State<PreOnboardingScreen>
     );
   }
 
-  Widget _buildPrivacyPage(AppLocalizations l10n) {
-    return PreOnboardingPage(
-      icon: Icons.shield,
-      headline: l10n.onboardingPrivacyHeadline,
-      bulletPoints: [
-        l10n.onboardingPrivacyPoint1,
-        l10n.onboardingPrivacyPoint2,
-        l10n.onboardingPrivacyPoint3,
-        l10n.onboardingPrivacyPoint4,
-      ],
-    );
-  }
-
-  Widget _buildMultiProfilePage(AppLocalizations l10n) {
-    return PreOnboardingPage(
-      iconWidget: _buildRotatingCircles(Theme.of(context)),
-      headline: l10n.onboardingMultiProfileHeadline,
-      description: l10n.onboardingMultiProfileDescription,
-    );
-  }
-
-  Widget _buildLetsGoPage(AppLocalizations l10n) {
-    return PreOnboardingPage(
-      icon: Icons.auto_awesome,
-      headline: l10n.onboardingLetsGoHeadline,
-      description: l10n.onboardingLetsGoDescription,
+  /// „Alles bleibt auf diesem Gerät.“ — Schild links, Satz daneben, darunter
+  /// ruhiger die Zusage „Keine Cloud-Sicherung, kein Tracking, keine
+  /// Werbung“.
+  ///
+  /// Die zweite Zeile ist keine Wiederholung: An ihr hängen die
+  /// Manifest-Attribute, die Androids Sicherung in die Google Drive
+  /// abschalten (`test/core/keine_cloud_sicherung_test.dart` prüft beides).
+  /// Mit der entfallenen Datenschutzseite war sie kurz verschwunden.
+  Widget _buildPrivacyLine(AppLocalizations l10n) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: const Color(0xFFB4E7CE).withValues(alpha: 0.5),
+        ),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.shield_outlined, color: Color(0xFFB4E7CE)),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l10n.onboardingPrivacyOneLine,
+                  style: const TextStyle(
+                    color: AppColors.paperBright,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    height: 1.3,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  l10n.onboardingPrivacyBullet2,
+                  style: const TextStyle(
+                    color: Color(0xFFD4C5B9), // Sanftes Beige
+                    fontSize: 14,
+                    height: 1.3,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -556,50 +516,6 @@ class _PreOnboardingScreenState extends State<PreOnboardingScreen>
           ),
         );
       }).toList(),
-    );
-  }
-
-  /// Rotierende Kreise für Multi-Profile Visualisierung
-  Widget _buildRotatingCircles(ThemeData theme) {
-    const colors = [
-      Color(0xFFFFB6C1), // Pastell Rosa
-      Color(0xFF87CEEB), // Pastell Blau
-      Color(0xFFB4E7CE), // Pastell Grün/Türkis
-      Color(0xFFFFF4A3), // Pastell Gelb
-    ];
-
-    return AnimatedBuilder(
-      animation: _animationController,
-      builder: (context, child) {
-        return SizedBox(
-          width: 120,
-          height: 120,
-          child: Stack(
-            alignment: Alignment.center,
-            children: List.generate(4, (index) {
-              final angle = (index * 90.0) + (_animationController.value * 360);
-              final radians = angle * math.pi / 180;
-              final offset = Offset(
-                30 * math.cos(radians),
-                30 * math.sin(radians),
-              );
-
-              return Transform.translate(
-                offset: offset,
-                child: Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: colors[index],
-                    border: Border.all(color: Colors.white, width: 2),
-                  ),
-                ),
-              );
-            }),
-          ),
-        );
-      },
     );
   }
 }

@@ -231,7 +231,11 @@ class Profile {
   final List<String>? securityAnswersHashed;
 
   /// Hat dieses Profil die Post-Login Welcome Screens bereits gesehen?
-  /// (Stage 3 des Onboarding Systems)
+  ///
+  /// Seit 3.0.25 ungelesen: Die Begrüßungsseiten sind entfallen. Das Feld
+  /// bleibt, weil es in bestehenden Hive-Daten steht (Feld 16) — es zu
+  /// entfernen hieße, den Adapter neu zu erzeugen, ohne dass jemand etwas
+  /// davon hätte.
   @HiveField(16, defaultValue: false)
   final bool hasSeenPostLoginWelcome;
 

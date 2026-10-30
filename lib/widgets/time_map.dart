@@ -15,7 +15,7 @@ import 'package:dis_app/services/gps_manager.dart';
 import 'package:dis_app/services/location_tracking_service.dart';
 import 'package:dis_app/services/timeline_data_service.dart';
 import 'package:dis_app/utils/short_place.dart';
-import 'package:dis_app/utils/time_phase.dart';
+import 'package:dis_app/widgets/every_minute.dart';
 import 'package:dis_app/widgets/overview_map.dart';
 import 'package:dis_app/widgets/timeline_marks.dart';
 import 'package:flutter/material.dart';
@@ -493,12 +493,10 @@ class TimeMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Die Karte behauptet „Jetzt" — dann muss ihr Jetzt auch stimmen. Ohne
-    // den Ticker fror die Datumszeile auf dem Stand des letzten Aufbaus ein
-    // und zeigte nach Minuten auf dem Anker eine falsche Uhrzeit. Für
-    // Menschen, die sich an genau dieser Zeile orientieren, ist eine
-    // stehende Uhr schlimmer als keine.
-    return _EveryMinute(builder: _buildContent);
+    // Die Karte behauptet „Jetzt" — dann muss ihr Jetzt auch stimmen: Der
+    // Vergangenheitsstrang endet an der aktuellen Minute. Datum und Uhrzeit
+    // trägt seit 3.0.25 das `ZeitBand` über der Karte, mit demselben Takt.
+    return EveryMinute(builder: _buildContent);
   }
 
   Widget _buildContent(BuildContext context) {
@@ -583,10 +581,6 @@ class TimeMap extends StatelessWidget {
                 profileColorOf: profileColorOf,
                 profileNameOf: profileNameOf,
                 compact: true,
-                nowLabel: DateFormat.yMMMEd(locale).format(now),
-                nowTimeLabel:
-                    '${DateFormat.Hm(locale).format(now)} · '
-                    '${timePhaseOf(l10n, now.hour)}',
                 placeLabel: _place,
               ),
             ),
@@ -638,23 +632,10 @@ class TimeMap extends StatelessWidget {
                   profileColorOf: profileColorOf,
                   profileNameOf: profileNameOf,
                   compact: kompakt,
-                  // Wochentag, Monatsname, Jahr — nicht „06.08.26". Wer nach
-                  // Monaten wieder vorn ist, soll nicht drei Zahlen deuten
-                  // müssen, um zu wissen, wann er gelandet ist. Der Wochentag
-                  // stand vorher in der Zeile, die diese Karte ersetzt; ohne
-                  // ihn wäre der Umbau ein Rückschritt für alle, die nur einen
-                  // Tag verloren haben.
-                  //
-                  // Auf der niedrigen Karte werden Wochentag und Monat
-                  // abgekürzt, nicht weggelassen: „Fr., 8. Aug. 2026" hält
-                  // dieselbe Zusage wie „Freitag, 8. August 2026", nur auf
-                  // halber Breite. Zu Ziffern wird es nie.
-                  nowLabel: kompakt
-                      ? DateFormat.yMMMEd(locale).format(now)
-                      : DateFormat.yMMMMEEEEd(locale).format(now),
-                  nowTimeLabel:
-                      '${DateFormat.Hm(locale).format(now)} · '
-                      '${timePhaseOf(l10n, now.hour)}',
+                  // Datum und Uhrzeit stehen seit 3.0.25 im `ZeitBand` über
+                  // der Karte, ausgeschrieben und über die volle Breite. Am
+                  // Jetzt-Ende des Strangs bleibt der Ort als Wort — er
+                  // gehört zur Karte.
                   placeLabel: _place,
                 ),
               ),
@@ -727,41 +708,6 @@ class TimeMap extends StatelessWidget {
   }
 }
 
-/// Baut sein Kind einmal pro Minute neu — im Takt der Uhr, nicht der Widgets.
-///
-/// Nur die Anzeige tickt: Die Daten der Karte kommen weiter vom Aufbau durch
-/// den Aufrufer. Eine Minute ist die Auflösung, in der die Zeitkarte spricht;
-/// öfter neu zu bauen zeigte nichts Neues.
-class _EveryMinute extends StatefulWidget {
-  const _EveryMinute({required this.builder});
-
-  final WidgetBuilder builder;
-
-  @override
-  State<_EveryMinute> createState() => _EveryMinuteState();
-}
-
-class _EveryMinuteState extends State<_EveryMinute> {
-  Timer? _timer;
-
-  @override
-  void initState() {
-    super.initState();
-    _timer = Timer.periodic(const Duration(minutes: 1), (_) {
-      if (mounted) setState(() {});
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) => widget.builder(context);
-}
-
 /// Ein Abschnitt des Vergangenheitsstrangs: von wann bis wann war wer vorn.
 ///
 /// `profileId == null` heißt: nicht aufgeschrieben.
@@ -791,8 +737,6 @@ class _Strand extends StatelessWidget {
     required this.to,
     required this.profileColorOf,
     required this.profileNameOf,
-    this.nowLabel,
-    this.nowTimeLabel,
     this.placeLabel,
     this.upcomingLabel,
     this.onUpcomingTap,
@@ -806,25 +750,6 @@ class _Strand extends StatelessWidget {
   /// Führt zum Ereignis selbst. `null`, wenn es keinen Schirm dafür gibt.
   final VoidCallback? onUpcomingTap;
 
-  /// Datum und Uhrzeit am Jetzt-Ende des Strangs.
-  ///
-  /// Steht rechts, weil rechts das Jetzt ist. Und es steht vollständig da —
-  /// Tag, Monat, Jahr —, nicht nur die Uhrzeit: Es kommt vor, dass ein
-  /// Anteil erst nach Monaten wieder vorn ist. Für den ist die Uhrzeit die
-  /// unwichtigste und das Jahr die wichtigste Angabe auf dem Schirm.
-  final String? nowLabel;
-
-  /// Uhrzeit und Tagesphase, in einer eigenen Zeile unter dem Datum.
-  ///
-  /// Getrennt vom Datum, weil beides zusammen in einer Zeile nicht überlebt:
-  /// Bei 1,5-facher Systemschrift kürzte die Ellipse ausgerechnet die
-  /// Zeitangabe weg — die Angabe, für die die Zeile da ist. Zwei kurze Zeilen
-  /// halten, wo eine lange bricht.
-  ///
-  /// Die Phase steht als Wort dabei, weil 6:00 und 18:00 auf einer Uhr
-  /// verwechselbar sind und beim Hochkommen genau das die Frage ist.
-  final String? nowTimeLabel;
-
   /// Der Ort, an dem man gerade ist — als Wort. `null`, wenn unbekannt.
   final String? placeLabel;
 
@@ -834,10 +759,8 @@ class _Strand extends StatelessWidget {
   /// Datum, Uhrzeit und Ort ein Viertel ein, bei 150 dp fast die Hälfte —
   /// dann blieb von der Karte, für die die Fläche da ist, ein Streifen.
   ///
-  /// Gekürzt wird die Schrift, nicht der Inhalt. Alle drei Zeilen bleiben:
-  /// Wer nach Monaten wieder vorn ist, braucht das Jahr; wer an einem
-  /// fremden Ort hochkommt, den Ort; und 6:00 gegen 18:00 ist die Frage,
-  /// für die die Zeitzeile existiert.
+  /// Gekürzt wird die Schrift, nicht der Inhalt: Wer an einem fremden Ort
+  /// hochkommt, braucht den Ort auch auf der kleinen Karte.
   final bool compact;
 
   /// Oben heißt: Balken am äußeren Rand, Marken zur Karte hin.
@@ -962,7 +885,7 @@ class _Strand extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: fromTop
-            ? [if (nowLabel != null) _nowLabelRow(), rail]
+            ? [if (placeLabel != null) _placeLabelRow(), rail]
             : [if (upcomingLabel != null) _upcomingLabelRow(), rail],
       ),
     );
@@ -1020,8 +943,8 @@ class _Strand extends StatelessWidget {
     );
   }
 
-  Widget _nowLabelRow() {
-    final labelSize = compact ? 12.0 : 15.0;
+  /// Der Ort am Jetzt-Ende, rechts — dort, wo oben das Jetzt liegt.
+  Widget _placeLabelRow() {
     final placeSize = compact ? 11.0 : 13.0;
     return Padding(
       padding: compact
@@ -1031,30 +954,7 @@ class _Strand extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            nowLabel!,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.right,
-            style: TextStyle(
-              fontSize: labelSize,
-              fontWeight: FontWeight.w600,
-              color: Colors.white,
-            ),
-          ),
-          if (nowTimeLabel != null)
-            Text(
-              nowTimeLabel!,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.right,
-              style: TextStyle(
-                fontSize: labelSize,
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-              ),
-            ),
-          // Der Ort als Wort, unter Tag und Uhrzeit.
+          // Der Ort als Wort.
           //
           // Die Karte zeigt, wo man ist — aber nur, wenn Kacheln da sind. Wer
           // an einem fremden Ort hochkommt, ist mit einiger Sicherheit in
@@ -1062,18 +962,17 @@ class _Strand extends StatelessWidget {
           // Fläche dann grau. Die Adresse steht ohnehin in jedem
           // Positionseintrag, rückwärts geokodiert und lokal gespeichert.
           // Sie hier zu zeigen kostet nichts und trägt allein.
-          if (placeLabel != null)
-            Text(
-              placeLabel!,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.right,
-              style: TextStyle(
-                fontSize: placeSize,
-                fontWeight: FontWeight.w500,
-                color: Colors.white.withValues(alpha: 0.85),
-              ),
+          Text(
+            placeLabel!,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.right,
+            style: TextStyle(
+              fontSize: placeSize,
+              fontWeight: FontWeight.w500,
+              color: Colors.white.withValues(alpha: 0.85),
             ),
+          ),
         ],
       ),
     );

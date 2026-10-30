@@ -66,6 +66,7 @@ import 'package:dis_app/widgets/startup_failure_screen.dart';
 import 'package:dis_app/widgets/time_map.dart';
 import 'package:dis_app/widgets/today_overview_line.dart';
 import 'package:dis_app/widgets/work_surface_scaffold.dart';
+import 'package:dis_app/widgets/zeit_band.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -730,14 +731,17 @@ class _MyAppState extends State<MyApp> {
               //
               // Die Neuerungen hängen bewusst NICHT in dieser Kette. Am Gerät
               // erwies sich das als unerreichbar: `ProfileSelectionScreen`
-              // navigiert nach der Wahl selbst per `pushReplacement` zu
-              // `PostLoginWelcomeScreen` und weiter zum `MainScreen`. Damit
-              // liegt eine Route ueber diesem `home` — der Zweig wurde
-              // gebaut und war vollstaendig verdeckt.
+              // navigiert nach der Wahl selbst per `pushReplacement` zum
+              // `MainScreen`. Damit liegt eine Route ueber diesem `home` —
+              // der Zweig wurde gebaut und war vollstaendig verdeckt.
               //
               // Diese Kette gilt nur, solange niemand navigiert. Der Schirm
               // wird deshalb aus `MainScreen` heraus geoeffnet, wo er auch
               // ankommt.
+              //
+              // Seit 3.0.25 führt auch das erste Profil hierher, ohne
+              // Auswahl: `ProfileCreationScreen` ist dann `home`, macht das
+              // neue Profil aktiv und navigiert nicht — dieser Zweig greift.
               homeScreen = const MainScreen();
             }
 
@@ -1844,11 +1848,24 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                 );
 
                 return AnchorMenu(
-                  // Fest über der Liste, nicht in ihr: Gruß, Name, der Weg
-                  // zum Anteilswechsel und der Begleiter.
-                  header: activeProfile == null
-                      ? null
-                      : AnchorHeader(
+                  // Fest über der Liste, nicht in ihr: zuerst „wann bin ich“
+                  // als breites Band direkt unter der Kopfzeile mit
+                  // „Aurora“, dann Gruß, Name, der Weg zum Anteilswechsel
+                  // und der Begleiter.
+                  //
+                  // Datum und Tageszeit standen bis 3.0.24 oben rechts in
+                  // der Zeitkarte, über den Kacheln. Am Gerät wirkte das
+                  // deplatziert; gewünscht war ein Element „oben hinten,
+                  // unter Aurora … als breites Element“.
+                  header: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(12, 4, 12, 4),
+                        child: ZeitBand(),
+                      ),
+                      if (activeProfile != null)
+                        AnchorHeader(
                           profile: activeProfile,
                           onSwitchProfile: () =>
                               getIt<ProfileService>().performLogout(
@@ -1856,6 +1873,8 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
                                 reason: 'Anteil wechseln',
                               ),
                         ),
+                    ],
+                  ),
                   // Der Kopfblock bekommt eine Obergrenze und teilt sie selbst
                   // auf. Vorher zog diese Stelle eine feste Zahl ab
                   // (`_bannerNebenDerZeitkarte = 60`) für alles, was neben der

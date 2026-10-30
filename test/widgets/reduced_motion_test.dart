@@ -5,7 +5,6 @@ import 'package:dis_app/core/di/injection.dart';
 import 'package:dis_app/l10n/app_localizations.dart';
 import 'package:dis_app/models/profile.dart';
 import 'package:dis_app/modules/onboarding/pre_onboarding_screen.dart';
-import 'package:dis_app/modules/profile/profile_creation_screen.dart';
 import 'package:dis_app/widgets/animated_empty_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -73,25 +72,19 @@ void main() {
     expect(tester.hasRunningAnimations, isTrue);
   }
 
-  testWidgets('Pre-Onboarding stoppt dekorative Kreisbewegung', (tester) async {
+  testWidgets('Pre-Onboarding stoppt das pulsierende Logo', (tester) async {
     await expectNoContinuousMotion(tester, const PreOnboardingScreen());
   });
 
-  testWidgets('Pre-Onboarding bewegt die Kreise ohne Systemoption', (
+  testWidgets('Pre-Onboarding pulsiert ohne Systemoption', (
     tester,
   ) async {
     await expectContinuousMotion(tester, const PreOnboardingScreen());
   });
 
-  testWidgets('Profilerstellung stoppt dekoratives Logo-Pulsieren', (
-    tester,
-  ) async {
-    await expectNoContinuousMotion(tester, const ProfileCreationScreen());
-  });
-
-  testWidgets('Profilerstellung pulsiert ohne Systemoption', (tester) async {
-    await expectContinuousMotion(tester, const ProfileCreationScreen());
-  });
+  // Die Profilerstellung hatte bis 3.0.24 ein pulsierendes Logo auf ihrer
+  // Einleitungsseite. Die Seite ist mit dem kurzen Einstieg entfallen und mit
+  // ihr die dekorative Bewegung — es gibt dort nichts mehr anzuhalten.
 
   testWidgets('Leerzustand pulsiert bei reduzierter Bewegung nicht', (
     tester,

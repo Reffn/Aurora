@@ -180,18 +180,6 @@
   "@profileNewProfile": {
     "description": "New profile button label"
   },
-  "profileCreationTitle": "Create new profile",
-  "@profileCreationTitle": {
-    "description": "Profile creation screen title"
-  },
-  "profileCreationSubtitle": "Who would like to introduce themselves?",
-  "@profileCreationSubtitle": {
-    "description": "Profile creation screen subtitle"
-  },
-  "profileCreationDescription": "Create your personal profile with name, color, and avatar. Each profile can be customized individually and receives appropriate permissions based on age.",
-  "@profileCreationDescription": {
-    "description": "Profile creation description text"
-  },
   "profileEditTitle": "Edit profile",
   "@profileEditTitle": {
     "description": "Profile edit screen title"
@@ -366,43 +354,43 @@
   "@rightsGroupManagement": {
     "description": "Group header of the rights switches"
   },
-  "rightSeeMedication": "See medication",
+  "rightSeeMedication": "Can see medication",
   "@rightSeeMedication": {
     "description": "Rights switch"
   },
-  "rightChangeMedicationPlan": "Change medication plan",
+  "rightChangeMedicationPlan": "Can change the medication plan",
   "@rightChangeMedicationPlan": {
     "description": "Rights switch; turning it on also turns on See medication"
   },
-  "rightChangeOthersEntries": "Change others' entries",
+  "rightChangeOthersEntries": "Can change others' entries",
   "@rightChangeOthersEntries": {
     "description": "Rights switch: edit other parts' events and diary entries"
   },
-  "rightDeleteOthersEntries": "Delete others' entries",
+  "rightDeleteOthersEntries": "Can delete others' entries",
   "@rightDeleteOthersEntries": {
     "description": "Rights switch: delete other parts' messages, events and diary entries"
   },
-  "rightReadOthersDiaries": "Read others' diaries",
+  "rightReadOthersDiaries": "Can read others' diaries",
   "@rightReadOthersDiaries": {
     "description": "Rights switch"
   },
-  "rightCreateParts": "Create parts",
+  "rightCreateParts": "Can create parts",
   "@rightCreateParts": {
     "description": "Rights switch"
   },
-  "rightPauseParts": "Pause parts",
+  "rightPauseParts": "Can pause parts",
   "@rightPauseParts": {
     "description": "Rights switch: pause other parts and bring them back"
   },
-  "rightGrantRights": "Grant rights",
+  "rightGrantRights": "Can grant rights",
   "@rightGrantRights": {
     "description": "Rights switch: change the rights of parts"
   },
-  "rightChangeSettings": "Change settings",
+  "rightChangeSettings": "Can change settings",
   "@rightChangeSettings": {
     "description": "Rights switch"
   },
-  "rightResetPasswords": "Reset passwords",
+  "rightResetPasswords": "Can reset passwords",
   "@rightResetPasswords": {
     "description": "Rights switch"
   },
@@ -1225,61 +1213,9 @@
   "@onboardingSelectLanguage": {
     "description": "Select language prompt in onboarding"
   },
-  "onboardingWelcomeTitle": "Welcome to",
-  "@onboardingWelcomeTitle": {
-    "description": "Welcome onboarding page title"
-  },
-  "onboardingWelcomeSubtitle": "Your safe companion in everyday life with DIS",
-  "@onboardingWelcomeSubtitle": {
-    "description": "Welcome onboarding page subtitle"
-  },
-  "onboardingWelcomeDescription": "Aurora is your shared safe space. Here you can express yourself freely and stay in touch with the other parts in the system.",
-  "@onboardingWelcomeDescription": {
-    "description": "Post-login welcome description"
-  },
-  "onboardingPrivacyTitle": "Your data belongs to YOU",
-  "@onboardingPrivacyTitle": {
-    "description": "Privacy onboarding page title"
-  },
-  "onboardingPrivacyBullet1": "All data stays local on your device",
-  "@onboardingPrivacyBullet1": {
-    "description": "Privacy feature 1"
-  },
   "onboardingPrivacyBullet2": "No cloud backup, no tracking, no ads",
   "@onboardingPrivacyBullet2": {
     "description": "Privacy feature 2"
-  },
-  "onboardingPrivacyBullet3": "You have full control",
-  "@onboardingPrivacyBullet3": {
-    "description": "Privacy feature 3"
-  },
-  "onboardingPrivacyBullet4": "Transparent and secure",
-  "@onboardingPrivacyBullet4": {
-    "description": "Privacy feature 4"
-  },
-  "onboardingMultiProfileTitle": "Many voices, one app",
-  "@onboardingMultiProfileTitle": {
-    "description": "Multi-profile onboarding page title"
-  },
-  "onboardingMultiProfileDescription": "Every part gets its own profile – with its own colour, its own picture and its own permissions.",
-  "@onboardingMultiProfileDescription": {
-    "description": "Multi-profile description"
-  },
-  "onboardingLetsGoTitle": "Ready to start?",
-  "@onboardingLetsGoTitle": {
-    "description": "Let's go onboarding page title"
-  },
-  "onboardingLetsGoDescription": "Create your first profile now. The first profile automatically becomes the admin profile with full access rights.",
-  "@onboardingLetsGoDescription": {
-    "description": "Let's go description"
-  },
-  "onboardingButtonNext": "Next →",
-  "@onboardingButtonNext": {
-    "description": "Next button in onboarding"
-  },
-  "onboardingButtonCreateProfile": "Create profile →",
-  "@onboardingButtonCreateProfile": {
-    "description": "Create profile button in onboarding"
   },
   "splashLoading": "Aurora is loading",
   "@splashLoading": {
@@ -2350,14 +2286,6 @@
   "@onboardingNext": {
     "description": "Next button text"
   },
-  "onboardingCreateProfile": "Create Profile →",
-  "@onboardingCreateProfile": {
-    "description": "Create profile button"
-  },
-  "onboardingLetsGo": "Let's Go! →",
-  "@onboardingLetsGo": {
-    "description": "Let's go button"
-  },
   "onboardingWelcomeTo": "Welcome to",
   "@onboardingWelcomeTo": {
     "description": "Welcome to text"
@@ -2370,234 +2298,9 @@
   "@onboardingDescription": {
     "description": "Main description"
   },
-  "onboardingPrivacyHeadline": "Your Data Belongs to YOU",
-  "@onboardingPrivacyHeadline": {
-    "description": "Privacy page headline"
-  },
-  "onboardingPrivacyPoint1": "All data stays locally on your device",
-  "@onboardingPrivacyPoint1": {
-    "description": "Privacy bullet point 1"
-  },
-  "onboardingPrivacyPoint2": "No cloud backup, no tracking, no ads",
-  "@onboardingPrivacyPoint2": {
-    "description": "Privacy bullet point 2"
-  },
-  "onboardingPrivacyPoint3": "You have full control",
-  "@onboardingPrivacyPoint3": {
-    "description": "Privacy bullet point 3"
-  },
-  "onboardingPrivacyPoint4": "Transparent and secure",
-  "@onboardingPrivacyPoint4": {
-    "description": "Privacy bullet point 4"
-  },
-  "onboardingMultiProfileHeadline": "Many Voices, One App",
-  "@onboardingMultiProfileHeadline": {
-    "description": "Multi-profile page headline"
-  },
-  "onboardingLetsGoHeadline": "Ready to Start?",
-  "@onboardingLetsGoHeadline": {
-    "description": "Let's go page headline"
-  },
-  "onboardingHelloName": "Hello {name}!",
-  "@onboardingHelloName": {
-    "description": "Hello greeting with name",
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
-  "onboardingGladYoureHere": "Glad you're here.",
-  "@onboardingGladYoureHere": {
-    "description": "Glad you're here subline"
-  },
-  "onboardingNotAlone": "You're Not Alone",
-  "@onboardingNotAlone": {
-    "description": "Not alone headline"
-  },
-  "onboardingNotAloneDescription": "You can chat with each other, share appointments, and support one another.",
-  "@onboardingNotAloneDescription": {
-    "description": "Not alone description"
-  },
-  "onboardingWhatYouCanDo": "What You Can Do",
-  "@onboardingWhatYouCanDo": {
-    "description": "What you can do headline"
-  },
-  "onboardingChildAccessDescription": "As a child profile, you have access to:",
-  "@onboardingChildAccessDescription": {
-    "description": "Child access description"
-  },
-  "onboardingAdultAccessDescription": "These features are available to you:",
-  "@onboardingAdultAccessDescription": {
-    "description": "Adult access description"
-  },
-  "onboardingSafeSpace": "Your Safe Space",
-  "@onboardingSafeSpace": {
-    "description": "Safe space headline"
-  },
-  "onboardingSafeSpaceDescription": "All your data stays locally on this device. No cloud backup, no tracking, no ads. You have full control.",
-  "@onboardingSafeSpaceDescription": {
-    "description": "Safe space description"
-  },
-  "onboardingHaveFun": "Have fun with Aurora!",
-  "@onboardingHaveFun": {
-    "description": "Have fun subline"
-  },
-  "onboardingFeatureChatChild": "Chat - Doodle and talk with others",
-  "@onboardingFeatureChatChild": {
-    "description": "Chat feature for children"
-  },
-  "onboardingFeatureDiaryChild": "Diary - Write down your thoughts",
-  "@onboardingFeatureDiaryChild": {
-    "description": "Diary feature for children"
-  },
-  "onboardingFeatureGamesChild": "Games - Have fun and relax",
-  "@onboardingFeatureGamesChild": {
-    "description": "Games feature for children"
-  },
-  "onboardingFeatureTimelineChild": "Timeline - Capture important moments",
-  "@onboardingFeatureTimelineChild": {
-    "description": "Timeline feature for children"
-  },
-  "onboardingFeatureChat": "Chat - Messages, doodles, voice messages",
-  "@onboardingFeatureChat": {
-    "description": "Chat feature for adults"
-  },
-  "onboardingFeatureCalendar": "Calendar - Plan and manage appointments",
-  "@onboardingFeatureCalendar": {
-    "description": "Calendar feature"
-  },
-  "onboardingFeatureContacts": "Contacts - Save important people",
-  "@onboardingFeatureContacts": {
-    "description": "Contacts feature"
-  },
-  "onboardingFeatureMedication": "Medication - Track medications and schedules",
-  "@onboardingFeatureMedication": {
-    "description": "Medication feature"
-  },
-  "onboardingFeatureDiary": "Diary - Record thoughts and experiences",
-  "@onboardingFeatureDiary": {
-    "description": "Diary feature for adults"
-  },
-  "onboardingFeatureFinder": "Finder - Find places and things again",
-  "@onboardingFeatureFinder": {
-    "description": "Finder feature"
-  },
-  "onboardingFeatureEmergency": "Emergency - Quick help in crisis situations",
-  "@onboardingFeatureEmergency": {
-    "description": "Emergency feature"
-  },
-  "onboardingFeatureMantras": "Mantras - Calming phrases and affirmations",
-  "@onboardingFeatureMantras": {
-    "description": "Mantras feature"
-  },
-  "onboardingFeatureChatBasic": "Chat - Basic features available",
-  "@onboardingFeatureChatBasic": {
-    "description": "Basic chat feature fallback"
-  },
-  "featureCarouselHeadline": "What Aurora Can Do",
-  "@featureCarouselHeadline": {
-    "description": "Feature carousel headline"
-  },
-  "featureCarouselSwipeHint": "Swipe through the features →",
-  "@featureCarouselSwipeHint": {
-    "description": "Swipe hint"
-  },
-  "featureCarouselChatTitle": "Chat",
-  "@featureCarouselChatTitle": {
-    "description": "Chat title"
-  },
-  "featureCarouselChatSubtitle": "Internal Communication",
-  "@featureCarouselChatSubtitle": {
-    "description": "Chat subtitle"
-  },
-  "featureCarouselChatDescription": "Messages, doodles & voice messages.\nShare thoughts, draw together, or talk with each other.",
-  "@featureCarouselChatDescription": {
-    "description": "Chat description"
-  },
-  "featureCarouselCalendarTitle": "Calendar",
-  "@featureCarouselCalendarTitle": {
-    "description": "Calendar title"
-  },
-  "featureCarouselCalendarSubtitle": "Events & Appointments",
-  "@featureCarouselCalendarSubtitle": {
-    "description": "Calendar subtitle"
-  },
-  "featureCarouselCalendarDescription": "Appointments with images & locations.\nKeep track of important dates with images and GPS positions.",
-  "@featureCarouselCalendarDescription": {
-    "description": "Calendar description"
-  },
-  "featureCarouselDiaryTitle": "Diary",
-  "@featureCarouselDiaryTitle": {
-    "description": "Diary title"
-  },
-  "featureCarouselDiarySubtitle": "Private Thoughts",
-  "@featureCarouselDiarySubtitle": {
-    "description": "Diary subtitle"
-  },
-  "featureCarouselDiaryDescription": "Visible to all or just for you.\nRecord thoughts - public for all profiles or private just for yourself.",
-  "@featureCarouselDiaryDescription": {
-    "description": "Diary description"
-  },
-  "featureCarouselFinderTitle": "Finder",
-  "@featureCarouselFinderTitle": {
-    "description": "Finder title"
-  },
-  "featureCarouselFinderSubtitle": "Places & Things",
-  "@featureCarouselFinderSubtitle": {
-    "description": "Finder subtitle"
-  },
-  "featureCarouselFinderDescription": "Find places and things again.\nSave important locations (with map) and items so you can find them again.",
-  "@featureCarouselFinderDescription": {
-    "description": "Finder description"
-  },
-  "featureCarouselMedicationTitle": "Medication",
-  "@featureCarouselMedicationTitle": {
-    "description": "Medication title"
-  },
-  "featureCarouselMedicationSubtitle": "Medication Tracker",
-  "@featureCarouselMedicationSubtitle": {
-    "description": "Medication subtitle"
-  },
-  "featureCarouselMedicationDescription": "Medications & schedules.\nTrack medications, intake times, and as-needed medication.",
-  "@featureCarouselMedicationDescription": {
-    "description": "Medication description"
-  },
-  "featureCarouselGamesTitle": "Games & Grounding",
-  "@featureCarouselGamesTitle": {
-    "description": "Games title"
-  },
-  "featureCarouselGamesSubtitle": "Relaxation",
-  "@featureCarouselGamesSubtitle": {
-    "description": "Games subtitle"
-  },
-  "featureCarouselGamesDescription": "Games, breathing exercises & grounding.\nCalm yourself with puzzles, breathing exercises, and grounding techniques.",
-  "@featureCarouselGamesDescription": {
-    "description": "Games description"
-  },
-  "featureCarouselEmergencyTitle": "Help Resources",
-  "@featureCarouselEmergencyTitle": {
-    "description": "Emergency title"
-  },
-  "featureCarouselEmergencySubtitle": "Emergency Contacts",
-  "@featureCarouselEmergencySubtitle": {
-    "description": "Emergency subtitle"
-  },
-  "featureCarouselEmergencyDescription": "Emergency contacts & quick help.\nStore important contacts for crisis situations.",
-  "@featureCarouselEmergencyDescription": {
-    "description": "Emergency description"
-  },
-  "featureCarouselInfoTitle": "DID Information",
-  "@featureCarouselInfoTitle": {
-    "description": "Info title"
-  },
-  "featureCarouselInfoSubtitle": "Knowledge & Resources",
-  "@featureCarouselInfoSubtitle": {
-    "description": "Info subtitle"
-  },
-  "featureCarouselInfoDescription": "Explained: What is DID?\nInformation about Dissociative Identity Disorder and resources.",
-  "@featureCarouselInfoDescription": {
-    "description": "Info description"
+  "onboardingPrivacyOneLine": "Everything stays on this device.",
+  "@onboardingPrivacyOneLine": {
+    "description": "Single privacy sentence on the one-page welcome before the first profile (since 3.0.25)"
   },
   "commonUnknown": "Unknown",
   "@commonUnknown": {
@@ -3121,8 +2824,6 @@
   "groundingBreathStep1": "Breathe in and count to four.",
   "groundingBreathStep2": "Hold briefly.",
   "groundingBreathStep3": "Breathe out and count to six.",
-  "groundingBreathStep4": "Again. No rush.",
-  "groundingBreathStep5": "Slower out than in. That is enough.",
   "medicationNameLabel": "Medication name",
   "medicationDosageLabel": "Dose",
   "medicationDosageHint": "e.g. 1 tablet, 10 mg, 5 ml",
@@ -3954,6 +3655,7 @@
   "releaseNotesAllgemein": "Aurora has grown a little. Everything familiar stays where it was — and your content still lives on this device alone.",
   "releaseNotesFassung3022": "This time it was small repairs behind the scenes, so Aurora stays reliable. Everything familiar stays where it was, and your content still lives on this device alone.",
   "releaseNotesFassung3024": "• Parts: pausing really works now. You can bring a part back under Settings → “Parts & rights”.\n• Rights: a few clear switches instead of sixty checkboxes.\n• Settings: newly sorted and reachable all the way down.\n• Reminders: when a reminder is deleted, paused or done, its notification goes away too.\n• Location: recording now starts reliably indoors as well.",
+  "releaseNotesFassung3025": "• Pausing is now at the top of a part's page.\n• Shorter start: two steps to your first profile.\n• Date and time of day sit in a band under “Aurora”.\n• The breathing exercise guides you through a minute, no tapping.",
   "releaseNotesFassung3023": "• Medication: managing, muting and the history are easier to find now.\n• Reminders: Aurora briefly explains before your device asks for permission.\n• Grounding: the exercises show the way forward with a Next button and swiping.\n• Chat: the keyboard no longer opens or closes on its own.\n• Languages: all five languages have been reviewed, and dates and times follow your language.",
   "updateHinweisTitel": "Aurora has been updated",
   "updateHinweisText": "Take a quick look at what’s new.",

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:dis_app/core/data_entry.dart';
 import 'package:dis_app/core/event_bus.dart';
-import 'package:dis_app/core/events/profile_events.dart';
 import 'package:dis_app/core/hive_box_names.dart';
 import 'package:dis_app/core/logger.dart';
 import 'package:dis_app/core/startup_state.dart';
@@ -30,6 +29,7 @@ import 'package:dis_app/services/chat_service.dart';
 import 'package:dis_app/services/comment_service.dart';
 import 'package:dis_app/services/contact_service.dart';
 import 'package:dis_app/services/diary_service.dart';
+import 'package:dis_app/services/einrichtung_meldung.dart';
 import 'package:dis_app/services/emergency_message_service.dart';
 import 'package:dis_app/services/feedback_sender.dart';
 import 'package:dis_app/services/finder_service.dart';
@@ -706,31 +706,15 @@ Future<void> setupDeferredDependencies() async {
     getIt<TelemetryRecorder>().record(TelemetryEventName.fehlerGpsTimeout),
   );
 
-  // Einrichtung abgeschlossen — einmal je Installation.
-  //
-  // Bis zum 13.08.2026 war das der groesste blinde Fleck: Onboarding-Abbrueche
-  // wurden seitengenau gezaehlt, und danach kam nichts mehr. Wer beim ersten
-  // Profil aufgab, hinterliess keine Spur.
-  //
-  // Angehaengt wird am EventBus, nicht an `DataEntry` oder `ProfileService`:
-  // Beide sollen nichts von Telemetrie wissen — dasselbe Muster wie beim
-  // GpsManager eine Zeile hoeher.
-  //
-  // **Einmal, nicht je Profil.** Firestore setzt `createTime` serverseitig;
-  // drei Eingaenge derselben Minute waeren lesbar als „dieses System hat drei
-  // Anteile". Der Merker wird deshalb VOR dem Melden gesetzt: Bricht der
-  // Versand ab, bleibt die Meldung aus — eine doppelte waere schlimmer als
-  // eine fehlende.
-  const einrichtungGemeldetKey = 'einrichtung_gemeldet';
-  final settingsBox = getIt<ProfileService>().settingsBox;
-  getIt<EventBus>().on<ProfileCreatedEvent>().listen((_) async {
-    if (settingsBox.get(einrichtungGemeldetKey) == true) return;
-
-    await settingsBox.put(einrichtungGemeldetKey, true);
-    await getIt<TelemetryRecorder>().record(
+  // Einrichtung abgeschlossen — einmal je Installation, nicht je Profil.
+  // Begründung und Merker stehen bei `meldeEinrichtungEinmal`.
+  meldeEinrichtungEinmal(
+    eventBus: getIt<EventBus>(),
+    settingsBox: getIt<ProfileService>().settingsBox,
+    melde: () => getIt<TelemetryRecorder>().record(
       TelemetryEventName.einrichtungAbgeschlossen,
-    );
-  });
+    ),
+  );
 
   // Eine geplante Erinnerung ist der Beweis, dass der Pfad traegt. Genau der
   // ist mehrfach lautlos ausgefallen — fehlende Empfaenger, von R8 verworfene

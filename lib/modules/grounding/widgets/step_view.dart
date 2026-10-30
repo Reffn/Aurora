@@ -28,19 +28,13 @@ class StepView extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final step = exercise.steps[index];
-    final assetPath = GroundingImages.resolve(step.imageKey);
-
-    var bild = assetPath != null
-        ? Image.asset(
-            assetPath,
-            width: 220,
-            height: 220,
-            fit: BoxFit.contain,
-            // Fehlt das Asset trotz Eintrag, springt das Symbol ein.
-            errorBuilder: (context, error, stack) =>
-                _FallbackSymbol(exercise: exercise),
-          )
-        : _FallbackSymbol(exercise: exercise);
+    Widget bild = KeyedSubtree(
+      key: const ValueKey('grounding-bild'),
+      child: GroundingBildView(
+        bild: GroundingImages.bildFuer(step.imageKey),
+        exercise: exercise,
+      ),
+    );
 
     final hold = step.hold;
     if (hold != null) {
@@ -64,10 +58,8 @@ class StepView extends StatelessWidget {
         const SizedBox(height: 24),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32),
-          child: Text(
-            _stepText(l10n, step, Localizations.localeOf(context)),
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 22, height: 1.4),
+          child: StepTextArea(
+            text: _stepText(l10n, step, Localizations.localeOf(context)),
           ),
         ),
         const SizedBox(height: 48),
@@ -93,9 +85,11 @@ class StepView extends StatelessWidget {
 
   /// Übersetzt einen Schlüssel. Fehlt er, bleibt der Text leer statt zu
   /// werfen — das Bild trägt den Schritt ohnehin allein.
-  String _lookup(AppLocalizations l10n, String key) {
-    return _groundingStrings(l10n)[key] ?? '';
-  }
+  String _lookup(AppLocalizations l10n, String key) => textOf(l10n, key);
+
+  /// Der Text eines Schritts, auch für den Atem-Takt.
+  static String textOf(AppLocalizations l10n, String key) =>
+      _groundingStrings(l10n)[key] ?? '';
 
   static Map<String, String> _groundingStrings(AppLocalizations l10n) => {
     'groundingOrientationStep1': l10n.groundingOrientationStep1,
@@ -125,8 +119,6 @@ class StepView extends StatelessWidget {
     'groundingBreathStep1': l10n.groundingBreathStep1,
     'groundingBreathStep2': l10n.groundingBreathStep2,
     'groundingBreathStep3': l10n.groundingBreathStep3,
-    'groundingBreathStep4': l10n.groundingBreathStep4,
-    'groundingBreathStep5': l10n.groundingBreathStep5,
   };
 
   /// Titel einer Übung, für Kachel und Kopfzeile
@@ -145,6 +137,45 @@ class StepView extends StatelessWidget {
       default:
         return '';
     }
+  }
+}
+
+/// Der Satz unter dem Bild, in einem Bereich fester Höhe.
+///
+/// Am Gerät (A14, 3.0.24) sprangen Bild und Text je Schritt auf und ab: Das
+/// Bild steht mittig im Rest der Fläche, und ein zweizeiliger Satz nahm ihm
+/// eine Zeile weg. Der Bereich ist jetzt immer so hoch wie drei Zeilen bei
+/// 22 pt — mit der Systemschrift gerechnet, damit er bei großer Schrift
+/// mitwächst. Ein Satz, der auch dann noch länger ist, darf den Bereich
+/// sprengen: Abschneiden wäre schlimmer als ein Sprung.
+///
+/// Die Höhe wird nicht im Test gemessen, sondern gerechnet: Widgettests
+/// setzen jede Glyphe so breit wie hoch, Umbrüche dort sagen über das Gerät
+/// nichts.
+class StepTextArea extends StatelessWidget {
+  const StepTextArea({required this.text, super.key});
+
+  final String text;
+
+  static const double fontSize = 22;
+  static const double lineHeight = 1.4;
+  static const int lines = 3;
+
+  @override
+  Widget build(BuildContext context) {
+    final skaliert = MediaQuery.textScalerOf(context).scale(fontSize);
+    return Container(
+      constraints: BoxConstraints(
+        minHeight: skaliert * lineHeight * lines,
+        minWidth: double.infinity,
+      ),
+      alignment: Alignment.topCenter,
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: const TextStyle(fontSize: fontSize, height: lineHeight),
+      ),
+    );
   }
 }
 
@@ -198,14 +229,70 @@ class _HoldRing extends StatelessWidget {
   }
 }
 
-/// Ersatz, wenn kein Bild vorliegt: das Symbol der Übung, groß
-class _FallbackSymbol extends StatelessWidget {
-  const _FallbackSymbol({required this.exercise});
+/// Das Bild eines Schritts im ruhigen Kreis der Übung.
+///
+/// Ein gezeichnetes Bild, wenn eins hinterlegt ist; sonst das eigene Symbol
+/// des Schritts; fehlt auch das, das Symbol der Übung. Der Kreis ist derselbe
+/// wie auf dem Abschluss (`ExerciseDoneSheet`): Farbe der Übung, gedämpft —
+/// dies ist der Halt-Bereich, hier bleibt alles ruhig (Regel 4).
+class GroundingBildView extends StatelessWidget {
+  const GroundingBildView({
+    required this.bild,
+    required this.exercise,
+    this.size = 220,
+    super.key,
+  });
 
+  final GroundingBild? bild;
   final GroundingExercise exercise;
+  final double size;
 
   @override
   Widget build(BuildContext context) {
-    return Icon(exercise.icon, size: 160, color: exercise.color);
+    final symbol = _SymbolKreis(
+      icon: switch (bild) {
+        GroundingBildSymbol(:final icon) => icon,
+        _ => exercise.icon,
+      },
+      color: exercise.color,
+      size: size,
+    );
+
+    return switch (bild) {
+      GroundingBildAsset(:final path) => Image.asset(
+        path,
+        width: size,
+        height: size,
+        fit: BoxFit.contain,
+        // Fehlt das Asset trotz Eintrag, springt das Symbol ein.
+        errorBuilder: (context, error, stack) => symbol,
+      ),
+      _ => symbol,
+    };
+  }
+}
+
+class _SymbolKreis extends StatelessWidget {
+  const _SymbolKreis({
+    required this.icon,
+    required this.color,
+    required this.size,
+  });
+
+  final IconData icon;
+  final Color color;
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: color.withValues(alpha: 0.18),
+      ),
+      child: Icon(icon, size: size * 0.55, color: color),
+    );
   }
 }

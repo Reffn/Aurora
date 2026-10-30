@@ -125,7 +125,6 @@ class AnchorHeader extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 2),
                 // Eingerückt auf die Textkante, nicht auf die Punktkante.
                 //
                 // Der Punkt gehört zur Zeile darüber, und was darunter steht,
@@ -134,10 +133,11 @@ class AnchorHeader extends StatelessWidget {
                 // Kante, und die untere linke Ecke wird frei; die Figur rechts
                 // steht dadurch weniger gedrängt.
                 //
-                // Die 6 sind das eigene Polster des Wegs: Abgezogen fluchtet
-                // sein Wort mit dem Gruß darüber statt sechs Punkte daneben.
+                // Seit der Weg ein umrandeter Knopf ist, fluchtet sein Rand
+                // mit dem Gruß darüber — die Kante, die man sieht.
+                const SizedBox(height: 4),
                 Padding(
-                  padding: const EdgeInsets.only(left: 48 - 6),
+                  padding: const EdgeInsets.only(left: 48),
                   child: _SwitchProfileLink(
                     label: l10n.anchorSwitchProfile,
                     onTap: onSwitchProfile,
@@ -176,6 +176,13 @@ class AnchorHeader extends StatelessWidget {
 /// sagt es aus, bevor er zu irgendetwas auffordert; erst danach ist Wechseln
 /// überhaupt ein Thema.
 ///
+/// **Ein Knopf, kein Hinweistext.** Bis 3.0.24 stand hier grauer 15-pt-Text
+/// mit einem Pfeil nach unten, rund 24 Punkte Trefferfläche. Am Gerät wurde
+/// er nicht als Weg gesehen. Jetzt: umrandet, Personen-Symbol links und Wort
+/// daneben (Regel 5), mindestens 48 dp hoch, die Schrift in voller
+/// Vordergrundfarbe. Ruhig bleibt er trotzdem — kein gefüllter Grund, keine
+/// Signalfarbe (Regel 4): Wechseln ist häufig, aber kein Notfall.
+///
 /// Ohne Rückfrage: Ein Wechsel mitten in der Handlung ist der Normalfall,
 /// nicht der Ausrutscher, und ein Bestätigungsdialog stünde genau dort im
 /// Weg, wo Reibung am meisten kostet. Verloren geht dabei nichts, was nicht
@@ -188,39 +195,26 @@ class _SwitchProfileLink extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Semantics(
-      button: true,
-      label: label,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(20),
-        child: Padding(
-          // Der Text allein wäre eine Trefferfläche von rund 14 Punkten Höhe.
-          // Das Polster bringt sie über die 24, die WCAG 2.2 als Untergrenze
-          // nennt — mehr gibt die Kopfzeile nicht her, und mehr braucht es
-          // hier auch nicht: Der Weg ist eine Abkürzung, kein Notweg.
-          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Flexible(
-                child: Text(
-                  label,
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              Icon(
-                Icons.expand_more,
-                size: 20,
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
-            ],
-          ),
+    final scheme = Theme.of(context).colorScheme;
+    return OutlinedButton.icon(
+      onPressed: onTap,
+      icon: const Icon(Icons.switch_account_outlined, size: 22),
+      // Umbrechen, nicht kürzen: Bei 200 % Systemschrift stand hier „Das
+      // bin ich …“ — gekürzt genau um das Wort, das den Satz trägt.
+      label: Text(
+        label,
+        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+      ),
+      style: OutlinedButton.styleFrom(
+        foregroundColor: scheme.onSurface,
+        iconColor: scheme.onSurface,
+        side: BorderSide(color: scheme.outline),
+        minimumSize: const Size(48, 48),
+        // Senkrechtes Polster für den Fall, dass er zweizeilig wird; bei
+        // einer Zeile hält die Mindesthöhe von 48 dp ihn wie bisher.
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
         ),
       ),
     );

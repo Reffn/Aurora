@@ -87,6 +87,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v7
 
+    # Dasselbe JDK wie die Release-Bauten (Android Studio JBR 21). Mit dem
+    # Standard-JDK des Runners scheiterte camera_android_camerax am
+    # Kompilieren: „class file for androidx.concurrent.futures.
+    # CallbackToFutureAdapter not found" — seit Anfang Oktober in jedem Lauf,
+    # während der lokale Bau mit 21 durchging.
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+
     - name: Setup Flutter
       uses: subosito/flutter-action@v2
       with:

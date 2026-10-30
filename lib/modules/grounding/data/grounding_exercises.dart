@@ -131,29 +131,39 @@ abstract final class GroundingExercises {
     ],
   );
 
+  /// Fünf Runden à 4 + 2 + 6 Sekunden: eine Minute, ohne Tippen.
+  ///
+  /// Bis 3.0.24 kamen nach den drei Phasen zwei Schritte „Nochmal. Ohne
+  /// Eile.“ und „Langsamer raus als rein. Das reicht.“ Beide sind
+  /// entfallen: Das „Nochmal“ tut der Takt jetzt selbst, fünfmal, und
+  /// „langsamer raus als rein“ zeigt der Kreis, der vier Sekunden wächst und
+  /// sechs schrumpft — vorgemacht statt gesagt (Regel 11). Am Ende steht der
+  /// gemeinsame Abschluss aller Übungen.
   static const _breath = GroundingExercise(
     id: 'breath',
     titleKey: 'groundingBreathTitle',
     icon: Icons.air,
     color: Color(0xFF9FA8DA),
+    pacedRounds: 5,
     steps: [
       GroundingStep(
         imageKey: 'breath_in',
         textKey: 'groundingBreathStep1',
         hold: Duration(seconds: 4),
+        breathPhase: BreathPhase.inhale,
       ),
       GroundingStep(
         imageKey: 'breath_hold',
         textKey: 'groundingBreathStep2',
         hold: Duration(seconds: 2),
+        breathPhase: BreathPhase.hold,
       ),
       GroundingStep(
         imageKey: 'breath_out',
         textKey: 'groundingBreathStep3',
         hold: Duration(seconds: 6),
+        breathPhase: BreathPhase.exhale,
       ),
-      GroundingStep(imageKey: 'breath_repeat', textKey: 'groundingBreathStep4'),
-      GroundingStep(imageKey: 'breath_done', textKey: 'groundingBreathStep5'),
     ],
   );
 }

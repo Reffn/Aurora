@@ -7,6 +7,7 @@ import 'package:dis_app/models/permission.dart';
 import 'package:dis_app/models/telemetry_event.dart';
 import 'package:dis_app/modules/emergency/emergency_screen.dart';
 import 'package:dis_app/modules/grounding/models/grounding_exercise.dart';
+import 'package:dis_app/modules/grounding/widgets/breath_pacer.dart';
 import 'package:dis_app/modules/grounding/widgets/exercise_done_sheet.dart';
 import 'package:dis_app/modules/grounding/widgets/step_view.dart';
 import 'package:dis_app/modules/help/help_resources_screen.dart';
@@ -63,6 +64,15 @@ class _ExercisePlayerScreenState extends State<ExercisePlayerScreen> {
   Timer? _ticker;
   double _dragDx = 0;
 
+  /// Nur im Takt (Atem): wie viele volle Runden durchlaufen sind, ob für
+  /// dieses Öffnen schon gemeldet wurde, und der wievielte Durchlauf es ist
+  /// (für „Nochmal“).
+  int _volleRunden = 0;
+  bool _gemeldet = false;
+  int _durchlauf = 0;
+
+  bool get _takt => widget.exercise.pacedRounds != null;
+
   @override
   void initState() {
     super.initState();
@@ -73,7 +83,8 @@ class _ExercisePlayerScreenState extends State<ExercisePlayerScreen> {
 
   void _tick() {
     final now = widget.clock();
-    final sameMinute = now.year == _now.year &&
+    final sameMinute =
+        now.year == _now.year &&
         now.month == _now.month &&
         now.day == _now.day &&
         now.hour == _now.hour &&
@@ -95,12 +106,34 @@ class _ExercisePlayerScreenState extends State<ExercisePlayerScreen> {
     setState(() => _index++);
   }
 
+  /// Meldet den Takt, höchstens einmal je Öffnen.
+  ///
+  /// Definition für die Atemübung: `uebung_beendet_breath`, sobald beim
+  /// Verlassen oder Beenden mindestens eine volle Runde durchlaufen ist;
+  /// `uebung_abgebrochen_breath`, wenn vor dem Ende der ersten Runde
+  /// verlassen wird. Danach — auch nach „Nochmal“ — kein weiteres Ereignis:
+  /// Mehrere Ereignisse je Öffnen ergäben eine Folge, und eine Folge verrät
+  /// mehr als eine Zahl.
+  void _taktMelden() {
+    if (_gemeldet) return;
+    _gemeldet = true;
+    _recordTelemetry(_volleRunden >= 1 ? 'beendet' : 'abgebrochen');
+  }
+
+  /// „Fertig“ oder das Ende der letzten Runde: zum Abschluss.
+  void _taktBeenden() {
+    _taktMelden();
+    setState(() => _done = true);
+  }
+
   @override
   void dispose() {
-    // Wer die Übung verlässt, bevor sie zu Ende ist, hat abgebrochen. Nach
-    // „nochmal" steht `_done` wieder auf false — dann zählt der Abbruch der
-    // Wiederholung, und das ist richtig so.
-    if (!_done) {
+    if (_takt) {
+      _taktMelden();
+    } else if (!_done) {
+      // Wer die Übung verlässt, bevor sie zu Ende ist, hat abgebrochen. Nach
+      // „nochmal" steht `_done` wieder auf false — dann zählt der Abbruch der
+      // Wiederholung, und das ist richtig so.
       _recordTelemetry('abgebrochen');
     }
     _ticker?.cancel();
@@ -137,7 +170,7 @@ class _ExercisePlayerScreenState extends State<ExercisePlayerScreen> {
   }
 
   void _back() {
-    if (_index == 0) {
+    if (_takt || _index == 0) {
       Navigator.of(context).pop();
       return;
     }
@@ -148,6 +181,8 @@ class _ExercisePlayerScreenState extends State<ExercisePlayerScreen> {
     setState(() {
       _index = 0;
       _done = false;
+      _volleRunden = 0;
+      _durchlauf++;
     });
   }
 
@@ -164,6 +199,66 @@ class _ExercisePlayerScreenState extends State<ExercisePlayerScreen> {
       MaterialPageRoute<void>(
         builder: (_) =>
             mayCall ? const EmergencyScreen() : const HelpResourcesScreen(),
+      ),
+    );
+  }
+
+  /// Der Atem als Takt: Kreis und Wort laufen von selbst, „Fertig“ steht
+  /// jederzeit unten (Regel 10 — kein Ablauf ohne Ausgang), der Pfeil oben
+  /// links führt hinaus wie bei jeder Übung.
+  Widget _buildTakt() {
+    // Gemeldet wird im Moment des Verlassens, nicht erst beim Aufräumen:
+    // Während die Route hinausgleitet, läuft der Takt noch ein paar hundert
+    // Millisekunden weiter — eine Runde, die dabei voll würde, hat niemand
+    // geatmet. Gilt für den Pfeil oben links und die Zurück-Taste.
+    return PopScope(
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop) _taktMelden();
+      },
+      child: _buildTaktFlaeche(),
+    );
+  }
+
+  Widget _buildTaktFlaeche() {
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: BreathPacer(
+                      key: ValueKey('grounding-breath-$_durchlauf'),
+                      exercise: widget.exercise,
+                      onRoundCompleted: (runden) => _volleRunden = runden,
+                      onFinished: _taktBeenden,
+                    ),
+                  ),
+                  Positioned(
+                    left: 8,
+                    top: 8,
+                    child: IconButton(
+                      key: const ValueKey('grounding-back'),
+                      icon: const Icon(Icons.arrow_back, size: 28),
+                      onPressed: _back,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
+              child: _NextButton(
+                key: const ValueKey('grounding-breath-finish'),
+                isLast: true,
+                color: widget.exercise.color,
+                pulse: false,
+                onTap: _taktBeenden,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -200,6 +295,8 @@ class _ExercisePlayerScreenState extends State<ExercisePlayerScreen> {
         ),
       );
     }
+
+    if (_takt) return _buildTakt();
 
     final reduceMotion = MediaQuery.disableAnimationsOf(context);
     final isLast = _index >= widget.exercise.steps.length - 1;
@@ -299,9 +396,10 @@ class _NextButtonState extends State<_NextButton>
     vsync: this,
     duration: const Duration(milliseconds: 900),
   );
-  late final Animation<double> _scale = Tween<double>(begin: 1, end: 1.06)
-      .chain(CurveTween(curve: Curves.easeInOut))
-      .animate(_controller);
+  late final Animation<double> _scale = Tween<double>(
+    begin: 1,
+    end: 1.06,
+  ).chain(CurveTween(curve: Curves.easeInOut)).animate(_controller);
 
   @override
   void initState() {

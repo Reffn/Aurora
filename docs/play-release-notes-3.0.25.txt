@@ -1,0 +1,8 @@
+Neu in dieser Fassung:
+• Kürzerer Anfang: In wenigen Schritten zum ersten Profil und direkt in Aurora.
+• Pausieren steht oben auf der Seite eines Anteils. Die Schalter sagen, was ein Anteil darf.
+• „Das bin ich nicht“ ist ein richtiger Knopf.
+• Datum und Tageszeit stehen als Band direkt unter „Aurora“.
+• Halt: Die Atemübung führt ohne Tippen durch eine Minute, jeder Schritt hat ein eigenes Bild.
+
+Deine Inhalte liegen weiterhin allein auf diesem Gerät.

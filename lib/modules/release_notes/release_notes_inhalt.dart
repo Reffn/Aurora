@@ -23,6 +23,7 @@ String? releaseNotesFuerFassung(String? version, AppLocalizations l10n) {
     '3.0.22' => l10n.releaseNotesFassung3022,
     '3.0.23' => l10n.releaseNotesFassung3023,
     '3.0.24' => l10n.releaseNotesFassung3024,
+    '3.0.25' => l10n.releaseNotesFassung3025,
     _ => null,
   };
 }

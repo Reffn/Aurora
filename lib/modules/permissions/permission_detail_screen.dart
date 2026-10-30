@@ -62,6 +62,22 @@ class _PermissionDetailScreenState extends State<PermissionDetailScreen> {
             padding: const EdgeInsets.all(16),
             children: [
               _Header(profile: profile),
+              // Die Handlung steht oben, direkt unter dem, den sie betrifft.
+              //
+              // Bis 3.0.24 stand sie als kleiner grauer Textknopf unter allen
+              // Schaltergruppen. Am Gerät wurde sie nicht gefunden — und der
+              // Schalter „Anteile pausieren“ darüber, ein Recht, sah aus wie
+              // die Handlung. Jetzt: sichtbar ohne Scrollen, Symbol und Wort
+              // (Regel 5), 48 dp hoch (Regel 6). Umrandet statt gefüllt:
+              // Pausieren ist keine Notfallhandlung (Regel 4), und es nimmt
+              // nichts weg — der Rückweg steht unter „Pausiert“.
+              if (_dataEntry.canPauseProfile(profile.id)) ...[
+                const SizedBox(height: 16),
+                _PauseButton(
+                  label: l10n.partsPauseNamed(profile.name),
+                  onPressed: () => _pause(profile),
+                ),
+              ],
               const SizedBox(height: 24),
               if (profile.isAdmin) ...[
                 const _AdminCard(),
@@ -104,22 +120,6 @@ class _PermissionDetailScreenState extends State<PermissionDetailScreen> {
                           )
                         : null,
                   ),
-              if (_dataEntry.canPauseProfile(profile.id)) ...[
-                const SizedBox(height: 8),
-                // Ruhiger Textknopf: Pausieren nimmt nichts weg, der Rückweg
-                // steht unter „Pausiert“.
-                Center(
-                  child: TextButton.icon(
-                    onPressed: () => _pause(profile),
-                    icon: const Icon(Icons.pause_circle_outline),
-                    label: Text(l10n.partsPauseNamed(profile.name)),
-                    style: TextButton.styleFrom(
-                      foregroundColor: AppColors.mist,
-                      minimumSize: const Size(48, 48),
-                    ),
-                  ),
-                ),
-              ],
             ],
           );
         },
@@ -228,6 +228,33 @@ class _Header extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+/// „{Name} pausieren“: über die volle Breite, umrandet, ruhig.
+class _PauseButton extends StatelessWidget {
+  const _PauseButton({required this.label, required this.onPressed});
+
+  final String label;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton.icon(
+      onPressed: onPressed,
+      icon: const Icon(Icons.pause_circle_outline, size: 24),
+      label: Text(label, style: const TextStyle(fontSize: 16)),
+      style: OutlinedButton.styleFrom(
+        foregroundColor: Theme.of(context).colorScheme.onSurface,
+        iconColor: AppColors.mist,
+        side: BorderSide(color: AppColors.mist.withValues(alpha: 0.6)),
+        minimumSize: const Size.fromHeight(48),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
     );
   }
 }
