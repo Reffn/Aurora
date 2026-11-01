@@ -93,7 +93,7 @@ jobs:
     # CallbackToFutureAdapter not found" — seit Anfang Oktober in jedem Lauf,
     # während der lokale Bau mit 21 durchging.
     - name: Setup Java
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@v6
       with:
         distribution: 'temurin'
         java-version: '21'
